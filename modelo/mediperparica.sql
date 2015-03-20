@@ -47,7 +47,7 @@ CREATE TABLE personal(
 -- -------------------------------------------------------------------------- --
 CREATE TABLE cliente(
   id_cliente CHAR(13) NOT NULL,
-  nombres VARCHAR(30) NOT NULL,
+  nombres VARCHAR(40) NOT NULL,
   telefono VARCHAR(10) NOT NULL,
   direccion VARCHAR(120) NOT NULL,
   creado TIMESTAMP default CURRENT_TIMESTAMP,

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mediperbarica</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/dashboard/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="css/themes/blue.css">
+  <!--
+  <link rel="stylesheet" type="text/css" href="css/themes/green.css">
+  <link rel="stylesheet" type="text/css" href="css/themes/red.css">
+  -->
+  <script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+<body>
+  <div id="page-wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar">
+        <li class="sidebar-main">
+          <a href="#">
+            MEDIPERBARICA
+            <span class="menu-icon glyphicon glyphicon-transfer"></span>
+          </a>
+        </li>
+        <li class="sidebar-title"><span>MENU</span></li>
+        <li class="sidebar-list">
+          <a href="#">Facturas <span class="menu-icon fa fa-money"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#">Pacientes <span class="menu-icon fa fa-user"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#">Tratamientos <span class="menu-icon fa fa-tasks"></span></a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <div class="col-xs-4">
+          <a href="http://twitter.com/eduardouio" target="_blank">
+            EVillota
+          </a>
+        </div>
+        <div class="col-xs-4">
+          <a href="#" target="_blank">
+            &copy; 2015
+          </a>
+        </div>
+        <div class="col-xs-4">
+          <a href="#">
+            Mediperbarica
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Sidebar -->
+
+    <div id="content-wrapper">
+      <div class="page-content">
+
+        <!-- Header Bar -->
+
+        <div class="row header">
+          <div class="col-xs-12">
+            <div class="meta pull-left">
+              <div class="page">
+                Medicina Hiperba&aacute;rica S.A.
+              </div>
+              <div class="breadcrumb-links">
+                Tratamientos De Medicina Hiperb&aacute;rica
+              </div>
+            </div>
+            <div class="user pull-right">
+              <div class="item dropdown">
+                <a href="#" class="dropdown-toggle">
+                  <img src="img/avatar.jpg">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    Nombre de Usuario
+                  </li>
+                  <li class="link">
+                    <a href="#">
+                      Alertas Importantes
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a href="#">
+                      Salir Sistema
+                    </a>
+                  </li>
+                </ul>               
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- End Header Bar -->
+
+        <!-- Main Content -->
+        <div class="row alerts-container">
+          <div class="col-xs-12">
+            <alert></alert>
+          </div>
+        </div>
+
+          <div class="row">
+            <p>Resumen Totales</p>
+            <div class="col-lg-3 col-md-6 col-xs-12">
+              <div class="widget">
+                <div class="widget-body">
+                  <div class="widget-icon green pull-left">
+                    <i class="fa fa-users"></i>
+                  </div>
+                  <div class="widget-content pull-left">
+                    <div class="title">1</div>
+                    <div class="comment">Pacientes</div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-xs-12">
+              <div class="widget">
+                <div class="widget-body">
+                  <div class="widget-icon red pull-left">
+                    <i class="fa fa-tasks"></i>
+                  </div>
+                  <div class="widget-content pull-left">
+                    <div class="title">16</div>
+                    <div class="comment">Tratamientos</div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-xs-12">
+              <div class="widget">
+                <div class="widget-body">
+                  <div class="widget-icon blue pull-left">
+                    <i class="fa fa-support"></i>
+                  </div>
+                  <div class="widget-content pull-left">
+                    <div class="title">1</div>
+                    <div class="comment">Sesiones</div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="spacer visible-xs"></div>
+            <div class="col-lg-3 col-md-6 col-xs-12">
+              <div class="widget">
+                <div class="widget-body">
+                  <div class="widget-icon orange pull-left">
+                    <i class="fa fa-money"></i>
+                  </div>
+                  <div class="widget-content pull-left">
+                    <div class="title">62</div>
+                    <div class="comment">Facturas</div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="widget">
+                <div class="widget-title">
+                  <i class="fa fa-tasks"></i> Listado De Tratamientos
+                  <input type="text" placeholder="Search" class="form-control input-sm pull-right" />
+                  <div class="clearfix"></div>
+                </div>
+                <div class="widget-body medium no-padding">
+                  <div class="table-responsive">
+                    <table class="table">
+                    <thead>
+                        <tr><th class="text-center">#</th><th>Doctor</th><th>Tratamiento</th><th>Historia</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td class="text-center">1</td><td>Dr. Vaca</td><td>T1002</td><td>H1001</td></tr>
+                        <tr><td class="text-center">2</td><td>Dr. Rivadeneria Rivadeneira </td><td>T1004</td><td>H1003</td></tr>
+                        <tr><td class="text-center">3</td><td>Dr. Vaca</td><td>T1003</td><td>H1009</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="widget">
+                <div class="widget-title">
+                  <i class="fa fa-users"></i> Listado de Pacientes
+                  <input type="text" placeholder="Search" class="form-control input-sm pull-right" />
+                  <div class="clearfix"></div>
+                </div>
+                <div class="widget-body medium no-padding">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr><th class="text-center">#</th><th>Doctor</th><th>Email</th><th>Sesiones</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td class="text-center">1</td><td>Laura Bosso</td><td>lbosso@gmail.com</td><td>1</td></tr>
+                        <tr><td class="text-center">2</td><td>Estefania C&aacute;ceres</td><td>tefa@gmail.com</td><td>4</td></tr>
+                        <tr><td class="text-center">3</td><td>Paul Rivadeneira</td><td>priva87@hotmiail.com</td><td>1</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!--  Ejeplo para poner otra fila de widgets 
+          <div class="row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+          -->
+        <!-- End Main Content -->
+
+      </div><!-- End Page Content -->
+      <small>
+      <p class="pull-right"> Developed by Eduardo Villota eduardouio7@gmail.com </p>
+      </small>
+    </div><!-- End Content Wrapper -->
+  </div><!-- End Page Wrapper -->
+</body>
+</html>
