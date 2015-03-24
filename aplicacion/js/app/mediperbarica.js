@@ -20,28 +20,43 @@ var mediperbaricaApp = angular.module('mediperbaricaApp', ['ngRoute']);
 Configuracion de las rutas a las plantillas
 */
 
-mediperbaricaApp.config(function($routeProvider){
+mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	
+	//$locationProvider.html5Mode(true);
 	$routeProvider
 	.when('/pacientes',{
 		templateUrl : 'tplhtml/pacientes.html',
+		controllerAs : 'pacientes',
 		controller : 'PacientesController'
 	})
 	.when('/personal',{
 		templateUrl : 'tplhtml/personal.html',
+		controllerAs : 'personal',
 		controller: 'PersonalController'
 	})
 	.when('/tratamientos',{
 		templateUrl : 'tplhtml/tratamientos.html',
+		controllerAs : 'tratamientos',
 		controller: 'TratamientosController'
 	})
 	.when('/clientes',{
 		templateUrl : 'tplhtml/clientes.html',
+		controllerAs : 'clientes',
 		controller: 'ClientesController'
 	})
-	.when('/clientes',{
+	.when('/facturacion',{
 		templateUrl : 'tplhtml/facturacion.html',
+		controllerAs : 'facturacion',
 		controller: 'FacturacionController'
+	})
+		.when('/usuarios',{
+		templateUrl : 'tplhtml/usuarios.html',
+		controllerAs : 'usuarios',
+		controller: 'UsuariosController'
+	})
+			.when('/acerca/:idCliente',{
+		templateUrl : 'tplhtml/acerca.html',
+		controller: 'AcercaController'
 	})
 	.otherwise({ redirectTo: '/' 
 	});
@@ -168,4 +183,20 @@ controlador encargado de manejar la facturacion
 */
 mediperbaricaApp.controller('FacturacionController', [function ($scope) {
 	//contenido del controlador de facturacion
+}]);
+
+
+/**
+Controlador para los usuarios 
+*/
+mediperbaricaApp.controller('UsuariosController', [function ($scope){
+	//contenido encargado dem manejar los uusarios
+}]);
+
+/**
+Controlador acerca de
+*/
+mediperbaricaApp.controller('AcercaController', [function ($scope, idCliente){
+	alert(idCliente);
+	//contendio de la vista acerca de
 }]);

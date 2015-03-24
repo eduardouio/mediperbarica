@@ -19,9 +19,12 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('cabecera');
+			$this->load->view('cabecera');
+		$this->load->view('sidebar');
+		$this->load->view('menu');
+		
 		$this->load->view('alertas');
-		$this->load->view('totales');
+		$this->load->view('contenidos');
         #$this->load->view('frm_pacientes');
 		#$this->load->view('widget_tratamientos');
 		#$this->load->view('widget_pacientes');
