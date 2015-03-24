@@ -1,19 +1,21 @@
 <!doctype html>
-<html lang="es" ng-app="mediperbarica">
+<html lang="es" ng-app="mediperbaricaApp">
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Mediperbarica</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/dashboard/dashboard.css">
-  <link rel="stylesheet" type="text/css" href="css/themes/blue.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/dashboard/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/themes/blue.css">
   <!--
   <link rel="stylesheet" type="text/css" href="css/themes/green.css">
   <link rel="stylesheet" type="text/css" href="css/themes/red.css">
   -->
-  <script type="text/javascript" src="js/jquery-2.1.3.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>js/angular.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>js/angular-route.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>js/jquery-2.1.3.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>js/bootstrap.js"></script>
 </head>
 <body>
   <div id="page-wrapper">
@@ -23,18 +25,30 @@
         <li class="sidebar-main">
           <a href="#">
             MEDIPERBARICA
-            <span class="menu-icon glyphicon glyphicon-transfer"></span>
+            <span class="menu-icon glyphicon glyphicon-home"></span>
           </a>
         </li>
         <li class="sidebar-title"><span>MENU</span></li>
         <li class="sidebar-list">
-          <a href="#">Facturas <span class="menu-icon fa fa-money"></span></a>
+          <a href="#pacientes">Pacientes <span class="menu-icon fa fa-user"></span></a>
+        </li>
+         <li class="sidebar-list">
+          <a href="#tratamientos">Tratamientos <span class="menu-icon fa fa-support"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#">Pacientes <span class="menu-icon fa fa-user"></span></a>
+          <a href="#clientes">Clientes <span class="menu-icon fa fa-briefcase"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#">Tratamientos <span class="menu-icon fa fa-tasks"></span></a>
+          <a href="#facturacion">Facturación <span class="menu-icon fa fa-money"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#usuarios">Usuarios <span class="menu-icon fa fa-cog"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#personal"> Personal<span class="menu-icon fa fa-plus"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#acerca">Acerca <span class="menu-icon fa fa-barcode"></span></a>
         </li>
       </ul>
       <div class="sidebar-footer">
@@ -76,7 +90,7 @@
             <div class="user pull-right">
               <div class="item dropdown">
                 <a href="#" class="dropdown-toggle">
-                  <img src="img/avatar.jpg">
+                  <img src="<?php echo base_url();?>img/avatar.jpg">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
@@ -98,5 +112,4 @@
             </div>
           </div>
         </div>
-
         <!-- End Header Bar -->

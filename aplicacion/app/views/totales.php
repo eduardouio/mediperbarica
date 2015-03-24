@@ -59,3 +59,5 @@
               </div>
             </div>
           </div>
+<!-- aparecen las vistas-->
+<div ng-view> </div>

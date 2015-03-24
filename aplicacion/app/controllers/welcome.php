@@ -22,9 +22,9 @@ class Welcome extends CI_Controller {
 		$this->load->view('cabecera');
 		$this->load->view('alertas');
 		$this->load->view('totales');
-        $this->load->view('frm_personal');
-		$this->load->view('widget_tratamientos');
-		$this->load->view('widget_pacientes');
+        #$this->load->view('frm_pacientes');
+		#$this->load->view('widget_tratamientos');
+		#$this->load->view('widget_pacientes');
 		$this->load->view('pie');
 	}
 

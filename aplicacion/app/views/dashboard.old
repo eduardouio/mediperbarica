@@ -234,3 +234,25 @@
   </div><!-- End Page Wrapper -->
 </body>
 </html>
+
+// creamos un diccionario con los datos que debe recibir del formulario
+var personal = {};
+var estructura = {};
+
+//Tomamos los valores del formulario
+function procesarFormulario(idFormulario) {
+    $(idFormulario).find("input").each(function () {
+        campo = this;
+        personal[campo.name] =  campo.value;
+    });
+}
+
+/**
+Esta funcion manda a guardar el formulario
+*/
+function guardarForm(idFormulario) {
+    procesarFormulario(idFormulario);
+    mivar = personal.id_personal;
+    console.dir(mivar);
+    
+}

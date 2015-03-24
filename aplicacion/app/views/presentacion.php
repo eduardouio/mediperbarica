@@ -4,6 +4,7 @@
   <div class="panel-heading">Dr. Eduardo Vinicio Villota Montenegro</div>
   <div class="panel-body">
     <table class="table table-hover">
+    <h1>{{persona.nombre}}</h1>
         <th class="col-lg-2">Dato</th>
         <th>Detalle</th>
         <tbody>

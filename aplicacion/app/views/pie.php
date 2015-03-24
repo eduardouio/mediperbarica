@@ -5,5 +5,8 @@
     </div><!-- End Content Wrapper -->
   </div><!-- End Page Wrapper -->
 </body>
-<script src="js/app/personal.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var host = 'http://localhost/aplicacion/';
+</script>
+<script src="<?php echo base_url();?>js/app/mediperbarica.js" type="text/javascript"></script>
 </html>
