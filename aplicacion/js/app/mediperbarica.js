@@ -1,202 +1,138 @@
 /*!
- * Fichero encargado de trabajar con el personal
- * http://mediperbarica.com.ec/
- *
- *
- * Copyright 2014 Mediperbarica Todos los derechos reservados
- * @autor: Eduardo Villota
- * @date: 20-03-2015 00:23
+  Fichero encargado de trabajar con las historias
+  http://mediperbarica.com.ec/hash/historias
+ 
+ 
+  Copyright 2014 Mediperbarica Todos los derechos reservados
+  @autor: Eduardo Villota
+  @date: 20-03-2015 00:23
  */
 
 /**
-*  Module de insersion de personas
-*
-* Co este modulo se prueba la infromcion que se
+Moduludo encargado de Crear Editar y Buscar las historias
 */
 var mediperbaricaApp = angular.module('mediperbaricaApp', ['ngRoute']);
+
+//Metodo encargado de gestionar las histororias
+mediperbaricaApp.factory('services', [ '$http', function($http){
+	var serviceBase = host + 'index.php/historias/';
+	var obj = {};
+
+	//Metodo que obtiene las historias
+	obj.getHistorias = function(){
+		console.log('[Debug] => Se llama a la funcion getHistoria');
+		console.log('[Debug] => ' + serviceBase + 'getHistoria');
+		return $http.get(serviceBase + 'getHistoria');
+	};
+	//Metodo que retorna una historia
+	obj.getHistoria = function (id_historia) {
+		return $http.get(serviceBase + 'getHistoria/' + id_historia);
+	};
+	//Metodo que guarda una historia
+	obj.insertHistoria = function (historia){
+		console.log('[Debug] => Se llama al servicio insertHistoria');
+		return $http.post(serviceBase + 'setHistoria', historia).then(function (results){
+			console.log('[Debug] => Resultado de la consulta');
+			console.dir(results);
+			return results;
+		});
+	};
+	//Metodo que actualiza una historia
+	obj.updateHistoria = function(id_historia, historia) {
+		return $http.post(serviceBase + 'updateHistoria', {id_historia:id_historia, historia:historia}).then(function (status){
+			console.log('[Debug]' + status.data);
+			return status.data;
+		});
+	};
+
+	//MEtodo que elimina una historia por URL
+	obj.deleteHistoria = function(id_histora){
+		return $http.delete(serviceBase + 'deleteHistoria/'+ id_histora).then (function (status){
+			console.log('[Debug]' + status.data);
+			return status.data;
+		});
+	}
+
+	return obj;
+}])
 
 
 /**
 Configuracion de las rutas a las plantillas
 */
-
 mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	
 	//$locationProvider.html5Mode(true);
 	$routeProvider
-	.when('/pacientes',{
-		templateUrl : 'tplhtml/pacientes.html',
-		controllerAs : 'pacientes',
-		controller : 'PacientesController'
+	.when('/',{
+		templateUrl : host + 'tplhtml/lista-tpl.html',
+		controllerAs : 'ctrlListar',
+		controller : 'ListarController'
 	})
-	.when('/personal',{
-		templateUrl : 'tplhtml/personal.html',
-		controllerAs : 'personal',
-		controller: 'PersonalController'
+	.when('/crear',{
+		templateUrl : host + 'tplhtml/historias-tpl.html',
+		controllerAs : 'editCtrl',
+		controller: 'editController'
 	})
-	.when('/tratamientos',{
-		templateUrl : 'tplhtml/tratamientos.html',
-		controllerAs : 'tratamientos',
-		controller: 'TratamientosController'
+	.when('/buscar',{
+		templateUrl : host + 'tplhtml/lista-tpl.html',
+		controllerAs : 'ctrlListar',
+		controller: 'ListarController'
 	})
-	.when('/clientes',{
-		templateUrl : 'tplhtml/clientes.html',
-		controllerAs : 'clientes',
-		controller: 'ClientesController'
-	})
-	.when('/facturacion',{
-		templateUrl : 'tplhtml/facturacion.html',
-		controllerAs : 'facturacion',
-		controller: 'FacturacionController'
-	})
-		.when('/usuarios',{
-		templateUrl : 'tplhtml/usuarios.html',
-		controllerAs : 'usuarios',
-		controller: 'UsuariosController'
-	})
-			.when('/acerca/:idCliente',{
-		templateUrl : 'tplhtml/acerca.html',
+		.when('/acerca',{
+		templateUrl : host + 'tplhtml/acerca.html',
 		controller: 'AcercaController'
 	})
 	.otherwise({ redirectTo: '/' 
 	});
 });
 
-
-/**
-Controlador encargado de manejar el personal
-*/
-mediperbaricaApp.controller('PersonalController', function ($scope, $http) {
-	
-	$scope.persona = {
-		'id_personal' : '',
-		'nombres' : '',
-		'direccion' : 'null',
-		'telefono_fijo' : 'null',
-		'celular' : 'null',
-		'mail' : '',
-		'notas' : ''
-	};
-
-	/**
-	* Valida los datos del formularios y permite mostrar el boton de enviar
-	* Valores requeridos cedula, nombres, mail)
-	* @return Boolean
-	*/
-	$scope.validarFrmPersonal = function(){
-		$scope.persona.id_personal = $scope.id_personal;
-		$scope.persona.nombres = $scope.nombres;
-		$scope.persona.direccion = $scope.direccion;
-		$scope.persona.telefono_fijo = $scope.telefono_fijo;
-		$scope.persona.celular = $scope.celular;
-		$scope.persona.mail = $scope.mail;
-		$scope.persona.notas = $scope.notas;
-		$scope.eviarForm();
-	};
-
-	/**
-	* Envia el formulario validado al server
-	* @return Boolean
-	*/
-	$scope.eviarForm = function() {
-		 console.log('Envioado a'  + host);
-		 console.log($scope.persona);
-		 console.log($scope.persona.nombres = "Eduardo Villota");
-		 var request = $http({
-		 	method: "post",
-		 	url: 'http://localhost/aplicacion/index.php/personal/registrar',
-		 	data : {
-		 			'id_personal' : $scope.id_personal,
-					'nombres' : $scope.nombres,
-					'direccion' : $scope.direccion,
-					'telefono_fijo' : $scope.telefono_fijo,
-					'celular' : $scope.celular,
-					'mail' : $scope.mail,
-					'notas' : $scope.notas
-		 			},
-		 	headers : {'Content-Type' : 'Aplication/x-www-form-urlencoded'}
-		 });
-
-		 request.success(function (data) {
-		 	$scope.id_personal = '';
-			$scope.nombres = '';
-			$scope.direccion = '';
-			$scope.telefono_fijo = '';
-			$scope.celular = '';
-			$scope.mail = '';
-			$scope.notas = '';
-		 	alert('Se guardo el registro ' + data);
-		 });
-	};
-
-	
-	/**
-	* Limpia el scope de los datos del formulario
-	*/
-	$scope.limpiarForm = function (){
-		$scope.id_personal = '';
-		$scope.nombres = '';
-		$scope.direccion = '';
-		$scope.telefono_fijo = '';
-		$scope.celular = '';
-		$scope.mail = '';
-		$scope.notas = '';
-	};
-
-	/**
-	* Cierra el formulario de contactos
-	*/
-	$scope.cerrarForm = function(){
-			
-	};
-
+//controlador encargado de listar las historias
+mediperbaricaApp.controller('ListarController', function($scope, services){
+	console.log("[Debug] => Se llama al controlador ListarController");
+	services.getHistorias().then(function (data){
+		$scope.historias = data.data;
+	});
 });
 
 /**
-Controlador encargado de manjar los pacientes
+Controlador encargado de Crear Editar Elimianar
 */
-mediperbaricaApp.controller('PacientesController', [function ($scope) {
-	// Contenido del controlador para pacientes
-}]);
+mediperbaricaApp.controller('editController', function( $scope, 
+							$rootScope, $location, $routeParams, services){
+	console.log('[Debug] => Se incia la carga de editController');
+	var id_historia = ($routeParams.id_historia) ? parseInt($routeParams.id_historia) : 0;	
+	$rootScope.title = (id_historia > 0) ? 'Edit Historia' : 'Add Historia';
+	
+	//Guada una historia
+	$scope.saveHistoria = function (historia){
+		console.log('[Debug] => Se llama a saveHistoria de editController');
+		console.dir(historia);
+		services.insertHistoria(historia);
+	};	
 
+	/**
+	Metodo encargado de limpiar el $scope, Se comparan los vcalores de los objetos
+	historia
+	@return (boolean)
+	*/
+	$scope.isClean = function (){
+		return angular.equals(original, $scope.historia);
+	};
 
-/**
-Controlador encargado de manejar los tratamamientos
-*/
+	/**	
+	MEtodo encargado de eliminar un registro de historia
+	@return str(id_historia)
+	*/
+	$scope.deleteHistoria = function(historia){
+		$location.path('/');
+		if(confirm("Esta Seguro de Eliminar la Historia : " + $scope._id + ' de ' + $scope.nombres) == true)
+			services.deleteHistoria(historia._id);
+	};
 
-mediperbaricaApp.controller('TratamientosController', [function ($scope) {
-	//contenido del controlador para tratamientos
-}]);
+	console.log('[Debug] => Se termina la carga de editController');
+});
 
+mediperbaricaApp.controller('AcercaController', function($scope, services){
 
-/**
-controlador encargado de manejar a los clientes
-*/
-mediperbaricaApp.controller('ClientesController', [function ($scope) {
- //contenido del controlador de clientes
-
-}]);
-
-
-/**
-controlador encargado de manejar la facturacion
-*/
-mediperbaricaApp.controller('FacturacionController', [function ($scope) {
-	//contenido del controlador de facturacion
-}]);
-
-
-/**
-Controlador para los usuarios 
-*/
-mediperbaricaApp.controller('UsuariosController', [function ($scope){
-	//contenido encargado dem manejar los uusarios
-}]);
-
-/**
-Controlador acerca de
-*/
-mediperbaricaApp.controller('AcercaController', [function ($scope, idCliente){
-	alert(idCliente);
-	//contendio de la vista acerca de
-}]);
+});

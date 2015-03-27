@@ -112,3 +112,36 @@
     </div>
 </div>
 <!--fin  contenedor de la app de Personal-->
+
+
+
+
+<!-- Text input-->
+<div class="form-group">
+  <span class="col-md-2 control-label">Motivo Tratamiento:</span>  
+  <div class="col-md-8">
+  <input name="motivo_tratamiento" ng-model="historia.motivo_tratamiento" placeholder="Motivo Del Tratamiento" class="form-control input-xx" type="text" maxlength="360">
+  <div ng-show="!motivo_tratamiento">
+      <small class="text-danger">Requerido</small>
+  </div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <span class="col-md-2 control-label">Examen Físico:</span>  
+  <div class="col-md-8">
+  <input name="examen_fisico" ng-model="historia.examen_fisico" placeholder="Examen Físico" class="form-control input-xx" type="text" maxlength="360">
+  <div ng-show="!examen_fisico">
+      <small class="text-danger">Requerido</small>
+  </div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <span class="col-md-2 control-label">Manejo:</span>  
+  <div class="col-md-8">
+  <input name="manejo" ng-model="historia.manejo" placeholder="Manejo" class="form-control input-xx" type="text" maxlength="180">
+  </div>
+</div>

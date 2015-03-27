@@ -1,0 +1,110 @@
+<!-- Inicio de contenedor de la app de Personal-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <p class="text-center text-info">Registro Paciente E Historia Médica</p>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal" name="frmPersonal">
+          <fieldset>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label" >Cédula:</span>  
+              <div class="col-md-4">
+                <input name="id_paciente" ng-model="historia.id_paciente" placeholder="Cedula/Pasaporte" class="form-control input-md" type="text" maxlength="10">
+                <div ng-show="!historia.id_paciente">
+                  <small class="text-danger">Requerido</small>
+                  <br> 
+                  <p class="label label-info">Debe contener 10 digitos en caso de pasaporte completar con Ceros</p>
+                </div>
+              </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label">Nombres:</span>  
+              <div class="col-md-5">
+                <input name="nombres" ng-model="historia.nombres" placeholder="Ingrese los nombres" class="form-control input-md" type="text" maxlength="40">
+                <div ng-show="!historia.nombres">
+                  <small class="text-danger">Requerido</small>
+                  <br> 
+                  <p class="label label-info">Ingresar al menos nombre y apellido</p>
+                </div>
+              </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label">Telefono:</span>  
+              <div class="col-md-4">
+                <input name="telefono" ng-model="historia.telefono" placeholder="Teléfono" class="form-control input-md" type="text" maxlength="10">
+                <div ng-show="!historia.telefono">
+                  <small class="text-danger">Requerido</small>
+                </div>
+              </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label">Fecha Nacimiento (aaaa-mm-dd):</span>  
+              <div class="col-md-4">
+                <input name="fecha_nacimiento" ng-model="historia.fecha_nacimiento" placeholder="1984-04-19" class="form-control input-md" type="date" maxlength="10">
+              </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label">Mail:</span>  
+              <div class="col-md-5">
+                <input name="mail" ng-model="historia.mail" placeholder="algo@algo.ext" class="form-control input-md" type="email" maxlength="45">
+                <div ng-show="!historia.mail">
+                  <small class="text-danger">Requerido</small>
+                  <br> 
+                  <p class="label label-info">El mail será usado para envio de citas</p>
+                </div>
+              </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label">Direccion:</span>  
+              <div class="col-md-6">
+                <input name="direccion" ng-model="historia.direccion" placeholder="Ciudad,Dirección,Edificio" class="form-control input-xx" type="text" maxlength="120">
+              </div>
+            </div>
+            <hr>
+            <span class="help-block"> <b>Referencias Familiares En Caso De Acompañante:</b></span>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label">Nombres:</span>  
+              <div class="col-md-5">
+                <input name="nombre_familiar" ng-model="historia.nombre_familiar" placeholder="Ingrese Los Nombres Del Familiar" class="form-control input-md" type="text" maxlength="40">
+                <div ng-show="!nombre_familiar">
+                  <br> 
+                  <p class="label label-info">Ingresar al menos nombre y apellido</p>
+                </div>
+              </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label">Telefono:</span>  
+              <div class="col-md-4">
+                <input name="telefono_familiar" ng-model="historia.telefono_familiar" placeholder="Teléfono Del Familiar" class="form-control input-md" type="text" maxlength="10">
+              </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+              <span class="col-md-2 control-label">Direccion:</span>  
+              <div class="col-md-6">
+                <input name="direccion_familiar" ng-model="historia.direccion_familiar" placeholder="Ciudad,Dirección,Edificio" class="form-control input-xx" type="text" maxlength="50">
+              </div>
+            </div>
+            <hr>
+          </fieldset>
+          <div class="form-group">
+            <span class="col-md-12 control-label">
+            <button ng-click="saveHistoria(historia)" class="btn btn-primary"> Guardar Registro </button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--fin  contenedor de la app de Personal-->

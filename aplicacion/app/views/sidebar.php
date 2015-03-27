@@ -5,28 +5,16 @@
       <ul class="sidebar">
         <li class="sidebar-main">
           <a href="#/">
-            MEDIPERBARICA
+            <?php print $title;?>
             <span class="menu-icon glyphicon glyphicon-home"></span>
           </a>
         </li>
         <li class="sidebar-title"><span>MENU</span></li>
-        <li class="sidebar-list">
-          <a href="#pacientes">Pacientes <span class="menu-icon fa fa-user"></span></a>
-        </li>
          <li class="sidebar-list">
-          <a href="#tratamientos">Tratamientos <span class="menu-icon fa fa-support"></span></a>
+          <a href="#crear">Crear <span class="menu-icon fa fa-plus"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#clientes">Clientes <span class="menu-icon fa fa-briefcase"></span></a>
-        </li>
-        <li class="sidebar-list">
-          <a href="#facturacion">Facturación <span class="menu-icon fa fa-money"></span></a>
-        </li>
-        <li class="sidebar-list">
-          <a href="#usuarios">Usuarios <span class="menu-icon fa fa-cog"></span></a>
-        </li>
-        <li class="sidebar-list">
-          <a href="#personal"> Personal<span class="menu-icon fa fa-plus"></span></a>
+          <a href="#buscar">Listar <span class="menu-icon fa fa-list"></span></a>
         </li>
         <li class="sidebar-list">
           <a href="#acerca">Acerca <span class="menu-icon fa fa-barcode"></span></a>

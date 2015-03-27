@@ -1,0 +1,59 @@
+<div class="row">
+<div class="panel panel-success">
+<div class="panel-heading">
+<div class="row">
+<span class="col-md-10 text-center"> Listado de Historias Clínicas</span>
+<input type="text" class="col-md-2" placeholder="Buscar" ng-model="buscar">
+	
+</div>
+</div>
+<div class="panel-body">
+<div class="row">
+<div class="table-responsive">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<th>ID</th>
+			<th>Cédula</th>
+			<th>Nombres</th>
+			<th>Tratamientos</th>
+			<th>Telefono</th>
+			<th>Mail</th>
+			<th>Edad</th>
+			<th>Direccion</th>
+			<th>Registro</th>
+			<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in historias | filter:buscar">
+				<td>{{row.id_historia}}</td>
+				<td>{{row.id_paciente}}</td>
+				<td>{{row.nombres}}</td>
+				<td>{{row.tratamientos}}</td>
+				<td>{{row.telefono}}</td>
+				<td>{{row.mail}}</td>
+				<td>{{row.edad}}</td>
+				<td>{{row.direccion}}</td>
+				<td>{{row.creado}}</td>
+				<td>
+					<!-- Single button -->
+					<div class="btn-group">
+					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					    Action <span class="caret"></span>
+					 </button>
+					 <ul class="dropdown-menu" role="menu">
+					    <li><a href="#">Ver</a></li>
+					    <li><a href="#">Editar</a></li>
+					    <li><a href="#">Asignar Tratamiento</a></li>
+					    <li class="divider"></li>
+					    <li><a href="#" class="text-danger">Eliminar</a></li>
+					</ul>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>
+</div>
+</div>

@@ -7,20 +7,30 @@ Descripcion del proyecto: Se encarga de manejar las sesiones de tratamiento con 
 Estructura y orden de las vistas
 
 1 cabecera
-2 totales
-3 alertas
-4 widget_tratamientos
-5 widget_pacientes
+2 sidebar
+3 menu
+4 alertas
 6 Pies
 
-
+####################################################################################################################################
 Procedimientos:
+ 
  1.- Sistema de Menus 
- la plantilla tiene un menu superior a la derecha este menu es controlado por codeigniter, tambien se tiene un menu a la izquierda sidebar, este menu es controlado por angular codeigniter carga los menus de la izquierda para que se acomplen y funcionen el la plantilla cargada estos menus son configurados por el sistema de vistas de codeigniter, la sidebar carga las plantillas el work space de clase css boostrap col-md-12 mismo que se puede dividir en 12 columnas o usarlas de acuerdo convenga.
+ 	El sistema de menu esta divido
 
  2.- Acciones Presentar, Editar, Eliminar, Asignar
  Estas assiones se encuentran dentro del workspace de angular por lo que hay que ver si se las puede llamar desde las vistas
 
+###################################################################################################################################
+ Funcionamiento de Controladores
+
+  1.- controlador Historial
+	  Este controlador este controlador trabaja para que los menus de la parte izquierda se muestren de acuerdo a las propiedades del controlador en este caso del historial, la sidebar apunta a acciones sobbre las historias, el menu pone el foco en item historias, por defecto se llama al controllador de angular encargado de mostrar la lista la url de llamada se la registra en el enlace unicial de esta forma angular debe cargar estos contenidoss de manera automatica:
+			Diccionario:
+				menu.php => { $controllador}
+				
+
+######################################################################################################################################
 Anotaciones:
 
 1.- Tener en cuenta que se hay ocaciones en las que los pacientes desea que se emita la factura a otro nombre (para esto habra que crear un nuevo paciente)
