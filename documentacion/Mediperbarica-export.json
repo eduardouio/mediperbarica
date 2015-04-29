@@ -1,0 +1,138 @@
+{
+  "name": "Mediperbarica",
+  "numberOfColumns": 5,
+  "columns": [
+    {
+      "name": "Pendientes",
+      "cards": [
+        {
+          "name": "Listado de Historias",
+          "details": "Implementar un listado de historias en el que se muestren todas las historias en paginas de 20, de acuerdo a las siguientes capacidades:\n\n- Listar las historias en paginas de 20 ítems\n- Que cada historia tenga las siguientes opciones\n    - Presentar Historias\n    - Editar Historias\n    - Eliminar Historias\n    - Asignar Tratamiento\n- Que sea posible filtrar el la lista de historias.\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n- Las historias se deben mostrar en una tabla",
+          "color": "A2FCA3"
+        },
+        {
+          "name": "Crear Historias",
+          "details": "Implementar un proceso para la creación de las historias de acuerdo a las siguientes condiciones:\n\n- Registro de la historia en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si el registro que se ingresa esta duplicado\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n- Luego de guardar el registro el sistema debe presentar el registro en la ficha de presentación indicando el ID.",
+          "color": "A2FCA3"
+        },
+        {
+          "name": "Presentacion individual de Historia",
+          "details": "Se tiene que implementar una pantalla para que se presente de forma individual las historias y que se permita ejecutar acciones sobre la misma.\n\n- Se debe elaborar una ficha de presentación en HTML\n- La presentación debe estar en una tabla\n- Se debe presentar los datos del paciente, y los tratamientos que tenga asignados (los tratamientos deben llevar a la ficha de seguimiento de tratamientos \"historia sesiones\")\n- Dar un énfasis a los datos de contacto y nombres de los pacientes.\n- Mostrar un listado de las alergias y Antecedentes del Paciente si estas aun no existen se debe mostrar un botón grande a lado izquierdo para que se puedan crear nuevas alergias o antecedentes.\n- La ficha debe permitir las siguientes acciones:\n    - Editar la historia\n    - Asignar un Tratamiento\n    - Registrar Alergia o Antecedentes\n    - Eliminar la historia\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor",
+          "color": "A2FCA3"
+        },
+        {
+          "name": "Editar Historias",
+          "details": "Se debe implementar la funcionalidad para editar las historias de acuerdo a los siguientes requerimientos:\n\n- Presentar la historia en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n\n- Luego de guardar el registro el sistema debe presentar el registro en la ficha de presentación indicando el ID.",
+          "color": "A2FCA3"
+        },
+        {
+          "name": "Eliminar Historias",
+          "details": "Implementar una funcionalidad para eliminar las historias de acuerdo a las siguientes condiciones:\n\n- La opción de eliminar presenta una pantalla de confirmación\n- Mostrar registros hijos afectados por la acción.\n- Cuando se elimine borrar los registros hijos de la base de datos\n- La eliminación de las historias esta designado solo al administrador\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n- Luego de eliminar el registro se debe indicar el id del registro y volver a la lista de registros",
+          "color": "A2FCA3"
+        },
+        {
+          "name": "Crear Tratamientos",
+          "details": "Implementar un proceso para crear tratamientos de acuerdo a las siguientes condiciones:\n\n- Registro del tratamiento en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si el registro que se ingresa esta duplicado\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - N otificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n- Luego de guardar el registro el sistema debe presentar el registro en la ficha de presentación indicando el ID.",
+          "color": "FAFFA1"
+        },
+        {
+          "name": "Listar Tratamientos",
+          "details": "Implementar un listado de tratamientos en el que se muestren todas las historias en paginas de 20, de acuerdo a las siguientes capacidades:\n\n- Los tratamientos son procedimientos en los que los pacientes reciben oxigeno por tiempos de acuerdo a una programación previa, los tratamientos no se registran en una tabla padre como se podría esperar algo como tipo de tratamientos ya que los tratamientos son de un solo tipo y se los asigna a los pacientes, en los que se especifica la rozan por la cual el paciente toma el tratamiento, los costos y el nro de sesiones que este contrata.\n- Listar los tratamientos en paginas de 20 ítems de manera que contengas información del paciente las sesiones contratadas, y las sesiones que ya se usaron\n- Que cada tratamiento tenga las siguientes opciones\n    - Presentar Tratamiento\n    - Editar Tratamiento\n    - Registrar Nueva Sesión\n    - Eliminar Tratamiento\n\n- Que sea posible filtrar el la lista de tratamientos.\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n- Los tratamientos se deben mostrar en una tabla",
+          "color": "FAFFA1"
+        },
+        {
+          "name": "Presentacion individual Tratamiento",
+          "details": "Se tiene que implementar una pantalla para que se presente de forma individual los tratamientos y que se permita ejecutar acciones sobre el mismo.\n\n- Se debe elaborar una ficha de presentación en HTML\n- La presentación debe estar en una tabla\n- Se debe presentar los datos del paciente, y el historial de sesiones realizadas así como también un total de sesiones realizadas y pendientes.\n- Dar un énfasis a los datos de contacto y nombres de los pacientes.\n- La ficha debe permitir las siguientes acciones:\n    - Editar la Tratamiento\n    - Asignar nueva Sesión\n    - Eliminar la Tratamiento\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor",
+          "color": "FAFFA1"
+        },
+        {
+          "name": "Editar Tratamientos",
+          "details": "Se debe implementar la funcionalidad para editar los tratamientos de acuerdo a los siguientes requerimientos:\n\n- Presentar el tratamiento en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n\n- Luego de guardar el registro el sistema debe presentar el registro en la ficha de presentación indicando el ID.",
+          "color": "FAFFA1"
+        },
+        {
+          "name": "Eliminar Tratamientos",
+          "details": "Implementar una funcionalidad para eliminar los tratamientos de acuerdo a las siguientes condiciones:\n\n- La opción de eliminar presenta una pantalla de confirmación\n- Mostrar registros hijos afectados por la acción.\n- Cuando se elimine borrar los registros hijos de la base de datos\n- La eliminación de los tratamientos esta designado solo al administrador\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n- Luego de eliminar el registro se debe indicar el id del registro y volver a la lista de registros",
+          "color": "FAFFA1"
+        },
+        {
+          "name": "Crear Antecedente",
+          "details": "Los antecedentes son los registros de alergias y/u operaciones a las que el paciente ha sido sometido, estos registros se guardan en una tabla hija la creación de las historias debe cumplir con los siguientes condiciones:\n\n- Registro del antecedente en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si el registro que se ingresa esta duplicado\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n- Luego de guardar el registro el sistema debe volver a la ficha de presentación de historias donde esta debe aparecer.",
+          "color": "FFFFFF"
+        },
+        {
+          "name": "Listado de Antecedentes",
+          "details": "Implementar un listado de antecedentes de un paciente, de acuerdo a las siguientes capacidades:\n\n- Listar dentro de la ficha de presentación de historias\n- Que cada antecedente tenga las siguientes opciones\n    - Editar Antecedente\n    - Eliminar Antecedente\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n- Las historias se deben mostrar en una tabla",
+          "color": "FFFFFF"
+        },
+        {
+          "name": "Eliminar Antecedente",
+          "details": "Implementar una funcionalidad para eliminar los antecedentes de un paciente de acuerdo a las siguientes condiciones:\n\n- La opción de eliminar presenta una pantalla de confirmación\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n- Luego de eliminar el registro se debe indicar el id del registro eiminado y volver a la presentacion de la historia del paciente",
+          "color": "FFFFFF"
+        },
+        {
+          "name": "Editar Antecedente",
+          "details": "Se debe implementar la funcionalidad para editar los antecedentes de acuerdo a los siguientes requerimientos:\n\n- Presentar el antecedente en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n\n- Luego de guardar el registro el sistema debe presentar la ficha de presentación de la historia del paciente",
+          "color": "FFFFFF"
+        },
+        {
+          "name": "Crear Cliente",
+          "details": "El cliente es la entidad a quien se emiten las facturas, en caso de que un paciente decida que la factura salga a su nombre hay que registrarlo como cliente, en el caso de que el cliente sea menor de edad o simplemente el tratamiento este cubierto por otra entidad seguro esposo etc, se debe registrar al paciente en la historia pero al que paga el tratamiento en la facturación.\n\nImplementar un proceso para la creación de las clientes de acuerdo a las siguientes condiciones:\n\n- Registro de cliente en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si el registro que se ingresa esta duplicado\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n- Luego de guardar el registro el sistema debe presentar el registro en la ficha de presentación indicando el ID.",
+          "color": "FFB5B5"
+        },
+        {
+          "name": "Presentacion individual de Cliente",
+          "details": "Se tiene que implementar una pantalla para que se presente de forma individual los clientes y que se permita ejecutar acciones sobre la misma.\n\n- Se debe elaborar una ficha de presentación en HTML\n- La presentación debe estar en una tabla\n- Se debe presentar los datos del cliente, y los tratamientos que tenga contratados.\n- Datos del paciente a quien este apadrinando los tratamientos\n- Lista de Facturas por tratamientos\n- Dar un énfasis a los datos de contacto y nombres de los pacientes.\n- La ficha debe permitir las siguientes acciones:\n    - Editar la Cliente\n    - Asignar un Factura\n    - Eliminar Cliente\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor",
+          "color": "FFB5B5"
+        },
+        {
+          "name": "Listar Clientes",
+          "details": "Implementar un listado de clientes en el que se muestren todas las clientes en paginas de 20, de acuerdo a las siguientes capacidades:\n\n- Listar los clientes en paginas de 20 ítems\n- Que cada cliente tenga las siguientes opciones\n    - Presentar Cliente\n    - Editar Cliente\n    - Eliminar Cliente\n    - Asignar Factura\n- Que sea posible filtrar el la lista de clientes.\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n- Los clientes se deben mostrar en una tabla",
+          "color": "FFB5B5"
+        },
+        {
+          "name": "Eliminar Clientes",
+          "details": "Implementar una funcionalidad para eliminar los clientes de acuerdo a las siguientes condiciones:\n\n- La opción de eliminar presenta una pantalla de confirmación\n- Mostrar registros hijos afectados por la acción.\n- Cuando se elimine borrar los registros hijos de la base de datos\n- La eliminación de los tratamientos esta designado solo al administrador\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n- Luego de eliminar el registro se debe indicar el id del registro y volver a la lista de clientes",
+          "color": "FFB5B5"
+        },
+        {
+          "name": "Editar Cliente",
+          "details": "Se debe implementar la funcionalidad para editar un cliente de acuerdo a los siguientes requerimientos:\n\n- Presentar el tratamiento en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n\n- Luego de guardar el registro el sistema debe presentar el registro en la ficha de presentación indicando el ID.",
+          "color": "FFB5B5"
+        },
+        {
+          "name": "Crear Sesiones tarea pendiente",
+          "details": "Las sesiones son lo eventos que ocurren durante un tratamiento por lo que debe existir al menos un tratamiento para que se pueda registrar una sesion.\nEl cliente es la entidad a quien se emiten las facturas, en caso de que un paciente decida que la factura salga a su nombre hay que registrarlo como cliente, en el caso de que el cliente sea menor de edad o simplemente el tratamiento este cubierto por otra entidad seguro esposo etc, se debe registrar al paciente en la historia pero al que paga el tratamiento en la facturación.\n\nImplementar un proceso para la creación de las clientes de acuerdo a las siguientes condiciones:\n\n- Registro de cliente en un Formulario HTML\n- Validación de campos en longitud y campos obligatorios\n- Enviar Información por AJAX al servidor PHP\n- Procesar el formulario en PHP verificar campos y longitudes\n- Notificar resultado de la acción al usuario de acuerdo a lo siguiente:\n    - Notificar si el registro que se ingresa esta duplicado\n    - Notificar si uno de los campos es requerido o tiene datos incompletos\n    - Notificar error de conexión con BD\n    - Notificar error en consulta SQL al servidor\n    - Notificar Si el registro se guardo correctamente\n- Luego de guardar el registro el sistema debe presentar el registro en la ficha de presentación indicando el ID.",
+          "color": "DBDBDB"
+        }
+      ],
+      "settings": {
+        "color": "#666"
+      }
+    },
+    {
+      "name": "Análisis",
+      "cards": [],
+      "settings": {
+        "color": null
+      }
+    },
+    {
+      "name": "Desarrollo",
+      "cards": [],
+      "settings": {}
+    },
+    {
+      "name": "Pruebas",
+      "cards": [],
+      "settings": {}
+    },
+    {
+      "name": "Terminados",
+      "cards": [],
+      "settings": {}
+    }
+  ],
+  "archived": [],
+  "settings": {}
+}

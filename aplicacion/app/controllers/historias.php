@@ -57,8 +57,7 @@ class Historias extends CI_Controller {
 	 */
 	public function getHistoria($id_historia = 0){
 
-	$this->Query_ = "SELECT 
-		hst.id_historia, 
+	$this->Query_ = " SELECT hst.id_historia, 
 		hst.id_paciente ,
 		hst.nombres,
 		(SELECT count(id_tratamiento) FROM tratamiento AS trt 
@@ -81,16 +80,40 @@ class Historias extends CI_Controller {
 		if( $this->_getRequestMethod() != "POST"){
 			$this->_resposeHttp('','406');
 		}
-		
+
 		$historia = json_decode(file_get_contents("php://input"),true);
-		$this->db->insert($this->Table_,$historia);
+		# comprobamos que esten todos los campos
+		if ($this->_checkData($historia)){
+			#comprobamos que el id del Registro no exista
+			$this->db->where('id_paciente', $historia['id_paciente']);
+			$query = $this->db->get($this->Table_);
+			$result = ($query->num_rows() > 0 ) ? true : false;
+			if(!$result){
+				$this->db->insert($this->Table_,$historia);
+				$response = array('status'=>'Success',
+								'msg'=> 'Historia Creada Correctamente',
+								'data' => $historia);
+				$this->_resposeHttp(json_encode($response), 201);	
+			}else{
+				$response = array('status'=>'Ok',
+							  'msg'=>'Ya existe un registro con el mismo numero de Cedula en el sistema',
+								'data' => $query->result_array());
+				$this->_resposeHttp(json_encode($response), 200);	
+			}
+
+		} else{
+			$response = array('status'=>'Ok',
+							  'msg'=>'Uno de los campos no esta completo o no existe'
+								);
+			$this->_resposeHttp(json_encode($response), 200);
+		}
 
 	}
 
 	/**
 	 * Actualiza una historia
 	 * @param (int)$id_historia
-	 * @param (array)$historia
+	 * @param (array)$historia.com/
 	 */
 	public function deleteHistoria(){
 
@@ -156,9 +179,50 @@ class Historias extends CI_Controller {
 	}
 
 	/**
-	 * Coloca las reglas para los formularios
+	 * Chequea la conexion a la base de datos
+	 * @return boolean
 	 */
-	private function _setRules(){
-		$this->form_validation->set_rules();
+	private function _checkDb(){
+		if ($this->db){
+			echo 'Algo';
+		}
 	}
+
+	/**
+	 * Funcion encargada de verificar los datos ingresados por el usuario
+	 * @param array(historia)
+	 * @return boolean
+	 */
+	private function _checkData($historia){
+		$condicion = false;
+		$i = 0;
+		$longitudes_minimas = array(
+						'id_paciente'=>'9',
+						'nombres'=>'4',
+						'telefono'=>'6',
+						'fecha_nacimiento'=>'9',
+						'mail' => '5',
+						'direccion' => '8',
+						'nombre_familiar' => '0',
+						'telefono_familiar' => '0',
+						'direccion_familiar' => '0');
+
+		foreach ($historia as $key => $value) {
+			$i++;
+			#print ($longitudes_minimas[$key]) . " <<<<<<" . (strlen($value)) . "\n";
+			if(($longitudes_minimas[$key]) < (strlen($value))){
+				$condicion = true;
+			}else{
+				$condicion = false;
+				break;				
+			}
+		}
+		#comprobamos que al menos nos deb los 6 primeros campos
+		if ($i > 5){
+			return $condicion;			
+		}else{
+			return false;
+		}
+}
+
 }

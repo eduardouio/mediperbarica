@@ -8,10 +8,12 @@
   @date: 20-03-2015 00:23
  */
 
+
+
 /**
 Moduludo encargado de Crear Editar y Buscar las historias
 */
-var mediperbaricaApp = angular.module('mediperbaricaApp', ['ngRoute']);
+var mediperbaricaApp = angular.module('mediperbaricaApp', ['ngRoute','ui.bootstrap']);
 
 //Metodo encargado de gestionar las histororias
 mediperbaricaApp.factory('services', [ '$http', function($http){
@@ -22,52 +24,48 @@ mediperbaricaApp.factory('services', [ '$http', function($http){
 	obj.getHistorias = function(){
 		console.log('[Debug] => Se llama a la funcion getHistoria');
 		console.log('[Debug] => ' + serviceBase + 'getHistoria');
-		return $http.get(serviceBase + 'getHistoria');
+		obj.httpResult = $http.get(serviceBase + 'getHistoria');
+		return obj.httpResult;
 	};
 	//Metodo que retorna una historia
 	obj.getHistoria = function (id_historia) {
-		return $http.get(serviceBase + 'getHistoria/' + id_historia);
+		obj.httpResult = $http.get(serviceBase + 'getHistoria/' + id_historia);
+		return obj.httpResult;
 	};
 	//Metodo que guarda una historia
 	obj.insertHistoria = function (historia){
 		console.log('[Debug] => Se llama al servicio insertHistoria');
 		return $http.post(serviceBase + 'setHistoria', historia).then(function (results){
-			console.log('[Debug] => Resultado de la consulta informamos se infroma el reseultado');
-			if (results.status  == 200){
-				document.getElementById('alertas').innerHTML = '<div id="alertas"' +
-				'class="text-danger alert alert-danger">' +
-				'Notificación: ' + results.data.msg + '</div>';
-			}else{
-				document.getElementById('frmHistorias').innerHTML = '<div class="well">' +
-										'<h3 class="text-center text-success">La historia de Fulano Funkencio se ha creado!.</h3>' +
-										'<br><div class="pull-right">' +
-										'<a class="btn btn-primary" href="http://127.0.0.1/aplicacion/index.php/historias/#/crear">	' +
-										'Nueva Historia</a>&nbsp;&nbsp;' +
-										'<a class="btn btn-primary" href="http://127.0.0.1/apliacion/antecedentes/registrar/">' +
-										'Registrar Antecedente</a>&nbsp;&nbsp;' +
-										'<a class="btn btn-success" href="http://127.0.0.1/aplicacion/index.php/historias/#/presentar">' +
-										'Ver Historia Fulano Funkencio</a></div><br><br></div>'
-			}
+			obj.httpResult = results;
+			return obj.httpResult;
 		});
 	};
 	//Metodo que actualiza una historia
 	obj.updateHistoria = function(id_historia, historia) {
 		return $http.post(serviceBase + 'updateHistoria', {id_historia:id_historia, historia:historia}).then(function (status){
+			obj.httpResult = status.data;
 			console.log('[Debug]' + status.data);
 			return status.data;
 		});
 	};
 
-	//Metodo que elimina una historia por URL
+	//MEtodo que elimina una historia por URL
 	obj.deleteHistoria = function(id_histora){
 		return $http.delete(serviceBase + 'deleteHistoria/'+ id_histora).then (function (status){
+			obj.httpResult = status.data;
 			console.log('[Debug]' + status.data);
 			return status.data;
 		});
 	}
 
+	//Metodo que retorna la respuesta del servidor
+
+	obj.getHttpResult = function(){
+		return obj.httpResult;
+	}
+
 	return obj;
-}]);
+}])
 
 
 /**
@@ -85,7 +83,7 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	.when('/crear',{
 		templateUrl : host + 'tplhtml/historias-tpl.html',
 		controllerAs : 'editCtrl',
-		controller: 'EditController'
+		controller: 'editController'
 	})
 	.when('/buscar',{
 		templateUrl : host + 'tplhtml/lista-tpl.html',
@@ -102,16 +100,53 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 
 //controlador encargado de listar las historias
 mediperbaricaApp.controller('ListarController', function($scope, services){
-	console.log("[Debug] => Se llama al controlador ListarController");
-	services.getHistorias().then(function (data){
-		$scope.historias = data.data;
+	console.log("[Debug] => Se Establece los parametros de la paginacion & Se llama al controlador ListarController");
+	$scope.historiasPaginadas = [];
+	$scope.historias = [] ;
+	$scope.currentPage = 0 ;
+	$scope.numPerPage = 10 ;
+	$scope.maxSize = 10 ;
+
+	
+	$scope.listarHistorias = function(){
+		services.getHistorias().then(function (data){
+			$scope.historias = data.data;
+		});	
+
+	};
+
+	$scope.listarHistorias();
+
+
+	//Determina el numero de paginas que contiene la paginacion
+	$scope.numPages = function (){
+		if ($scope.historias.length){
+			console.log('[Debug] Valor de Paginacion ' + Math.ceil($scope.historias.length / $scope.numPerPage));		
+			return Math.ceil($scope.historias.length / $scope.numPerPage);
+		} else{
+			console.log("[ERROR] no hay valor para el scope historias numPages()");
+		}
+	};
+
+	//Determina lo que se muestra en la tabla
+	$scope.$watch('currentPage + numPerPage', function(){
+		if ($scope.historias.length > 0){
+			var begin = (($scope.currentPage -1 ) * $scope.numPerPage);
+			var end = begin + $scope.numPerPage;
+			console.log("[Debug] valor de begin " + begin + " Valor de End " + end);
+			$scope.historiasPaginadas = $scope.historias.slice(begin,end);
+		} else {
+			console.log("[ERROR] No hay un valor para scope Historias");
+		}
 	});
 });
+
+
 
 /**
 Controlador encargado de Crear Editar Elimianar
 */
-mediperbaricaApp.controller('EditController', function( $scope, 
+mediperbaricaApp.controller('editController', function( $scope, 
 							$rootScope, $location, $routeParams, services){
 	console.log('[Debug] => Se incia la carga de editController');
 	var id_historia = ($routeParams.id_historia) ? parseInt($routeParams.id_historia) : 0;	
@@ -119,10 +154,10 @@ mediperbaricaApp.controller('EditController', function( $scope,
 	
 	//Guada una historia
 	$scope.saveHistoria = function (historia){
-		console.log('[Debug] => Se llama a saveHistoria de EditController');
-		//Validamos los datos ingresados
-		console.dir($scope.historia);
+		console.log('[Debug] => Se llama a saveHistoria de editController');
 		services.insertHistoria(historia);
+		alert(services.httpResult);
+		console.dir(services);
 	};	
 
 	/**
@@ -143,10 +178,6 @@ mediperbaricaApp.controller('EditController', function( $scope,
 		if(confirm("Esta Seguro de Eliminar la Historia : " + $scope._id + ' de ' + $scope.nombres) == true)
 			services.deleteHistoria(historia._id);
 	};
-
-	$scope.clearForm = function(){
-		$scope.historia = {};
-	}
 
 	console.log('[Debug] => Se termina la carga de editController');
 });

@@ -1,0 +1,1208 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"file_",
+				"file_get_contents"
+			],
+			[
+				"json",
+				"json_decode"
+			],
+			[
+				"res",
+				"resposeHttp"
+			],
+			[
+				"$route",
+				"$routeParams	AngularJS"
+			],
+			[
+				"$loca",
+				"$location	AngularJS"
+			],
+			[
+				"$root",
+				"$rootScope	AngularJS"
+			],
+			[
+				"h",
+				"hst"
+			],
+			[
+				"ngrea",
+				"ng-repeat	AngularJS"
+			],
+			[
+				"Crear",
+				"CrearController"
+			],
+			[
+				"Buscar",
+				"BuscarController"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"mostra",
+				"mostrarhtml"
+			],
+			[
+				"C",
+				"CatalogoVistas_"
+			],
+			[
+				"a",
+				"array"
+			],
+			[
+				"RE",
+				"Result_"
+			],
+			[
+				"tab",
+				"Table_"
+			],
+			[
+				"R",
+				"Result_"
+			],
+			[
+				"JSO",
+				"json_encode"
+			],
+			[
+				"DI",
+				"div"
+			],
+			[
+				"mediperba",
+				"mediperbaricaApp"
+			],
+			[
+				"medi",
+				"mediperbaricaApp"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"ng-cl",
+				"ng-click	AngularJS"
+			],
+			[
+				"ng-c",
+				"ng-click	AngularJS"
+			],
+			[
+				"$sc",
+				"$scope	AngularJS"
+			],
+			[
+				"ngre",
+				"ng-repeat	AngularJS"
+			],
+			[
+				"con",
+				"controller	Angular.js"
+			],
+			[
+				"ng-re",
+				"ng-repeat	AngularJS"
+			],
+			[
+				"ID",
+				"id_tratamiento"
+			],
+			[
+				"id_",
+				"id_sesion"
+			],
+			[
+				"id",
+				"id_sesion"
+			],
+			[
+				"defa",
+				"DEFAULT"
+			],
+			[
+				"us",
+				"UNSIGNED"
+			],
+			[
+				"i",
+				"id_tratamiento"
+			],
+			[
+				"ino",
+				"InnoDB"
+			],
+			[
+				"com",
+				"COMMENT"
+			],
+			[
+				"co",
+				"COMMENT"
+			],
+			[
+				"n",
+				"NOT"
+			],
+			[
+				"au",
+				"AUTO_INCREMENT"
+			],
+			[
+				"traa",
+				"tratamiento"
+			],
+			[
+				"his",
+				"historia"
+			],
+			[
+				"def",
+				"DEFAULT"
+			],
+			[
+				"de",
+				"DEFAULT"
+			],
+			[
+				"N",
+				"NOT"
+			],
+			[
+				"in",
+				"InnoDB"
+			],
+			[
+				"ID_",
+				"id_proveedor"
+			],
+			[
+				"SER",
+				"servicio"
+			],
+			[
+				"FK",
+				"FK_FACTURA_DETALLE_FACTUTA"
+			],
+			[
+				"CLIEN",
+				"cliente"
+			],
+			[
+				"DE",
+				"DEFAULT"
+			],
+			[
+				"create",
+				"CREATE"
+			],
+			[
+				"null",
+				"NULL"
+			],
+			[
+				"s",
+				"style	Attr"
+			],
+			[
+				"eq",
+				"equipo"
+			],
+			[
+				"COS",
+				"CONSTRAINT"
+			],
+			[
+				"las",
+				"last_update"
+			],
+			[
+				"id_ma",
+				"id_manejo_combustible"
+			],
+			[
+				"prima",
+				"PRIMARY"
+			],
+			[
+				"UN",
+				"UNIQUE"
+			],
+			[
+				"Au",
+				"AUTO_INCREMENT"
+			],
+			[
+				"manejo",
+				"manejo_combustibles"
+			],
+			[
+				"servicio",
+				"servicio_fluido"
+			],
+			[
+				"Comme",
+				"COMMENT"
+			],
+			[
+				"not",
+				"NOT"
+			],
+			[
+				"uni",
+				"UNIQUE"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/256_chimborazo.html",
+			"settings":
+			{
+				"buffer_size": 10129,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/Matriz Facturas GELVS Motor.html",
+			"settings":
+			{
+				"buffer_size": 21422,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/384_REP_chimborazo.htm",
+			"settings":
+			{
+				"buffer_size": 21505,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/385-chimbo-mante.html",
+			"settings":
+			{
+				"buffer_size": 21360,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/386_tunguragua_man.html",
+			"settings":
+			{
+				"buffer_size": 21825,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/387_tungurahua_rep.html",
+			"settings":
+			{
+				"buffer_size": 21679,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/387_tungurahua_final.html",
+			"settings":
+			{
+				"buffer_size": 21649,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "Snippet: ",
+		"selected_items":
+		[
+			[
+				"Snippet: ",
+				"Snippet: for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"bs3-",
+				"Snippet: bs3-form"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"bs3-tab",
+				"Snippet: bs3-table-responsive"
+			],
+			[
+				"shell",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"bs3-html",
+				"Snippet: bs3-html5-template"
+			],
+			[
+				"bs3-ima",
+				"Snippet: bs3-image"
+			],
+			[
+				"bs3-fo",
+				"Snippet: bs3-form"
+			],
+			[
+				"bs3-ta",
+				"Snippet: bs3-table-condensed"
+			],
+			[
+				"sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"bs3-ht",
+				"Snippet: bs3-html5-template"
+			],
+			[
+				"c",
+				"Set Syntax: C#"
+			],
+			[
+				"bs3-htm",
+				"Snippet: bs3-html5-template"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"bs3-b",
+				"Snippet: bs3-button-info"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 457.0,
+		"history":
+		[
+			"dir(os)",
+			"os.pwd",
+			"os.system('pwd')",
+			"import os",
+			"pwd",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/eduardo/Desktop/Matriz Facturas GELVS.htm",
+		"/var/www/html/aplicacion/app/controllers/historias.php",
+		"/home/eduardo/Dropbox/polaris/Documentos/Software/consulta_mantenimiento_detalle.sql",
+		"/var/www/html/aplicacion/js/app/mediperbarica.js",
+		"/var/www/html/aplicacion/app/views/sidebar.php",
+		"/var/www/html/aplicacion/app/views/menu.php",
+		"/var/www/html/aplicacion/tplhtml/tratamientos.html",
+		"/var/www/html/aplicacion/tplhtml/historias-tpl.html",
+		"/var/www/html/aplicacion/tplhtml/lista-tpl.html",
+		"/var/www/html/aplicacion/app/config/config.php",
+		"/var/www/html/aplicacion/app/views/pie.php",
+		"/var/www/html/aplicacion/app/views/cabecera.php",
+		"/home/eduardo/www.fmoyota.info/index.html",
+		"/home/eduardo/www.fmoyota.info/robots.txt",
+		"/var/www/html/aplicacion/app/models/appmodel.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/Readme.md",
+		"/var/www/html/aplicacion/app/controllers/welcome.php",
+		"/var/www/html/aplicacion/app/controllers/clientes.php",
+		"/var/www/html/aplicacion/app/views/alertas.php",
+		"/var/www/html/aplicacion/tplhtml/pacientes.html",
+		"/home/eduardo/Desktop/angular.sh",
+		"/var/www/html/AngularCRUD/services/Rest.inc.php",
+		"/var/www/html/AngularCRUD/partials/customers.html",
+		"/var/www/html/AngularCRUD/app/app.js",
+		"/var/www/html/AngularCRUD/index.html",
+		"/var/www/html/AngularCRUD/services/api.php",
+		"/var/www/html/angular-course-master/app/js/app.js",
+		"/var/www/html/angular-course-master/app/js/controllers.js",
+		"/var/www/html/angular-course-master/app/js/templates.js",
+		"/var/www/html/angular-course-master/app/js/mem-services.js",
+		"/var/www/html/angular-course-master/app/index.html",
+		"/home/eduardo/ejemplo_carlos/Readme.md",
+		"/home/eduardo/Downloads/angular-animacion-demo-master/index.html",
+		"/home/eduardo/angular-1.3.15/docs/examples/example-example103/index.html",
+		"/var/www/html/aplicacion/tplhtml/acerca.html",
+		"/var/www/html/aplicacion/app/views/frm_pacientes.php",
+		"/var/www/html/aplicacion/app/views/totales.php",
+		"/var/www/html/aplicacion/tplhtml/usuarios.html",
+		"/var/www/html/aplicacion/tplhtml/facturacion.html",
+		"/var/www/html/aplicacion/tplhtml/clientes.html",
+		"/var/www/html/aplicacion/app/views/listado_registros.php",
+		"/var/www/html/aplicacion/tplhtml/personal.html",
+		"/var/www/html/aplicacion/ruta/mediperbarica.js",
+		"/var/www/html/aplicacion/app/controllers/personal.php",
+		"/var/www/html/aplicacion/js/app/personal.js",
+		"/var/www/html/aplicacion/ruta/index.html",
+		"/var/www/html/aplicacion/ruta/main.js",
+		"/var/www/html/aplicacion/index.php",
+		"/var/www/html/aplicacion/app/views/frm_personal.php",
+		"/var/www/html/aplicacion/app/controllers/tratamiento.php",
+		"/var/www/html/aplicacion/app/config/autoload.php",
+		"/var/www/html/aplicacion/bin/language/english/form_validation_lang.php",
+		"/var/www/html/aplicacion/bin/libraries/Form_validation.php",
+		"/var/www/html/aplicacion/css/dashboard/dashboard.css",
+		"/var/www/html/aplicacion/css/bootstrap.min.css",
+		"/var/www/html/aplicacion/app/views/dashboard.old",
+		"/var/www/html/aplicacion/app/config/database.php",
+		"/var/www/html/aplicacion/js/bootstrap.js",
+		"/var/www/html/aplicacion/app/controllers/cliente.php",
+		"/var/www/html/aplicacion/demo/index.php",
+		"/var/www/html/aplicacion/js/angular.js",
+		"/var/www/html/aplicacion/bin/database/DB_active_rec.php",
+		"/home/eduardo/Dropbox/home.js",
+		"/var/www/html/aplicacion/js/app/app.js",
+		"/var/www/html/aplicacion/fonts/FontAwesome.otf",
+		"/var/www/html/aplicacion/app/config/foreign_chars.php",
+		"/var/www/html/aplicacion/app/config/hooks.php",
+		"/var/www/html/aplicacion/bin/helpers/array_helper.php",
+		"/var/www/html/aplicacion/bin/helpers/date_helper.php",
+		"/var/www/html/aplicacion/app/controllers/historia.php",
+		"/var/www/html/aplicacion/app/controllers/sesion.php",
+		"/var/www/html/aplicacion/app/controllers/user.php",
+		"/var/www/html/aplicacion/app/controllers/antecedente.php",
+		"/var/www/html/aplicacion/app/views/presentacion.php",
+		"/var/www/html/aplicacion/demo/ajax.php",
+		"/var/www/html/aplicacion/bin/libraries/Ftp.php",
+		"/var/www/html/aplicacion/app/config/profiler.php",
+		"/var/www/html/aplicacion/app/views/espacio_trabajo.php",
+		"/var/www/html/aplicacion/js/angula.js",
+		"/var/www/html/aplicacion/bin/libraries/Cache/drivers/Cache_apc.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/config/config.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/controllers/welcome.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/config/autoload.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/views/widget_tratamientos.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/views/widget_pacientes.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/views/pie.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/views/cabecera.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/views/dashboard.old",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/views/totales.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/views/alertas.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/views/welcome_message.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/Responsive-Dashboard-master/index.html",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/Responsive-Dashboard-master/js/index.html",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/app/models/appmodel.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/aplicacion/index.php",
+		"/home/eduardo/Dropbox/Repositorios/mediperbarica/modelo/mediperparica.sql",
+		"/home/eduardo/Dropbox/seguimiento_tratamiento.html",
+		"/home/eduardo/Desktop/segumiento_camara.html",
+		"/tmp/protocolo.tgn",
+		"/home/eduardo/Desktop/seguimiento_tratamiento.html",
+		"/home/eduardo/Desktop/formato protocolo de tratamientos (1).html",
+		"/home/eduardo/Dropbox/formato protocolo de tratamientos (1).htm",
+		"/home/eduardo/Desktop/archivos.html",
+		"/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/382_rosa_prima.html",
+		"/home/eduardo/Downloads/setup_ushay_1.1.2_fedora_oa_64.sh",
+		"/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/381 Morona Santiago.html",
+		"/home/eduardo/comandos.txt",
+		"/home/eduardo/Dropbox/Repositorios/sln_control/aplicacion/registro/reporte/admin.py",
+		"/home/eduardo/Dropbox/Repositorios/eduardo/contabilidad/admin.py",
+		"/home/eduardo/Dropbox/Repositorios/sln_control/aplicacion/registro/registro/settings.py",
+		"/home/eduardo/Dropbox/Repositorios/eduardo/contabilidad/models.py",
+		"/home/eduardo/Desktop/Sistema_Liposerve/Backup/Sistema_Liposerve/frm_abonos.vb",
+		"/home/eduardo/Desktop/Sistema_Liposerve/Sistema_Liposerve/facturas.Designer.vb",
+		"/home/eduardo/Dropbox/04ORI_FEBRERO2015.xml",
+		"/home/eduardo/Dropbox/Repositorios/eduardo/facturacion/contabilidad/models.py",
+		"/home/eduardo/Dropbox/Repositorios/eduardo/facturacion/facturacion/settings.py",
+		"/home/eduardo/Dropbox/Repositorios/eduardo/facturacion/modelo.py",
+		"/home/eduardo/Dropbox/Repositorios/sln_control/modelo/basedatos.sql",
+		"/home/eduardo/Dropbox/Repositorios/gelvsrm/aplicacion/gelvs/settings.py",
+		"/home/eduardo/Dropbox/Repositorios/gelvsrm/aplicacion/gelvs/__init__.py",
+		"/home/eduardo/Dropbox/Repositorios/gelvsrm/aplicacion/gelvs/urls.py",
+		"/home/eduardo/Dropbox/Repositorios/gelvsrm/aplicacion/gelvs/views.py",
+		"/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/323_rosa_prima.html",
+		"/home/eduardo/Dropbox/Repositorios/miapp/modelo_eduardo.sql",
+		"/home/eduardo/Dropbox/Repositorios/sln_control/documentacion/INSTRUCTIVO PARA LLENAR EL FORMATO DE REPORTE DIARIO.docx",
+		"/home/eduardo/Dropbox/Repositorios/sln_control/aplicacion/registro/reporte/models.py",
+		"/home/eduardo/Dropbox/Repositorios/sln_control/aplicacion/registro/mi_modelo.py",
+		"/home/eduardo/Dropbox/Repositorios/sln_control/documentacion/Sln_control.gan"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"input",
+			"button",
+			"public",
+			"getRequestMethod",
+			"mostrarhtml",
+			"ng-model",
+			"h2",
+			"mediperbaricaApp",
+			"https://twitter.com/fat",
+			"from",
+			"as",
+			"ng-src=\\\"/img/",
+			"'",
+			"\">an",
+			"Sistema",
+			"b",
+			"h3",
+			"id_paciente",
+			"direccion",
+			"fecha_nacimiento",
+			"forma_pago",
+			"nombres",
+			"id_paciente",
+			"label-warning",
+			"$routeProvider",
+			"routeProvider",
+			"host",
+			"direccion",
+			"telefono_fijo",
+			"nombres",
+			"examen_fisico",
+			"motivo_tratamiento",
+			"&oacute",
+			"for=",
+			"celular",
+			"Celular",
+			"celular",
+			"limpiarForm",
+			"required",
+			"small",
+			"Requerido",
+			"''",
+			"$scope",
+			");\n",
+			"mail",
+			"nombres",
+			"celular",
+			"		'",
+			"form_personal",
+			"p",
+			");\n",
+			"	",
+			"),",
+			"','",
+			",",
+			"	",
+			"	 ",
+			"blue",
+			" \n",
+			"DELETE RESTRCIT",
+			"CASCADE O DELETE",
+			"CONSTRAINT",
+			"create TIMESTAMP",
+			"CREATE",
+			"create",
+			"CREATE",
+			"create",
+			"CREATE",
+			"create",
+			"CREATE",
+			"create",
+			"decimal",
+			"_familiar",
+			"varchar",
+			"&nbsp;",
+			"os.path.join(BASE_DIR,",
+			"EMI",
+			"`0.0`",
+			"DATETIME",
+			"DEFAULT `0.0`",
+			"\n		",
+			"DEFAULT `0.0`,\n",
+			"DEFAULT `0.0`,",
+			"decimna",
+			"create DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,",
+			"--------------------------------------------------------------------",
+			"datetime",
+			"default null",
+			"not null",
+			"create",
+			"varchar",
+			"1004",
+			"\"//",
+			"=\"//",
+			"CREATE  TABLE IF NOT EXISTS",
+			"id_servicio_fluido",
+			"\"//",
+			"shadow: 3px 3px 3px",
+			"<img src=",
+			"<td>",
+			"> </td>",
+			"src=\"",
+			"\"//",
+			"<td></td>",
+			"__==>",
+			"iventario_entrada",
+			"polaris/001.jpg",
+			"Cursos"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 6,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/256_chimborazo.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10129,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/Matriz Facturas GELVS Motor.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/384_REP_chimborazo.htm",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21505,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								247,
+								247
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/385-chimbo-mante.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21360,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								543,
+								543
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/386_tunguragua_man.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21825,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2430.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/387_tungurahua_rep.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21679,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								681,
+								259
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/eduardo/Dropbox/Repositorios/Facturas Emitidas/387_tungurahua_final.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21649,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								832,
+								832
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/HTML (Django).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 21.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "mediperbarica.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"tplhtml/historias-tpl.html"
+			],
+			[
+				"his",
+				"app/controllers/historias.php"
+			],
+			[
+				"side",
+				"app/views/sidebar.php"
+			],
+			[
+				"menu",
+				"app/views/menu.php"
+			],
+			[
+				"medi",
+				"js/app/mediperbarica.js"
+			],
+			[
+				"conf",
+				"app/config/config.php"
+			],
+			[
+				"pie",
+				"app/views/pie.php"
+			],
+			[
+				"cabe",
+				"app/views/cabecera.php"
+			],
+			[
+				"confg",
+				"app/config/config.php"
+			],
+			[
+				"histo",
+				"app/controllers/historias.php"
+			],
+			[
+				"pi",
+				"app/views/pie.php"
+			],
+			[
+				"men",
+				"app/views/menu.php"
+			],
+			[
+				"meu",
+				"app/views/menu.php"
+			],
+			[
+				"mode",
+				"app/models/appmodel.php"
+			],
+			[
+				"welco",
+				"app/controllers/welcome.php"
+			],
+			[
+				"aler",
+				"app/views/alertas.php"
+			],
+			[
+				"cli",
+				"app/controllers/clientes.php"
+			],
+			[
+				"cab",
+				"app/views/cabecera.php"
+			],
+			[
+				"cnf",
+				"app/config/config.php"
+			],
+			[
+				"med",
+				"js/app/mediperbarica.js"
+			],
+			[
+				"cnfi",
+				"app/config/config.php"
+			],
+			[
+				"pacie",
+				"tplhtml/pacientes.html"
+			],
+			[
+				"acerc",
+				"tplhtml/acerca.html"
+			],
+			[
+				"welc",
+				"app/controllers/welcome.php"
+			],
+			[
+				"ca",
+				"app/views/cabecera.php"
+			],
+			[
+				"hi",
+				"app/controllers/historias.php"
+			],
+			[
+				"cabece",
+				"app/views/cabecera.php"
+			],
+			[
+				"acer",
+				"tplhtml/acerca.html"
+			],
+			[
+				"welcom",
+				"app/controllers/welcome.php"
+			],
+			[
+				"tota",
+				"app/views/totales.php"
+			],
+			[
+				"cabec",
+				"app/views/cabecera.php"
+			],
+			[
+				"person",
+				"js/app/personal.js"
+			],
+			[
+				"pers",
+				"tplhtml/personal.html"
+			],
+			[
+				"perso",
+				"js/app/personal.js"
+			],
+			[
+				"coni",
+				"app/config/config.php"
+			],
+			[
+				"tot",
+				"app/views/totales.php"
+			],
+			[
+				"main",
+				"ruta/main.js"
+			],
+			[
+				"cae",
+				"app/views/cabecera.php"
+			],
+			[
+				"frm",
+				"app/views/frm_pacientes.php"
+			],
+			[
+				"wl",
+				"app/controllers/welcome.php"
+			],
+			[
+				"wel",
+				"app/controllers/welcome.php"
+			],
+			[
+				"ie",
+				"index.php"
+			],
+			[
+				"dash",
+				"css/dashboard/dashboard.css"
+			],
+			[
+				"das",
+				"app/views/dashboard.old"
+			],
+			[
+				"boo",
+				"css/bootstrap.min.css"
+			],
+			[
+				"peso",
+				"js/app/personal.js"
+			],
+			[
+				"auto",
+				"app/config/autoload.php"
+			],
+			[
+				"data",
+				"app/config/database.php"
+			],
+			[
+				"con",
+				"app/config/config.php"
+			],
+			[
+				"angu",
+				"js/angular.js"
+			],
+			[
+				"base",
+				"modelo/basedatos.sql"
+			],
+			[
+				"sett",
+				"aplicacion/registro/registro/settings.py"
+			],
+			[
+				"see",
+				"documentacion/INSTRUCTIVO PARA LLENAR EL FORMATO DE REPORTE DIARIO.docx"
+			],
+			[
+				"mi",
+				"aplicacion/registro/mi_modelo.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 213.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

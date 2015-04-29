@@ -6,7 +6,8 @@
   </div><!-- End Page Wrapper -->
 </body>
 <script type="text/javascript">
-	var host = 'http://192.168.0.114/aplicacion/';
+	var host = 'http://127.0.0.1/aplicacion/';
+	var httpResult = {};
 </script>
 <script src="<?php echo base_url();?>js/app/mediperbarica.js" type="text/javascript"></script>
 </html>
