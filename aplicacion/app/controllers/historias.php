@@ -21,7 +21,8 @@ class Historias extends CI_Controller {
 	 * (array)$CatalogoVistas_ relaciona las vista scon los contenidos
 	 * (array) $Pagina_ => El vontenido HTML de la pagina completa
 	 *
-	 * SE CODIFICAN LO ERRORES VER ARCHIVO LISTADO DE ERRORES EN LA RAIZ DEL PROYECTO
+	 * SE CODIFICAN LO ERRORES VER ARCHIVO LISTADO DE ERRORES EN LA RAIZ DEL 
+	 * PROYECTO
 	 *
 	 */
 
@@ -34,29 +35,36 @@ class Historias extends CI_Controller {
 	protected $Query_;
 	protected $ModuloAngular_ = array('modulo' => 'historias.js' );
 
-
+	/*************************************************************************
+	 *  Funcion Contructora inicializa librerias
+	 * @method __construct()
+	 * @return (void)
+	 ************************************************************************/
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->library('rest');
 	}
 
-	/**
-	 * Se muestra SPA historias 
-	 */
+	/*************************************************************************
+	* Muestra la pagina de inicio y sus librerias
+	* @method index
+	* @return void	  
+	 ************************************************************************/
 	public function index()
 	{	
 		$this->CatalogoVistas_['cabecera'] = array();
 		$this->CatalogoVistas_['sidebar'] = array('title' => 'Historias');
 		$this->CatalogoVistas_['menu'] = array('historias' => 'active');
 		$this->CatalogoVistas_['contenidos'] = array();		
-		$this->_mostrarhtml($this->CatalogoVistas_);
+		$this->_mostrarHTML($this->CatalogoVistas_);
 	}
 
-	 /**
+	 /************************************************************************
 	 * Obtiene un listado de historias o una historia
-	 * @param $id_historia = 0 
-	 */
+	 * @param (int) opcional identificador de la historia
+	 * @return (JSON) Listado de hisotrias
+	 ************************************************************************/
 	public function getHistoria($historiaID = 0){
 		//print(var_dump($historiaID));
 		if ($historiaID == 0){
@@ -75,7 +83,8 @@ class Historias extends CI_Controller {
 			Order by hst.creado DESC;";
 			
 		} else{
-			$this->Query_ = "SELECT * from historia WHERE id_historia = " . $historiaID . ";";
+			$this->Query_ = "SELECT * from historia WHERE id_historia = " . 
+			$historiaID . ";";
 		}	
 			$this->Result_ = $this->db->query($this->Query_);
 			$response = array('status'=>'Success',
@@ -85,10 +94,12 @@ class Historias extends CI_Controller {
 			$this->rest->_resposeHttp(json_encode($response),200);
 	}
 
-	/**
+	/*************************************************************************
 	 * Registra una historia en el sistema
-	 * @param (array)$historia
-	 */
+	 * @method setHistoria()
+	 * @param (array) arreglo con los datos de la historia a crear 
+	 * @return (JSON) Estado de la peticion http 200 y 201
+	 ************************************************************************/
 	public function setHistoria(){
 		if( $this->rest->_getRequestMethod() != "POST"){
 			$this->rest->_resposeHttp('','406');
@@ -111,9 +122,9 @@ class Historias extends CI_Controller {
 			}else{
 				$historia_old = $query->result_array();
 				$response = array('status'=>'Ok',
-								'id_historia' => $historia_old[0]['id_historia'],
-							  	'msg'=>'1000',
-								'data' => $query->result_array());
+							'id_historia' => $historia_old[0]['id_historia'],
+						  	'msg'=>'1000',
+							'data' => $query->result_array());
 				$this->rest->_resposeHttp(json_encode($response), 200);	
 			}
 
@@ -126,9 +137,12 @@ class Historias extends CI_Controller {
 
 	}
 
-	/**
+	/*************************************************************************
 	 * Actualiza una historia
-	 */
+	 * @method updateHistoria
+	 * @param (array) arreglo con los datos de la historia modificada
+	 * @return (JSON) Estado de la peticion http 200 y 201
+	 ************************************************************************/
 	public function updateHistoria(){
 		if( $this->rest->_getRequestMethod() != "POST"){
 			$this->rest->_resposeHttp('','406');
@@ -146,33 +160,33 @@ class Historias extends CI_Controller {
 			$result = ($query->num_rows() > 0 ) ? true : false;
 
 			if($result){
-				#comprobar que el numero de cedula no este asignado a otra historia que no sea esta
+				#comprobar que el numero de cedula no este asignado
+				#a otra historia que no sea esta
 				$this->db->where('id_paciente', $historia['id_paciente']);
 				$query = $this->db->get($this->Table_);
 				$historia_old = $query->result_array();
-				#print(var_dump($historia_old));
-				#print(var_dump($historia));
-				if($historia_old[0]['id_historia'] == $historia['id_historia']){
+				if($historia_old[0]['id_historia'] == $historia['id_historia'])
+				{
 					#se actualiza la historia
 					$this->db->where('id_historia',$historia['id_historia']);
 					$this->db->update($this->Table_,$validate);
 					$response = array('status'=>'Success',
-										'id_historia' => $historia['id_historia'],
-										'msg'=> '1003',
-										'data' => $historia);
+									'id_historia' => $historia['id_historia'],
+									'msg'=> '1003',
+									'data' => $historia);
 					$this->rest->_resposeHttp(json_encode($response), 201);	
 				}else{
 					$response = array('status'=>'Ok',
-								'id_historia' => $historia_old[0]['id_historia'],
-							  	'msg'=>'1000'
+							'id_historia' => $historia_old[0]['id_historia'],
+						  	'msg'=>'1000'
 							  	);
 					$this->rest->_resposeHttp(json_encode($response), 200);	
 				}				
 
 			}else{
 				$response = array('status'=>'Ok',
-								'id_historia' => $historia_old[0]['id_historia'],
-							  	'msg'=>'1004'
+							'id_historia' => $historia_old[0]['id_historia'],
+						  	'msg'=>'1004'
 							  	);
 				$this->rest->_resposeHttp(json_encode($response), 200);	
 			}	
@@ -184,10 +198,13 @@ class Historias extends CI_Controller {
 
 	}
 
-	 /**
+
+	 /************************************************************************
 	 * Obtiene un listado de antecedentes de una historia
-	 * @param $id_historia = 0 
-	 */
+	 * @method getAntecedentes
+	 * @param (int) identificador del antecedente a obtener
+	 * @return (JSON) Objeto JS con el listado de antecedentes o vacio
+	 ************************************************************************/
 	public function getAntecedentes($pacienteId = 0){
 		//Se verifica la lonjutus del id paciente
 		if (strlen($pacienteId) > 9){
@@ -205,10 +222,13 @@ class Historias extends CI_Controller {
 		}			
 	}
 
-	 /**
-	 * Obtiene un antecedente de antecedentes de una historia
-	 * @param $antecedeteId = 0 
-	 */
+
+	 /************************************************************************
+	 * Retorna un antecedente completo al navegador
+	 * @method getAntecedente
+	 * @param (int) identificador del antecedente
+	 * @return (JSON) Objeto JS con un antecedente o vacio
+	 ************************************************************************/
 	public function getAntecedente($antecedenteId = 0){
 		//Se comprueba el antecedenteId
 		if (strlen($antecedenteId) > 0){
@@ -227,9 +247,12 @@ class Historias extends CI_Controller {
 	}
 
 
-	/**
-	 * Crea un antecedente en una historia
-	 */
+	/*************************************************************************
+	 * Crea un antecedente
+	 * @method setAntecedente
+	 * @param (array) arreglo con los datos para crear un nuevo antecedente
+	 * @return (JSON) Estado de la peticion http 200 y 201
+	 ************************************************************************/
 	public function setAntecedente(){
 		if( $this->rest->_getRequestMethod() != "POST"){
 			$this->rest->_resposeHttp('','406');
@@ -248,7 +271,8 @@ class Historias extends CI_Controller {
 				$this->db->where('id_antecedente',$this->db->insert_id());
 				$newAntecedente = $this->db->get('antecedente');
 				$newAntecedenteArray = $newAntecedente->result_array();
-				$this->db->where('id_paciente',$newAntecedenteArray[0]['id_paciente']);
+				$this->db->where('id_paciente',
+									$newAntecedenteArray[0]['id_paciente']);
 				$historia = $this->db->get($this->Table_);
 				$historiaID = $historia->result_array();
 
@@ -278,9 +302,12 @@ class Historias extends CI_Controller {
 		}
 	}
 
-	/**
-	 * Actualiza una antecedete
-	 */
+	/*************************************************************************
+	 * Actualizar un antecedente
+	 * @method updateAntecedente
+	 * @param (array) arreglo que contiene los nuevos datos y el old_id
+	 * @return (JSON) Estado de la peticion http 200 y 201
+	 ************************************************************************/
 	public function updateAntecedente(){
 		if( $this->rest->_getRequestMethod() != "POST"){
 			$this->rest->_resposeHttp('','406');
@@ -314,10 +341,13 @@ class Historias extends CI_Controller {
 
 	}
 
-	###################3 Funcion de Reporte hisotoria ######################
-	/**
-	 * Obtiene un reporte PDF de la hisotoria de acuerdo al formato
-	 */
+
+	/*************************************************************************
+	 * Obtiene un reporte PDF de la hisotoria solicitada
+	 * @method getReporteHistoria
+	 * @param (int) identificador de la historia
+	 * @return (JSON) Objeto JS con los detalles de una historia
+	 ************************************************************************/
 	public function getReporteHistoria($id_historia){
 		if($id_historia > 0){
 			$this->db->where('id_historia',$id_historia);
@@ -337,18 +367,21 @@ class Historias extends CI_Controller {
 		$this->CatalogoVistas_['cabecera'] = array();
 		$this->CatalogoVistas_['sidebar'] = array('title' => 'Historias');
 		$this->CatalogoVistas_['menu'] = array('historias' => 'active');
-		$this->CatalogoVistas_['alertas'] = array('alerta' => 'El identificador de la historia no es el Correcto!');
+		$this->CatalogoVistas_['alertas'] = array('alerta' => 
+						'El identificador de la historia no es el Correcto!');
+
 		$this->CatalogoVistas_['contenidos'] = array();		
 		}
-		$this->_mostrarhtml($this->CatalogoVistas_);
+		$this->_mostrarHTML($this->CatalogoVistas_);
 	}
 
 
-	/**
-	 * Funcion encargada de verificar los datos ingresados por el usuario
-	 * @param array(historia)
+	/*************************************************************************
+	 * Validar los datos de hisotoria
+	 * @method _checkData
+	 * @param (array) arreglo con los datos de historia
 	 * @return boolean
-	 */
+	 ************************************************************************/
 	private function _checkData($historia){
 		#print('objeto recibido en validacion');
 		#print(var_dump($historia));
@@ -389,13 +422,13 @@ class Historias extends CI_Controller {
 
 	}
 
-	/**
-	 * Funcion encargada de verificar los datos ingresados por el usuario
-	 * para el arreglo de antecedentes
-	 * @param array(antecedente)
-	 * @param (boolean) opcion indica si es una validacion true = nuevo false = editar 
+	/*************************************************************************
+	 * Valida los datos de un antecedente
+	 * @method (_checkDataAntecedente)
+	 * @param (array) objeto con los datos del antecedente
+	 * @param (boolean) indica si se crea o se edita un antecedente
 	 * @return boolean
-	 */
+	 ************************************************************************/
 	private function _checkDataAntecedente($antecedente,$opcion){
 		//print('objeto recibido en validacion');
 		//print(var_dump($antecedente));
@@ -425,8 +458,6 @@ class Historias extends CI_Controller {
 				}
 			}
 			#comprobamos que al menos nos deb los 3 primeros campos
-			#print('| comprobamos el valor del controlador ' . $i);
-			#print('| Valor de condicion => ' . $condicion);
 			if ($i > 2){
 				return $condicion;			
 			}else{
@@ -436,13 +467,13 @@ class Historias extends CI_Controller {
 
 	}
 
-	    ################ Funciones privadas para el funcionamiento ###############
-    /**
-    * Crea la plantilla de la pagina guaradandolas en una sola variable
-    * @param array $catalogo array con las plantillas necesarias 
-    * y su informacion
-    **/
-     function _mostrarhtml($catalogo){
+    /*************************************************************************
+    * Carga los datos en las plantillas HTML y las Imprime  
+    * @method _mostrarHTML()
+    * @param (array) arreglo con el listado de vistas y datos
+    * @return (void)
+    *************************************************************************/
+     function _mostrarHTML($catalogo){
         $vistas;
         $this->Pagina_;
         foreach ($catalogo as $arreglos => $nombres) {
