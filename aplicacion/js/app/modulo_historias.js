@@ -6,12 +6,74 @@
   @date: 20-03-2015 00:23
  */
 
-/**
-Moduludo encargado de Crear Editar y Buscar las historias
-*/
+/* ---------------------------------------------------------------------------------------
+                        _         _          _    _  _       _                _             
+                       | |       | |        | |  | |(_)     | |              (_)            
+  _ __ ___    ___    __| | _   _ | |  ___   | |__| | _  ___ | |_  ___   _ __  _   __ _  ___ 
+ | '_ ` _ \  / _ \  / _` || | | || | / _ \  |  __  || |/ __|| __|/ _ \ | '__|| | / _` |/ __|
+ | | | | | || (_) || (_| || |_| || || (_) | | |  | || |\__ \| |_| (_) || |   | || (_| |\__ \
+ |_| |_| |_| \___/  \__,_| \__,_||_| \___/  |_|  |_||_||___/ \__|\___/ |_|   |_| \__,_||___/
+
+ --------------------------------------------------------------------------------------- */
+
 var mediperbaricaApp = angular.module('mediperbaricaApp', ['ngRoute']);
 
-//Metodo encargado de gestionar las histororias
+
+/* ---------------------------------------------------------------------------------------
+ __    ___    __  
+|__)|  || /\ /__` 
+|  \\__/|/~~\.__/ 
+                  
+--------------------------------------------------------------------------------------- */
+mediperbaricaApp.config(function($locationProvider, $routeProvider){
+	
+	//$locationProvider.html5Mode(true);
+	$routeProvider
+	.when('/',{
+		templateUrl : host + 'tplhtml/lista-historias-tpl.html',
+		controllerAs : 'ctrlListar',
+		controller : 'ListarController'
+	})
+	.when('/crear',{
+		templateUrl : host + 'tplhtml/crear-historia-tpl.html',
+		controllerAs : 'editCtrl',
+		controller: 'EditController'
+	})
+		.when('/editar/:historiaID',{
+		templateUrl : host + 'tplhtml/crear-historia-tpl.html',
+		controllerAs : 'editCtrl',
+		controller: 'EditController'
+	})
+		.when('/asignar-antecedente/:historiaID',{
+		templateUrl : host + 'tplhtml/asignar-antecedente-tpl.html',
+		controllerAs : 'asgantCtrl',
+		controller: 'AsignarAntecendeteController'
+	})
+		.when('/acerca',{
+		templateUrl : host + 'tplhtml/acerca-app-tpl.html',
+		controller: 'AcercaController'
+	})
+		.when('/error-server',{
+		templateUrl : host + 'tplhtml/error-server-tpl.html',
+		controllerAs : 'errCtrl',
+		controller: 'errroServer'
+	})
+		.when('/presentar/:historiaID',{
+		templateUrl : host + 'tplhtml/presentar-historia-tpl.html',
+		controllerAs : 'presentCtrl',
+		controller: 'PresentController'
+	})
+		.otherwise({ redirectTo: '/' 
+	});
+});
+
+
+/* ---------------------------------------------------------------------------------------
+ ___   _______  __        __  
+|__/\ /  `|/  \|__)\ //\ /__` 
+| /~~\\__,|\__/|  \ |/~~\.__/ 
+
+--------------------------------------------------------------------------------------- */
 mediperbaricaApp.factory('services', [ '$http','$location', function($http,$location){
 	var serviceBase = host + 'index.php/historias/';
 	var obj = {};
@@ -170,53 +232,16 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,$loca
 	return obj;
 }]);
 
+/* ---------------------------------------------------------------------------------------
+ __  __    _____  __          ___ __  __  
+/  `/  \|\ |||__)/  \|   |   |__ |__)/__` 
+\__,\__/| \|||  \\__/|___|___|___|  \.__/ 
 
-/**
-Configuracion de las rutas a las plantillas
-*/
-mediperbaricaApp.config(function($locationProvider, $routeProvider){
-	
-	//$locationProvider.html5Mode(true);
-	$routeProvider
-	.when('/',{
-		templateUrl : host + 'tplhtml/lista-historias-tpl.html',
-		controllerAs : 'ctrlListar',
-		controller : 'ListarController'
-	})
-	.when('/crear',{
-		templateUrl : host + 'tplhtml/crear-historia-tpl.html',
-		controllerAs : 'editCtrl',
-		controller: 'EditController'
-	})
-		.when('/editar/:historiaID',{
-		templateUrl : host + 'tplhtml/crear-historia-tpl.html',
-		controllerAs : 'editCtrl',
-		controller: 'EditController'
-	})
-		.when('/asignar-antecedente/:historiaID',{
-		templateUrl : host + 'tplhtml/asignar-antecedente-tpl.html',
-		controllerAs : 'asgantCtrl',
-		controller: 'AsignarAntecendeteController'
-	})
-		.when('/acerca',{
-		templateUrl : host + 'tplhtml/acerca-app-tpl.html',
-		controller: 'AcercaController'
-	})
-		.when('/error-server',{
-		templateUrl : host + 'tplhtml/error-server-tpl.html',
-		controllerAs : 'errCtrl',
-		controller: 'errroServer'
-	})
-		.when('/presentar/:historiaID',{
-		templateUrl : host + 'tplhtml/presentar-historia-tpl.html',
-		controllerAs : 'presentCtrl',
-		controller: 'PresentController'
-	})
-		.otherwise({ redirectTo: '/' 
-	});
-});
+--------------------------------------------------------------------------------------- */
 
-//controlador encargado de listar las historias
+/* ---------------------------------------------------------------------------------------
+controlador encargado de listar las historias
+--------------------------------------------------------------------------------------- */
 mediperbaricaApp.controller('ListarController', function($scope, services){
 	console.log("[Debug] => Se llama al controlador ListarController");
 	services.getHistorias().then(function (data){
@@ -224,9 +249,9 @@ mediperbaricaApp.controller('ListarController', function($scope, services){
 	});
 });
 
-/**
+/* ---------------------------------------------------------------------------------------
 Controlador encargado de Crear Editar Elimianar
-*/
+--------------------------------------------------------------------------------------- */
 mediperbaricaApp.controller('EditController', function( $scope, 
 							$rootScope, $location, $routeParams, services)
 {	console.log('[Debug] => Se incia la carga de editController');
@@ -354,6 +379,9 @@ mediperbaricaApp.controller('EditController', function( $scope,
 	console.log('[Debug] => Se termina la carga de editController');
 });
 
+/* ---------------------------------------------------------------------------------------
+Controlador encargado de Presentar las historias
+--------------------------------------------------------------------------------------- */
 mediperbaricaApp.controller('PresentController', function($scope, 
 							$rootScope, $location, $routeParams, services){
 	var historiaID = ($routeParams.historiaID)? parseInt($routeParams.historiaID) : 0;
@@ -400,7 +428,9 @@ mediperbaricaApp.controller('PresentController', function($scope,
 
 });
 
-
+/* ---------------------------------------------------------------------------------------
+Controlador encargado de Asignar un antecedente a la historia
+--------------------------------------------------------------------------------------- */
 mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, services, $routeParams,
 															$location, $rootScope){
 	console.log('[Debug] Se llama al controlador  AsignarAntecendeteController');
@@ -515,7 +545,13 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, ser
 	};
 });
 
-//Controlladores para manejo de los errores
+/* ---------------------------------------------------------------------------------------
+Controlladores para manejo de los errores
+--------------------------------------------------------------------------------------- */
 mediperbaricaApp.controller('errroServer', function($scope, services){});
-//controlador necesario para presentar hacerca de
+
+
+/* ---------------------------------------------------------------------------------------
+Controlador necesario para presentar hacerca de
+--------------------------------------------------------------------------------------- */
 mediperbaricaApp.controller('AcercaController', function($scope, services){});
