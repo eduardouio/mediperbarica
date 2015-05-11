@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/dashboard/dashboard.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/themes/blue.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/bootstrap-datepicker.css">
   <!--
   <link rel="stylesheet" type="text/css" href="css/themes/green.css">
   <link rel="stylesheet" type="text/css" href="css/themes/red.css">
@@ -18,6 +19,7 @@
   <script type="text/javascript" src="<?php echo base_url();?>js/angular.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>js/angular-route.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>js/angular-resource.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>js/bootstrap-datepicker.js"></script>
 </head>
 
 

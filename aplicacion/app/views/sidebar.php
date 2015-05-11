@@ -6,15 +6,12 @@
         <li class="sidebar-main">
           <a href="#/">
             <?php print $title;?>
-            <span class="menu-icon glyphicon glyphicon-home"></span>
+            <span class="menu-icon glyphicon glyphicon-list"></span>
           </a>
         </li>
         <li class="sidebar-title"><span>MENU</span></li>
          <li class="sidebar-list">
           <a href="#crear">Crear <span class="menu-icon fa fa-plus"></span></a>
-        </li>
-        <li class="sidebar-list">
-          <a href="#buscar">Listar <span class="menu-icon fa fa-list"></span></a>
         </li>
         <li class="sidebar-list">
           <a href="#acerca">Acerca <span class="menu-icon fa fa-barcode"></span></a>

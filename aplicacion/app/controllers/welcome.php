@@ -2,36 +2,34 @@
 
 class Welcome extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
+	protected $Table_ = 'historia';
+	protected $Controller_ = 'welcome';
+	protected $Result_;
+	protected $CatalogoVistas_;
+	protected $Pagina_;
+	protected $Query_;
+	private $CodeHTTP = 200;
+	private $ContentType = 'application/json';
+
 	public function index()
 	{
-			$this->load->view('cabecera');
-		$this->load->view('sidebar');
-		$this->load->view('menu');
-		
-		$this->load->view('alertas');
-		$this->load->view('contenidos');
-        #$this->load->view('frm_pacientes');
-		#$this->load->view('widget_tratamientos');
-		#$this->load->view('widget_pacientes');
-		$this->load->view('pie');
+
+		$this->CatalogoVistas_['cabecera'] = array();
+		#$this->CatalogoVistas_['sidebar'] = array('title' => 'inicio');
+		$this->CatalogoVistas_['menu'] = array('inicio' => 'active');
+		#$this->CatalogoVistas_['alertas'] = array();
+		$this->CatalogoVistas_['admin_home'] = array('historias' => $this->countHistorias());		
+		$this->_mostrarhtml($this->CatalogoVistas_);
 	}
 
 	
+	/**
+	 * Retorna en numero de historias registradas en el sistema
+	 */
+	private function countHistorias(){
+		$query = $this->db->get('historia');
+		return $query->num_rows();
+	}
 
 	/**
 	* Se encrarga de recibir la informacion y genera la pantalla de salia
@@ -40,7 +38,7 @@ class Welcome extends CI_Controller {
 	*
 	* @param array $catalogo array con las plantillas necesarias y su informacion
 	**/
-	private function mostrarhtml($catalogo){
+	private function _mostrarhtml($catalogo){
 		$vistas;
 		$this->Pagina_;
 		foreach ($catalogo as $arreglos => $nombres) {

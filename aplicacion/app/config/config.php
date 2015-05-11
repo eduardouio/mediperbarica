@@ -1,5 +1,5 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -16,6 +16,7 @@
 */
 #$config['base_url']	= 'http://192.168.0.114/aplicacion/';
 $config['base_url']	= 'http://127.0.0.1/aplicacion/';
+#$config['base_url']	= 'http://medicinahiperbarica.com.ec/P9T9geUfaeCMKUdrbZ5So/';
 
 /*
 |--------------------------------------------------------------------------
@@ -181,7 +182,7 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 2;
 
 /*
 |--------------------------------------------------------------------------
