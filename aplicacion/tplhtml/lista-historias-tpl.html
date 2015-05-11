@@ -1,0 +1,69 @@
+<div class="row">
+<div class="row alerts-container" ng-show="1==2">
+ <div class="col-xs-12">
+<div class="alert alert-info">Se han encontrado un total de <b>{{historias.length}} </b>historias</div class="alert alert-info">
+          </div>
+        </div>
+<div class="panel panel-success">
+<div class="panel-heading">
+<div class="row">
+<span class="col-md-10 text-center"> Listado de Historias Clínicas <b>{{historias.length}} Historia</b></span>
+<input type="text" class="col-md-2" placeholder="Buscar" ng-model="buscar">
+	
+</div>
+</div>
+<div class="panel-body">
+<div class="row">
+<div class="table-responsive">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<th>ID</th>
+			<th>Nombres</th>
+			<th>Tratamientos</th>
+			<th>Telefono</th>
+			<th>Mail</th>
+			<th>Referente</th>
+			<th>Registro</th>
+			<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in historias | filter:buscar">
+				<td>{{row.id_historia}}</td>
+				<td><a href="#/presentar/{{row.id_historia}}">{{row.nombres}}</a></td>
+				<td>{{row.tratamientos}}</td>
+				<td>{{row.telefono}}</td>
+				<td>{{row.mail}}</td>
+				<td>{{row.nombre_referente}}</td>
+				<td>{{row.creado}}</td>
+				<td>
+					<!-- Single button -->
+					<div class="btn-group">
+					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					    Action <span class="caret"></span>
+					 </button>
+					 <ul class="dropdown-menu" role="menu">
+					    <li><a href="#/presentar/{{row.id_historia}}">Ver</a></li>
+					    <li><a href="#/editar/{{row.id_historia}}">Editar</a></li>
+					    <li><a href="#/asignar-antecedente/{{row.id_historia}}">Asignar Antecedete</a></li>
+					    <li><a href="getReporteHistoria/{{row.id_historia}}" target="_blank">Imprimir Historia</a></li>
+					    <li><a href="#">Asignar Tratamiento</a></li>
+					    <li class="divider"></li>
+					    <li><a href="#" class="text-danger">Eliminar</a></li>
+					</ul>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="row pull-right">
+ <div class="col-xs-12">
+	 <div data-pagination="" data-num-pages="numPages()" 
+      data-current-page="currentPage" data-max-size="maxSize"  
+      data-boundary-links="true"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

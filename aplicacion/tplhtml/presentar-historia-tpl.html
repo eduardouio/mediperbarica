@@ -1,0 +1,117 @@
+<div class="col-lg-8">
+   <div class="panel panel-default" ng-show="!historia.id_paciente == ''">
+      <div class="panel-heading">
+         <h3 class="text-left"><span class="glyphicon glyphicon-user">&nbsp;</span>{{historia.nombres}} 
+            <span class="pull-right glyphicon glyphicon-folder-close"> Historia: {{historia.id_historia}}</span>
+         </h3>
+         <div class="pull-right">
+         <p></p>
+         <a  class="btn btn-inverse btn-sm" ng-click="afterHistory(historia.id_historia)">
+            <span class="glyphicon glyphicon-backward">&nbsp;</span>Anterior
+        </a>
+        <a  class="btn btn-inverse btn-sm" ng-click="berofeHistory(historia.id_historia)">
+            <span class="glyphicon glyphicon-forward">&nbsp;</span>Seguiente
+        </a>
+        </div>
+      </div>
+      <div class="panel-body">
+         <table class="table table-striped">
+            <tbody>
+               <tr>
+                  <td class="text-right col-lg-3"><b>C&eacute;dula:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.id_paciente}}</td>
+               </tr>
+               <tr>
+                  <td class="text-right"><b>Telefono:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.telefono}}</td>
+               </tr>
+               <tr>
+                  <td class="text-right"><b>Email:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.mail}}</td>
+               </tr>
+               <tr>
+                  <td class="text-right"><b>Fecha Nacimiento:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.fecha_nacimiento}}</td>
+               </tr>
+               <tr>
+                  <td class="text-right"><b>Direcci&oacute;n:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.direccion}}</td>
+               </tr>
+               <tr class="text-info">
+                  <td class="text-right"><b>Nombre Familiar:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.nombre_familiar}}</td>
+               </tr>
+               <tr class="text-info">
+                  <td class="text-right"><b>Tel&eacute;fono Familiar:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.telefono_familiar}}</td>
+               </tr>
+               <tr class="text-info">
+                  <td class="text-right"><b>Direcci&oacute;n Familiar:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.direccion_familiar}}</td>
+               </tr>
+               <tr>
+                  <td class="text-right text-inverse"><b>Fecha Registro:&nbsp;&nbsp;</b></td>
+                  <td>{{historia.creado}}</td>
+               </tr>
+               <tr>
+                  <td class="text-center info" colspan="2">
+                     <h4>
+                        <b><span class="glyphicon pull-left glyphicon-plus"> </span> M&eacute;dico Referente</b>
+                     </h4>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="text-right"><b>Nombres:</b></td>
+                  <td>{{historia.nombre_referente}}</td>
+               </tr>
+               <tr>
+                  <td class="text-right"><b>Tel&eacute;fono:</b></td>
+                  <td>{{historia.telefono_referente}}</td>
+               </tr>
+               <tr>
+                  <td class="text-right"><b>Email:</b></td>
+                  <td>{{historia.mail_referente}}</td>
+               </tr>
+               <tr>
+                  <td class="text-center danger" colspan="2">
+                     <h4><b><span class="glyphicon pull-left glyphicon-warning-sign"> </span> Antecedentes M&eacute;dicos</h4>
+                  </td>
+               </tr>
+               <tr ng-repeat="row in listaAntecedentes">
+                  <td class="text-right"><b>{{row.tipo}}:</b>&nbsp;&nbsp;</td>
+                  <td>{{row.detalle}}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <div class="panel panel-default" ng-show="!historia.id_paciente">
+      <div class="panel-heading">
+         <h3 class="text-left"><span class="glyphicon glyphicon-user">&nbsp;</span>No Existe 
+            <span class="pull-right glyphicon glyphicon-folder-close"> Historia: NULL</span>
+         </h3>
+      </div>
+      <div class="panel-body">
+         <h2>El registro al que esta intentando acceder no existe</h2>
+      </div>
+   </div>
+
+</div>
+<div class="col-lg-4" ng-show="historia.id_paciente">
+   <h4>Acciones de Registro</h4>
+   
+   <hr>
+   <a href="#/asignar-antecedente/{{historia.id_historia}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus">&nbsp;</span>
+   Asignar Antecedente
+   </a>
+   <a href="#/editar/{{historia.id_historia}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-list">&nbsp;</span>
+   Editar Historia
+   </a>
+   <p></p>
+   <a href="getReporteHistoria/{{historia.id_historia}}" target="_bank" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-print">&nbsp;</span>
+   Imprimir Historia &nbsp;&nbsp;&nbsp;
+   </a>
+   <a href="#/" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash">&nbsp;</span>
+   Borrar Historia
+   </a>
+</div>

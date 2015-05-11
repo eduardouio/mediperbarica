@@ -1,0 +1,75 @@
+<div class="col-lg-8">
+   <div class="panel panel-default">
+      <div class="panel-heading">
+         <h3 class="text-left"><span class="glyphicon glyphicon-user">&nbsp;</span>{{historia.nombres}} 
+            <span class="pull-right glyphicon glyphicon-folder-close"><a href="#/presentar/{{historia.id_historia}}"> Historia: {{historia.id_historia}} </a></span>
+         </h3>
+      <div class="panel-body">
+      <div name="frmAntecedente" class="form-horizontal" role="form">
+      <div class="alert alert-warning text-center" ng-show="antecedente.id_antecedente">
+          Se Encuentra Editando Valores Del Antecedente: <b> {{antecedente.id_antecedente}} </b>
+      </div>
+
+      <div class="row">
+         <legend class="text-primary">Asignar Antecedete </legend>
+            <span class="col-md-2 control-label">Tipo:</span>  
+              <div class="col-md-8">
+                <input name="tipo" ng-model="antecedente.tipo" placeholder="Nombre Antecedente M&eacute;dico" class="form-control input-md" type="text" maxlength="45">
+                <div ng-show="!antecedente.tipo">
+                  <small class="text-danger">Requerido</small>
+                </div>
+              </div>
+         </div>
+         <div class="row">
+         <span class="col-md-2 control-label">Detalle Del Antecedente:</span>  
+         <div class="col-md-10">
+                <textarea name="detalle" ng-model="antecedente.detalle" placeholder="Detalle Antecedente" class="form-control input-md" type="text" maxlength="180">
+                  </textarea>
+                <div ng-show="!antecedente.detalle">
+                  <small class="text-danger">Requerido</small>
+                </div>
+              </div>
+         </div>
+         <div class="row">
+      <div class="form-group">
+         <div class="col-sm-10 col-sm-offset-2">
+            <button class="btn btn-primary btn-sm pull-right" ng-click="validateAntecedenteForm(antecedente)"> <span class="glyphicon glyphicon-plus"></span> Registrar Antecedente</button>
+         </div>
+      </div>
+      </div>
+</div>
+      </div>
+   </div>
+   </div>
+   </div>
+   <!--<div class="panel panel-default">
+      <div class="panel-heading">
+         <h3 class="text-left"><span class="glyphicon glyphicon-user">&nbsp;</span>No Existe 
+            <span class="pull-right glyphicon glyphicon-folder-close"> Historia: NULL</span>
+         </h3>
+      </div>
+      <div class="panel-body">
+         <h2>El registro al que esta intentando acceder no existe</h2>
+      </div>
+   </div>
+
+</div>
+-->
+<div class="col-lg-4">
+   <h4 class="text-danger">Antecedentes Registrados:</h4>
+   <table class="table table-hover">
+      <thead>
+         <tr>
+            <th>Nombre</th>
+            <th>Detalle</th>
+            <th>fecha</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="row in listaAntecedentes">
+            <td class="pull-right"><b><a ng-click="editAntecedente(row.id_antecedente)">{{row.tipo}}:</a></b></td>
+            <td>{{row.detalle}}</td>
+            <td>{{row.creado}}</td>
+      </tbody>
+   </table>
+</div>

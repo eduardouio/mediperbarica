@@ -1,0 +1,19 @@
+Listado de Errores:
+Historias 1000:
+1000 Ya existe un registro con el mismo numero de Cedula en el sistema
+1001 Uno de los datos ingresado esta incompleto o no existe
+1002 Historia Creada Corectamente
+1003 Editado Correctamente
+1004 La historia que esta intentando editar no existe, recargue la pagina e intentelo nuevamente
+1005 Se listan las historias correctamente
+
+-- Listado de errores Atecedentes
+2000 Ya Existe Este Antecedete En Esta Historia
+2001 la longitud del identificador del paciente no esta completa o no existe
+2002 Se crea el antecedente correctamente
+2003 Se Edita correctamente el antecedente
+2004 El antecedete al que intenta acceder no existe
+2005 Se listas los antecedentes correctamente
+
+Tratamientos 2000
+2000
