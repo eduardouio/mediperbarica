@@ -1,30 +1,27 @@
-/*
-  Fichero encargado de trabajar con las historias
+/*****************************************************************************
+  Modulo de historias
   http://mediperbarica.com.ec/hash/historias
   Copyright 2014 Mediperbarica Todos los derechos reservados
   @autor: Eduardo Villota
   @date: 20-03-2015 00:23
- */
+ _    _  _       _                _ 
+| |  | |(_)     | |              (_)            
+| |__| | _  ___ | |_  ___   _ __  _   __ _  ___ 
+|  __  || |/ __|| __|/ _ \ | '__|| | / _` |/ __|
+| |  | || |\__ \| |_| (_) || |   | || (_| |\__ \
+|_|  |_||_||___/ \__|\___/ |_|   |_| \__,_||___/
 
-/* ---------------------------------------------------------------------------------------
-                        _         _          _    _  _       _                _             
-                       | |       | |        | |  | |(_)     | |              (_)            
-  _ __ ___    ___    __| | _   _ | |  ___   | |__| | _  ___ | |_  ___   _ __  _   __ _  ___ 
- | '_ ` _ \  / _ \  / _` || | | || | / _ \  |  __  || |/ __|| __|/ _ \ | '__|| | / _` |/ __|
- | | | | | || (_) || (_| || |_| || || (_) | | |  | || |\__ \| |_| (_) || |   | || (_| |\__ \
- |_| |_| |_| \___/  \__,_| \__,_||_| \___/  |_|  |_||_||___/ \__|\___/ |_|   |_| \__,_||___/
-
- --------------------------------------------------------------------------------------- */
+ ****************************************************************************/
 
 var mediperbaricaApp = angular.module('mediperbaricaApp', ['ngRoute']);
 
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
  __    ___    __  
 |__)|  || /\ /__` 
 |  \\__/|/~~\.__/ 
                   
---------------------------------------------------------------------------------------- */
+----------------------------------------------------------------------------*/
 mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	
 	//$locationProvider.html5Mode(true);
@@ -63,35 +60,36 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controllerAs : 'presentCtrl',
 		controller: 'PresentController'
 	})
-		.otherwise({ redirectTo: '/' 
-	});
+		.otherwise({ redirectTo: '/' });
 });
 
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
  ___   _______  __        __  
 |__/\ /  `|/  \|__)\ //\ /__` 
 | /~~\\__,|\__/|  \ |/~~\.__/ 
 
---------------------------------------------------------------------------------------- */
-mediperbaricaApp.factory('services', [ '$http','$location', function($http,$location){
-	var serviceBase = host + 'index.php/historias/';
+----------------------------------------------------------------------------*/
+mediperbaricaApp.factory('services', [ '$http','$location', function($http,
+																	$location){
+	var serviceBase = host + 'index.php/';
 	var obj = {};
 
 	//Metodo que obtiene las historias
 	obj.getHistorias = function(){
 		console.log('[Debug] => Se llama a la funcion getHistoria');
 		console.log('[Debug] => ' + serviceBase + 'getHistoria');
-		return $http.get(serviceBase + 'getHistoria');
+		return $http.get(serviceBase + 'historias/getHistoria');
 	};
 	//Metodo que retorna una historia
 	obj.getHistoria = function (id_historia) {
-		return $http.get(serviceBase + 'getHistoria/' + id_historia);
+		return $http.get(serviceBase + 'historias/getHistoria/' + id_historia);
 	};
 	//Metodo que guarda una historia
 	obj.insertHistoria = function (historia){
 		console.log('[Debug] => Se llama al servicio insertHistoria');
-		var result = $http.post(serviceBase + 'setHistoria', historia);
+		var result = $http.post(serviceBase + 'historias/setHistoria', 
+								historia);
 		console.log('[Debug] Retornamos el volcado de la peticion $http');
 		
 		result.success(function(data){
@@ -105,7 +103,8 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,$loca
 					break;
 				case 1001:
 					console.log('[Debug] status 1001 faltan datos');
-					alert('Uno de los Datos ingresados esta incompleto o no existe!');
+					alert('Uno de los Datos ingresados ' +
+							'esta incompleto o no existe!');
 					console.log('[Debug] status 1002 se crea la historia');
 					break;
 				case 1002:
@@ -122,19 +121,23 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,$loca
 
 	//Metodo que actualiza una historia
 	obj.updateHistoria = function(historia) {
-		var result = $http.post(serviceBase + 'updateHistoria', historia);
+		var result = $http.post(serviceBase + 'historias/updateHistoria', 
+								historia);
 
 		result.success(function(data){
 			console.log('[Debug] Se envia la peticion Satisfactoriamente');
 			var respuesta = parseInt(data.msg);
 			switch(respuesta){
 				case 1000:
-					console.log('[Debug] status 1000 el id del paciente esta en otra historia');
-					alert('Ya existe un registro con el mismo numero de Cedula en el sistema!');
+					console.log('[Debug] status 1000 el id del paciente esta ' + 
+								'en otra historia');
+					alert('Ya existe un registro con el mismo numero de Cedula ' + 
+						  'en el sistema!');
 					break;
 				case 1001:
 					console.log('[Debug] status 1001 faltan datos');
-					alert('Uno de los Datos ingresados esta incompleto o no existe!');
+					alert('Uno de los Datos ingresados esta incompleto o no '+
+						'existe!');
 					console.log('[Debug] status 1002 se crea la historia');
 					break;
 					
@@ -152,7 +155,8 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,$loca
 
 	//Metodo que elimina una historia por URL
 	obj.deleteHistoria = function(id_histora){
-		return $http.delete(serviceBase + 'deleteHistoria/'+ id_histora).then (function (status){
+		return $http.delete(serviceBase + 'historias/deleteHistoria/'+ 
+							id_histora).then (function (status){
 			console.log('[Debug]' + status.data);
 			return status.data;
 		});
@@ -161,19 +165,22 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,$loca
 	//Obtiene los antecedentes de una historia
 	obj.getAntecedentes = function (pacienteId) {
 		console.log('[Debug] Se llama al servicio getAntecedentes');
-		return $http.get(serviceBase + 'getAntecedentes/' + pacienteId);
+		return $http.get(serviceBase + 'antecedentes/getAntecedentes/' + 
+						pacienteId);
 	};
 
 	//obtiene un antecedente
 	obj.getAntecedente = function (antecedenteId) {
 		console.log('[Debug] Se llama al servicio getAntecedente');
-		return $http.get(serviceBase + 'getAntecedente/' + antecedenteId);
+		return $http.get(serviceBase + 'antecedentes/getAntecedente/' + 
+						antecedenteId);
 	};
 
 	//guarda un antecedente
 	obj.insertAntecedente = function (antecedente) {
 		console.log('[Debug] => Se llama al servicio insertAntecedente');
-		var result = $http.post(serviceBase + 'setAntecedente', antecedente);
+		var result = $http.post(serviceBase + 'antecedentes/setAntecedente', 
+								antecedente);
 		console.log('[Debug] Retornamos el volcado de la peticion $http');
 		result.success(function(data){
 			console.log('[Debug] Se envia la peticion Satisfactoriamente');
@@ -186,7 +193,8 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,$loca
 					break;
 				case 2001:
 					console.log('[Debug] status 2001 faltan datos');
-					alert('Uno de los Datos ingresados esta incompleto o no existe!');
+					alert('Uno de los Datos ingresados esta incompleto o no ' +
+						'existe!');
 					console.log('[Debug] status 2002 se crea el antecedente');
 					break;
 				case 2002:
@@ -205,18 +213,21 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,$loca
 		console.log('[Debug] Antecedete Recibido :');
 		console.dir(antecedente);
 		console.log('[Debug] Se llama al servicio updateAntecedente');
-		var result = $http.post(serviceBase + 'updateAntecedente', antecedente);
+		var result = $http.post(serviceBase + 'antecedentes/updateAntecedente', 
+								antecedente);
 		result.success(function(data){
 			console.log('[Debug] Se envia la peticion Satisfactoriamente');
 			var respuesta = parseInt(data.msg);
 			switch(respuesta){
 				case 2000:
-					console.log('[Debug] status 2000 Ya Existe Este Antecedete En Esta Historia');
+					console.log('[Debug] status 2000 Ya Existe Este ' +
+						'Antecedete En Esta Historia');
 					alert('Ya Existe Este Antecedete En Esta Historia!');
 					break;
 				case 2001:
 					console.log('[Debug] status 2001 faltan datos');
-					alert('Uno de los Datos ingresados esta incompleto o no existe!');
+					alert('Uno de los Datos ingresados esta incompleto o ' + 
+							'no existe!');
 					console.log('[Debug] status 2003 se crea el atecedente');
 					break;
 				case 2003:
@@ -232,16 +243,16 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,$loca
 	return obj;
 }]);
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
  __  __    _____  __          ___ __  __  
 /  `/  \|\ |||__)/  \|   |   |__ |__)/__` 
 \__,\__/| \|||  \\__/|___|___|___|  \.__/ 
 
---------------------------------------------------------------------------------------- */
+----------------------------------------------------------------------------*/
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
 controlador encargado de listar las historias
---------------------------------------------------------------------------------------- */
+----------------------------------------------------------------------------*/
 mediperbaricaApp.controller('ListarController', function($scope, services){
 	console.log("[Debug] => Se llama al controlador ListarController");
 	services.getHistorias().then(function (data){
@@ -249,9 +260,9 @@ mediperbaricaApp.controller('ListarController', function($scope, services){
 	});
 });
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
 Controlador encargado de Crear Editar Elimianar
---------------------------------------------------------------------------------------- */
+----------------------------------------------------------------------------*/
 mediperbaricaApp.controller('EditController', function( $scope, 
 							$rootScope, $location, $routeParams, services)
 {	console.log('[Debug] => Se incia la carga de editController');
@@ -262,7 +273,7 @@ mediperbaricaApp.controller('EditController', function( $scope,
 	if(historiaID > 0){	
 		console.log("[Debug] => Se llama al controlador ListarController");
 		services.getHistoria(historiaID).then(function (data){
-		$scope.historia = data.data[0];
+		$scope.historia = data.data.data[0];
 		console.dir($scope.historia);
 	});
 	}else{
@@ -287,11 +298,11 @@ mediperbaricaApp.controller('EditController', function( $scope,
 	};
 
 
-	/**
-	Metodo encargado de limpiar el $scope, Se comparan los vcalores de los objetos
-	historia
+	/*************************************************************************
+	Metodo encargado de limpiar el $scope, Se comparan los valores 
+	de los objetos 	historia
 	@return (boolean)
-	*/
+	*************************************************************************/
 	$scope.isClean = function (){
 		return angular.equals(original, $scope.historia);
 	};
@@ -303,7 +314,8 @@ mediperbaricaApp.controller('EditController', function( $scope,
 	$scope.deleteHistoria = function(historia){
 		$location.path('/');
 		//alert('otra vez me pide poner ===');
-		if(confirm("Esta Seguro de Eliminar la Historia : " + $scope._id + ' de ' + $scope.nombres) === true)
+		if(confirm("Esta Seguro de Eliminar la Historia : " + $scope._id + 
+					' de ' + $scope.nombres) === true)
 			services.deleteHistoria(historia._id);
 	};
 
@@ -313,7 +325,6 @@ mediperbaricaApp.controller('EditController', function( $scope,
 	};
 
 	$scope.validForm = function(historia){
-		//alert('Hacer que los length no te den error al intentar acceder a un idiice que no existe! forEach');
 		console.log('[Debug] Se validan los capos de la historia');
 		console.dir(historia);
 		//se normaliza el arreglo de historia
@@ -347,7 +358,8 @@ mediperbaricaApp.controller('EditController', function( $scope,
 			var cantidad = Object.keys(historia).length;
 			console.log('[Debug] Se Comprueba si existe el arreglo');
 			condicion = (cantidad > 5) ? true : false;
-			console.log('[Debug] Estado de La condicion ' + condicion + ' cantidad de arreglo ' + cantidad);
+			console.log('[Debug] Estado de La condicion ' + condicion + 
+						' cantidad de arreglo ' + cantidad);
 			if(condicion){
 				angular.forEach(longitudes_minimas, function(value, key){
 					myhistoria = historia[key];
@@ -366,22 +378,20 @@ mediperbaricaApp.controller('EditController', function( $scope,
 				console.dir(historia);
 				$scope.editHistoria(historia);
 			}else{
-				console.log('[Debug] se validan los datos y se los manda a saveHistoria');
+				console.log('[Debug] se valida datos y se envia saveHistoria');
 				console.dir(historia);
 				$scope.saveHistoria(historia);
 			}
 		}else{
-			//condicion = false;
-			console.log('[Debug] no se puede pasar la validacion a las pripiedades del objeto historia');
-			alert('Por Favor revise el Formulario uno de los datos no existe o es muy corto');
+			alert('Uno De Los Datos No Existe O Es Muy Corto!');
 		}
 	};
 	console.log('[Debug] => Se termina la carga de editController');
 });
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
 Controlador encargado de Presentar las historias
---------------------------------------------------------------------------------------- */
+----------------------------------------------------------------------------*/
 mediperbaricaApp.controller('PresentController', function($scope, 
 							$rootScope, $location, $routeParams, services){
 	var historiaID = ($routeParams.historiaID)? parseInt($routeParams.historiaID) : 0;
@@ -399,10 +409,12 @@ mediperbaricaApp.controller('PresentController', function($scope,
 		console.dir(getListadoAntecedentes);
 		var cantidad = Object.keys(getListadoAntecedentes.data).length;
 		if(cantidad > 0){
-			console.log('[Debug] Cantidad de Aantecedente s encontrado ' + cantidad);
+			console.log('[Debug] Cantidad de Aantecedentes encontrado ' + 
+						cantidad);
 			$scope.listaAntecedentes = getListadoAntecedentes.data;
 		}else{
-			console.log('[Debug] Se vacia en arreglo de antecedentes por seguridad cantidad desde la BD ' + cantidad);
+			console.log('[Debug] Se vacia en arreglo de antecedentes por ' + 
+						'seguridad cantidad desde la BD ' + cantidad);
 			$scope.listaAntecedentes = {};
 			}
 		});
@@ -428,11 +440,11 @@ mediperbaricaApp.controller('PresentController', function($scope,
 
 });
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
 Controlador encargado de Asignar un antecedente a la historia
---------------------------------------------------------------------------------------- */
-mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, services, $routeParams,
-															$location, $rootScope){
+----------------------------------------------------------------------------*/
+mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, 
+							services, $routeParams,$location, $rootScope){
 	console.log('[Debug] Se llama al controlador  AsignarAntecendeteController');
 	var getListadoAntecedentes = {};
 	var historiaID = ($routeParams.historiaID)? parseInt($routeParams.historiaID) : 0;
@@ -452,10 +464,12 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, ser
 		console.dir(getListadoAntecedentes);
 		var cantidad = Object.keys(getListadoAntecedentes.data).length;
 		if(cantidad > 0){
-			console.log('[Debug] Cantidad de Aantecedente s encontrado ' + cantidad);
+			console.log('[Debug] Cantidad de Aantecedente s encontrado ' + 
+				cantidad);
 			$scope.listaAntecedentes = getListadoAntecedentes.data;
 		}else{
-			console.log('[Debug] Se vacia en arreglo de antecedentes por seguridad cantidad desde la BD ' + cantidad);
+			console.log('[Debug] Se vacia en arreglo de antecedentes por ' + 
+						'seguridad cantidad desde la BD ' + cantidad);
 			$scope.listaAntecedentes = {};
 			}
 		});
@@ -482,7 +496,8 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, ser
 
 		//se normaliza el arreglo de historia
 		angular.forEach(antecedente, function(value,key){
-		console.log('[Debug] se asigna valores vacios a los elementos faltantes');
+		console.log('[Debug] se asigna valores vacios a los elementos ' + 
+					'faltantes');
 			if (!antecedente[key]){
 				antecedente[key] = '';
 				}
@@ -501,11 +516,11 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, ser
 			var cantidad = Object.keys(antecedente).length;
 			console.log('[Debug] Se Comprueba si existe el arreglo');
 			condicion = (cantidad > 2) ? true : false;
-			console.log('[Debug] Estado de La condicion ' + condicion + ' cantidad de arreglo ' + cantidad);
+			console.log('[Debug] Estado de La condicion ' + condicion + 
+						' cantidad de arreglo ' + cantidad);
 			if(condicion){
 				angular.forEach(longitudes_minimas, function(value, key){
 					myantecedente = antecedente[key];
-					//alert('Cambio sugerido por crome === estaba ==');
 					if((myantecedente.length > longitudes_minimas[key]) && condicion === true){
 						console.log('funciona ' + key);
 					}else{
@@ -522,20 +537,23 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, ser
 				console.dir(antecedente);
 				services.updateAntecedente(antecedente);
 			}else{
-				console.log('[Debug] se validan los datos y se los manda a insertAntecedente');
+				console.log('[Debug] se validan los datos y se los manda a ' + 
+							'insertAntecedente');
 				console.dir(antecedente);
 				services.insertAntecedente(antecedente);
 			}
 		}else{
 			//condicion = false;
-			console.log('[Debug] no se puede pasar la validacion a las pripiedades del objeto antecedente');
-			alert('Por Favor revise el Formulario uno de los datos no existe o es muy corto');
+			console.log('[Debug] no se puede pasar la validacion a las ' +
+						'pripiedades del objeto antecedente');
+			alert('Uno De Los Datos No Existe O Es Muy Corto!');
 		}
 	};
 
 	//Edita el valor del antecdete
 	$scope.editAntecedente = function(id_antecedente){
-		console.log('[Debug] se llama a la funcion de editar para el antecedente ' + id_antecedente);
+		console.log('[Debug] se llama a la funcion de editar para el ' +
+					'antecedente ' + id_antecedente);
 		$scope.antecedente = {};
 		services.getAntecedente(id_antecedente).then(function (data){
 			var antecedenteLista = data.data;
@@ -545,13 +563,13 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, ser
 	};
 });
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
 Controlladores para manejo de los errores
---------------------------------------------------------------------------------------- */
+----------------------------------------------------------------------------*/
 mediperbaricaApp.controller('errroServer', function($scope, services){});
 
 
-/* ---------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------
 Controlador necesario para presentar hacerca de
---------------------------------------------------------------------------------------- */
+----------------------------------------------------------------------------*/
 mediperbaricaApp.controller('AcercaController', function($scope, services){});
