@@ -32,7 +32,7 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller: 'mostrarTratamientosController'
 	})
 	.when('/crear/', {
-		templateUrl: host + 'tplhtml/asignar-tratamiento-tpl.html',
+		templateUrl: host + 'tplhtml/crear-tratamiento-tpl.html',
 		controller: 'AsignarTratamientosController'
 	})
 	.when('/actualizar-tratamiento/:tratamientoId', {
