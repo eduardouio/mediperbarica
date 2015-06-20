@@ -3,17 +3,17 @@
   <div class="col-lg-12">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <p class="text-center text-info"><span class="glyphicon glyphicon-folder-close pull-left">&nbsp;</span><h4 class="text-center text-info">Registro De Tratamiento</h4></p>
+        <p class="text-center text-info"><span class="glyphicon glyphicon-folder-close pull-left">&nbsp;</span><h4 class="text-center text-info">Registro Paciente E Historia Médica</h4></p>
       </div>
       <div class="panel-body">
       <div class="alert alert-warning text-center" ng-show="historia.id_historia">
-          Se encuentra editado los valores del tratamiento Nro. <b> {{tratamiento.id_tratamiento}} </b>
+          Se Encuentra Editando Valores De La Historia: <b> {{historia.id_historia}} </b>
       </div>
-        <div class="form-horizontal" name="frmTratamientos" id="frmTratamientos">
+        <div class="form-horizontal" name="frmHistorias" id="frmHistorias">
           <fieldset>
             <!-- row -->
             <!-- Text input-->
-            <span class="help-block"> <b>Seleccione El Nombre De Un Paciente:</b></span>
+            <span class="help-block"> <b>1.- Informacion de Paciente:</b> <small class=" text-info">Datos personales e informaci&oacute;n de contacto (Los datos no se usan para la facturaci&oacute;n)</small></span> 
             <hr>
             <div class="row">
                 <span class="col-md-1 control-label">Cédula:</span>  
@@ -73,7 +73,7 @@
                 </div>
               </div>
             </div>
-            <span class="help-block"> <b>M&eacute;dico Referente:</b></span>
+            <span class="help-block"> <b>2.- M&eacute;dico Referente:</b><small class=" text-info"> Datos del m&eacute;dico quien refiri&oacute; el tratamiento (Se usar&aacute; para obtener informaci&oacute;n del paciente)</small></span>
             <hr>
             <div class="row">
                             <span class="col-md-1 control-label">Nombres:</span>  
@@ -95,7 +95,7 @@
               </div>
             </div>
             <!-- /row -->
-            <span class="help-block"> <b>Referencias Familiares En Caso De Acompañante:</b></span>
+            <span class="help-block"> <b>3.- Referencias Familiares En Caso De Acompañante:</b></span>
             <hr>
             <!-- row -->
             <div class="row well">

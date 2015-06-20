@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/css/bootstrap-theme.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/dashboard/dashboard.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/themes/red.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/themes/blue.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/bootstrap-datepicker.css">
   <!--
   <link rel="stylesheet" type="text/css" href="css/themes/green.css">

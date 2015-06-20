@@ -1,0 +1,147 @@
+<!-- Inicio de contenedor de la app de Personal-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <p class="text-center text-info"><span class="glyphicon glyphicon-briefcase pull-left">&nbsp;</span><h4 class="text-center text-info">Agregar Sesion al sesion Nro: {{sesion.id_sesion}}</h4></p>
+      </div>
+      <div class="panel-body">
+      <div class="alert alert-warning text-center" ng-show="sesion.id_historia">
+          Se Encuentra Editando Valores Del sesion: <b> {{sesion.id_historia}} </b>
+      </div>
+        <div class="form-horizontal" name="frmsesions" id="frmsesions">
+          <fieldset>
+            <!-- row -->
+            <!-- Text input-->
+            <span class="help-block"> 
+              <b>1.- Información Del Tratamiento Nro <b class="text-primary"> {{tratamiento.id_tratamiento}}</b> De <b class="text-primary">{{historia.nombres}}</b></small>
+          </b>
+            </span> 
+            <hr>
+                   <!-- row -->
+            <div class="row">              
+            <!-- Text input-->
+              <span class="col-md-2">Medico Encargado:</span>  
+              <div class="col-md-2">
+              {{personal.nombres}}
+              </div>
+            <!-- Text input-->
+              <span class="col-md-2">Examen Fisico:</span>  
+                <div class="col-md-2">
+                {{tratamiento.examen_fisico}}
+              </div>
+            <!-- Text input-->
+              <span class="col-md-2">Última Sesión:</span>  
+              <div class="col-md-2">
+                {{sesion.ultima}}
+              </div>
+            </div>
+            <!-- row -->
+            <div class="row">              
+            <!-- Text input-->
+              <span class="col-md-2">Sesiones Contradas:</span>  
+              <div class="col-md-2">
+              {{sesion.contratadas}}
+              </div>
+            <!-- Text input-->
+              <span class="col-md-2">Sesiones Realizadas:</span>  
+                <div class="col-md-2">
+                {{sesion.realizadas}}
+              </div>
+            <!-- Text input-->
+              <span class="col-md-2">Sesiones Restantes:</span>  
+              <div class="col-md-2">
+                {{sesion.restantes}}
+              </div>
+            </div>
+            <span class="help-block"> <b class=>2.- Listado Sesiones Realizadas:</b>
+              <small class=" text-primary"> Listado completo de las sesiones que se han realizado en este tratamiento.
+            </small>
+          </span>
+            <hr>
+            <div class="row"> 
+              <div class="col-md-12">
+                <!--Tabla de antecedentes-->
+                <table class="table table-striped table-bordered">
+            <tbody>
+              <tr>
+                  <th>Item</th>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Num Sesion</th>
+                  <th>Doctor</th>
+                  <th>Notas</th>
+              </tr>
+              <tr>
+                  <td>A</td>
+                  <td>Lunes 20-05-2015</td>
+                  <td>13:20</td>
+                  <td>1</td>
+                  <td>Dr. Andres Vaca</td>
+                  <td>Ninguna</td>
+              </tr>
+              <tr>
+                  <td>B</td>
+                  <td>Jueves 24-05-2015</td>
+                  <td>19:20</td>
+                  <td>2</td>
+                  <td>Dr. Andres Vaca</td>
+                  <td>Ninguna</td>
+              </tr>
+              <tr>
+                  <td>C</td>
+                  <td>Miercoles 29-05-2015</td>
+                  <td>08:20</td>
+                  <td>3</td>
+                  <td>Dr. Manuel Nolivos</td>
+                  <td>Ninguna</td>
+              </tr>
+            </tbody>
+         </table>
+                <!--/Tabla de antecedentes-->
+              </div>
+            </div>
+            <!-- /row -->
+            <span class="help-block"> <b>3.- Detalles de sesion que desea registrar:</b></span>
+            <hr>
+            <!-- row -->
+            <div class="row">
+              <span class="col-md-1">Fecha:</span>  
+              <div class="col-md-2">
+                <input name="sesiones" ng-model="sesion.sesiones" placeholder="Fecha" class="form-control input-md" type="date" maxlength="2" value="" id="fecha">
+                <div ng-show="!sesion.sesiones">
+                  <p class="label label-default">Requerido</p>
+                </div>
+              </div>
+            <!-- Text input-->
+              <span class="col-md-1">Medico:</span>  
+              <div class="col-md-3">
+                <input name="personal.nombres" ng-model="personal.nombres" placeholder="M&eacute;dico Tratante" class="form-control input-md" type="text" maxlength="20" value="">
+              </div>
+            <!-- Text input-->
+              <span class="col-md-1">Notas:</span>  
+              <div class="col-md-4">
+                <input name="motivo" ng-model="sesion.motivo" placeholder="Notas" class="form-control input-xx" type="text" maxlength="50" value="">
+              </div>
+            </div>
+   
+            <hr>
+          </fieldset>
+          <div class="pull-right ">
+            <button ng-click="clearForm()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-unchecked">&nbsp;</span>Limpiar Campos </button>
+            <a href="#/buscar" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-list">&nbsp;</span> Listar Historias </a>
+            <button ng-click="validForm(historia)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save">&nbsp;</span> Guardar Historia</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('#fecha').datepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayHighlight: true
+});
+    </script>
+<!--fin  contenedor de la app de Personal-->

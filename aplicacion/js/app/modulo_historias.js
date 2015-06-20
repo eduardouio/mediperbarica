@@ -27,36 +27,36 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	//$locationProvider.html5Mode(true);
 	$routeProvider
 	.when('/',{
-		templateUrl : host + 'tplhtml/lista-historias-tpl.html',
+		templateUrl : host + 'tplhtml/templates/lista-historias-tpl.html',
 		controllerAs : 'ctrlListar',
 		controller : 'ListarController'
 	})
 	.when('/crear',{
-		templateUrl : host + 'tplhtml/crear-historia-tpl.html',
+		templateUrl : host + 'tplhtml/forms/frm-historia-tpl.html',
 		controllerAs : 'editCtrl',
 		controller: 'EditController'
 	})
 		.when('/editar/:historiaID',{
-		templateUrl : host + 'tplhtml/crear-historia-tpl.html',
+		templateUrl : host + 'tplhtml/forms/frm-historia-tpl.html',
 		controllerAs : 'editCtrl',
 		controller: 'EditController'
 	})
 		.when('/asignar-antecedente/:historiaID',{
-		templateUrl : host + 'tplhtml/asignar-antecedente-tpl.html',
+		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
 		controllerAs : 'asgantCtrl',
 		controller: 'AsignarAntecendeteController'
 	})
 		.when('/acerca',{
-		templateUrl : host + 'tplhtml/acerca-app-tpl.html',
+		templateUrl : host + 'tplhtml/templates/acerca-app-tpl.html',
 		controller: 'AcercaController'
 	})
 		.when('/error-server',{
-		templateUrl : host + 'tplhtml/error-server-tpl.html',
+		templateUrl : host + 'tplhtml/templates/error-server-tpl.html',
 		controllerAs : 'errCtrl',
 		controller: 'errroServer'
 	})
 		.when('/presentar/:historiaID',{
-		templateUrl : host + 'tplhtml/presentar-historia-tpl.html',
+		templateUrl : host + 'tplhtml/templates/presentar-historia-tpl.html',
 		controllerAs : 'presentCtrl',
 		controller: 'PresentController'
 	})
