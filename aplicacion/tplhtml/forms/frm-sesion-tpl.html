@@ -3,59 +3,61 @@
   <div class="col-lg-12">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <p class="text-center text-info"><span class="glyphicon glyphicon-briefcase pull-left">&nbsp;</span><h4 class="text-center text-info">Agregar Sesion al sesion Nro: {{sesion.id_sesion}}</h4></p>
+        <p class="text-center text-info"><span class="glyphicon glyphicon-briefcase pull-left">&nbsp;</span><h4 class="text-center text-info">Agregar Sesion Al Tratamiento Nro: {{tratamiento.id_tratamiento}} de {{historia.nombres}}</h4></p>
       </div>
       <div class="panel-body">
-      <div class="alert alert-warning text-center" ng-show="sesion.id_historia">
-          Se Encuentra Editando Valores Del sesion: <b> {{sesion.id_historia}} </b>
+      <div class="alert alert-warning text-center" ng-show="sesion.id_sesion">
+          Se Encuentra Editando Valores Del La Sesion: <b> {{sesion.id_sesion}} </b>
       </div>
-        <div class="form-horizontal" name="frmsesions" id="frmsesions">
+        <div class="form-horizontal" name="frmSesiones" id="frmSesiones">
           <fieldset>
             <!-- row -->
             <!-- Text input-->
             <span class="help-block"> 
-              <b>1.- Información Del Tratamiento Nro <b class="text-primary"> {{tratamiento.id_tratamiento}}</b> De <b class="text-primary">{{historia.nombres}}</b></small>
+             <b>1.- Detalles de sesion a registrar:</b></span>
           </b>
             </span> 
             <hr>
-                   <!-- row -->
-            <div class="row">              
+                 <div class="row">
             <!-- Text input-->
-              <span class="col-md-2">Medico Encargado:</span>  
+              <span class="col-md-1">Fecha:</span>  
               <div class="col-md-2">
-              {{personal.nombres}}
+                <input name="fechaSesion" ng-model="sesion.fecha" placeholder="Fecha" class="form-control input-md" type="date" maxlength="12" value="" id="fecha">
+                <div ng-show="!sesion.fecha">
+                <span class="label btn btn-info">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true">2014/06/20</span>
+                </span>
+                  <p class="label label-default">Requerido</p>
+                </div>
               </div>
             <!-- Text input-->
-              <span class="col-md-2">Examen Fisico:</span>  
-                <div class="col-md-2">
-                {{tratamiento.examen_fisico}}
+                     <span class="col-md-1">Hora:</span>  
+              <div class="col-sm-2">
+                <input name="horaSesion" ng-model="sesion.hora" placeholder="Hora" class="form-control input-md" type="time" maxlength="7" value="">
+                <div ng-show="!sesion.hora">
+                <span class="label btn btn-info">
+                <span class="glyphicon glyphicon-time" aria-hidden="true">&nbsp; 14:34:28</span>
+                </span>
+                  <p class="label label-default">Requerido</p>
+                </div>
               </div>
             <!-- Text input-->
-              <span class="col-md-2">Última Sesión:</span>  
+              <span class="col-md-1">Medico:</span>  
               <div class="col-md-2">
-                {{sesion.ultima}}
+                <input name="personal.nombres" ng-model="personal.nombres" placeholder="M&eacute;dico Tratante" class="form-control input-md" type="text" maxlength="40" value="">
+                <div ng-show="!personal.nombres">
+                  <p class="label label-default">Requerido</p>
+                </div>
               </div>
-            </div>
-            <!-- row -->
-            <div class="row">              
             <!-- Text input-->
-              <span class="col-md-2">Sesiones Contradas:</span>  
+              <span class="col-md-1">Notas:</span>  
               <div class="col-md-2">
-              {{sesion.contratadas}}
-              </div>
-            <!-- Text input-->
-              <span class="col-md-2">Sesiones Realizadas:</span>  
-                <div class="col-md-2">
-                {{sesion.realizadas}}
-              </div>
-            <!-- Text input-->
-              <span class="col-md-2">Sesiones Restantes:</span>  
-              <div class="col-md-2">
-                {{sesion.restantes}}
+                <textarea name="notasSesion" ng-model="sesion.notas" rows="3" class="form-control input-xx" maxlength="450">
+                </textarea>
               </div>
             </div>
             <span class="help-block"> <b class=>2.- Listado Sesiones Realizadas:</b>
-              <small class=" text-primary"> Listado completo de las sesiones que se han realizado en este tratamiento.
+              <small class=" text-primary"> Sesiones realizadas durante el tratamiento.
             </small>
           </span>
             <hr>
@@ -71,30 +73,28 @@
                   <th>Num Sesion</th>
                   <th>Doctor</th>
                   <th>Notas</th>
+                  <th>Acci&oacute;n</th>
               </tr>
-              <tr>
-                  <td>A</td>
-                  <td>Lunes 20-05-2015</td>
-                  <td>13:20</td>
-                  <td>1</td>
-                  <td>Dr. Andres Vaca</td>
-                  <td>Ninguna</td>
-              </tr>
-              <tr>
-                  <td>B</td>
-                  <td>Jueves 24-05-2015</td>
-                  <td>19:20</td>
-                  <td>2</td>
-                  <td>Dr. Andres Vaca</td>
-                  <td>Ninguna</td>
-              </tr>
-              <tr>
-                  <td>C</td>
-                  <td>Miercoles 29-05-2015</td>
-                  <td>08:20</td>
-                  <td>3</td>
-                  <td>Dr. Manuel Nolivos</td>
-                  <td>Ninguna</td>
+              <tr ng-repeat="sesion in sesiones">
+                  <td>{{sesion.item}}</td>
+                  <td>{{sesion.fecha}}</td>
+                  <td>{{sesion.hora}}</td>
+                  <td>{{sesion.id_sesion}}</td>
+                  <td>{{personal.nombres}}</td>
+                  <td>{{sesion.notas}}</td>
+                  <td>
+                    <!-- Single button -->
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;Editar</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#"> <b class="text-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true">&nbsp;Eliminar</b></a></li>
+                      </ul>
+                    </div>
+                  </td>
               </tr>
             </tbody>
          </table>
@@ -102,26 +102,46 @@
               </div>
             </div>
             <!-- /row -->
-            <span class="help-block"> <b>3.- Detalles de sesion que desea registrar:</b></span>
+
+            <span class="help-block"> 
+            <b>3.- Información Del Tratamiento Nro <b class="text-primary"> {{tratamiento.id_tratamiento}}</b> De <b class="text-primary">{{historia.nombres}}</b></small>
+          </b>
             <hr>
-            <!-- row -->
-            <div class="row">
-              <span class="col-md-1">Fecha:</span>  
+            
+                    <!-- row -->
+            <div class="row">              
+            <!-- Text input-->
+              <span class="col-md-2">M&eacute;dico Encargado:</span>  
               <div class="col-md-2">
-                <input name="sesiones" ng-model="sesion.sesiones" placeholder="Fecha" class="form-control input-md" type="date" maxlength="2" value="" id="fecha">
-                <div ng-show="!sesion.sesiones">
-                  <p class="label label-default">Requerido</p>
-                </div>
+              {{personal.nombres}}
               </div>
             <!-- Text input-->
-              <span class="col-md-1">Medico:</span>  
-              <div class="col-md-3">
-                <input name="personal.nombres" ng-model="personal.nombres" placeholder="M&eacute;dico Tratante" class="form-control input-md" type="text" maxlength="20" value="">
+              <span class="col-md-2">Examen F&iacute;sico:</span>  
+                <div class="col-md-2">
+                {{tratamiento.examen_fisico}}
               </div>
             <!-- Text input-->
-              <span class="col-md-1">Notas:</span>  
-              <div class="col-md-4">
-                <input name="motivo" ng-model="sesion.motivo" placeholder="Notas" class="form-control input-xx" type="text" maxlength="50" value="">
+              <span class="col-md-2">Última Sesión:</span>  
+              <div class="col-md-2">
+                {{sesion.fecha_ultima}}
+              </div>
+            </div>
+            <!-- row -->
+            <div class="row">              
+            <!-- Text input-->
+              <span class="col-md-2">Sesiones Contradas:</span>  
+              <div class="col-md-2">
+              {{sesion.nro_sesiones}}
+              </div>
+            <!-- Text input-->
+              <span class="col-md-2">Sesiones Realizadas:</span>  
+                <div class="col-md-2">
+                {{sesion.realizadas}}
+              </div>
+            <!-- Text input-->
+              <span class="col-md-2">Sesiones Restantes:</span>  
+              <div class="col-md-2">
+                {{sesion.nro_sesiones - sesion.realizdas}}
               </div>
             </div>
    

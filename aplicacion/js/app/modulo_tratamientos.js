@@ -28,11 +28,11 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller: 'ListarTratamientosController'
 	})
 	.when('/mostrar-tratamiento/:tratamientoId', {
-		templateUrl: host + 'tplhtml/templates/mostrar-tratamiento-tpl.html',
+		templateUrl: host + 'tplhtml/templates/mostrar-sesion-tpl.html',
 		controller: 'mostrarTratamientosController'
 	})
 	.when('/crear/', {
-		templateUrl: host + 'tplhtml/forms/frm-tratamiento-tpl.html',
+		templateUrl: host + 'tplhtml/forms/frm-cliente-tpl.html',
 		controller: 'AsignarTratamientosController'
 	})
 	.when('/actualizar-tratamiento/:tratamientoId', {

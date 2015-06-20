@@ -73,7 +73,7 @@
             <div class="row">
               <span class="col-md-1 text-right  ">Sesiones:</span>  
               <div class="col-md-1">
-                <input name="sesionesTratamiento" ng-model="tratamiento.nro_sesiones" placeholder="0" class="form-control input-md" type="number" maxlength="2" value="">
+                <input name="sesionesTratamiento" ng-model="tratamiento.nro_sesiones" placeholder="0" class="form-control input-md" type="float" maxlength="2" value="">
                 <div ng-show="!tratamiento.nro_sesiones">
                   <p class="label label-default">Requerido</p>
                 </div>
@@ -122,7 +122,8 @@
               
               <span class="col-md-1">Notas:</span>  
               <div class="col-md-8">
-                <input name="notasTratamiento" ng-model="tratamiento.notas" placeholder="Apuntes adicionales al tratamiento" class="form-control input-md" type="text" maxlength="360" value="">
+                <textarea name="notasTratamiento" ng-model="tratamiento.notas" class="form-control input-md" type="text" maxlength="360" value="">
+                </textarea>
               </div>
             </div>
             <!-- row-->

@@ -1,86 +1,85 @@
 <!-- Inicio de contenedor de la app de cliente-->
 <div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-success">
+<div class="col-lg-12">
+   <div class="panel panel-success">
       <div class="panel-heading">
-        <p class="text-center text-info"><span class="glyphicon glyphicon-user pull-left">&nbsp;</span><h4 class="text-center text-info">Registro cliente MEDIPERBARICA S.A.</h4></p>
+         <p class="text-center text-info"><span class="glyphicon glyphicon-user pull-left">&nbsp;</span>
+         <h4 class="text-center text-info">Registro cliente MEDIPERBARICA S.A.</h4>
+         </p>
       </div>
       <div class="panel-body">
-      <div class="alert alert-warning text-center" ng-show="cliente.nombres">
-          Se Encuentra Editando Valores Del Empleado: <b> {{cliente.nombres}} </b>
+         <div class="alert alert-warning text-center" ng-show="cliente.nombres">
+            Se Encuentra Editando Los Datos Del Cleinte: <b> {{cliente.nombres}} </b>
+         </div>
+         <div class="form-horizontal" name="frmClientes" id="frmClientes">
+            <fieldset>
+               <!-- row -->
+               <!-- Text input-->
+               <span class="help-block"> <b>1.- Información del cliente:</b> <small class=" text-info">Datos clientees e informaci&oacute;n de contacto</small></span> 
+               <hr>
+               <div class="row">
+                  <span class="col-md-1 control-label">Cédula:</span>  
+                  <div class="col-md-2">
+                     <input name="id_clienteCliente" autofocus ng-model="cliente.id_cliente" placeholder="Cedula/Pasaporte" class="form-control input-md" type="text" maxlength="13">
+                     <div ng-show="!cliente.id_cliente">
+                        <small class="text-danger">Requerido</small>
+                        <br> 
+                        <p class="label label-default">13 digitos completar con 001</p>
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <span class="col-md-1 control-label">Nombres:</span>  
+                  <div class="col-md-4">
+                     <input name="nombresCliente" ng-model="cliente.nombres" placeholder="Nombre y Apellido Cliente" class="form-control input-md" type="text" maxlength="40">
+                     <div ng-show="!cliente.nombres">
+                        <small class="text-danger">Requerido</small>
+                        <br> 
+                        <p class="label label-default">Ingresar al menos nombre y apellido</p>
+                     </div>
+                  </div>
+                  <span class="col-md-1 control-label">Email:</span>  
+                  <div class="col-md-3">
+                     <input name="emailCliente" ng-model="cliente.mail" placeholder="algo@algo.ext" class="form-control input-md" type="mail" maxlength="45">
+                  </div>
+               </div>
+               <!-- /row -->
+               <!-- row -->
+               <div class="row">
+                  <!-- Text input-->
+                  <span class="col-md-1 control-label">Telefono:</span>  
+                  <div class="col-md-2">
+                     <input name="telefonoCliente" ng-model="cliente.telefono" placeholder="Telefono" class="form-control input-md" type="tel" maxlength="10">
+                     <div ng-show="!cliente.telefono">
+                        <small class="text-danger">Requerido</small>
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <span class="col-md-1 control-label">Direccion:</span>  
+                  <div class="col-md-8">
+                     <input name="direccionCliente" ng-model="cliente.direccion" placeholder="Ciudad,Dirección,Edificio" class="form-control input-xx" type="text" maxlength="120">
+                     <div ng-show="!cliente.direccion">
+                        <small class="text-danger">Requerido</small>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <!-- Text input-->
+                  <span class="col-md-1 control-label">Notas:</span>  
+                  <div class="col-md-11">
+                     <textarea name="notasCliente" ng-model="cliente.notas" class="form-control input-xx"  maxlength="120">
+                     </textarea>
+                  </div>
+               </div>
+               <hr>
+            </fieldset>
+            <div class="pull-right ">
+               <button ng-click="clearForm()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-unchecked">&nbsp;</span>Limpiar Campos </button>
+               <a href="#/buscar" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-list">&nbsp;</span> Listar clientes </a>
+               <button ng-click="validForm(cliente)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save">&nbsp;</span> Guardar cliente</button>
+            </div>
+            </form>
+         </div>
       </div>
-        <div class="form-horizontal" name="frmclientes" id="frmclientes">
-          <fieldset>
-            <!-- row -->
-            <!-- Text input-->
-            <span class="help-block"> <b>1.- Información del cliente:</b> <small class=" text-info">Datos clientees e informaci&oacute;n de contacto</small></span> 
-            <hr>
-            <div class="row">
-                <span class="col-md-1 control-label">Cédula:</span>  
-              <div class="col-md-2">
-                <input name="id_cliente" autofocus ng-model="cliente.id_cliente" placeholder="Cedula/Pasaporte" class="form-control input-md" type="text" maxlength="10">
-                <div ng-show="!cliente.id_cliente">
-                  <small class="text-danger">Requerido</small>
-                  <br> 
-                  <p class="label label-default">10 digitos sino completar con Ceros</p>
-                </div>
-            </div>
-            <!-- Text input-->
-              <span class="col-md-1 control-label">Nombres:</span>  
-              <div class="col-md-4">
-                <input name="nombres" ng-model="cliente.nombres" placeholder="Ingrese los nombres" class="form-control input-md" type="text" maxlength="40">
-                <div ng-show="!cliente.nombres">
-                  <small class="text-danger">Requerido</small>
-                  <br> 
-                  <p class="label label-default">Ingresar al menos nombre y apellido</p>
-                </div>
-              </div>
-              <span class="col-md-1 control-label">Email:</span>  
-             <div class="col-md-3">
-                <input name="email" ng-model="cliente.mail" placeholder="algo@algo.ext" class="form-control input-md" type="mail" maxlength="45">
-                <div ng-show="!cliente.mail">
-                  <small class="text-danger">Requerido</small>
-                  <br> 
-                  <p class="label label-default">El mail será usado para envio de citas</p>
-                </div>
-              </div>
-            </div>
-            <!-- /row -->
-            <!-- row -->
-            <div class="row">              
-            <!-- Text input-->
-              <span class="col-md-1 control-label">Telefono:</span>  
-              <div class="col-md-2">
-                <input name="Telefono" ng-model="cliente.Telefono" placeholder="Telefono" class="form-control input-md" type="text" maxlength="10">
-              </div>
-
-            <!-- Text input-->
-              <span class="col-md-1 control-label">Direccion:</span>  
-              <div class="col-md-8">
-                <input name="direccion" ng-model="cliente.direccion" placeholder="Ciudad,Dirección,Edificio" class="form-control input-xx" type="text" maxlength="120">
-                  <div ng-show="!cliente.direccion">
-                  <small class="text-danger">Requerido</small>
-                </div>
-              </div>
-            </div>
-                        <div class="row">              
-            <!-- Text input-->
-              <span class="col-md-1 control-label">Notas:</span>  
-              <div class="col-md-11">
-                <input name="direccion" ng-model="cliente.direccion" placeholder="Apuntes adicionales" class="form-control input-xx" type="text" maxlength="120">
-              </div>
-            </div>
-            <hr>
-
-          </fieldset>
-          <div class="pull-right ">
-            <button ng-click="clearForm()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-unchecked">&nbsp;</span>Limpiar Campos </button>
-            <a href="#/buscar" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-list">&nbsp;</span> Listar clientes </a>
-            <button ng-click="validForm(cliente)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save">&nbsp;</span> Guardar cliente</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+   </div>
 </div>
 <!--fin  contenedor de la app de cliente-->
