@@ -7,14 +7,19 @@
       <div class="panel-body">
       <div name="frmAntecedente" class="form-horizontal" role="form">
       <div class="alert alert-warning text-center" ng-show="antecedente.id_antecedente">
-          Se Encuentra Editando Valores Del Antecedente: <b> {{antecedente.id_antecedente}} </b>
+          Se Encuentra Editando Valores Del Antecedente: <b> {{antecedente.id_antecedente}}</b>
       </div>
 
       <div class="row">
          <legend class="text-primary">Asignar Antecedete </legend>
             <span class="col-md-2 control-label">Tipo:</span>  
               <div class="col-md-8">
-                <input name="tipo" ng-model="antecedente.tipo" placeholder="Nombre Antecedente M&eacute;dico" class="form-control input-md" type="text" maxlength="45">
+                <select name="tipo" ng-model="antecedente.tipo" class="form-control input-md">
+                  <option value="Patológicos Personales" selected="true">Antecedentes Patológicos Personales</option>
+                  <option value="Quirúrgicos">Antecedentes. Quirúrgicos</option>
+                  <option value="Alergias">Alergias</option>
+                  <option value="Patológicos Familiares">Antecedentes Patológicos Familiares</option>
+                </select>
                 <div ng-show="!antecedente.tipo">
                   <small class="text-danger">Requerido</small>
                 </div>
@@ -33,6 +38,8 @@
          <div class="row">
       <div class="form-group">
          <div class="col-sm-10 col-sm-offset-2">
+          <a class="btn btn-danger btn-sm" ng-show="antecedente.id_antecedente" href="#/eliminar-antecedente/{{antecedente.id_antecedente}}">
+          <span class="glyphicon glyphicon-trash"></span> Eliminar</a>
             <button class="btn btn-primary btn-sm pull-right" ng-click="validateAntecedenteForm(antecedente)"> <span class="glyphicon glyphicon-plus"></span> Registrar Antecedente</button>
          </div>
       </div>
@@ -57,19 +64,18 @@
 -->
 <div class="col-lg-4">
    <h4 class="text-danger">Antecedentes Registrados:</h4>
-   <table class="table table-hover">
+   <table class="table table-hover table-bordered">
       <thead>
          <tr>
             <th>Nombre</th>
             <th>Detalle</th>
-            <th>fecha</th>
          </tr>
       </thead>
       <tbody>
          <tr ng-repeat="row in listaAntecedentes">
-            <td class="pull-right"><b><a ng-click="editAntecedente(row.id_antecedente)">{{row.tipo}}:</a></b></td>
+            <td><b><a ng-click="editAntecedente(row.id_antecedente)">{{row.tipo}}:</a></b></td>
             <td>{{row.detalle}}</td>
-            <td>{{row.creado}}</td>
+          </tr>
       </tbody>
    </table>
 </div>

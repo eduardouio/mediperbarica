@@ -24,10 +24,11 @@ var mediperbaricaApp = angular.module('mediperbaricaApp', ['ngRoute']);
 ----------------------------------------------------------------------------*/
 mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	
-	//$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode.enabled;
+
 	$routeProvider
-	.when('/',{
-		templateUrl : host + 'tplhtml/templates/lista-historias-tpl.html',
+	.when('/',
+{		templateUrl : host + 'tplhtml/templates/lista-historias-tpl.html',
 		controllerAs : 'ctrlListar',
 		controller : 'ListarController'
 	})
@@ -70,11 +71,11 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 | /~~\\__,|\__/|  \ |/~~\.__/ 
 
 ----------------------------------------------------------------------------*/
-mediperbaricaApp.factory('services', [ '$http','$location', function($http,
-																	$location){
+mediperbaricaApp.factory('services', [ '$http','$location',
+													function($http,$location){
+	
 	var serviceBase = host + 'index.php/';
 	var obj = {};
-
 	//Metodo que obtiene las historias
 	obj.getHistorias = function(){
 		console.log('[Debug] => Se llama a la funcion getHistoria');
@@ -131,8 +132,8 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,
 				case 1000:
 					console.log('[Debug] status 1000 el id del paciente esta ' + 
 								'en otra historia');
-					alert('Ya existe un registro con el mismo numero de Cedula ' + 
-						  'en el sistema!');
+					alert('Ya existe un registro con el mismo numero ' + 
+						  'de Cedula en el sistema!');
 					break;
 				case 1001:
 					console.log('[Debug] status 1001 faltan datos');
@@ -253,22 +254,27 @@ mediperbaricaApp.factory('services', [ '$http','$location', function($http,
 /* ---------------------------------------------------------------------------
 controlador encargado de listar las historias
 ----------------------------------------------------------------------------*/
-mediperbaricaApp.controller('ListarController', function($scope, services){
+mediperbaricaApp.controller('ListarController', function($scope, $rootScope, 
+															services){
 	console.log("[Debug] => Se llama al controlador ListarController");
-	services.getHistorias().then(function (data){
+		services.getHistorias().then(function (data){
 		$scope.historias = data.data.data;
+		$rootScope.dataInicial = $scope.historias;
 	});
+
 });
 
 /* ---------------------------------------------------------------------------
 Controlador encargado de Crear Editar Elimianar
 ----------------------------------------------------------------------------*/
 mediperbaricaApp.controller('EditController', function( $scope, 
-							$rootScope, $location, $routeParams, services)
-{	console.log('[Debug] => Se incia la carga de editController');
-	var historiaID = ($routeParams.historiaID) ? parseInt($routeParams.historiaID) : 0;	
-	$rootScope.title = (historiaID > 0) ? 'Edit Historia' : 'Add Historia';
+							$rootScope, $location, $routeParams, services){	
 
+	console.log($rootScope.dataInicial);
+	console.log('[Debug] => Se incia la carga de editController');
+	var historiaID = ($routeParams.historiaID) ? 
+										parseInt($routeParams.historiaID) : 0;
+	$rootScope.title = (historiaID > 0) ? 'Edit Historia' : 'Add Historia';
 	//se analiza se se desea editar una historia o crear una nueva
 	if(historiaID > 0){	
 		console.log("[Debug] => Se llama al controlador ListarController");
@@ -285,8 +291,6 @@ mediperbaricaApp.controller('EditController', function( $scope,
 	$scope.saveHistoria = function (historia){
 		console.log('[Debug] => Se llama a saveHistoria de EditController');
 		//Validamos los datos ingresados
-
-
 		services.insertHistoria(historia);
 	};
 
@@ -312,10 +316,10 @@ mediperbaricaApp.controller('EditController', function( $scope,
 	@return str(historiaID)
 	*/
 	$scope.deleteHistoria = function(historia){
-		$location.path('/');
 		//alert('otra vez me pide poner ===');
 		if(confirm("Esta Seguro de Eliminar la Historia : " + $scope._id + 
 					' de ' + $scope.nombres) === true)
+		$location.path('/');
 			services.deleteHistoria(historia._id);
 	};
 
@@ -352,7 +356,7 @@ mediperbaricaApp.controller('EditController', function( $scope,
 						'telefono':6,
 						'fecha_nacimiento': 9,
 						'mail' : 4,
-						'direccion' : 5
+						'direccion' : 4
 		};
 		if(historia){
 			var cantidad = Object.keys(historia).length;
@@ -363,7 +367,8 @@ mediperbaricaApp.controller('EditController', function( $scope,
 			if(condicion){
 				angular.forEach(longitudes_minimas, function(value, key){
 					myhistoria = historia[key];
-					if((myhistoria.length > longitudes_minimas[key]) && condicion == true){
+					if((myhistoria.length > longitudes_minimas[key]) && 
+															condicion == true){
 						console.log('funciona ' + key);
 					}else{
 						condicion = false;
@@ -394,8 +399,8 @@ Controlador encargado de Presentar las historias
 ----------------------------------------------------------------------------*/
 mediperbaricaApp.controller('PresentController', function($scope, 
 							$rootScope, $location, $routeParams, services){
-	var historiaID = ($routeParams.historiaID)? parseInt($routeParams.historiaID) : 0;
-
+	var historiaID = ($routeParams.historiaID) ? 
+										parseInt($routeParams.historiaID) : 0;
 	console.log('Se determina el valor del id de la historia' + historiaID);
 	if(historiaID > 0){	
 		console.log("[Debug] => Se llama al controlador ListarController");
@@ -403,7 +408,8 @@ mediperbaricaApp.controller('PresentController', function($scope,
 		$scope.historia = data.data.data[0];
 		console.dir($scope.historia);
 		//recuperamos los posibles antecedentes
-		services.getAntecedentes($scope.historia['id_paciente']).then(function (data){
+		services.getAntecedentes($scope.historia['id_paciente'])
+		.then(function (data){
 		console.log('[Debug] se obtiene el objeto lista antecedentes');
 		getListadoAntecedentes = data.data;
 		console.dir(getListadoAntecedentes);
@@ -445,9 +451,10 @@ Controlador encargado de Asignar un antecedente a la historia
 ----------------------------------------------------------------------------*/
 mediperbaricaApp.controller('AsignarAntecendeteController', function($scope, 
 							services, $routeParams,$location, $rootScope){
-	console.log('[Debug] Se llama al controlador  AsignarAntecendeteController');
+	console.log('[Debug] llama al controlador  AsignarAntecendeteController');
 	var getListadoAntecedentes = {};
-	var historiaID = ($routeParams.historiaID)? parseInt($routeParams.historiaID) : 0;
+	var historiaID = ($routeParams.historiaID) ? 
+										parseInt($routeParams.historiaID) : 0;
 	console.log('Se determina el valor del id de la historia' + historiaID);
 
 	if(historiaID > 0){	
@@ -458,7 +465,8 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope,
 		console.dir($scope.historia);
 		
 		//recuperamos los posibles antecedentes
-		services.getAntecedentes($scope.historia['id_paciente']).then(function (data){
+		services.getAntecedentes($scope.historia['id_paciente'])
+		.then(function (data){
 		console.log('[Debug] se obtiene el objeto lista antecedentes');
 		getListadoAntecedentes = data.data;
 		console.dir(getListadoAntecedentes);
@@ -510,7 +518,7 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope,
 		var longitudes_minimas = {
 						'id_paciente': 9,
 						'tipo': 4,
-						'detalle':6
+						'detalle':4
 		};
 		if(antecedente){
 			var cantidad = Object.keys(antecedente).length;
@@ -521,7 +529,8 @@ mediperbaricaApp.controller('AsignarAntecendeteController', function($scope,
 			if(condicion){
 				angular.forEach(longitudes_minimas, function(value, key){
 					myantecedente = antecedente[key];
-					if((myantecedente.length > longitudes_minimas[key]) && condicion === true){
+					if((myantecedente.length > longitudes_minimas[key]) && 
+															condicion === true){
 						console.log('funciona ' + key);
 					}else{
 						condicion = false;

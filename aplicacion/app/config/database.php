@@ -49,7 +49,7 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['password'] = 'elian';
+$db['default']['password'] = 'elian.2011';
 $db['default']['database'] = 'gelvscom_mediperbarica';
 $db['default']['username'] = 'root';
 $db['default']['dbdriver'] = 'mysql';

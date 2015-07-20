@@ -14,7 +14,7 @@
 | In some instances, however, you may want to remap this relationship
 | so that a different class/function is called than the one
 | corresponding to the URL.
-|
+|	
 | Please see the user guide for complete details:
 |
 |	http://codeigniter.com/user_guide/general/routing.html
@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "login";
 $route['404_override'] = '';
 
 

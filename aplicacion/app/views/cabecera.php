@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/dashboard/dashboard.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/themes/blue.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>css/angular-material.min.css">
   <!--
   <link rel="stylesheet" type="text/css" href="css/themes/green.css">
   <link rel="stylesheet" type="text/css" href="css/themes/red.css">
@@ -21,6 +22,9 @@
   <script type="text/javascript" src="<?php echo base_url();?>js/angular-autocomplete.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>js/angular-resource.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>js/bootstrap-datepicker.js"></script>
+  <script src="<?php echo base_url();?>js/angular-animate.min.js"></script>
+  <script src="<?php echo base_url();?>js/angular-aria.min.js"></script>
+  <script src="<?php echo base_url();?>js/angular-material.min.js"></script>
 </head>
 
 

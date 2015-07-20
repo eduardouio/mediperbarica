@@ -786,7 +786,6 @@ class CI_Session {
 		}
 	}
 
-
 }
 // END Session Class
 

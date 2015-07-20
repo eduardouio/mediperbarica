@@ -21,8 +21,6 @@
                 <input name="id_paciente" autofocus ng-model="historia.id_paciente" placeholder="Cedula/Pasaporte" class="form-control input-md" type="text" maxlength="10">
                 <div ng-show="!historia.id_paciente">
                   <small class="text-danger">Requerido</small>
-                  <br> 
-                  <p class="label label-default">10 digitos sino completar con Ceros</p>
                 </div>
             </div>
             <!-- Text input-->
@@ -31,8 +29,6 @@
                 <input name="nombres" ng-model="historia.nombres" placeholder="Ingrese los nombres" class="form-control input-md" type="text" maxlength="40">
                 <div ng-show="!historia.nombres">
                   <small class="text-danger">Requerido</small>
-                  <br> 
-                  <p class="label label-default">Ingresar al menos nombre y apellido</p>
                 </div>
               </div>
               <span class="col-md-1 control-label">Email:</span>  
@@ -40,8 +36,6 @@
                 <input name="email" ng-model="historia.mail" placeholder="algo@algo.ext" class="form-control input-md" type="mail" maxlength="45">
                 <div ng-show="!historia.mail">
                   <small class="text-danger">Requerido</small>
-                  <br> 
-                  <p class="label label-default">El mail será usado para envio de citas</p>
                 </div>
               </div>
             </div>
@@ -73,6 +67,27 @@
                 </div>
               </div>
             </div>
+                      
+                      <!-- row -->
+
+    <md-input-container>
+  <label>Color</label>
+  <input type="text" ng-model="color" required md-maxlength="10">
+</md-input-container>
+        <!--   -->
+                    <div class="row">
+                            <span class="col-md-1 control-label">Manejo:</span>  
+              <div class="col-md-4">
+                <input name="manejo" ng-model="historia.manejo" placeholder="Manejo" class="form-control input-md" type="text" maxlength="180" value="">
+              </div>
+            <!-- Text input-->
+              <span class="col-md-2 control-label">Examen F&iacute;sico:</span>  
+              <div class="col-md-4">
+                <input name="examen_fisico" ng-model="historia.examen_fisico" placeholder="Examen Fisico" class="form-control input-md" type="text" maxlength="360" value="">
+              </div>
+            </div>
+        <!--   -->
+            <!-- /row -->
             <span class="help-block"> <b>2.- M&eacute;dico Referente:</b><small class=" text-info"> Datos del m&eacute;dico quien refiri&oacute; el tratamiento (Se usar&aacute; para obtener informaci&oacute;n del paciente)</small></span>
             <hr>
             <div class="row">

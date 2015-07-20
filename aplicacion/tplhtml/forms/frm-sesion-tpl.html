@@ -21,7 +21,7 @@
                  <div class="row">
             <!-- Text input-->
               <span class="col-md-1">Fecha:</span>  
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <input name="fechaSesion" ng-model="sesion.fecha" placeholder="Fecha" class="form-control input-md" type="date" maxlength="12" value="" id="fecha">
                 <div ng-show="!sesion.fecha">
                 <span class="label btn btn-info">
@@ -43,19 +43,22 @@
               </div>
             <!-- Text input-->
               <span class="col-md-1">Medico:</span>  
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <input name="personal.nombres" ng-model="personal.nombres" placeholder="M&eacute;dico Tratante" class="form-control input-md" type="text" maxlength="40" value="">
                 <div ng-show="!personal.nombres">
                   <p class="label label-default">Requerido</p>
                 </div>
               </div>
             <!-- Text input-->
-              <span class="col-md-1">Notas:</span>  
-              <div class="col-md-2">
+            </div>
+            <div class="row">
+              <span class="col-md-1">Observaciones:</span>  
+              <div class="col-md-6">
                 <textarea name="notasSesion" ng-model="sesion.notas" rows="3" class="form-control input-xx" maxlength="450">
                 </textarea>
               </div>
             </div>
+
             <span class="help-block"> <b class=>2.- Listado Sesiones Realizadas:</b>
               <small class=" text-primary"> Sesiones realizadas durante el tratamiento.
             </small>
