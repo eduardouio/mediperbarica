@@ -2,10 +2,10 @@
 -- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 13, 2015 at 03:07 PM
--- Server version: 5.5.43-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.11
+-- Servidor: localhost
+-- Tiempo de generación: 20-07-2015 a las 17:33:10
+-- Versión del servidor: 5.5.43-0ubuntu0.14.04.1
+-- Versión de PHP: 5.5.9-1ubuntu4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `gelvscom_mediperbarica`
+-- Base de datos: `gelvscom_mediperbarica`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `antecedente`
+-- Estructura de tabla para la tabla `antecedente`
 --
 
 CREATE TABLE IF NOT EXISTS `antecedente` (
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `antecedente` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `antecedente`
+-- Volcado de datos para la tabla `antecedente`
 --
 
 INSERT INTO `antecedente` (`id_antecedente`, `id_paciente`, `tipo`, `detalle`, `creado`) VALUES
@@ -53,7 +53,31 @@ INSERT INTO `antecedente` (`id_antecedente`, `id_paciente`, `tipo`, `detalle`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente`
+-- Estructura de tabla para la tabla `ci_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
+('240e8539273c2d7d7b9144416136b7d1', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36', 1437430272, 'a:6:{s:2:"id";s:4:"1000";s:8:"username";s:7:"eduardo";s:10:"first_name";s:7:"Eduardo";s:9:"last_name";s:7:"Villota";s:5:"email";s:21:"eduardouio7@gmail.com";s:8:"logueado";i:1;}'),
+('c973faecf684034f9bc598abbc298d3b', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36', 1437430734, '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
 --
 
 CREATE TABLE IF NOT EXISTS `cliente` (
@@ -68,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `factura`
+-- Estructura de tabla para la tabla `factura`
 --
 
 CREATE TABLE IF NOT EXISTS `factura` (
@@ -90,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `factura` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `historia`
+-- Estructura de tabla para la tabla `historia`
 --
 
 CREATE TABLE IF NOT EXISTS `historia` (
@@ -115,20 +139,20 @@ CREATE TABLE IF NOT EXISTS `historia` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `historia`
+-- Volcado de datos para la tabla `historia`
 --
 
 INSERT INTO `historia` (`id_historia`, `id_paciente`, `nombres`, `telefono`, `fecha_nacimiento`, `mail`, `direccion`, `nombre_referente`, `telefono_referente`, `mail_referente`, `nombre_familiar`, `telefono_familiar`, `direccion_familiar`, `examen_fisico`, `manejo`, `creado`) VALUES
-(5, '0801916529', 'Shirley Quinoñez Prado', '0000000000', '1975-07-07', 'sinmail', 'Quito', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2015-07-13 19:19:36'),
-(3, '1704968388', 'Pilar Patricio Arboleda Segovia', '2803153', '1957-06-11', 'sinmail', 'Quito', '', '', '', '', '', '', NULL, NULL, '2015-07-13 19:03:37'),
-(2, '1710005750', 'Granda Darquea Francisco Javier', '0998648089', '1977-03-02', 'sinmail', 'Torre San Isisdro', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2015-07-13 18:56:38'),
-(4, '1710019611', 'Jorge Yanez Romero', '0992004511', '1972-07-12', 'jorgeyanezjr@hotmail.com', 'Quito, Quiroz S95', 'Casa', '02261747', NULL, NULL, NULL, NULL, NULL, NULL, '2015-07-13 19:15:10'),
+(5, '0801916529', 'Shirley Quinoñez Prado', '0000000000', '1975-07-07', 'sinmail', 'Quito', '', '', '', '', '', '', 'Infinito', '1.30 H', '2015-07-13 19:19:36'),
+(3, '1704968388', 'Pilar Patricia Arboleda Segovia', '2803153', '1957-06-11', 'sinmail', 'Quito', '', '', '', '', '', '', 'Hidrodinamica Estobia : T/a 110/80 : Otras Cosas Mas: Una Cosa Adicional', 'Se Recomienda 25 Sesiones', '2015-07-13 19:03:37'),
+(2, '1710005750', 'Granda Darquea Francisco Javier', '0998648089', '1977-03-02', 'sinmail', 'Torre San Isisdro', '', '', '', '', '', '', 'Alguna Cosa', 'Camara Hiperbarica', '2015-07-13 18:56:38'),
+(4, '1710019611', 'Jorge Yanez Romero', '0992004511', '1972-07-12', 'jorgeyanezjr@hotmail.com', 'Quito, Quiroz S95', 'Casa', '02261747', '', '', '', '', 'Algo Mas', '30/60t30 2.75-3ama', '2015-07-13 19:15:10'),
 (1, '1722919725', 'Eduardo Villota', '0992936569', '1987-07-01', 'eduardouio7@gmail.com', 'Quito, Colon E4-412 Y Amazonas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2015-07-09 19:44:58');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal`
+-- Estructura de tabla para la tabla `personal`
 --
 
 CREATE TABLE IF NOT EXISTS `personal` (
@@ -146,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `personal` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sesion`
+-- Estructura de tabla para la tabla `sesion`
 --
 
 CREATE TABLE IF NOT EXISTS `sesion` (
@@ -161,12 +185,12 @@ CREATE TABLE IF NOT EXISTS `sesion` (
   UNIQUE KEY `id_sesion` (`id_sesion`),
   KEY `FK_SESION_TRATAMIENTO` (`id_tratamiento`),
   KEY `FK_SESION_PERSONAL_idx` (`id_personal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tratamiento`
+-- Estructura de tabla para la tabla `tratamiento`
 --
 
 CREATE TABLE IF NOT EXISTS `tratamiento` (
@@ -182,18 +206,18 @@ CREATE TABLE IF NOT EXISTS `tratamiento` (
   PRIMARY KEY (`id_tratamiento`),
   KEY `FK_TRATAMIENTO_HISTORIA` (`id_paciente`),
   KEY `FK_TRATAMIENTO_PERSONAL` (`id_personal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Estructura de tabla para la tabla `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(128) NOT NULL,
-  `last_login` datetime NOT NULL,
+  `last_login` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
@@ -201,34 +225,41 @@ CREATE TABLE IF NOT EXISTS `user` (
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1001 ;
 
 --
--- Constraints for dumped tables
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`id`, `password`, `last_login`, `username`, `first_name`, `last_name`, `email`, `creado`) VALUES
+(1000, 'mediperbarica', 1437428726, 'eduardo', 'Eduardo', 'Villota', 'eduardouio7@gmail.com', '2015-07-15 18:18:21');
+
+--
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `antecedente`
+-- Filtros para la tabla `antecedente`
 --
 ALTER TABLE `antecedente`
   ADD CONSTRAINT `FK_ANTECENDETE_HISTORIA` FOREIGN KEY (`id_paciente`) REFERENCES `historia` (`id_paciente`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `factura`
+-- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
   ADD CONSTRAINT `fk_factura_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_factura_tratamiento` FOREIGN KEY (`id_tratamiento`) REFERENCES `tratamiento` (`id_tratamiento`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `sesion`
+-- Filtros para la tabla `sesion`
 --
 ALTER TABLE `sesion`
   ADD CONSTRAINT `FK_SESION_PERSONAL` FOREIGN KEY (`id_personal`) REFERENCES `personal` (`id_personal`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_SESION_TRATAMIENTO` FOREIGN KEY (`id_tratamiento`) REFERENCES `tratamiento` (`id_tratamiento`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `tratamiento`
+-- Filtros para la tabla `tratamiento`
 --
 ALTER TABLE `tratamiento`
   ADD CONSTRAINT `FK_TRATAMIENTO_HISTORIA` FOREIGN KEY (`id_paciente`) REFERENCES `historia` (`id_paciente`) ON UPDATE CASCADE,
