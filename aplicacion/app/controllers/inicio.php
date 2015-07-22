@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Inicio extends CI_Controller {
+class Inicio extends MY_Controller {
 
 	protected $Table_ = 'historia';
 	protected $Controller_ = 'welcome';
@@ -11,6 +11,17 @@ class Inicio extends CI_Controller {
 	private $CodeHTTP = 200;
 	private $ContentType = 'application/json';
 
+		/*************************************************************************
+	 *  Funcion Contructora inicializa librerias
+	 * @method __construct()
+	 * @return (void)
+	 ************************************************************************/
+	public function __construct(){
+		parent::__construct();
+		$this->_checkSesion($this->session->all_userdata());
+		$this->load->library('form_validation');
+	}
+
 	public function index()
 	{
 
@@ -19,7 +30,7 @@ class Inicio extends CI_Controller {
 		$this->CatalogoVistas_['menu'] = array('inicio' => 'active');
 		#$this->CatalogoVistas_['alertas'] = array();
 		$this->CatalogoVistas_['admin_home'] = array('historias' => $this->countHistorias());		
-		$this->_mostrarhtml($this->CatalogoVistas_);
+		$this->_mostrarhtml($this->CatalogoVistas_,'historias.js');
 	}
 
 	
@@ -30,24 +41,4 @@ class Inicio extends CI_Controller {
 		$query = $this->db->get('historia');
 		return $query->num_rows();
 	}
-
-	/**
-	* Se encrarga de recibir la informacion y genera la pantalla de salia
-	* Todos los valores se guardan en una variable de clase $Pagina_
-	* Es este metodo el que decide que vistas mostrar a partir de los paramtros recibidos
-	*
-	* @param array $catalogo array con las plantillas necesarias y su informacion
-	**/
-	private function _mostrarhtml($catalogo){
-		$vistas;
-		$this->Pagina_;
-		foreach ($catalogo as $arreglos => $nombres) {
-			$vistas[] = $arreglos;
-			}
-		foreach ($vistas as $nombre) {
-			$this->Pagina_ = $this->Pagina_ . $this->load->view($nombre,$catalogo[$nombre],true);
-			}
-		$this->Pagina_ = $this->Pagina_ . $this->load->view('pie','',true);
-		print $this->Pagina_;
-		}
 }

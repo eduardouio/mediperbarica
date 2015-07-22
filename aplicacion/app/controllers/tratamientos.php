@@ -13,7 +13,7 @@
  * updateTratamiento()
  * 
  ****************************************************************************/
-class Tratamientos extends CI_Controller {
+class Tratamientos extends MY_Controller {
 
 	protected $Table_ = 'tratamiento';
 	protected $Controller_ = 'tratamientos';
@@ -31,6 +31,7 @@ class Tratamientos extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->library('rest');
+		$this->_checkSesion($this->session->all_userdata());
 	}
 
 	/*************************************************************************
@@ -47,27 +48,6 @@ class Tratamientos extends CI_Controller {
 		$this->_mostrarHTML($this->CatalogoVistas_);
 	}
 
-
-    /*************************************************************************
-    * Carga los datos en las plantillas HTML y las Imprime  
-    * @method _mostrarHTML()
-    * @param (array) arreglo con el listado de vistas y datos
-    * @return (void)
-    *************************************************************************/
-     function _mostrarHTML($catalogo){
-        $vistas;
-        $this->Pagina_;
-        foreach ($catalogo as $arreglos => $nombres) {
-            $vistas[] = $arreglos;
-            }
-        foreach ($vistas as $nombre) {
-            $this->Pagina_ = $this->Pagina_ . $this->load->view($nombre,
-                                                    $catalogo[$nombre],true);
-            }
-
-        $this->Pagina_ = $this->Pagina_ . $this->load->view('pie',$this->ModuloAngular_,true);
-        
-        print $this->Pagina_;
-        }
+	
 
 }

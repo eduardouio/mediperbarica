@@ -1,4 +1,4 @@
-   </div><!-- End Page Content -->
+   </div class="container"><!-- End Page Content -->
       <small>
       <p class="pull-right pie-pagina"> <b>Dir:</b>
         Av. Eloy Alfaro N29-235 E Italia OF 112 <b>Edf:</b>Fortune Plaza

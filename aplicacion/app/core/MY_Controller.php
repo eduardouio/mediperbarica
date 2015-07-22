@@ -7,6 +7,8 @@
 *                        |_|                                       
 */
 class MY_Controller extends CI_Controller{
+
+    protected $ModuloAngular_;
 	
 	public function __construct() {
        parent::__construct();
@@ -14,22 +16,42 @@ class MY_Controller extends CI_Controller{
 	
 //Muestra el estado de la sesion en pantalla
 	public function _showSession(){
-		print(var_dump($this->session->userdata));
+
 	}
 
-	//chequea el estado de una sesion
-	// return boolean
-	public function _checkSesion($sessionID){
-        
+	/**
+     * Cheque la sesion cuando se carga un controlador 
+     * @param (array) arreglo de session
+     * @return (bool) existe la sesion 
+     */
+	public function _checkSesion(){
+        if($this->session->userdata('logueado')){
+            //si existe retorna 1
+            return 1;  
+        } else{
+            //redirecciona al login
+            $this->session->sess_destroy();
+            $this->_redirectLoginPage();
+        }
 	}
+
+    /**
+     * Redirecciona Login
+     */
+    protected function _redirectLoginPage(){
+        header('Status: 301 Moved Permanently', false, 301);
+        header('Location: http://127.0.0.1/aplicacion/index.php/login');
+    }
 
 	  /*************************************************************************
     * Carga los datos en las plantillas HTML y las Imprime  
     * @method _mostrarHTML()
     * @param (array) arreglo con el listado de vistas y datos
+    * @param (str) nombre del modulo angular
     * @return (void)
     *************************************************************************/
-     function _mostrarHTML($catalogo){
+     function _mostrarHTML($catalogo,$modulo){
+        $this->ModuloAngular_ = $modulo;
         $vistas;
         $this->Pagina_;
         foreach ($catalogo as $arreglos => $nombres) {
@@ -39,9 +61,9 @@ class MY_Controller extends CI_Controller{
             $this->Pagina_ = $this->Pagina_ . $this->load->view($nombre,
                                                     $catalogo[$nombre],true);
             }
-
+        $val = array('modulo'=> $this->ModuloAngular_);
         $this->Pagina_ = $this->Pagina_ . $this->load->view('pie',
-        											$this->ModuloAngular_,true);
+        											$val,true);
         
         print $this->Pagina_;
         }

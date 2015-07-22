@@ -22,7 +22,7 @@ class Login extends MY_Controller {
 	protected $Result_;
 	protected $Pagina_;
 	protected $Query_;
-	protected $ModuloAngular_ = array('modulo' => 'tratamientos.js' );
+	protected $ModuloAngular_ = 'login.js';
 
 	/**
 	 * Metodo encargado de iniciar las librerias y el controller
@@ -40,36 +40,32 @@ class Login extends MY_Controller {
 	 ************************************************************************/
 	public function index()
 	{	
-		//comprobamos que no existe la sesion sino llamamos al form
-		print(var_dump($this->session->userdata()));
-		print(var_dump($this->session->userdata('logueado')));
-		if($this->session->userdata('logueado') == 1){
+		if($this->session->userdata('logueado')){
 			$this->_redirectPage();
 		}else{
 			$this->CatalogoVistas_['cabecera'] = array();
 			$this->CatalogoVistas_['login'] = array();		
-			$this->_mostrarHTML($this->CatalogoVistas_);
+			$this->_mostrarHTML($this->CatalogoVistas_,$this->ModuloAngular_);
 		}
 	}
 
-	//Se verifican los datos y se inicia sesion
+	/**
+	 * Se hace la recepcion de datos
+	 */
 	public function go(){
-			if($_POST){
-				if($this->input->post('username') != '' || $this->input->post('password') != ''){
-					$this->MySession_['username'] = $this->input->post('username');
-					$this->MySession_['password'] = $this->input->post('password');
-					$this->_validData($this->MySession_);
-				}else{
-					//unno de los campos en blanco
-					$this->_showError(1000);
-				}
-			}else{
-				//no entra por post se muestra en form
-				$this->index();
-			}
+		if($this->rest->_getRequestMethod() != 'POST'){
+			$this->rest->_resposeHttp('Permiso Denegado!','406');
+		}
+
+		$user = json_decode(file_get_contents('php://input'),true);
+		$respuesta['code'] = $this->_validData($user);
+		$this->rest->_resposeHttp(json_encode($respuesta),'200');
+
 	}
 
-	// valida el usuario y contrasenia
+	/**
+	 * Se validan los datos recibidos
+	 */
 	protected function _validData($data){
 		//comprobamos que exista el usuario y el password
 		$this->db->where('username',$data['username']);
@@ -90,30 +86,19 @@ class Login extends MY_Controller {
 				$query = $this->db->update($this->Table_,$misession);
 				//colocamos los datos de sesion en la cookie
 				$this->session->set_userdata($userData);
-				$this->_redirectPage();
+				return 1000;
 			}else{
 				//erro de contrasenia
 				$data = array(
 					'logueado' => 0
 					);
 				$this->session->set_userdata();
-				$this->_showError(3000);	
+				return 1002;
 			}
 		}else{
 			//no existe el usuario
-			$this->_showError(2000);
+			return 1002;
 		}
 	}	
-
-	//Muestra un error durante el inicio de sesion
-	protected function _showError($codigo){
-		print('Estamos en problemas ' + $codigo);
-	}
-
-	//Redirecciona a la pagina principal del sitio
-	protected function _redirectPage(){
-		header('Status: 301 Moved Permanently', false, 301);
-		header('Location: http://127.0.0.1/aplicacion/index.php/inicio');
-	}
 
 }

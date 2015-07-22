@@ -6,6 +6,7 @@ Historias 1000:
 1003 Editado Correctamente
 1004 La historia que esta intentando editar no existe, recargue la pagina e intentelo nuevamente
 1005 Se listan las historias correctamente
+1006 se elima la historia
 
 -- Listado de errores Atecedentes
 2000 Ya Existe Este Antecedete En Esta Historia
@@ -14,6 +15,7 @@ Historias 1000:
 2003 Se Edita correctamente el antecedente
 2004 El antecedete al que intenta acceder no existe
 2005 Se listas los antecedentes correctamente
+2006 Se elimina el antecedente
 
 Tratamientos 2000
 2000

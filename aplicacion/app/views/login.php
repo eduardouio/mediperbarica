@@ -1,5 +1,5 @@
 <style type="text/css">
-	@import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+    @import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
 
 body {
     font-family: Open Sans;
@@ -103,45 +103,48 @@ body {
 }
 
 .pull-right{
-	color:#fff;
+    color:#fff;
 }
 </style>
-<div class="login-body">
+<div class="login-body container" ng-controller = "loginController">
     <article class="container-login center-block">
-		<section>
-			<ul id="top-bar" class="nav nav-tabs nav-justified">
-				<li class="active"><a href="#login-access">Bienvenido</a></li>
-				<li><a>Medicina Hiperb&aacute;rica S.A.</a></li>
-			</ul>
-			<div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
-				<div id="login-access" class="tab-pane fade active in">
-				<img src="http://medicinahiperbarica.com.ec/sites/all/themes/nexus/logo.png" class="text-center" align="right" alt="mediperbarica_logo">
-				<br>
-					<h2><i class="glyphicon glyphicon-log-in"></i> Inicio de Sesi&oacute;n</h2>		
-					<br>				
-					<form method="post" accept-charset="utf-8" role="form" class="form-horizontal" action="<?php print base_url();?>index.php/login/go">
-						<div class="form-group ">
-							<label for="login" class="sr-only">Usuario</label>
-								<input type="text" class="form-control" name="username" id="login_value" 
-									placeholder="User" tabindex="1" value="" required/>
-						</div>
-						<div class="form-group ">
-							<label for="password" class="sr-only">Password</label>
-								<input type="password" class="form-control" name="password" id="password"
-									placeholder="Password" value="" tabindex="2"  required/>
-						</div>
-						<div class="checkbox">
-								<label class="control-label" for="remember_me">
-									<input type="checkbox" name="remember_me" value="1" tabindex="3" /> Recordarme
-								</label>
-						</div>
-						<br/>
-						<div class="form-group ">				
-								<button type="submit" name="log-me-in" id="submit" tabindex="5" class="btn btn-lg btn-primary">Entrar</button>
-						</div>
-					</form>			
-				</div>
-			</div>
-		</section>
-	</article>
+    <section class="alert alert-warning" ng-show="user.alerta">
+        {{user.alerta}}
+    </section>
+        <section>
+            <ul id="top-bar" class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#login-access">Bienvenido</a></li>
+                <li><a>Medicina Hiperb&aacute;rica S.A.</a></li>
+            </ul>
+            <div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
+                <div id="login-access" class="tab-pane fade active in">
+                <img src="http://medicinahiperbarica.com.ec/sites/all/themes/nexus/logo.png" class="text-center" align="right" alt="mediperbarica_logo">
+                <br>
+                    <h2><i class="glyphicon glyphicon-log-in"></i> Inicio de Sesi&oacute;n</h2>     
+                    <br>                
+                    <form accept-charset="utf-8" role="form" class="form-horizontal" ng-submit="validForm(user)">
+                        <div class="form-group ">
+                            <label for="login" class="sr-only">Usuario</label>
+                                <input type="text" class="form-control" name="username" id="login_value" 
+                                    placeholder="User" tabindex="1" value="" required ng-model="user.username" />
+                        </div>
+                        <div class="form-group ">
+                            <label for="password" class="sr-only">Password</label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    placeholder="Password" value="" tabindex="2" ng-model="user.password" required/>
+                        </div>
+                        <div class="checkbox">
+                                <label class="control-label" for="remember_me">
+                                    <input type="checkbox" name="remember_me" value="1" tabindex="3" /> Recordarme
+                                </label>
+                        </div>
+                        <br/>
+                        <div class="form-group ">               
+                                <button type="submit" id="submit" class="btn btn-lg btn-primary">Entrar</button>
+                        </div>
+                    </form>         
+                </div>
+            </div>
+        </section>
+    </article>
 </div>

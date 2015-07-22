@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Historias extends CI_Controller {
+class Historias extends MY_Controller {
 	/**
 	 * Controlador encargado de gestionar la SPA de historias
 	 * @author eduardouio7@gmail.com
@@ -34,7 +34,7 @@ class Historias extends CI_Controller {
 	protected $CatalogoVistas_;
 	protected $Pagina_;
 	protected $Query_;
-	protected $ModuloAngular_ = array('modulo' => 'historias.js' );
+	protected $ModuloAngular_ = 'historias.js';
 
 	/*************************************************************************
 	 *  Funcion Contructora inicializa librerias
@@ -43,6 +43,7 @@ class Historias extends CI_Controller {
 	 ************************************************************************/
 	public function __construct(){
 		parent::__construct();
+		$this->_checkSesion($this->session->all_userdata());
 		$this->load->library('form_validation');
 	}
 
@@ -57,7 +58,7 @@ class Historias extends CI_Controller {
 		$this->CatalogoVistas_['sidebar'] = array('title' => 'Historias');
 		$this->CatalogoVistas_['menu'] = array('historias' => 'active');
 		$this->CatalogoVistas_['contenidos'] = array();		
-		$this->_mostrarHTML($this->CatalogoVistas_);
+		$this->_mostrarHTML($this->CatalogoVistas_, $this->ModuloAngular_);
 	}
 
 	 /************************************************************************
@@ -230,7 +231,7 @@ class Historias extends CI_Controller {
 
 		$this->CatalogoVistas_['contenidos'] = array();		
 		}
-		$this->_mostrarHTML($this->CatalogoVistas_);
+		$this->_mostrarHTML($this->CatalogoVistas_,'historias.js');
 	}
 
 
@@ -279,27 +280,4 @@ class Historias extends CI_Controller {
 		}
 
 	}
-
-
-    /*************************************************************************
-    * Carga los datos en las plantillas HTML y las Imprime  
-    * @method _mostrarHTML()
-    * @param (array) arreglo con el listado de vistas y datos
-    * @return (void)
-    *************************************************************************/
-     function _mostrarHTML($catalogo){
-        $vistas;
-        $this->Pagina_;
-        foreach ($catalogo as $arreglos => $nombres) {
-            $vistas[] = $arreglos;
-            }
-        foreach ($vistas as $nombre) {
-            $this->Pagina_ = $this->Pagina_ . $this->load->view($nombre,
-                                                    $catalogo[$nombre],true);
-            }
-
-        $this->Pagina_ = $this->Pagina_ . $this->load->view('pie',$this->ModuloAngular_,true);
-        
-        print $this->Pagina_;
-        }
 }
