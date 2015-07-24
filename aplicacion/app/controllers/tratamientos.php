@@ -21,7 +21,7 @@ class Tratamientos extends MY_Controller {
 	protected $CatalogoVistas_;
 	protected $Pagina_;
 	protected $Query_;
-	protected $ModuloAngular_ = array('modulo' => 'tratamientos.js' );
+	protected $ModuloAngular_ = 'tratamientos.js';
 
 	/**
 	 * Metodo encargado de iniciar las librerias y el controller
@@ -45,9 +45,44 @@ class Tratamientos extends MY_Controller {
 		$this->CatalogoVistas_['sidebar'] = array('title' => 'Tratamientos');
 		$this->CatalogoVistas_['menu'] = array('tratamientos' => 'active');
 		$this->CatalogoVistas_['contenidos'] = array();		
-		$this->_mostrarHTML($this->CatalogoVistas_);
+		$this->_mostrarHTML($this->CatalogoVistas_, $this->ModuloAngular_);
 	}
 
-	
-
+	/**
+	 * Obtiene una lista o un tratamiento
+	 * @param (int) id_tratamoiento
+	 * @return (array)
+	 */
+	public function getTratamientos($id_tratamiento = 0){
+		//variable de respuesta
+		$response = array(
+						'status' => 'Success');
+		$this->Query_ = 'SELECT trt.id_tratamiento, trt.id_paciente, 
+							hist.nombres , hist.telefono ,trt.id_personal, 
+							pers.nombres AS medico, trt.motivo_tratamiento, 
+							trt.nro_sesiones,
+							(SELECT COUNT(*) FROM sesion AS ses WHERE 
+								trt.id_tratamiento = ses.id_tratamiento) 
+							AS sesiones,
+							(trt.nro_sesiones) AS pendientes, trt.creado
+							FROM tratamiento AS trt
+							JOIN personal AS pers using(id_personal)
+							JOIN historia AS hist using(id_paciente)';
+		//Validamos la consulta para un tratamiento
+		if($id_tratamiento != 0){	
+		$this->Query_ = $this->Query_ . 'WHERE trt.id_tratamiento = ' . 
+														$id_tratamiento . ';';
+		}
+		//ejecuta la consulta
+		$this->Result_ = $this->db->query($this->Query_);
+		//comprobamos que la consulta retorna datos
+		if($this->Result_->num_rows() > 0){
+			$response['msg'] = '1005';
+			$response['data'] = $this->Result_->result_array();
+		}else{
+			$response['msg'] = '1007';
+		}
+		//enviamos respuesta
+		$this->rest->_responseHttp($response,200);
+	}
 }

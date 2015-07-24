@@ -60,7 +60,7 @@ class Login extends MY_Controller {
 		$user = json_decode(file_get_contents('php://input'),true);
 		$respuesta['code'] = $this->_validData($user);
 		$this->rest->_resposeHttp(json_encode($respuesta),'200');
-
+		
 	}
 
 	/**
@@ -99,6 +99,12 @@ class Login extends MY_Controller {
 			//no existe el usuario
 			return 1002;
 		}
-	}	
+	}
+
+	//Redirecciona a la pagina principal del sitio
+	protected function _redirectPage(){
+		header('Status: 301 Moved Permanently', false, 301);
+		header('Location: http://127.0.0.1/aplicacion/index.php/inicio');
+	}
 
 }

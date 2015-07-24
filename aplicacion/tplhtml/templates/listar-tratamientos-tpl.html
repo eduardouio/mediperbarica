@@ -1,0 +1,73 @@
+<div class="row">
+<div class="row alerts-container" ng-show="1==2">
+ <div class="col-xs-12">
+<div class="alert alert-info">Se han encontrado un total de <b>{{historias.length}} </b>historias</div class="alert alert-info">
+          </div>
+        </div>
+<div class="panel panel-success">
+<div class="panel-heading">
+<div class="row">
+<span class="col-md-10 text-center"> Listado de Tratamientos: <b>{{tratamientos.length}} Tratamientos econtrados</b></span>
+<input type="text" class="col-md-2" placeholder="Buscar" ng-model="buscar">
+	
+</div>
+</div>
+<div class="panel-body">
+<div class="row">
+<div class="table-responsive">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<th>ID</th>
+			<th>Nombres</th>
+			<th>Telefono</th>
+			<th>Medico</th>
+			<th>Motivo Tratamiento</th>
+			<th>Ses Cont</th>
+			<th>Ses Real</th>
+			<th>Ses Pend</th>
+			<th>Fecha</th>
+			<th>Acciones</th>			
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in tratamientos | filter:buscar">
+				{{row}}
+				<td><a href="#/presentar/{{row.id_tratamieto}}">{{row.id_tratamiento}}</a></td>
+				<td><a href="#/presentar/{{row.nombres}}">{{row.nombres}}</a></td>
+				<td>{{row.telefono}}</td>
+				<td>{{row.medico}}</td>
+				<td>{{row.motivo_tratamiento}}</td>
+				<td>{{row.nro_sesiones}}</td>
+				<td>{{row.sesiones}}</td>
+				<td>{{row.pendientes}}</td>
+				<td>{{row.creado}}</td>
+				<td>
+					<!-- Single button -->
+					<div class="btn-group">
+					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					    Acci&oacute;n <span class="caret"></span>
+					 </button>
+					 <ul class="dropdown-menu" role="menu">
+					    <li><a href="#/presentar/{{row.id_tratamiento}}">Ver</a></li>
+					    <li><a href="#/editar/{{row.id_tratamiento}}">Editar</a></li>
+					    <li><a href="#/asignar-sesion/{{row.id_tratamiento}}">Nueva Sesi&oacute;n</a></li>
+					    <li><a href="getReporteTratamiento/{{row.id_tratamiento}}" target="_blank">Imprimir Protocolo</a></li>
+					    <li class="divider"></li>
+					    <li><a href="#/eliminar/{{row.id_tratamiento}}" class="text-danger">Eliminar</a></li>
+					</ul>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="row pull-right">
+ <div class="col-xs-12">
+	 <div data-pagination="" data-num-pages="numPages()" 
+      data-current-page="currentPage" data-max-size="maxSize"  
+      data-boundary-links="true"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

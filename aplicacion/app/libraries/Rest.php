@@ -44,4 +44,14 @@ class Rest{
         echo $data;
         exit;
     }
+
+       /**
+     * Envia las respuestas http mal navegador
+     */
+        function _responseHttp($data,$status){
+        $this->CodeHTTP = ($status) ? $status : 200;
+        $this->_setHeaders();
+        echo json_encode($data);
+        exit;
+    }
 }

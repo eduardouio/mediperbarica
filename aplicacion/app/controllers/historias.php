@@ -67,32 +67,34 @@ class Historias extends MY_Controller {
 	 * @return (JSON) Listado de hisotrias
 	 ************************************************************************/
 	public function getHistoria($historiaID = 0){
-		//print(var_dump($historiaID));
-		if ($historiaID == 0){
-			$this->Query_ = " SELECT hst.id_historia, 
-			hst.id_paciente ,
-			hst.nombres,
-			(SELECT count(id_tratamiento) FROM tratamiento AS trt 
-				WHERE trt.id_paciente = hst.id_paciente) AS `tratamientos`,
-			hst.telefono,
-			hst.mail ,
-			hst.nombre_referente ,
-			timestampdiff(year,hst.fecha_nacimiento,curdate()) AS `edad`,
-			hst.direccion ,
-			concat(month(hst.creado), '-' , year(hst.creado)) as creado
-			FROM historia AS hst
-			Order by hst.creado DESC;";
-			
-		} else{
+		//variable de respuesta
+		$response = array(
+				'status' => 'Success' );
+		$this->Query_ = " SELECT hst.id_historia, 
+					hst.id_paciente , hst.nombres,
+					(SELECT count(id_tratamiento) FROM tratamiento AS trt 
+					WHERE trt.id_paciente = hst.id_paciente) AS `tratamientos`,
+					hst.telefono, hst.mail , hst.nombre_referente ,
+					timestampdiff(year,hst.fecha_nacimiento,curdate()) AS `edad`,
+					hst.direccion ,
+					concat(month(hst.creado), '-' , year(hst.creado)) as creado
+					FROM historia AS hst Order by hst.creado DESC;";
+		//una historia por id
+		if ($historiaID != 0){
 			$this->Query_ = "SELECT * from historia WHERE id_historia = " . 
-			$historiaID . ";";
-		}	
-			$this->Result_ = $this->db->query($this->Query_);
-			$response = array('status'=>'Success',
-								'msg'=> '1005',
-								'data' => $this->Result_->result_array());
-
-			$this->rest->_resposeHttp(json_encode($response),200);
+															$historiaID . ";";			
+		}
+		//ejecuta la consulta
+		$this->Result_ = $this->db->query($this->Query_);
+		//comprobamos que la consulta retorna datos
+		if($this->Result_->num_rows() > 0){
+			$response['msg'] = '1005';
+			$response['data'] = $this->Result_->result_array();
+		}else{
+			$response['msg'] = '1007';
+		}
+		//enviamos respuesta
+		$this->rest->_responseHttp($response,200);
 	}
 
 	/*************************************************************************

@@ -1,142 +1,167 @@
 <!-- Inicio de contenedor de la app de Personal-->
 <div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        <p class="text-center text-info"><span class="glyphicon glyphicon-briefcase pull-left">&nbsp;</span><h4 class="text-center text-info">Registro De Tratamiento</h4></p>
+   <div class="col-lg-12">
+      <div class="panel panel-success">
+         <div class="panel-heading">
+            <p class="text-center text-info"><span class="glyphicon glyphicon-briefcase pull-left">&nbsp;</span>
+            <h4 class="text-center text-info">Formulario: Registro De Tratamiento</h4>
+            </p>
+         </div>
+         <div class="panel-body">
+            <div class="alert alert-warning text-center" ng-show="tratamiento.id_tratamiento">
+               Se Encuentra Editando Valores Del Tratamiento: <b> {{tratamiento.id_tratamiento}} </b>
+            </div>
+            <form action="#" class="form-horizontal" name="frmTratamientos" id="frmTratamientos" ng-submit="validForm(tratamiento)">
+               <fieldset>
+                  <!-- row -->
+                  <!-- Text input-->
+                  <span class="help-block"> <b>1.- Informaci&oacute;n de Paciente:</b> </span> 
+                  <hr>
+                  <div class="row">
+                     <div class="col-md-7">
+                        <div class="input-group">
+                           <div class="input-group-addon">Nombre Del Paciente:</div>
+                           <input name="paciente" ng-model="tratamiento.paciente" placeholder="Ingrese un nombre, luego elija uno de la lista" class="form-control input-md" type="search" maxlength="40" required>
+                        </div>
+                        <div ng-show="!tratamiento.paciente">
+                           <p class="label label-default">Requerido</p>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="input-group">
+                           <div class="input-group-addon">Tel&eacute;fono:</div>
+                           <input name="paciente" ng-model="historia.telefono" class="form-control input-md" type="text" disabled>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- row -->
+                  <div class="row">
+                     <!-- Text input-->
+                     <div class="col-md-3">
+                        <div class="input-group">
+                           <div class="input-group-addon">C&eacute;dula:</div>
+                           <input class="form-control input-md" type="text" name="id_paciente" ng-model="historia.id_paciente" disabled/ value="17229182732">
+                        </div>
+                     </div>
+                     <!-- Text input-->
+                     <div class="col-md-4">
+                        <div class="input-group">
+                           <div class="input-group-addon">Nombres:</div>
+                           <input class="form-control input-md" type="text" name="nombres" ng-model="historia.nombres" disabled/>
+                        </div>
+                     </div>
+                     <!-- Text input-->
+                     <div class="col-md-5">
+                        <div class="input-group">
+                           <div class="input-group-addon">Direcci&oacute;n:</div>
+                           <input class="form-control input-md" type="text" name="direccion" ng-model="historia.direccion" disabled/>
+                        </div>
+                     </div>
+                  </div>
+                  <span class="help-block"> <b class=>2.- Antecedentes Medicos:</b></span>
+                  <hr>
+                  <div class="row">
+                     <div class="col-md-12">
+                        <!--Tabla de antecedentes-->
+                        <table class="table table-striped table-bordered">
+                           <thead>
+                              <tr>
+                                 <th class="text-right col-md-2"><b>Tipo Antecedente</b>&nbsp;&nbsp;</th>
+                                 <th>Detalle Antecedente</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr ng-repeat="antecedente in antecedentes">
+                                 <td><b>{{antecedente.tipo}}</b>&nbsp;&nbsp;</td>
+                                 <td>{{antecedente.detalle}}</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <!--/Tabla de antecedentes-->
+                     </div>
+                  </div>
+                  <!-- /row -->
+                  <span class="help-block"> <b>3.- Detalles de tratamiento que desea registrar:</b></span>
+                  <hr>
+                  <!-- row -->
+                  <div class="row">
+                     <!-- Text input-->
+                     <div class="col-md-4">
+                        <div class="input-group">
+                           <div class="input-group-addon">M&eacute;dico:</div>
+                           <input name="nombresPersonal" ng-model="personal.nombres" placeholder="Elija un Nombre" class="form-control input-md" type="text" maxlength="40" required>
+                        </div>
+                        <div ng-show="!personal.nombres">
+                           <p class="label label-default">Requerido</p>
+                        </div>
+                     </div>
+                     <!-- Text input--> 
+                     <div class="col-md-3">
+                        <div class="input-group">
+                           <div class="input-group-addon">Tel&eacute;fono:</div>
+                           <input name="celular" ng-model="personal.celular" class="form-control input-xx" type="text" maxlength="180" value="" disabled>
+                        </div>
+                     </div>
+                     <!-- row -->
+                     <div class="col-md-3">
+                        <div class="input-group">
+                           <div class="input-group-addon">Mail:</div>
+                           <input name="mailPersonal" ng-model="personal.mail" class="form-control input-md" type="text" maxlength="180" value="" disabled>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="row">
+                     <div class="col-md-7">
+                        <div class="input-group">
+                           <div class="input-group-addon">Motivo Tratamiento:</div>
+                           <input name="motivoTratamiento" ng-model="tratamiento.motivo_tratamiento" placeholder="Raz&oacute;n del tratamiento" class="form-control input-md" type="text" maxlength="360" required>
+                        </div>
+                        <div ng-show="!tratamiento.examen_fisico">
+                           <p class="label label-default">Requerido</p>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="input-group">
+                           <div class="input-group-addon" style="background-color:#0099FF;">Sesiones:</div>
+                           <input name="sesionesTratamiento" ng-model="tratamiento.nro_sesiones" placeholder="0" class="form-control input-md" type="number" maxlength="2" required>
+                        </div>
+                        <div ng-show="!tratamiento.nro_sesiones">
+                           <p class="label label-default">Requerido</p>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="input-group">
+                           <div class="input-group-addon" style="background-color:#0099FF;">Costo:</div>
+                           <input type="number" class="form-control" placeholder="00.00" name="costoTratamiento" 
+                              ng-model="tratamiento.costo" required>
+                           <div class="input-group-addon">$</div>
+                        </div>
+                        <div ng-show="!tratamiento.costo">
+                           <p class="label label-default">Requerido</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="input-group">
+                           <div class="input-group-addon">Notas:</div>
+                           <textarea name="notasTratamiento" ng-model="tratamiento.notas" class="form-control input-md" type="text" maxlength="360" value="">
+                     </textarea>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- row-->
+                  <hr>
+               </fieldset>
+               <div class="pull-right ">
+                  <button ng-click="clearForm()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-unchecked">&nbsp;</span>Limpiar Campos </button>
+                  <a href="#/" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-list">&nbsp;</span> Listar Tratamientos </a>
+                  <button ng-click="validForm(historia)" type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save">&nbsp;</span> Guardar Tratamiento</button>
+               </div>
+            </form>
+         </div>
       </div>
-      <div class="panel-body">
-      <div class="alert alert-warning text-center" ng-show="tratamiento.id_tratamiento">
-          Se Encuentra Editando Valores Del Tratamiento: <b> {{tratamiento.id_tratamiento}} </b>
-      </div>
-        <div class="form-horizontal" name="frmTratamientos" id="frmTratamientos">
-          <fieldset>
-            <!-- row -->
-            <!-- Text input-->
-            <span class="help-block"> <b>1.- Informacion de Paciente:</b> <small class=" text-info">Seleccione un nombre de la lista</small></span> 
-            <hr>
-            <div class="row">
-                <span class="col-md-1">Nombres:</span>  
-              <div class="col-md-6">
-                <input name="inputNombres" ng-model="tratamiento.inputNombres" placeholder="Ingrese un nombre, luego elija uno de la lista" class="form-control input-md" type="search" maxlength="40">
-                <div ng-show="!tratamiento.inputNombres">
-                  <p class="label label-default">Requerido</p>
-                </div>
-            </div>
-              <span class="col-md-3">El paciente registra {{tratamiento.histTratamientos}}</span>  
-            </div>
-            <!-- row -->
-            <div class="row">              
-            <!-- Text input-->
-              <span class="col-md-1">C&eacute;dula:</span>  
-              <div class="col-md-2">
-              {{historia.id_paciente}}
-              </div>
-            <!-- Text input-->
-              <span class="col-md-1">Nombres:</span>  
-                <div class="col-md-2">
-                {{historia.nombres}}
-              </div>
-            <!-- Text input-->
-              <span class="col-md-1">Direcci&oacute;n:</span>  
-              <div class="col-md-5">
-                {{historia.direccion}}
-              </div>
-            </div>
-            <span class="help-block"> <b class=>2.- Antecedentes Medicos:</b><small class=" text-danger"> Listado de antecedentes m&eacute;dicos.</small></span>
-            <hr>
-            <div class="row"> 
-              <div class="col-md-12">
-                <!--Tabla de antecedentes-->
-                <table class="table table-striped table-bordered">
-                <thead>
-            <tr>
-                  <th class="text-right col-md-2"><b>Antecedente</b>&nbsp;&nbsp;</th>
-                  <th>Detalle</th>
-            </tr><!-- end ngRepeat: row in listaAntecedentes --><tr>
-                  
-                </thead>
-            <tbody>
-              <tr ng-repeat="antecedente in antecedentes">
-                  <td><b>{{antecedente.tipo}}</b>&nbsp;&nbsp;</td>
-                  <td>{{antecedente.detalle}}</td>
-              </tr>
-            </tbody>
-         </table>
-                <!--/Tabla de antecedentes-->
-              </div>
-            </div>
-            <!-- /row -->
-            <span class="help-block"> <b>3.- Detalles de tratamiento que desea registrar:</b></span>
-            <hr>
-            <!-- row -->
-            <div class="row">
-              <span class="col-md-1 text-right  ">Sesiones:</span>  
-              <div class="col-md-1">
-                <input name="sesionesTratamiento" ng-model="tratamiento.nro_sesiones" placeholder="0" class="form-control input-md" type="float" maxlength="2" value="">
-                <div ng-show="!tratamiento.nro_sesiones">
-                  <p class="label label-default">Requerido</p>
-                </div>
-              </div>
-            <!-- Text input-->
-              <span class="col-md-2">Medico Tratante:</span>  
-              <div class="col-md-3">
-                <input name="nombresPersonal" ng-model="personal.nombres" placeholder="Ingrese un nombre, luego elija uno" class="form-control input-md" type="text" maxlength="40" value="">
-                <div ng-show="!tratamiento.nro_sesiones">
-                  <p class="label label-default">Requerido</p>
-                </div>
-              </div>
-            <!-- Text input-->
-              <span class="col-md-1">Manejo:</span>  
-              <div class="col-md-4">
-                <input name="manejoTratamiento" ng-model="tratamiento.manejo" placeholder="Manejo" class="form-control input-xx" type="text" maxlength="180" value="">
-              </div>
-            </div>
-                      <!-- row -->
-            <div class="row">
-              <span class="col-md-1">E. F&iacute;sico:</span>  
-              <div class="col-md-3">
-                <input name="examenFisicoTratamiento" ng-model="tratamiento.examen_fisico" placeholder="Examen Fisico" class="form-control input-md" type="text" maxlength="180" value="">
-                <div ng-show="!tratamiento.examen_fisico">
-                  <p class="label label-default">Requerido</p>
-                </div>
-              </div>
-            <!-- Text input-->
-              <span class="col-md-1">Motivo:</span>  
-              <div class="col-md-7">
-                <input name="motivoTratamiento" ng-model="tratamiento.motivo_tratamiento" placeholder="Raz&oacute;n del tratamiento" class="form-control input-md" type="text" maxlength="360" value="">
-                <div ng-show="!tratamiento.examen_fisico">
-                  <p class="label label-default">Requerido</p>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-            <span class="col-md-1">Costo:</span>  
-              <div class="col-md-2">
-                <div class="input-group">
-      <div class="input-group-addon">$</div>
-      <input type="number" class="form-control" placeholder="Costo" name="costoTratamiento" ng-model="tratamiento.costo">
-      <div class="input-group-addon">.00</div>
-    </div>
-  </div>
-              
-              <span class="col-md-1">Notas:</span>  
-              <div class="col-md-8">
-                <textarea name="notasTratamiento" ng-model="tratamiento.notas" class="form-control input-md" type="text" maxlength="360" value="">
-                </textarea>
-              </div>
-            </div>
-            <!-- row-->
-            <hr>
-          </fieldset>
-          <div class="pull-right ">
-            <button ng-click="clearForm()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-unchecked">&nbsp;</span>Limpiar Campos </button>
-            <a href="#/buscar" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-list">&nbsp;</span> Listar Historias </a>
-            <button ng-click="validForm(historia)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save">&nbsp;</span> Guardar Historia</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+   </div>
 </div>
 <!--fin  contenedor de la app de Personal-->
