@@ -66,7 +66,7 @@ class Historias extends MY_Controller {
 	 * @param (int) opcional identificador de la historia
 	 * @return (JSON) Listado de hisotrias
 	 ************************************************************************/
-	public function getHistoria($historiaID = 0){
+	public function getHistoryData($historiaID = 0){
 		//variable de respuesta
 		$response = array(
 				'status' => 'Success' );
@@ -78,11 +78,12 @@ class Historias extends MY_Controller {
 					timestampdiff(year,hst.fecha_nacimiento,curdate()) AS `edad`,
 					hst.direccion ,
 					concat(month(hst.creado), '-' , year(hst.creado)) as creado
-					FROM historia AS hst Order by hst.creado DESC;";
+					FROM historia AS hst Order by hst.nombres ASC;";
 		//una historia por id
 		if ($historiaID != 0){
 			$this->Query_ = "SELECT * from historia WHERE id_historia = " . 
-															$historiaID . ";";			
+															$historiaID . "
+											Order by nombres DESC;";			
 		}
 		//ejecuta la consulta
 		$this->Result_ = $this->db->query($this->Query_);

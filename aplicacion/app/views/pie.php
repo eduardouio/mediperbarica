@@ -1,4 +1,4 @@
-   </div class="container"><!-- End Page Content -->
+   </div><!-- End Page Content -->
       <small>
       <p class="pull-right pie-pagina"> <b>Dir:</b>
         Av. Eloy Alfaro N29-235 E Italia OF 112 <b>Edf:</b>Fortune Plaza
@@ -12,7 +12,7 @@
 </body>
 <script type="text/javascript">
   
-	var host = '<?php print(base_url()); ?>'
+  var host = '<?php print(base_url()); ?>';
 	var httpResult = {};
 
 // Funciones Auxiliares
@@ -46,6 +46,8 @@ function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+
 </script>
-<script src="<?php echo base_url();?>js/app/modulo_<?php print($modulo); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url();?>js/app/modulo_errores.js"> </script>
+<script src="<?php echo base_url();?>js/app/modulo_<?php print($modulo);?>"></script>
 </html>

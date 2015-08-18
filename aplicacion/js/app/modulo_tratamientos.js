@@ -14,7 +14,8 @@
 /******************************************************************************/
 
 //generamos la APP
-var mediperbaricaApp = angular.module('mediperbaricaApp',['ngRoute']);
+var mediperbaricaApp = angular.module('mediperbaricaApp',['ngRoute',
+                                                                'ngMaterial']);
 
 /* -----------------------------------------------------------------------------
  __    ___    __  
@@ -59,40 +60,90 @@ mediperbaricaApp.config(function($locationProvider,$routeProvider){
 
 });
 
+
 /* -----------------------------------------------------------------------------
  ___   _______  __        __  
 |__/\ /  `|/  \|__)\ //\ /__` 
 | /~~\\__,|\__/|  \ |/~~\.__/ 
 ------------------------------------------------------------------------------*/
-mediperbaricaApp.factory('services', [ '$http' ,'$location' , function($http, 
-                                                                    $location){
-  var urlBase = host + 'index.php/';
-  var service = {};
-  //trae trae los tratamientos de la base de datos
-  service.getTratamientos = function(callback){
-    console.log('[DEBUG] FAC Lista Tratamientos');
-    $http.get(urlBase + 'tratamientos/getTratamientos').
-      success(function(response){
-        return callback(response);
-      }).
-      error(function(response){
-        alert('Lo sentimos!, No se puede recuperar los datos, ' +
-                                                      ' intente mas tarde :(');
-      });
-  };
-  //listado de historias para el autocoplete del form
-  service.getHistorias = function(callback){
-    console.log('[DEBUG] FAC Listar Historias');
-    $http.get(urlBase + 'historias/getHistoria').
-    success(function(response){
-        return callback(response);
-    }).
-    error(function(response){
-        alert('Lo sentimos!, No se puede recuperar los datos, ' +
-                                                      ' intente mas tarde :(');
-    })
-  };
 
+/**
+Factoria encargad de manejar los datos de los tratamientos
+*/
+mediperbaricaApp.factory('treatmentsServices', [ '$http' ,'$location','$q', function(
+                                                    $http, $location,$q){
+    console.log('[DEBUG] FAC treatmentsServices');
+    var service = {};
+    var urlBase = host + 'index.php/';
+    var defered = $q.defer();
+    var promise =  defered.promise;
+
+    //trae trae los tratamientos de la base de datos
+    service.getTreatments = function(){
+    console.log('[DEBUG] MET FAC getTreatments');
+
+    $http.get(urlBase + 'tratamientos/getTreatments')
+        .success(function(response){
+            return defered.resolve(response);
+        })
+        .error(function(response){
+            return defered.reject(response);
+      });
+    return promise;
+  }
+  return service;
+
+}]);
+
+/**
+    Factoria encargada de manejar los datos de loas empleados
+*/
+mediperbaricaApp.factory('employedServices', [ '$http' ,'$location','$q', 
+                                                function($http, $location,$q){
+    console.log('[DEBUG] FACT employedServices');
+    var service = {};
+    var urlBase = host + 'index.php/';
+    var defered = $q.defer();
+    var promise =  defered.promise;
+
+    service.getEmployedData = function(){
+    console.log('[Debug] MET FAC get getEmployedData');
+    $http.get(urlBase + 'personal/getEmployedData')
+        .success(function(response){
+            return defered.resolve(response);
+        })
+        .error(function(response){
+            return defered.reject(response);
+        });
+    return promise;
+  }  
+
+  return service;
+}]);
+
+
+/**
+Factoria encargada de manejar los datos de las historias
+*/
+mediperbaricaApp.factory('historyServices', [ '$http' ,'$location','$q', 
+                                                function( $http, $location,$q){
+    console.log('[Debug] FCT historyServices');
+    var service = {};
+    var urlBase = host + 'index.php/';
+    var defered = $q.defer();
+    var promise =  defered.promise;
+
+    service.getHistories = function(){
+        console.log('[DEBUG] MET FAC getHistories');
+        $http.get(urlBase + 'historias/getHistoryData')
+            .success(function(response){
+                return defered.resolve(response);
+            })
+            .error(function(response){
+                return defered.reject(response);
+            })
+        return promise;
+        } ;  
   return service;
 }]);
 
@@ -105,91 +156,41 @@ mediperbaricaApp.factory('services', [ '$http' ,'$location' , function($http,
 /*------------------------------------------------------------------------------
 Controllador encargado de Listar los tratamientos
 ------------------------------------------------------------------------------*/
-mediperbaricaApp.controller('listController',function($scope,services,
-                                            $rootScope, $location,$routeParams){
-  console.log('[DEBUG] CTRL Lista tratamientos');
-  var respuesta = services.getTratamientos(function(response){
-          if(parseInt(response['msg']) == 1007){
-           alert('Base sin datos');
-          }
-          parseInt(response['msg'])
-          $scope.showMsg(parseInt(response['msg']));
-          $scope.tratamientos = response.data;
-      });
+mediperbaricaApp.controller('listController',function($scope,$timeout,$rootScope, 
+                                                        $location,$routeParams,
+                                                        treatmentsServices){
+    console.log('[DEBUG] CTRL Lista tratamientos');
+    //guarda los tratamientos
+    var promiseTratamientos = treatmentsServices.getTreatments();
+    promiseTratamientos.then(
+        function(response){
+            delete $scope.tratamientos;
+            console.dir(response);
+            $scope.tratamientos = response.data;                
+        },
+        function(error){
+            $scope.error = error;
+            console.log('[ERROR] ' + error);
+        })
 });
 
-/*------------------------------------------------------------------------------
-Controllador encargado de presentar los tratamientos
-------------------------------------------------------------------------------*/
-mediperbaricaApp.controller('presentController',function($scope,services,
-                                                        $location,$routeParams){
-
-});
 /*------------------------------------------------------------------------------
 Controllador encargado de agregar y editar un tratamiento
 ------------------------------------------------------------------------------*/
-mediperbaricaApp.controller('editController',function($scope,services,
-                                                       $location,$routeParams){
-    console.log('[DEBUG] CTRL editar tratamientos');
-    /**
-    Metodo encargado de cargar la info basica
-    */
-    $scope.loadData = function(){
-        $scope.historia = {};
-        $scope.antecedentes = {};
-        $scope.tratamiento = {};
-        $scope.personal = {};
-        //recuperamos los datos
-        var respHistorias = services.getHistorias(function(response){
-            
+mediperbaricaApp.controller('editController',function($scope,$location,$timeout,
+                                                 $routeParams, historyServices){
+    console.log('[Debug] CTRL editController');
+    //variables con la promesas de las llamadas
+    var promiseHistories = historyServices.getHistories();
+    promiseHistories.then(
+        function(response){
+            $scope.histories = response.data;
+            console.log('[DEBUG] Listado de historias');
+        },
+        function(error){
+            console.log('[ERROR] 404 ' + error);
+            showMsg(404);
         });
-
-    };
-
-
-    //iniciamos loadData
-    $scope.loadData();
-
-    /**
-  Metodo encargado de mostrar los codigos de error de la app
-  */
-  $scope.showMsg = function(codigo){
-    switch (codigo) {
-      case 1000:
-      $scope.alertas['msg'] = ('Err [1000] => El tratamiento ya Existe ' +
-                        ':(');
-        $scope.redirectHome();
-      break;
-      case 1001:
-      $scope.alertas['msg'] = ('Err [1001] => Datos incompletos en el ' + 
-        'formulario de registro de tratamiento.');
-      break;
-      case 1002:
-      $scope.alertas['msg'] = ('Err [1002] => Tratamiento registrado ' + 
-                    ' Correctamente! :)');
-      break;
-      case 1003:
-      $scope.alertas['msg'] = ('Err [1003] => Tratamiento editado' + 
-                             ' Correctamente! :)');
-      break;
-      case 1004:
-      $scope.alertas['msg'] = ('Err [1004] => El tratamiento al que intenta' + 
-                             ' acceder no existe.');
-      break;
-      case 1005:
-      $scope.alertas['msg'] = ('Err [1005] => Tratamientos listados ' +
-                                                          'Correctamente :(');
-      break;
-      case 1006:
-      $scope.alertas['msg'] = ('Err [1006] => Tratamiento Eliminado' + 
-                             ' Correctamente');
-      break;
-      case 1007:
-      $scope.alertas['msg'] = ('Err [1007] => La consulta retorno un valor' + 
-                             ' vacio, no existen datos.');
-      break;
-    }
-  };
 
 });
 
@@ -208,10 +209,12 @@ mediperbaricaApp.controller('aboutController',function($scope,services,
                                                         $location,$routeParams){
 
 });
+
+
 /*------------------------------------------------------------------------------
-Controllador encargado de mostrar error iniminete en app
+Controllador encargado de presentar los tratamientos
 ------------------------------------------------------------------------------*/
-mediperbaricaApp.controller('failController',function($scope,services,
+mediperbaricaApp.controller('presentController',function($scope,services,
                                                         $location,$routeParams){
 
 });

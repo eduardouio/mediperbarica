@@ -21,7 +21,18 @@
                      <div class="col-md-7">
                         <div class="input-group">
                            <div class="input-group-addon">Nombre Del Paciente:</div>
-                           <input name="paciente" ng-model="tratamiento.paciente" placeholder="Ingrese un nombre, luego elija uno de la lista" class="form-control input-md" type="search" maxlength="40" required>
+                              <md-autocomplete
+                                 md-selected-item="acSelectedItem"
+                                 md-search-text-change = "acSelectedItemChange"
+                                 md-search-text="acQueryText"
+                                 md-items="item in acSearchHistory(acQueryText)"
+                                 md-item-text="item.display"
+                                 placeholder="Seleccione un nombre de la lista">
+                                 <span md-highlight-text="searchText">{{item.display}}</span>
+                                 <md-not-found>
+                                 No hay conincidencias para "{{acQueryText}}"
+                                 </md-not-found>
+                              </md-autocomplete>
                         </div>
                         <div ng-show="!tratamiento.paciente">
                            <p class="label label-default">Requerido</p>
@@ -47,7 +58,7 @@
                      <div class="col-md-4">
                         <div class="input-group">
                            <div class="input-group-addon">Nombres:</div>
-                           <input class="form-control input-md" type="text" name="nombres" ng-model="historia.nombres" disabled/>
+                           <input class="form-control input-md" type="text" name="mail" ng-model="historia.mail" disabled/>
                         </div>
                      </div>
                      <!-- Text input-->
@@ -89,7 +100,8 @@
                      <div class="col-md-4">
                         <div class="input-group">
                            <div class="input-group-addon">M&eacute;dico:</div>
-                           <input name="nombresPersonal" ng-model="personal.nombres" placeholder="Elija un Nombre" class="form-control input-md" type="text" maxlength="40" required>
+                                 <!--pendiente-->
+               
                         </div>
                         <div ng-show="!personal.nombres">
                            <p class="label label-default">Requerido</p>

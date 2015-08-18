@@ -80,11 +80,11 @@ mediperbaricaApp.factory('services', [ '$http','$location',
 	obj.getHistorias = function(){
 		console.log('[Debug] => Se llama a la funcion getHistoria');
 		console.log('[Debug] => ' + serviceBase + 'getHistoria');
-		return $http.get(serviceBase + 'historias/getHistoria');
+		return $http.get(serviceBase + 'historias/getHistoryData');
 	};
 	//Metodo que retorna una historia
 	obj.getHistoria = function (id_historia) {
-		return $http.get(serviceBase + 'historias/getHistoria/' + id_historia);
+		return $http.get(serviceBase + 'historias/getHistoryData/' + id_historia);
 	};
 	//Metodo que guarda una historia
 	obj.insertHistoria = function (historia){

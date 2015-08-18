@@ -4,7 +4,7 @@
 /**
 * Clase encargada de administrar a al personal
 */
-class Personal extends CI_Controller {
+class Personal extends My_Controller {
 
 	var $Data_;
 	var $Table_ = 'personal';
@@ -28,23 +28,36 @@ class Personal extends CI_Controller {
 		print($this->db->last_query());
 	}
 
+	
 	/**
-	* Se encrarga de recibir la informacion y genera la pantalla de salia
-	* Todos los valores se guardan en una variable de clase $Pagina_
-	* Es este metodo el que decide que vistas mostrar a partir de los paramtros recibidos
-	*
-	* @param array $catalogo array con las plantillas necesarias y su informacion
-	**/
-	private function mostrarhtml($catalogo){
-		$vistas;
-		$this->Pagina_;
-		foreach ($catalogo as $arreglos => $nombres) {
-			$vistas[] = $arreglos;
-			}
-		foreach ($vistas as $nombre) {
-			$this->Pagina_ = $this->Pagina_ . $this->load->view($nombre,$catalogo[$nombre],true);
-			}
-		$this->Pagina_ = $this->Pagina_ . $this->load->view('pie','',true);
-		print $this->Pagina_;
+	 * Obtiene el listado de los empleados
+	 * @return (array) listado de empleados
+	 */
+	public function getEmployedData(){
+		$this->Query_ = 'SELECT id_personal, nombres, celular, mail 
+						FROM personal Order by nombres ASC';
+		$this->Result_ = $this->db->query($this->Query_);
+		$this->checkData($this->Result_);
+	}
+
+		/**
+	 * Funcion encagada de comprobar que el arreglo tenga datos
+	 * @param (array) drespuesta SQL
+	 * @return (JSON) responde con data
+	 */
+	private function checkData($resource){
+		//variable de respuesta
+		$response = array(
+						'status' => 'Success');
+		//enviamos una respuesta dependiendo de la coneccion
+		if($resource->num_rows() > 0){
+			$response['msg'] = '1005';
+			$response['data'] = $this->Result_->result_array();
+		}else{
+			$response['msg'] = '1007';
 		}
+		//enviamos respuesta
+		$this->rest->_responseHttp($response,200);
+	}
+
 }

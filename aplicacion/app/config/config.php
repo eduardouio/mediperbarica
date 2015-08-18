@@ -15,7 +15,7 @@
 |
 */
 #$config['base_url']	= 'http://192.168.0.114/aplicacion/';
-$config['base_url']	= 'http://127.0.0.1/aplicacion/';
+$config['base_url']	= 'http://app.medicinahiperbarica.com.ec/';
 #$config['base_url']	= 'http://medicinahiperbarica.com.ec/P9T9geUfaeCMKUdrbZ5So/';
 
 /*

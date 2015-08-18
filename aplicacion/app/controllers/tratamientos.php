@@ -53,10 +53,7 @@ class Tratamientos extends MY_Controller {
 	 * @param (int) id_tratamoiento
 	 * @return (array)
 	 */
-	public function getTratamientos($id_tratamiento = 0){
-		//variable de respuesta
-		$response = array(
-						'status' => 'Success');
+	public function getTreatments($id_tratamiento = 0){
 		$this->Query_ = 'SELECT trt.id_tratamiento, trt.id_paciente, 
 							hist.nombres , hist.telefono ,trt.id_personal, 
 							pers.nombres AS medico, trt.motivo_tratamiento, 
@@ -67,16 +64,31 @@ class Tratamientos extends MY_Controller {
 							(trt.nro_sesiones) AS pendientes, trt.creado
 							FROM tratamiento AS trt
 							JOIN personal AS pers using(id_personal)
-							JOIN historia AS hist using(id_paciente)';
+							JOIN historia AS hist using(id_paciente)
+							';
 		//Validamos la consulta para un tratamiento
 		if($id_tratamiento != 0){	
-		$this->Query_ = $this->Query_ . 'WHERE trt.id_tratamiento = ' . 
-														$id_tratamiento . ';';
+		$this->Query_ = $this->Query_ . ' WHERE trt.id_tratamiento = ' . 
+														$id_tratamiento ;
 		}
 		//ejecuta la consulta
+		$this->Query_ = $this->Query_ . ' ORDER BY trt.id_tratamiento DESC' . ';'; 
 		$this->Result_ = $this->db->query($this->Query_);
-		//comprobamos que la consulta retorna datos
-		if($this->Result_->num_rows() > 0){
+		$this->checkData($this->Result_);
+		
+	}
+
+	/**
+	 * Funcion encagada de comprobar que el arreglo tenga datos
+	 * @param (array) drespuesta SQL
+	 * @return (JSON) responde con data
+	 */
+	private function checkData($resource){
+		//variable de respuesta
+		$response = array(
+						'status' => 'Success');
+		//enviamos una respuesta dependiendo de la coneccion
+		if($resource->num_rows() > 0){
 			$response['msg'] = '1005';
 			$response['data'] = $this->Result_->result_array();
 		}else{
