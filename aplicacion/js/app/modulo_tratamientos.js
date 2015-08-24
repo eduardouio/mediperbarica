@@ -180,18 +180,39 @@ Controllador encargado de agregar y editar un tratamiento
 mediperbaricaApp.controller('editController',function($scope,$location,$timeout,
                                                  $routeParams, historyServices){
     console.log('[Debug] CTRL editController');
-    //variables con la promesas de las llamadas
-    var promiseHistories = historyServices.getHistories();
-    promiseHistories.then(
+
+    //Acciones para cuando cambia de valor el AC
+    $scope.acSelectedItemChange = function(item){
+        console.log('El Valor Cambia a ' + JSON.stringify(item));
+    };
+
+    //acciones para mostrar la lista de historias
+    $scope.acSearchHistory = function(acQueryText){
+        var histories = [];
+        //recuperamos la promesa de historias
+        var promiseHistories = historyServices.getHistories();
+        promiseHistories.then(
         function(response){
-            $scope.histories = response.data;
-            console.log('[DEBUG] Listado de historias');
+            //creamos la lista de historias
+            var historiesItems = response.data;
+            angular.forEach(historiesItems, function(value,key){
+                console.dir((value.nombres).indexOf(acQueryText) > -1);
+                if((value.nombres.toLowerCase()).indexOf(acQueryText
+                                                        .toLowerCase()) >= 0 ){
+                var item = {
+                    'display' : value.nombres,
+                    'value' : value.id_paciente
+                };
+                histories.push(item);
+            }
+            });
         },
         function(error){
             console.log('[ERROR] 404 ' + error);
             showMsg(404);
         });
-
+            return histories;
+        }
 });
 
 /*------------------------------------------------------------------------------

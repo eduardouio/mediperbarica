@@ -23,15 +23,17 @@
                            <div class="input-group-addon">Nombre Del Paciente:</div>
                               <md-autocomplete
                                  md-selected-item="acSelectedItem"
-                                 md-search-text-change = "acSelectedItemChange"
+                                 md-selected-item-change = "acSelectedItemChange(item)"
                                  md-search-text="acQueryText"
                                  md-items="item in acSearchHistory(acQueryText)"
                                  md-item-text="item.display"
                                  placeholder="Seleccione un nombre de la lista">
-                                 <span md-highlight-text="searchText">{{item.display}}</span>
-                                 <md-not-found>
-                                 No hay conincidencias para "{{acQueryText}}"
-                                 </md-not-found>
+                                    <md-item-template>
+                                       <span md-highlight-text="acQueryText" md-highlight-flags="^i">{{item.display}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                       No se encontraron resultados para "{{acQueryText}}".
+                                    </md-not-found>
                               </md-autocomplete>
                         </div>
                         <div ng-show="!tratamiento.paciente">
