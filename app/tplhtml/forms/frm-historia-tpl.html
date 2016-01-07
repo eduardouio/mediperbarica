@@ -1,0 +1,181 @@
+<!-- Inicio de contenedor de la app de Personal-->
+<div class="row">
+<div class="col-lg-12">
+   <div class="panel panel-success">
+      <div class="panel-heading">
+         <p class="text-center text-info"><span class="glyphicon glyphicon-folder-close pull-left">&nbsp;</span>
+         <h4 class="text-center text-info">Registro Paciente E Historia Médica</h4>
+         </p>
+      </div>
+      <div class="panel-body">
+         <div class="alert alert-warning text-center" ng-show="historia.id_historia">
+            Se Encuentra Editando Valores De La Historia: <b> {{historia.id_historia}} </b>
+         </div>
+         <div class="form-horizontal" name="frmHistorias" id="frmHistorias">
+            <fieldset>
+               <!-- row -->
+               <!-- Text input-->
+               <span class="help-block"> <b>1.- Informacion de Paciente:</b> <small class=" text-info">Datos personales e informaci&oacute;n de contacto (Los datos no se usan para la facturaci&oacute;n)</small></span> 
+               <hr>
+               <div class="row">
+                  <div class="col-md-3">
+                     <div class="input-group">
+                        <div class="input-group-addon">C&eacute;dula:</div>
+                        <input name="id_paciente" autofocus ng-model="historia.id_paciente" placeholder="Cedula/Pasaporte" class="form-control input-md" type="text" maxlength="10">
+                     </div>
+                     <div ng-show="!historia.id_paciente">
+                        <p class="label label-default">Requerido</p>
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="col-md-5">
+                     <div class="input-group">
+                        <div class="input-group-addon">Nombres:</div>
+                        <input name="nombres" ng-model="historia.nombres" placeholder="Ingrese los nombres" class="form-control input-md" type="text" maxlength="40">
+                     </div>
+                     <div ng-show="!historia.nombres">
+                        <p class="label label-default">Requerido</p>
+                     </div>
+                  </div>
+                  <div class="col-md-4">
+                     <div class="input-group">
+                        <div class="input-group-addon">Email:</div>
+                        <input name="email" ng-model="historia.mail" placeholder="algo@algo.ext" class="form-control input-md" type="mail" maxlength="45">
+                     </div>
+                     <div ng-show="!historia.mail">
+                        <p class="label label-default">Requerido</p>
+                     </div>
+                  </div>
+               </div>
+               <!-- /row -->
+               <!-- row -->
+               <div class="row">
+                  <!-- Text input-->
+                  <div class="col-md-3">
+                     <div class="input-group">
+                        <div class="input-group-addon">Fecha Nac.:</div>
+                        <input name="fecha_nacimiento" ng-model="historia.fecha_nacimiento" placeholder="aaaa-mm-dd" class="form-control input-md" type="text" maxlength="10" id="fecha">
+                     </div>
+                     <div ng-show="!historia.fecha_nacimiento">
+                        <p class="label label-default">Requerido</p>
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="col-md-3">
+                     <div class="input-group">
+                        <div class="input-group-addon">Tel&eacute;fono:</div>
+                        <input name="telefono" ng-model="historia.telefono" placeholder="Teléfono" class="form-control input-md" type="text" maxlength="10">
+                     </div>
+                     <div ng-show="!historia.telefono">
+                        <p class="label label-default">Requerido</p>
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <div class="input-group-addon">Direcci&oacute;n:</div>
+                        <input name="direccion" ng-model="historia.direccion" placeholder="Ciudad,Dirección,Edificio" class="form-control input-xx" type="text" maxlength="120">
+                     </div>
+                     <div ng-show="!historia.direccion">
+                        <p class="label label-default">Requerido</p>
+                     </div>
+                  </div>
+               </div>
+               <!-- row -->
+               <!--   -->
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <div class="input-group-addon">Manejo:</div>
+                        <input name="manejo" ng-model="historia.manejo" placeholder="Manejo" class="form-control input-md" type="text" maxlength="180" value="">
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <div class="input-group-addon">Examen F&iacute;sico:</div>
+                        <input name="examen_fisico" ng-model="historia.examen_fisico" placeholder="Examen Fisico" class="form-control input-md" type="text" maxlength="360" value="">
+                     </div>
+                  </div>
+               </div>
+               <!--   -->
+               <!-- /row -->
+               <span class="help-block"> <b>2.- M&eacute;dico Referente:</b><small class=" text-info"> Datos del m&eacute;dico quien refiri&oacute; el tratamiento (Se usar&aacute; para obtener informaci&oacute;n del paciente)</small></span>
+               <hr>
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="input-group">
+                        <div class="input-group-addon">Nombres:</div>
+                        <input name="nombre_referente" ng-model="historia.nombre_referente" placeholder="Nombres Medico Referente" class="form-control input-md" type="text" maxlength="40" value="">
+                     </div>
+                     <div ng-show="!historia.historia.nombre_referente">
+                        <p class="label label-default">Ingresar al menos nombre y apellido</p>
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="col-md-3">
+                     <div class="input-group">
+                        <div class="input-group-addon">Tel&eacute;fono:</div>
+                        <input name="telefono_referente" ng-model="historia.telefono_referente" placeholder="Teléfono" class="form-control input-md" type="text" maxlength="10" value="">
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="col-md-5">
+                     <div class="input-group">
+                        <div class="input-group-addon">Email:</div>
+                        <input name="mail_referente" ng-model="historia.mail_referente" placeholder="Ciudad,Dirección,Edificio" class="form-control input-xx" type="email" maxlength="50" value="">
+                     </div>
+                  </div>
+               </div>
+               <!-- /row -->
+               <span class="help-block"> <b>3.- Referencias Familiares En Caso De Acompañante:</b></span>
+               <hr>
+               <!-- row -->
+               <div class="row well">
+                  <div class="col-md-4">
+                     <div class="input-group">
+                        <div class="input-group-addon">Nombres:</div>
+                        <input name="nombre_familiar" ng-model="historia.nombre_familiar" placeholder="Nombres Familiar" class="form-control input-md" type="text" maxlength="40" value="">
+                     </div>
+                     <div ng-show="!historia.nombre_familiar">
+                        <p class="label label-default">Ingresar al menos nombre y apellido</p>
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="col-md-3">
+                     <div class="input-group">
+                        <div class="input-group-addon">Tel&eacute;fono:</div>
+                        <input name="telefono_familiar" ng-model="historia.telefono_familiar" placeholder="Teléfono Del Familiar" class="form-control input-md" type="text" maxlength="10" value="">
+                     </div>
+                  </div>
+                  <!-- Text input-->
+                  <div class="col-md-5">
+                     <div class="input-group">
+                        <div class="input-group-addon">Direcci&oacute;n:</div>
+                        <input name="direccion_familiar" ng-model="historia.direccion_familiar" placeholder="Ciudad,Dirección,Edificio" class="form-control input-xx" type="text" maxlength="50" value="">
+                     </div>
+                  </div>
+               </div>
+            </fieldset>
+            <div class="pull-right ">
+               <button ng-click="clearForm()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-unchecked">&nbsp;</span>Limpiar Campos </button>
+               <a href="#/buscar" class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-list">&nbsp;</span> Listar Historias </a>
+               <button ng-click="validForm(historia)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-save">&nbsp;</span> Guardar Historia</button>
+            </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+<script type="text/javascript">
+   $('#fecha').datepicker({
+       format: "yyyy-mm-dd",
+       startView: 2,
+       startDate: "1920-01-01",
+       todayBtn: "linked",
+       orientation: "top left",
+       autoclose: true,
+       todayHighlight: true
+   });
+</script>
+<!--fin  contenedor de la app de Personal-->

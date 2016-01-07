@@ -1,0 +1,11 @@
+Estandar de errores a usar para el manejo de incidencias de la aplicacion 
+
+Listado de Errores:
+1000 Ya existe un registro con el mismo numero de identificacion
+1001 Uno de los datos ingresado esta incompleto o no existe
+1002 Registro creado correctamente
+1003 Editado Correctamente
+1004 El registro al que esta intentando acceder no existe
+1005 Se listan los registros correctamente
+1006 Se elimina el registro correcatamente
+1007 La consulta retorno un vaor vacio no existen datos
