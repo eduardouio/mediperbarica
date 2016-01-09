@@ -11,6 +11,15 @@
 /**
 Controllador 
 **/
+mediperbaricaApp.controller('loginController', function($scope, $location,
+												$rootScope, $timeout){
+
+});
+
+
+/**
+Controllador 
+**/
 mediperbaricaApp.controller('listHistories', function($scope, $location,
 												$rootScope, $timeout){
 

@@ -11,9 +11,23 @@
 var serviceBase = host + 'index.php/';
 
 mediperbaricaApp.factory('serviceLogin',['$http','$rootScope','$location',
-	function($http, $rootScope, $location{
-		
-		
-	};
+	function($http, $rootScope, $location){
+
+		// variable que almacena los servicios de la factory
+		var service = {};
+
+		//Funcion encargada de validar los datos del login
+		service.login = function(userData, callback){
+			console.log('[Debug] llamada funcion login');
+			$http.post(serviceBase + 'login/go', userData).
+			success(function(response) {
+				callback(response);
+			}).
+			error(function(response){
+				showStatus(404,response);
+			})
+		};
+
 	return service;
-)]);
+	}
+]);

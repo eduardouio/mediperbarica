@@ -13,49 +13,122 @@
 | |__| |  | | | (_) | | |  __/\__ \
 \____/_|  |_|  \___/|_|  \___||___/
 /******************************************************************************/
-//Manejo de errores app
-function showMsg(codigo){
-  console.log('[Debug] Lamada a funcion muestra de errores');
-    switch (codigo) {
+  /**
+    Estructura de control encargada de manejar los errores de aplicación
+    @param int(codeNumber) codigo de error
+    @param obj(data) objeto con el error
+    @return (void)
+    **/
+function showStatus(codeNumber, data){
+  console.log('[Debug] Llamada funcion showStatus');
+  //variable que almacena la los detalles del error
+  var objError = {};
+    switch (codeNumber) {
+      
       case 404:
-      alert ('Err [404] => La pagina solicitada no existe!, comuniquese con '+ 
-            'el administrador, error interno de aplicacion' +
-                        ' :( ');
+      objError = {
+        code : '404',
+        type : 'Error',
+        title : 'La Página solicitada no existe!',
+        message : 'El error ocurrió porque un recurso no está disponible ' +
+                'es posible que sea un error interno, si el problema continúa' +
+                'comuníquese al mail <eduardouio7@gmail.com>',
+        data : data
+      };
+      break;
+
+      case 405:
+      objError = {
+        code : '405',
+        type : 'Error',
+        title : 'Error en Aplicacion',
+        message : 'No se puede enviar los datos al servidor, compruebe' + 
+                  'su conexión a Internet e intente nuevamente.',
+        data : data
+      };
       break;
 
       case 1000:
-      return ('Status 1000: El Registro que intenta crear ya existe.' +
-                        ' :(');
+      objError = {
+        code : '1000',
+        type : 'Anvertencia',
+        title : 'El registro ya Existe!',
+        message : 'El registro que está ingresando ya existe en el sistema ' +
+                ' verifique los datos para continuar',
+        data : data
+      };
       break;
+
       case 1001:
-      return ('Status 1001: Datos incompletos en el ' + 
-        'formulario de Registro, uno de los campos esta incompleto o no tiene' +
-        ' un valor asignado.');
+      objError = {
+        code : '1001',
+        type : 'Error',
+        title : 'Faltan Datos',
+        message : 'Falta uno o mas datos en el formulario de registro o es' + 
+                'es demaciado corto ejem. (Dirección), (Teléfono), (Nombre) etc.',
+        data : data
+      };
       break;
+
       case 1002:
-      return ('Status 1002: Registro Guardado ' + 
-                    ' Correctamente! :)');
+      objError = {
+        code : '1002',
+        type : 'Mensaje',
+        title : 'Registro Guardado Correctamente',
+        message : 'El registro se creo satifactoriamente',
+        data : data
+      };
       break;
+
       case 1003:
-      return ('Status 1003: Registro Editado' + 
-                             ' Correctamente! :)');
+      objError = {
+        code : '1003',
+        type : 'Mensaje',
+        title : 'Registro Guardado Correctamente',
+        message : 'Las modificaciones en el registro fueron guardadas',
+        data : data
+      };
       break;
+
       case 1004:
-      return ('Status 1004: El Registro Al Que Intenta' + 
-                             ' Acceder No Existe. :(');
+      objError = {
+        code : '1004',
+        type : 'Error',
+        title : 'Registro Inexistente',
+        message : 'El registro que intenta ver no existe',
+        data : data
+      };
       break;
+
       case 1005:
-      return ('Status 1005: Registros Listados ' +
-                                         'Correctamente :)');
+      objError = {
+        code : '1005',
+        type : 'Mensaje',
+        title : 'Registros Listados',
+        message : 'Los registros se listaron correctamente',
+        data : data
+      };
       break;
+
       case 1006:
-      return ('Status 1006: Registro Eliminado' + 
-                             ' Correctamente :)');
+      objError = {
+        code : '1006',
+        type : 'Mensaje',
+        title : 'Registro Eliminado',
+        message : 'El registro fue eliminado correctamente',
+        data : data
+      };
       break;
+
       case 1007:
-      return ('Status 1007: La Consulta Retornó Un Valor' + 
-                             ' Vacío, No Existen Datos. :)');
+      objError = {
+        code : '1007',
+        type : 'Error',
+        title : 'El Servidor Retornó Un Valor Vacio',
+        message : 'No existen datos para esta consulta',
+        data : data
+      };
       break;
     }
+    console.dir(objError);
   };
-
