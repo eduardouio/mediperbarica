@@ -55,7 +55,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = 'bin';
+	$system_path = 'codeigniter';
 
 /*
  *---------------------------------------------------------------

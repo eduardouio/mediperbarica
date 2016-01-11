@@ -26,19 +26,10 @@ class Inicio extends MY_Controller {
 	{
 
 		$this->CatalogoVistas_['cabecera'] = array();
-		#$this->CatalogoVistas_['sidebar'] = array('title' => 'inicio');
-		$this->CatalogoVistas_['menu'] = array('inicio' => 'active');
-		#$this->CatalogoVistas_['alertas'] = array();
-		$this->CatalogoVistas_['admin_home'] = array('historias' => $this->countHistorias());		
+		$this->CatalogoVistas_['menu'] = array();
+		$this->CatalogoVistas_['contenidos'] = array();
 		$this->_mostrarhtml($this->CatalogoVistas_,'historias.js');
 	}
 
 	
-	/**
-	 * Retorna en numero de historias registradas en el sistema
-	 */
-	private function countHistorias(){
-		$query = $this->db->get('historia');
-		return $query->num_rows();
-	}
 }

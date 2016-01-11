@@ -51,7 +51,7 @@ function showStatus(codeNumber, data){
       case 1000:
       objError = {
         code : '1000',
-        type : 'Anvertencia',
+        type : 'Advertencia',
         title : 'El registro ya Existe!',
         message : 'El registro que está ingresando ya existe en el sistema ' +
                 ' verifique los datos para continuar',
@@ -126,6 +126,36 @@ function showStatus(codeNumber, data){
         type : 'Error',
         title : 'El Servidor Retornó Un Valor Vacio',
         message : 'No existen datos para esta consulta',
+        data : data
+      };
+      break;
+
+      case 3000:
+      objError = {
+        code : '3000',
+        type : 'Mensaje',
+        title : 'Sesión Iniciada',
+        message : 'La sesión se inicio correctamente',
+        data : data
+      };
+      break;
+
+      case 3001:
+      objError = {
+        code : '3001',
+        type : 'Advertencia',
+        title : 'Sesión Terminada',
+        message : 'La sesión ha caducado, inicie una nueva sesión',
+        data : data
+      };
+      break;
+
+      case 3002:
+      objError = {
+        code : '3002',
+        type : 'Error',
+        title : 'Falta Datos',
+        message : 'Los campos de usuario y contraseña son requeridos',
         data : data
       };
       break;

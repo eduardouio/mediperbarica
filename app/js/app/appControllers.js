@@ -9,13 +9,73 @@
 /******************************************************************************/
 
 /**
-Controllador 
+Controllador encargado del inicio y cierre de sesion
 **/
 mediperbaricaApp.controller('loginController', function($scope, $location,
-												$rootScope, $timeout){
+									$rootScope, $timeout, serviceLogin){
+	//Envia el formulario al server
+	$scope.login = function(userData){
+		//validamos los datos del usuarios
+		var promiseLogin = serviceLogin.login(userData);
+		promiseLogin.then(
+			function(response){
+				console.dir(response);
+				$scope.redirectToHome();
+			}, function(error){
+				console.dir(error);
+			});
+	};
+
+	//Valida los datos del user
+	$scope.validForm = function(userData){
+		var condition = false;
+		console.dir(userData);
+		if(userData.username && userData.password){
+			if(userData.username !== '' && userData.password !== ''){
+				condition = true;
+			}
+		}
+
+		if(condition){
+			$scope.login(userData);
+		}else{
+			console.log('Error en dfatos')
+		}
+	};
+
+	$scope.logon = function(){
+		//Cierra la sesion del usuario
+		var promiseLogin = serviceLogin.logon();
+		promiseLogin.then(
+			function(response){
+				console.dir(response);
+				$scope.redirectToHome();
+			}, function(error){
+				console.dir(error);
+			});
+	};
+
+	//redirecciona al inicio de la aplicacion
+	$scope.redirectToHome = function(){
+		var url = host + 'index.php/inicio'
+		function redirect(){
+			window.location = url;
+		}
+
+		setTimeout(redirect(),3000);
+
+	}
 
 });
 
+
+/**
+Controlador de la pagina principal, muestra informacion relevante del sistema
+**/
+mediperbaricaApp.controller('startController', function($scope, $location,
+												$rootScope, $timeout){
+
+});
 
 /**
 Controllador 

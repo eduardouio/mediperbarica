@@ -1,7 +1,22 @@
-   </div><!-- End Page Content -->
-    </div><!-- End Content Wrapper -->
-  </div><!-- End Page Wrapper -->
-</body>
+ <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+          </div>
+          <div class="col l6 s12">
+            </a>
+          </div>
+      </div>
+
+
+      <div class="footer-copyright">
+        <div class="container">
+        © 2014-2015 Mediperbarica, Todos los derechos reservados
+        <a class="grey-text text-lighten-4 right" href="http://medicinahiperbarica.com.es">eduardouio7@gmail.com</a>
+        </div>
+      </div>
+    </footer>
+  
 <script type="text/javascript">
   
   var host = '<?php print(base_url()); ?>';
@@ -40,9 +55,28 @@ function toTitleCase(str)
 }
 
 </script>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>if (!window.jQuery) { document.write('<script src="http://materializecss.com/bin/jquery-2.1.1.min.js"><\/script>'); }
+    </script>
+    <script src="<?php print base_url();?>js/jquery.timeago.min.js"></script>
+    <script src="<?php print base_url();?>js/prism.js"></script>
+    <script src="<?php print base_url();?>js/jade/lunr.min.js"></script>
+    <script src="<?php print base_url();?>js/jade/search.js"></script>
+    <script src="<?php print base_url();?>bin/materialize.js"></script>
+    <script src="<?php print base_url();?>js/init.js"></script>
+<!-- Librerias de Angular Adicionales-->
+  <script type="text/javascript" src="<?php echo base_url();?>js/angular.js"></script>
+  <script src="<?php echo base_url();?>js/angular-animate.min.js"></script>
+  <script src="<?php echo base_url();?>js/angular-aria.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>js/angular-route.js"></script>
+  <script type="text/javascript" src="<?php echo base_url();?>js/angular-resource.js"></script>
+  <script src="<?php echo base_url();?>js/angular-material.min.js"></script>
+
 <script src="<?php echo base_url();?>js/app/app.js"></script>
 <script src="<?php echo base_url();?>js/app/appRoutes.js"></script>
 <script src="<?php echo base_url();?>js/app/appFactories.js"></script>
 <script src="<?php echo base_url();?>js/app/appControllers.js"></script>
 <script src="<?php echo base_url();?>js/app/appStatusMsg.js"></script>
+  </body>
 </html>

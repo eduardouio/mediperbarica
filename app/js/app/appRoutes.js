@@ -15,8 +15,8 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	$routeProvider
 	
 	.when('/',{
-		templateUrl : host + 'tplhtml/templates/lista-historias-tpl.html',
-		controller : 'listHistories'
+		templateUrl : host + 'tplhtml/templates/inicio-tpl.html',
+		controller : 'startController'
 	})
 
 	.when('/listar-historias',{

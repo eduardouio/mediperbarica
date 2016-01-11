@@ -1,4 +1,6 @@
-        <!-- Main Content -->
 <!-- aparecen las vistas-->
-<div ng-view class="container"> 
-</div>
+   <main>
+      <div ng-view class="container">
+        
+      </div>
+    </main>

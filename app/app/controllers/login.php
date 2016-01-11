@@ -64,6 +64,13 @@ class Login extends MY_Controller {
 	}
 
 	/**
+	 * Cierra la sesion del usuarios
+	 */
+	public function logout(){
+		$this->session->sess_destroy();
+	}
+
+	/**
 	 * Se validan los datos recibidos
 	 */
 	protected function _validData($data){
@@ -86,18 +93,17 @@ class Login extends MY_Controller {
 				$query = $this->db->update($this->Table_,$misession);
 				//colocamos los datos de sesion en la cookie
 				$this->session->set_userdata($userData);
-				return 1000;
+				return 3000;
 			}else{
 				//erro de contrasenia
 				$data = array(
 					'logueado' => 0
 					);
 				$this->session->set_userdata();
-				return 1002;
+				return 3002;
 			}
 		}else{
-			//no existe el usuario
-			return 1002;
+			return 3002;
 		}
 	}
 

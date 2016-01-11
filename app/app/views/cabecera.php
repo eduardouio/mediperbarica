@@ -1,31 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es" ng-app="mediperbaricaApp">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mediperbarica</title>
-  <link rel="stylesheet" href="<?php echo base_url();?>css/angular-material.min.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/bootstrap-theme.min.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/dashboard/dashboard.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/themes/blue.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/bootstrap-datepicker.css">
-  <!-- Angular CSS Material Desing-->
-  <!--
-  <link rel="stylesheet" type="text/css" href="css/themes/green.css">
-  <link rel="stylesheet" type="text/css" href="css/themes/red.css">
-  -->
-  <script type="text/javascript" src="<?php echo base_url();?>js/jquery-2.1.3.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>js/bootstrap.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>js/bootstrap-datepicker.js"></script>
-<!-- Librerias de Angular Adicionales-->
-  <script type="text/javascript" src="<?php echo base_url();?>js/angular.js"></script>
-  <script src="<?php echo base_url();?>js/angular-animate.min.js"></script>
-  <script src="<?php echo base_url();?>js/angular-aria.min.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>js/angular-route.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>js/angular-resource.js"></script>
-  <script src="<?php echo base_url();?>js/angular-material.min.js"></script>
-
-
-
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Mediperbarica Aplicacion" content="no">
+    <meta name="description" content="Aplicacion Manejo de clientes Mediperbarica">
+    <title>Mediperbarica S.A.</title>
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <!--  Android 5 Chrome Color-->
+    <meta name="theme-color" content="#01579b">
+    <!-- CSS-->
+    <link href="<?php print base_url();?>css/prism.css" rel="stylesheet">
+    <link href="<?php print base_url();?>css/ghpages-materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+  <header>
