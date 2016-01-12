@@ -84,11 +84,14 @@ mediperbaricaApp.controller('listHistories', function($scope, $location,
 									$rootScope, $timeout, serviceHistories){
 	console.log('[Debug] llamad a Controller listHistories');
 
+	$scope.counter = 0;
 	$scope.listHistories = function(){
 		var promiseHistories = serviceHistories.getHistories();
 		promiseHistories.then(
 			function(response){
 				$scope.historias = response.data;
+				console.log($scope.historias.length);
+				$scope.counter = $scope.historias.length;
 				console.dir(response);
 			},
 			function(error){
