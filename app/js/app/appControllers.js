@@ -81,7 +81,7 @@ mediperbaricaApp.controller('startController', function($scope, $location,
 Controllador 
 **/
 mediperbaricaApp.controller('listHistories', function($scope, $location,
-									$rootScope, $timeout, serviceHistories){
+			$rootScope, $timeout, serviceHistories,serviceLoadTemplates, $sce){
 	console.log('[Debug] llamad a Controller listHistories');
 
 	$scope.counter = 0;
@@ -99,6 +99,22 @@ mediperbaricaApp.controller('listHistories', function($scope, $location,
 				console.dir(error);
 			}
 			);
+	};
+
+	//Metodo encargado de mostrar una historia
+	$scope.presentHistory = function (idHistory){
+		console.log('[Debug] Llamada funcion presentHistory ' + idHistory);
+		delete($scope.tplPresentHistory);
+		var promiseTemplate = serviceLoadTemplates.getTplPresentHistory(idHistory);
+		promiseTemplate.then(
+			function(response){
+				$scope.tplPresentHistory = $sce.trustAsHtml(response);
+			},
+			function(error){
+				console.dir(error);
+			}
+			);
+			
 	};
 	//El controlador inicia obteniendo un listado completo de las historias
 	$scope.listHistories();

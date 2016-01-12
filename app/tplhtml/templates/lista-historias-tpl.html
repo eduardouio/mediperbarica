@@ -1,20 +1,25 @@
+<div ng-bind-html="tplPresentHistory">
+	
+</div>
 
   <div class="row">
-      <div class="col s6">
-        <span> Listado de Historias Clínicas <b>{{historias.length}} Historia</b></span>
+      <div class="col s6 card-panel teal lighten-2">
+        <H5> <b>{{historias.length}} </b> Historias Encontradas</h5>
       </div>
       <div class="col s6">
-		<input type="text" class="col-md-2" placeholder="Buscar" ng-model="buscar">
+      	<input placeholder="Buscar" id="buscar" ng-model="buscar" type="text" class="validate">
+          <label for="buscar">Buscar</label>
       </div>
     </div>
      <div class="progress" ng-show ="counter < 1">
       <div class="indeterminate"></div>
   </div>
         
-		<table class="highlight responsive-table" ng-show ="counter > 1">
+		<table class="highlight responsive-table bordered" ng-show ="counter > 1">
 		<thead>
 			<th>ID</th>
 			<th>Nombres</th>
+			<th>Edad</th>
 			<th>Tratamientos</th>
 			<th>Telefono</th>
 			<th>Mail</th>
@@ -26,7 +31,10 @@
 		<tbody>
 			<tr ng-repeat="row in historias | filter:buscar">
 				<td>{{row.id_historia}}</td>
-				<td><a href="#/presentar/{{row.id_historia}}">{{row.nombres}}</a></td>
+				<td>
+				<a href="" ng-click="presentHistory(row.id_historia)">
+				{{row.nombres}}</a></td>
+				<td>{{row.edad}}</td>
 				<td>{{row.tratamientos}}</td>
 				<td>{{row.telefono}}</td>
 				<td>{{row.mail}}</td>
@@ -34,34 +42,16 @@
 				<td>{{row.creado}}</td>
 				<td>
 					<!-- Boton de Actividades -->
-					<a class='dropdown-button btn' href='' data-activates='dropdown1'>
-					Opciones</a>
-					<ul id='dropdown1' class="dropdown-content">
-					    <li><a href="#/presentar/{{row.id_historia}}">Ver</a></li>
-					    <li><a href="#/editar/{{row.id_historia}}">Editar</a></li>
-					    <li><a href="#/asignar-antecedente/{{row.id_historia}}">Asignar Antecedete</a></li>
-					    <li><a href="getReporteHistoria/{{row.id_historia}}" target="_blank">Imprimir Historia</a></li>
-					    <li><a href="#">Asignar Tratamiento</a></li>
-					    <li class="divider"></li>
-					    <li><a href="#" class="text-danger">Eliminar</a></li>
-					</ul>
-<script type="text/javascript">
-	
-  $('.dropdown-button').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrain_width: false, 
-      hover: false, 
-      gutter: 0, 
-      belowOrigin: false, 
-      alignment: 'left' 
-    }
-  );
-</script>
+					    	<a href="#/editar-hisotoria/{{row.id_historia}}">
+					    		<i class="material-icons right">edit</i>
+					    	</a>					
+					    	<a href="#/asignar-antecedente/{{row.id_historia}}">
+					    		<i class="material-icons right">add</i>
+					    	</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
   <div class="fixed-action-btn vertical click-to-toggle" style="top: 55px; right: 20px;">
      <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-  </div>	
+  </div>

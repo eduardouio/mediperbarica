@@ -153,3 +153,36 @@ mediperbaricaApp.factory('serviceHistories', ['$http','$rootScope','$location',
 
 		return service;
 	}]);
+
+/*------------------------------------------------------------------------------
+Factory Para carga de archivos HTML
+------------------------------------------------------------------------------*/
+mediperbaricaApp.factory('serviceLoadTemplates', ['$http','$rootScope','$location',
+							'$q', 
+	function($http, $rootScope, $location, $q){
+		console.log('[Debug] Llamada a FAC serviceLoadTemplates');
+		//valiables que almacenas los servicios
+		var service = {};
+		
+		//funcion estandar para GET
+		function httpPost(url,idHistory){
+		var deferred = $q.defer();
+		var promise = deferred.promise;
+		$http.post(serviceBase + url , idHistory)
+				.success(function(response){
+					return deferred.resolve(response);
+				})
+				.error(function(response){
+					return deferred.reject(response);
+				})
+			return promise;			
+		}
+
+		//Funcion encargada de listar las historias
+		service.getTplPresentHistory = function(idHistory){
+			console.log('[Debug] llamada funcion getTplPresentHistory() ');
+			return httpPost('templates/getTplPresentHistory/', idHistory );	
+			}
+
+		return service;
+	}]);

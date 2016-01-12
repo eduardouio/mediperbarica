@@ -75,7 +75,6 @@ class Historias extends MY_Controller {
 					WHERE trt.id_paciente = hst.id_paciente) AS `tratamientos`,
 					hst.telefono, hst.mail , hst.nombre_referente ,
 					timestampdiff(year,hst.fecha_nacimiento,curdate()) AS `edad`,
-					hst.direccion ,
 					concat(month(hst.creado), '-' , year(hst.creado)) as creado
 					FROM historia AS hst Order by hst.nombres ASC;";
 		//una historia por id
