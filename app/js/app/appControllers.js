@@ -81,7 +81,25 @@ mediperbaricaApp.controller('startController', function($scope, $location,
 Controllador 
 **/
 mediperbaricaApp.controller('listHistories', function($scope, $location,
-												$rootScope, $timeout){
+									$rootScope, $timeout, serviceHistories){
+	console.log('[Debug] llamad a Controller listHistories');
+
+	$scope.listHistories = function(){
+		var promiseHistories = serviceHistories.getHistories();
+		promiseHistories.then(
+			function(response){
+				$scope.historias = response.data;
+				console.dir(response);
+			},
+			function(error){
+				console.log('[Debug] Hubo un problema para recuperar las hisotiras');
+				console.dir(error);
+			}
+			);
+	};
+	//El controlador inicia obteniendo un listado completo de las historias
+	$scope.listHistories();
+
 
 });
 
