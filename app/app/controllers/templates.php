@@ -52,12 +52,28 @@ class Templates extends MY_Controller {
 		}
 		// Diccionario de respuesta
 		$response = array('status' => 'success');
-		//
-		$idHistory = json_decode(file_get_contents("php://input"),true);
-		$this->Query_ = 'SELECT * from historia where id_historia = ' . $idHistory;
+		$idPerson = json_decode(file_get_contents("php://input"),true);
+		
+		//iniciamos la recoleccion de datos de la historia
+		$this->Query_ = 'SELECT * from historia where id_paciente = ' . 
+									$idPerson;
 		$this->Result_ = $this->db->query($this->Query_);
+		$response['data']['history'] = $historia = $this->Result_->result_array();
+		$this->Query_ = 'SELECT id_antecedente, tipo, detalle FROM antecedente '.
+							' WHERE id_paciente = \'' . $idPerson . '\'';
+		$this->Result_ = $this->db->query($this->Query_);
+		$response['data']['antecendt'] = $this->Result_->result_array();
+		//llenamos los dartos de los tratamientos
+		$this->Query_ = 'SELECT 
+						trt.id_tratamiento, 
+						per.nombres, 
+						trt.motivo_tratamiento, 
+						trt.nro_sesiones 
+						FROM tratamiento as trt 
+						LEFT JOIN personal as per USING(id_personal)
+						WHERE id_paciente = \'' . $idPerson . '\'' ;
+		print(var_dump($response));
 		$response['msg'] = '1005';
-		$response['data'] = $this->Result_->result_array();
 		$this->rest->_responseHttp($response,'201');
 
 	}

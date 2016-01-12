@@ -102,12 +102,13 @@ mediperbaricaApp.controller('listHistories', function($scope, $location,
 	};
 
 	//Metodo encargado de mostrar una historia
-	$scope.presentHistory = function (idHistory){
-		console.log('[Debug] Llamada funcion presentHistory ' + idHistory);
+	$scope.presentHistory = function (idPerson){
+		console.log('[Debug] Llamada funcion presentHistory ' + idPerson);
 		delete($scope.tplPresentHistory);
-		var promiseTemplate = serviceLoadTemplates.getTplPresentHistory(idHistory);
+		var promiseTemplate = serviceLoadTemplates.getTplPresentHistory(idPerson);
 		promiseTemplate.then(
 			function(response){
+				console.dir(response)
 				$scope.tplPresentHistory = $sce.trustAsHtml(response);
 			},
 			function(error){

@@ -165,10 +165,10 @@ mediperbaricaApp.factory('serviceLoadTemplates', ['$http','$rootScope','$locatio
 		var service = {};
 		
 		//funcion estandar para GET
-		function httpPost(url,idHistory){
+		function httpPost(url,idPerson){
 		var deferred = $q.defer();
 		var promise = deferred.promise;
-		$http.post(serviceBase + url , idHistory)
+		$http.post(serviceBase + url , idPerson)
 				.success(function(response){
 					return deferred.resolve(response);
 				})
@@ -179,9 +179,9 @@ mediperbaricaApp.factory('serviceLoadTemplates', ['$http','$rootScope','$locatio
 		}
 
 		//Funcion encargada de listar las historias
-		service.getTplPresentHistory = function(idHistory){
+		service.getTplPresentHistory = function(idPerson){
 			console.log('[Debug] llamada funcion getTplPresentHistory() ');
-			return httpPost('templates/getTplPresentHistory/', idHistory );	
+			return httpPost('templates/getTplPresentHistory/', idPerson );	
 			}
 
 		return service;
