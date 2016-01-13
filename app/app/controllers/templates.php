@@ -26,7 +26,7 @@ class Templates extends MY_Controller {
 	protected $CatalogoVistas_;
 	protected $Pagina_;
 	protected $Query_;
-
+	
 	/*************************************************************************
 	 *  Funcion Contructora inicializa librerias
 	 * @method __construct()
@@ -50,16 +50,24 @@ class Templates extends MY_Controller {
 			);
 			$this->rest->_responseHttp($respuesta,'406');
 		}
-		// Se crea un diccionario con las respuestas
+		// Si el parametro de la historia es insuficiente se envia el error
+		//y se cancela la peticion
 		$response = array('status' => 'success');
-		$idPerson = json_decode(file_get_contents("php://input"),true);
-		
+		$historyData = array();
+		(string)$idPerson = json_decode(file_get_contents("php://input"),true);
+		if(strlen($idPerson) < 10){	
+			$response['msg'] = '5001';
+			$response['data'] = "' " . $idPerson . "'";
+			$this->rest->_responseHttp($response,'200');		
+			exit();
+		}
+
 		//Se completan los datos de la historia
 		$this->Query_ = 'SELECT 
 							* FROM historia 
 							WHERE id_paciente = \'' . $idPerson . '\'';
 		$this->Result_ = $this->db->query($this->Query_);
-		$response['data']['history'] = $historia = $this->Result_->result_array();
+		$historyData['data']['history'] = $historia = $this->Result_->result_array();
 
 		//Se completa la lista de Antecedentes
 		$this->Query_ = 'SELECT 
@@ -69,7 +77,7 @@ class Templates extends MY_Controller {
 						FROM antecedente 
 						WHERE id_paciente = \'' . $idPerson . '\'';
 		$this->Result_ = $this->db->query($this->Query_);
-		$response['data']['antecendt'] = $this->Result_->result_array();
+		$historyData['data']['antecedent'] = $this->Result_->result_array();
 
 		//Se completa el listado de tratamientos
 		$this->Query_ = 'SELECT 
@@ -91,11 +99,12 @@ class Templates extends MY_Controller {
 						WHERE id_paciente = \'' . $idPerson . '\'' . 'ORDER BY 
 						trt.id_tratamiento DESC;';
 		$this->Result_ = $this->db->query($this->Query_);
-		$response['data']['treatments'] = $this->Result_->result_array();
-
-		//Consultamos las ultimas sesiones del tratamiento
-		$id_tratamiento = $response['data']['treatments'][0]['id_tratamiento'];
-		$this->Query_ = 'SELECT
+		//Comprobamos que el resultado de la consulta no sea cero
+		$historyData['data']['treatments'] = $this->Result_->result_array();
+		if($this->Result_->num_rows() > 0){
+			$id_tratamiento = $historyData['data']['treatments'][0]['id_tratamiento'];	
+			//Consultamos las ultimas sesiones del tratamiento
+			$this->Query_ = 'SELECT
 						 ses.id_sesion,
 						 ses.id_tratamiento,
 						 ses.fecha,
@@ -103,15 +112,17 @@ class Templates extends MY_Controller {
 						 per.nombres
 						 FROM sesion AS ses
 						 LEFT JOIN personal  AS per USING (id_personal)
-						 WHERE id_tratamiento = ' . $id_tratamiento ;
-		$this->Result_ = $this->db->query($this->Query_);
-		$response['data']['sessions'] = $this->Result_->result_array();
-
-		//recuperamos las sesiones del ultimo tratamiento
+						 WHERE id_tratamiento = ' . $id_tratamiento . '
+						 ORDER BY ses.id_sesion DESC';
+			$this->Result_ = $this->db->query($this->Query_);
+			$historyData['data']['sessions'] = $this->Result_->result_array();
+		}
+		
+		//Rendereamos la plantilla y la retornamos
+		$this->Pagina_ = $this->load->view('tpl-modal-historia',$historyData,true);
 		$response['msg'] = '1005';
-
-		print(var_dump($response));
-
+		$response['data'] = $this->Pagina_;
+		$this->rest->_responseHttp($response, '200');
 		
 	}
 

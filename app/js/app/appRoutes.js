@@ -44,7 +44,20 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'presentHystory'
 	})
 
-	.when('/asignar-antencedente',{
+	.when('/asignar-antencedente/:idPerson',{
+		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
+		controller : 'assigAntecedent'
+	})
+
+	.when('/eliminar-antencedente/:idAntecedent',{
+		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
+		controller : 'assigAntecedent'
+	})
+	.when('/listar-antencedentes/:idPerson',{
+		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
+		controller : 'assigAntecedent'
+	})
+	.when('/editar-antencedente/:idAntecedent',{
 		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
 		controller : 'assigAntecedent'
 	})
@@ -59,7 +72,7 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'presentTreatment'
 	})
 
-	.when('/crear-tratamiento',{
+	.when('/crear-tratamiento/:idPerson',{
 		templateUrl : host + 'tplhtml/forms/frm-tratamiento-tpl.html',
 		controller : 'createTreatment'
 	})
@@ -84,6 +97,25 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'errorController'
 	})
 
+	.when('/asignar-sesion/:idTreatment',{
+		templateUrl : host + 'tplhtml/templates/vacio.html',
+		controller : 'deleteHystory'
+	})
+
+	.when('/eliminiar-sesion/:idSesion',{
+		templateUrl : host + 'tplhtml/templates/vacio.html',
+		controller : 'deleteHystory'
+	})
+
+	.when('/editar-sesion/:idSesion',{
+		templateUrl : host + 'tplhtml/templates/vacio.html',
+		controller : 'deleteHystory'
+	})
+
+	.when('/listar-sesiones/:idTreatment',{
+		templateUrl : host + 'tplhtml/templates/vacio.html',
+		controller : 'deleteHystory'
+	})
 	.otherwise({redirectTo : '/'});
 
 });

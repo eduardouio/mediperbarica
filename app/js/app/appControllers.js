@@ -109,7 +109,7 @@ mediperbaricaApp.controller('listHistories', function($scope, $location,
 		promiseTemplate.then(
 			function(response){
 				console.dir(response)
-				$scope.tplPresentHistory = $sce.trustAsHtml(response);
+				$scope.tplPresentHistory = $sce.trustAsHtml(response.data);
 			},
 			function(error){
 				console.dir(error);

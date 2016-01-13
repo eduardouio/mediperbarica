@@ -159,6 +159,16 @@ function showStatus(codeNumber, data){
         data : data
       };
       break;
+
+      case 3002:
+      objError = {
+        code : '5001',
+        type : 'Error',
+        title : 'Partametro Incompleto',
+        message : 'El parametro pasado a la función BackEnd esta Incompleto',
+        data : data
+      };
+      break;
     }
     console.dir(objError);
   };
