@@ -50,32 +50,69 @@ class Templates extends MY_Controller {
 			);
 			$this->rest->_responseHttp($respuesta,'406');
 		}
-		// Diccionario de respuesta
+		// Se crea un diccionario con las respuestas
 		$response = array('status' => 'success');
 		$idPerson = json_decode(file_get_contents("php://input"),true);
 		
-		//iniciamos la recoleccion de datos de la historia
-		$this->Query_ = 'SELECT * from historia where id_paciente = ' . 
-									$idPerson;
+		//Se completan los datos de la historia
+		$this->Query_ = 'SELECT 
+							* FROM historia 
+							WHERE id_paciente = \'' . $idPerson . '\'';
 		$this->Result_ = $this->db->query($this->Query_);
 		$response['data']['history'] = $historia = $this->Result_->result_array();
-		$this->Query_ = 'SELECT id_antecedente, tipo, detalle FROM antecedente '.
-							' WHERE id_paciente = \'' . $idPerson . '\'';
+
+		//Se completa la lista de Antecedentes
+		$this->Query_ = 'SELECT 
+						id_antecedente, 
+						tipo, 
+						detalle 
+						FROM antecedente 
+						WHERE id_paciente = \'' . $idPerson . '\'';
 		$this->Result_ = $this->db->query($this->Query_);
 		$response['data']['antecendt'] = $this->Result_->result_array();
-		//llenamos los dartos de los tratamientos
+
+		//Se completa el listado de tratamientos
 		$this->Query_ = 'SELECT 
 						trt.id_tratamiento, 
+						trt.creado,
 						per.nombres, 
 						trt.motivo_tratamiento, 
-						trt.nro_sesiones 
+						trt.nro_sesiones,
+						(SELECT count(id_sesion) 
+							FROM sesion 
+							WHERE id_tratamiento = trt.id_tratamiento) AS 
+							sesiones_realizadas,
+						((trt.nro_sesiones)-(SELECT count(id_sesion) 
+							FROM sesion 
+							WHERE id_tratamiento = trt.id_tratamiento)) AS 
+						sesiones_pendientes
 						FROM tratamiento as trt 
 						LEFT JOIN personal as per USING(id_personal)
-						WHERE id_paciente = \'' . $idPerson . '\'' ;
-		print(var_dump($response));
-		$response['msg'] = '1005';
-		$this->rest->_responseHttp($response,'201');
+						WHERE id_paciente = \'' . $idPerson . '\'' . 'ORDER BY 
+						trt.id_tratamiento DESC;';
+		$this->Result_ = $this->db->query($this->Query_);
+		$response['data']['treatments'] = $this->Result_->result_array();
 
+		//Consultamos las ultimas sesiones del tratamiento
+		$id_tratamiento = $response['data']['treatments'][0]['id_tratamiento'];
+		$this->Query_ = 'SELECT
+						 ses.id_sesion,
+						 ses.id_tratamiento,
+						 ses.fecha,
+						 ses.hora,
+						 per.nombres
+						 FROM sesion AS ses
+						 LEFT JOIN personal  AS per USING (id_personal)
+						 WHERE id_tratamiento = ' . $id_tratamiento ;
+		$this->Result_ = $this->db->query($this->Query_);
+		$response['data']['sessions'] = $this->Result_->result_array();
+
+		//recuperamos las sesiones del ultimo tratamiento
+		$response['msg'] = '1005';
+
+		print(var_dump($response));
+
+		
 	}
 
 }
