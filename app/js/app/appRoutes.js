@@ -116,6 +116,11 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		templateUrl : host + 'tplhtml/templates/vacio.html',
 		controller : 'deleteHystory'
 	})
+
+	.when('/sin-url',{
+		templateUrl : host + 'tplhtml/templates/vacio.html',
+		controller : 'deleteHystory'
+	})
 	.otherwise({redirectTo : '/'});
 
 });
