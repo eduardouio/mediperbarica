@@ -169,6 +169,36 @@ mediperbaricaApp.controller('assigAntecedent', function($scope, $location,
 
 });
 
+/**
+Controlador  encargado de listar los tratamientos
+**/
+mediperbaricaApp.controller('listTreatment', function($scope, $location,
+												$rootScope, $timeout){
+		console.log('[Debug] llamad a Controller listTreatment');
+
+	$scope.counter = 0;
+	$scope.listTreatments = function(){
+		console.log('[Debug] Se llama al metodo listTreatments');
+		var promiseHistories = serviceTratments.getHistories();
+		promiseHistories.then(
+			function(response){
+				$scope.historias = response.data;
+				console.log($scope.historias.length);
+				$scope.counter = $scope.historias.length;
+				console.dir(response);
+			},
+			function(error){
+				console.log('[Debug] Hubo un problema para recuperar las hisotiras');
+				console.dir(error);
+			}
+			);
+	};
+
+	//iniciamos la funcion para que liste los tratamientos al entrar en el CTRLL
+	$scope.listTreatments();
+
+});
+
 
 /**
 Controllador 
