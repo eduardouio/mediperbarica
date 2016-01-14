@@ -18,54 +18,53 @@
               <div class="collapsible-body">
                 <ul>
                   <li><a href="#/listar-historias">Listar Historias</a></li>
-                  <li><a href="grid.html">Crear Hisotirias</a></li>
-                  <li><a href="grid.html">Buscar Hisotiria</a></li>
+                  <li><a href="#/crear-historia">Crear Hisotirias</a></li>
+                  <li><a href="#/sin-url">Buscar Hisotiria</a></li>
                 </ul>
               </div>
             </li>
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Tratamientos</a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="navbar.html">Listar Tratamientos</a></li>
-                  <li><a href="pagination.html">Crear Tratamiento</a></li>
-                  <li><a href="preloader.html">Buscar Tratamiento</a></li>
+                  <li><a href="#/listar-tratamientos">Listar Tratamientos</a></li>
+                  <li><a href="#/crear-tratamiento/0">Crear Tratamiento</a></li>
+                  <li><a href="#/sin-url">Buscar Tratamiento</a></li>
                 </ul>
               </div>
             </li>
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Sesiones</a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="collapsible.html">Iniciar Sesion</a></li>
-                  <li><a href="dialogs.html">Listar Sesiones</a></li>
-                  <li><a href="dropdown.html">Buscar Sesion</a></li>
+                  <li><a href="#/listar-sesiones/0">Listar Sesiones</a></li>
+                  <li><a href="#/sin-url">Buscar Sesion</a></li>
                 </ul>
               </div>
             </li>
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Facturación</a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="collapsible.html">Listar Facturas</a></li>
-                  <li><a href="dialogs.html">Reporte Facturaciones</a></li>
-                  <li><a href="dropdown.html">Crear Factura</a></li>
-                  <li><a href="dropdown.html">Buscar Factura</a></li>
+                  <li><a href="#/sin-url">Listar Facturas</a></li>
+                  <li><a href="#/sin-url">Reporte Facturaciones</a></li>
+                  <li><a href="#/sin-url">Crear Factura</a></li>
+                  <li><a href="#/sin-url">Buscar Factura</a></li>
                 </ul>
               </div>
             </li>
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Usuarios</a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="collapsible.html">Crear Nuevo Usuario</a></li>
-                  <li><a href="dialogs.html">Cambiar Contraseña</a></li>
-                  <li><a href="dropdown.html">Cerrar Sesion</a></li>
+                  <li><a href="#/sin-url">Crear Nuevo Usuario</a></li>
+                  <li><a href="#/sin-url">Cambiar Contraseña</a></li>
+                  <li><a href="#/sin-url">Cerrar Sesion</a></li>
                 </ul>
               </div>
             </li>
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Personal</a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="collapsible.html">Listar Personal</a></li>
-                  <li><a href="dialogs.html">Ingresar Personal</a></li>
-                  <li><a href="dropdown.html">Buscar Personal</a></li>
+                  <li><a href="#/sin-url">Listar Personal</a></li>
+                  <li><a href="#/sin-url">Ingresar Personal</a></li>
+                  <li><a href="#/sin-url">Buscar Personal</a></li>
                 </ul>
               </div>
             </li>
