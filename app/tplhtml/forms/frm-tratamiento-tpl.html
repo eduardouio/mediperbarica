@@ -1,0 +1,124 @@
+  <div class="row card">
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Eduardo Villota</span>
+  </div>
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia: <b>1000</b></span>
+  </div>
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Tratamientos Anteriores 3</span>
+  </div>
+    <form class="col s12">
+    <br>
+      <span class="blue-text">Datos Paciente:</span>
+      <div class="row">
+        <div class="input-field col s3">
+          
+ <select>
+      <option value="" disabled selected>Ingrese un Nombre</option>
+      <option value="1">MArco Polo</option>
+      <option value="2">Anita Lopez</option>
+      <option value="3">Oscar Poma</option>
+    </select>
+</div>
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Cédula: </b> 
+        <span class="grey-text text-darken-2">1722919725</span>
+        </div>    
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Telef: </b> 
+        <span class="grey-text text-darken-2">0992936569</span>
+        </div>  
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Referente: </b> 
+        <span class="grey-text text-darken-2">Dr. German Lopez</span>
+        </div>
+        
+      </div>
+      <div class="row">
+         <div class="col s5">
+        <b class="teal-text text-lighten-2">Manejo: </b> 
+       <span class="grey-text text-darken-2"> Indicaciones de manejo en presion de la camar</span>
+        </div>
+         <div class="col s4">
+        <b class="teal-text text-lighten-2">Examen Físico: </b> 
+        <span class="grey-text text-darken-2">Agun Valor Para el Examen</span>
+        </div>
+         <div class="col s3">
+        <b class="teal-text text-lighten-2">Registrado: </b> 
+        <span class="grey-text text-darken-2">2011-05-01</span>
+        </div>
+      </div>
+      <br>
+<span class="blue-text">Datos Médico Tratante:</span>
+            <div class="row">
+        <div class="input-field col s3">
+          
+ <select>
+      <option value="" disabled selected>Ingrese un Nombre</option>
+      <option value="1">MArco Polo</option>
+      <option value="2">Anita Lopez</option>
+      <option value="3">Oscar Poma</option>
+    </select>
+</div>
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Celular: </b> 
+       <span class="grey-text text-darken-2">0992936569</span>
+        </div>    
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Telef: </b> 
+        <span class="grey-text text-darken-2">023203521</span>
+        </div>  
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Mail: </b> 
+        <span class="grey-text text-darken-2">eduardouio7@gmail.com</span>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">comment</i>
+          <input id="motivo" type="text" class="validate" name="motivo" ng-model="tratamiento.motivo" maxlength="360">
+          <label for="motivo">Motivo</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s2">
+          <i class="material-icons prefix">#</i>
+          <input type="number" name="sesiones" id="sesiones" ng-model="tratamiento.nro_sesiones" maxlength="2">
+          <label for="id_paciente">Sesiones</label>
+        </div>
+        <div class="input-field col s2">
+          <i class="material-icons prefix">trending_down</i>
+          <input type="number" name="descuento" id="descuento" ng-model="tratamiento.descuento" maxlength="2">
+          <label for="descuento">% Descueto</label>
+        </div>
+        <div class="input-field col s2">
+          <i class="material-icons prefix">$</i>
+          <input type="number" name="costo" id="costo" ng-model="tratamiento.costo" maxlength="5">
+          <label for="costo">Costo $</label>
+        </div>
+        <div class="input-field col s2">
+           <input type="checkbox" id="iva" name="iva" />
+           <label for="iva">IVA</label>
+        </div>
+                <div class="input-field col s4">
+           <h5 class="right-align">IVA: 0.00 </h5>
+           <h5 class="right-align"><span class="teal-text">Total: $100.00</span></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s4 offset-s8">
+          <input id="enviar" type="submit" class="btn" value="Guardar">
+          <a href="" class="btn red">Cancelar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+  
+</script>
