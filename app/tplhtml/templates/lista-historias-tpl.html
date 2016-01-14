@@ -42,16 +42,17 @@
 				<td>{{row.creado}}</td>
 				<td>
 					<!-- Boton de Actividades -->
-					    	<a href="#/editar-hisotoria/{{row.id_historia}}">
+					    	<a href="#/editar-historia/{{row.id_historia}}">
 					    		<i class="material-icons right">edit</i>
 					    	</a>					
 					    	<a href="#/asignar-antecedente/{{row.id_historia}}">
-					    		<i class="material-icons right">add</i>
+					    		<i class="material-icons right">print</i>
 					    	</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
   <div class="fixed-action-btn vertical click-to-toggle" style="top: 55px; right: 20px;">
-     <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+     <a class="btn-floating btn-large waves-effect waves-light red" href="#/crear-historia">
+     <i class="material-icons">add</i></a>
   </div>
