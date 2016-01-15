@@ -32,7 +32,7 @@
 			<tr ng-repeat="row in historias | filter:buscar">
 				<td>{{row.id_historia}}</td>
 				<td>
-				<a href="" ng-click="presentHistory(row.id_paciente)">
+				<a href="#/presentar-historia/{{row.id_historia}}">
 				{{row.nombres}}</a></td>
 				<td>{{row.edad}}</td>
 				<td>{{row.tratamientos}}</td>

@@ -19,6 +19,16 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'startController'
 	})
 
+	.when('/crear-personal',{
+		templateUrl : host + 'tplhtml/templates/presentar-personal-tpl.html',
+		controller : ''
+	})
+
+	.when('/presentar-personal/:idPersonal',{
+		templateUrl : host + 'tplhtml/templates/presentar-personal-tpl.html',
+		controller : ''
+	})
+
 	.when('/listar-historias',{
 		templateUrl : host + 'tplhtml/templates/lista-historias-tpl.html',
 		controller : 'listHistories'
@@ -47,6 +57,11 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	.when('/asignar-antencedente/:idPerson',{
 		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
 		controller : 'assigAntecedent'
+	})
+
+	.when('/mostrar-antecedente/:idPerson',{
+		templateUrl : host + 'tplhtml/templates/modal-antecedente-tpl.html',
+		controller : ''
 	})
 
 	.when('/eliminar-antencedente/:idAntecedent',{
@@ -115,6 +130,21 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	.when('/listar-sesiones/:idTreatment',{
 		templateUrl : host + 'tplhtml/templates/vacio.html',
 		controller : 'deleteHystory'
+	})
+
+	.when('/nueva-factura',{
+		templateUrl : host + 'tplhtml/forms/frm-factura-tpl.html',
+		controller : ''
+	})
+
+	.when('/listar-facturas',{
+		templateUrl : host + 'tplhtml/forms/frm-factura-tpl.html',
+		controller : ''
+	})
+
+	.when('/ver-cliente/:idCoustumer',{
+		templateUrl : host + 'tplhtml/templates/modal-cliente-tpl.html',
+		controller : ''
 	})
 
 	.when('/sin-url',{

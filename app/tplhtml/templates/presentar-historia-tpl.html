@@ -1,121 +1,101 @@
-<div class="container">
-<div id="modal1" class="modal modal-fixed-footer">
-<div class="modal-content">
-      
-
-            <h3 class="text-left"><span class="glyphicon glyphicon-user">&nbsp;</span>{{historia.nombres}} 
-            <span class="pull-right glyphicon glyphicon-folder-close"> Historia: {{historia.id_historia}}</span>
-         </h3>
-  
-       <a href="#/asignar-antecedente/{{historia.id_historia}}" class="btn  blue">
-   Asignar Antecedente
-   </a>
-         <table class="striped">
-            <tbody>
-               <tr>
-                  <td ><b>C&eacute;dula:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.id_paciente}}</td>
-               </tr>
-               <tr>
-                  <td><b>Telefono:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.telefono}}</td>
-               </tr>
-               <tr>
-                  <td><b>Email:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.mail}}</td>
-               </tr>
-               <tr>
-                  <td><b>Fecha Nacimiento:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.fecha_nacimiento}}</td>
-               </tr>
-               <tr>
-                  <td><b>Direcci&oacute;n:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.direccion}}</td>
-               </tr>
-               <tr>
-                  <td><b>Examen F&iacute;sico:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.examen_fisico}}</td>
-               </tr>
-               <tr>
-                  <td ><b>Manejo:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.manejo}}</td>
-               </tr>
-               <tr>
-                  <td ><b>Nombre Familiar:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.nombre_familiar}}</td>
-               </tr>
-               <tr>
-                  <td ><b>Tel&eacute;fono Familiar:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.telefono_familiar}}</td>
-               </tr>
-               <tr>
-                  <td><b>Direcci&oacute;n Familiar:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.direccion_familiar}}</td>
-               </tr>
-               <tr>
-                  <td><b>Fecha Registro:&nbsp;&nbsp;</b></td>
-                  <td>{{historia.creado}}</td>
-               </tr>
-               <tr>
-                  <td colspan="2">
-                     <h4>
-                        <b> M&eacute;dico Referente</b>
-                     </h4>
-                  </td>
-               </tr>
-               <tr>
-                  <td><b>Nombres:</b></td>
-                  <td>{{historia.nombre_referente}}</td>
-               </tr>
-               <tr>
-                  <td><b>Tel&eacute;fono:</b></td>
-                  <td>{{historia.telefono_referente}}</td>
-               </tr>
-               <tr>
-                  <td><b>Email:</b></td>
-                  <td>{{historia.mail_referente}}</td>
-               </tr>
-               <tr>
-                  <td colspan="2">
-                     <h4><b>Antecedentes M&eacute;dicos</h4>
-                  </td>
-               </tr>
-               <tr ng-repeat="row in listaAntecedentes">
-                  <td><b>{{row.tipo}}:</b>&nbsp;&nbsp;</td>
-                  <td>{{row.detalle}}</td>
-               </tr>
-            </tbody>
-         </table>
-         </div>
-         <div class="modal-footer">
-
-
-    <div class="row">
-<div class="col s6">
-   &nbsp;
-      </div>
-      <div class="col s2">
-          <a href="#/editar/{{historia.id_historia}}" class="btn blue">
-   Editar
-   </a>
-      </div>
-      <div class="col s2">
-         <a href="getReporteHistoria/{{historia.id_historia}}" target="_bank" class="btn blue">
-   Imprimir
-   </a>
-      </div>
-      <div class="col s2">
-         <a href="getReporteHistoria/{{historia.id_historia}}" target="_bank" class="btn red darken-3">
-   Borrar
-   </a>
-      </div>
-
-    </div>
-          
-</div>
-</div>
-      </div>
+  <div class="row card">
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Eduardo Villota: <b>1722919725</b></span>
   </div>
-  <script type="text/javascript">
-  $('#modal1').openModal();
-  </script>
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia: <b>1000</b></span>
+  </div>
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Tratamientos Realizados 3</span>
+  </div>
+    <div class="col s12">
+    <br>
+      <span class="grey-text" style="font-size:18px;">Datos Paciente:</span>
+      <br>
+      <div class="row">
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Tel: </b> 
+        <span class="grey-text text-darken-2">022226906</span>
+        </div> 
+         <div class="col s3">
+        <b class="teal-text text-lighten-2">Mail: </b> 
+        <span class="grey-text text-darken-2">eduardouio7@gmail.com</span>
+        </div>   
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Fecha Nac: </b> 
+        <span class="grey-text text-darken-2">01-07-1987</span>
+        </div>  
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Fecha Reg: </b> 
+        <span class="grey-text text-darken-2">01-01-2015</span>
+       </div>
+      </div>
+      <div class="row">
+         <div class="col s5">
+        <b class="teal-text text-lighten-2">Dirección: </b> 
+       <span class="grey-text text-darken-2">Av. Humberto Albornoz y 12 de Agosto La Comuna</span>
+        </div>
+         <div class="col s4">
+        <b class="teal-text text-lighten-2">Examen Físico: </b> 
+        <span class="grey-text text-darken-2">Agun Valor Para el Examen</span>
+        </div>
+         <div class="col s3">
+        <b class="teal-text text-lighten-2">Manejo: </b> 
+        <span class="grey-text text-darken-2">Algo Para el</span>
+        </div>
+      </div>
+<span class="grey-text" style="font-size:18px;">Datos Médico Referente:</span>
+<br>
+      <div class="row">
+        <div class="col s4">
+        <b class="teal-text text-lighten-2">Nombre: </b> 
+        <span class="grey-text text-darken-2">Dr. Luiz Peres</span>
+        </div> 
+         <div class="col s3">
+        <b class="teal-text text-lighten-2">Tel: </b> 
+        <span class="grey-text text-darken-2">2226906</span>
+        </div>   
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Mail </b> 
+        <span class="grey-text text-darken-2">luisperez@aol.com</span>
+        </div>
+      </div>
+
+      <span class="grey-text" style="font-size:18px;">Referencia Familiar:</span>
+<br>
+      <div class="row">
+        <div class="col s4">
+        <b class="teal-text text-lighten-2">Nombre: </b> 
+        <span class="grey-text text-darken-2">Juan Lopez</span>
+        </div> 
+         <div class="col s3">
+        <b class="teal-text text-lighten-2">Tel: </b> 
+        <span class="grey-text text-darken-2">099546201</span>
+        </div>   
+      </div>
+      <span class="orange-text" style="font-size:18px;">Antecedentes Médicos:</span>
+<br>
+      <div class="row">
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Tipo: </b> 
+        <span class="grey-text text-darken-2">Quirurjico</span>
+        </div> 
+         <div class="col s4">
+        <b class="teal-text text-lighten-2">Detalle: </b> 
+        <span class="grey-text text-darken-2">Hepatitias G</span>
+        </div>  
+         <div class="col s3 offset-s2">
+          <span class="btn">Añadir Antecedente</span>
+        </div> 
+      </div>
+      <div class="row">
+         <div class="col s5">
+             <span class="btn">Editar</span>
+             <span class="btn">Volver</span>
+             <span class="btn red">Borrar</span>
+         </div>
+      </div>
+      
+    </div>
+  </div>
+

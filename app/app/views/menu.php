@@ -43,9 +43,9 @@
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Facturación</a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="#/sin-url">Listar Facturas</a></li>
+                  <li><a href="#/listar-facturas">Listar Facturas</a></li>
                   <li><a href="#/sin-url">Reporte Facturaciones</a></li>
-                  <li><a href="#/sin-url">Crear Factura</a></li>
+                  <li><a href="#/nueva-factura">Crear Factura</a></li>
                   <li><a href="#/sin-url">Buscar Factura</a></li>
                 </ul>
               </div>
@@ -63,7 +63,7 @@
               <div class="collapsible-body">
                 <ul>
                   <li><a href="#/sin-url">Listar Personal</a></li>
-                  <li><a href="#/sin-url">Ingresar Personal</a></li>
+                  <li><a href="#/crear-personal">Ingresar Personal</a></li>
                   <li><a href="#/sin-url">Buscar Personal</a></li>
                 </ul>
               </div>

@@ -1,17 +1,88 @@
-<form class="col s12">
-       <div class="row">
-         <div class="input-field col s4">
-          <i class="material-icons prefix">list</i>
-          <input id="tipo" type="text" class="validate" name="tipo" maxlength="40" ng-model="antecedente.tipo">
+  <div class="row card">
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Eduardo Villota</span>
+  </div>
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia: <b>1000</b></span>
+  </div>
+  <div class="col s4">
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Antecedentes 3</span>
+  </div>
+    <form class="col s12">
+    <br>
+      <span class="blue-text">Datos Paciente:</span>
+      <br>
+      <div class="row">
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Edad </b> 
+        <span class="grey-text text-darken-2">25 Años</span>
+        </div>  
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Cédula: </b> 
+        <span class="grey-text text-darken-2">1722919725</span>
+        </div>    
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Telef: </b> 
+        <span class="grey-text text-darken-2">0992936569</span>
+        </div>  
+        <div class="col s3">
+        <b class="teal-text text-lighten-2">Referente: </b> 
+        <span class="grey-text text-darken-2">Dr. German Lopez</span>
+        </div>
+        
+      </div>
+      <div class="row">
+         <div class="col s5">
+        <b class="teal-text text-lighten-2">Manejo: </b> 
+       <span class="grey-text text-darken-2"> Indicaciones de manejo en presion de la camar</span>
+        </div>
+         <div class="col s4">
+        <b class="teal-text text-lighten-2">Examen Físico: </b> 
+        <span class="grey-text text-darken-2">Agun Valor Para el Examen</span>
+        </div>
+         <div class="col s3">
+        <b class="teal-text text-lighten-2">Registrado: </b> 
+        <span class="grey-text text-darken-2">2011-05-01</span>
+        </div>
+      </div>
+      <span class="orange-text">Asignar Antecedente:</span>
+      <br>
+      <div class="row">
+     
+        <div class=" col s6">
+           <table class="bordered">
+           <tr>
+             <th>Item</th>
+             <th>Tipo</th>
+             <th>Detalle</th>
+             <th>Opcion</th>
+           </tr>
+           <tr>
+             <td>1</td>
+             <td>Cirujia</td>
+             <td>Cirujia de colon</td>
+             <td><a href="" class="red-text">Quitar</a></td>
+           </tr>
+           </table>
+           </table>
+        </div>
+                <div class="input-field col s2">
+          <i class="material-icons prefix">toc</i>
+          <input type="text" name="tipo" id="tipo" ng-model="antecendete.tipo" maxlength="45">
           <label for="tipo">Tipo</label>
         </div>
-      <div class="input-field col s6">
-          <i class="material-icons prefix">detail</i>
-          <input id="nombre_familiar" type="text" class="validate" name="nombre_familiar" maxlength="40" ng-model="paciente.nombre_familiar">
-          <label for="nombre_familiar">Descripcion</label>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">comment</i>
+          <input type="text" name="detalle" id="detalle" ng-model="antecedente.detalle" maxlength="180">
+          <label for="detalle">Detalle</label>
         </div>
-         <div class="input-field col s2">
-          <button class="btn"> Eliminar</button>
+      </div>
+      <br>
+      <div class="row">
+        <div class="input-field col s4 offset-s8">
+          <input id="enviar" type="submit" class="btn" value="Guardar">
+          <a href="" class="btn red">Cerrar</a>
         </div>
-        </div>
-       </form>
+      </div>
+    </form>
+  </div>

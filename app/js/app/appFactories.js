@@ -128,11 +128,11 @@ mediperbaricaApp.factory('serviceHistories', ['$http','$rootScope','$location',
 		}
 
 		//Funcion encargada de listar las historias
-		service.getTreatments = function(){
+		service.getHistories = function(){
 			console.log('[Debug] llamada funcion getHistories() ');
-			return httpGet('tratamientos/getTreatments');	
+			return httpGet('historias/getHistoryData');	
 			};
-/**
+
 		//Funcion encargada de devolver una historia
 		service.getHistory = function(idHistory){
 			console.log('[Debug] llamada funcion getHistory()');
@@ -150,7 +150,7 @@ mediperbaricaApp.factory('serviceHistories', ['$http','$rootScope','$location',
 			console.log('[Debug] llamada funcion delHistory()');
 			return httpDelete('hisotrias/deleteHistory/' , history);
 		};
-*/
+
 		return service;
 	}]);
 
@@ -183,85 +183,6 @@ mediperbaricaApp.factory('serviceLoadTemplates', ['$http','$rootScope','$locatio
 			console.log('[Debug] llamada funcion getTplPresentHistory() ');
 			return httpPost('templates/getTplPresentHistory/', idPerson );	
 			}
-
-		return service;
-	}]);
-
-/*------------------------------------------------------------------------------
-Factory Historias
-------------------------------------------------------------------------------*/
-mediperbaricaApp.factory('serviceTreatments', ['$http','$rootScope','$location',
-							'$q', 
-	function($http, $rootScope, $location, $q){
-		console.log('[Debug] Llamada a FAC serviceTreatments');
-		//valiables que almacenas los servicios
-		var service = {};
-		
-		//funcion estandar para GET
-		function httpGet(url){
-		var deferred = $q.defer();
-		var promise = deferred.promise;
-		$http.post(serviceBase + url)
-				.success(function(response){
-					return deferred.resolve(response);
-				})
-				.error(function(response){
-					return deferred.reject(response);
-				})
-			return promise;			
-		}
-
-		//funcion estandar para POST
-		function httpPost(url,data){
-		var deferred = $q.defer();
-		var promise = deferred.promise;
-		$http.post(serviceBase + url,data)
-				.success(function(response){
-					return deferred.resolve(response);
-				})
-				.error(function(response){
-					return deferred.reject(response);
-				})
-			return promise;			
-		}
-
-		//funcion estandar para DELETE
-		function httpDelete(url,data){
-		var deferred = $q.defer();
-		var promise = deferred.promise;
-		$http.delete(serviceBase + url,data)
-				.success(function(response){
-					return deferred.resolve(response);
-				})
-				.error(function(response){
-					return deferred.reject(response);
-				})
-			return promise;			
-		}
-
-		//Funcion encargada de listar las historias
-		service.getHistories = function(){
-			console.log('[Debug] llamada funcion getHistories() ');
-			return httpGet('historias/getHistoryData');	
-			};
-
-		//Funcion encargada de devolver una historia
-		service.getHistory = function(idHistory){
-			console.log('[Debug] llamada funcion getHistory()');
-			return httpGet('hisotrias/getHistoryData/' + idHistory);
-		};
-
-		//Funcion encargada de guardar una historia
-		service.setHistory = function(history){
-			console.log('[Debug] llamada funcion setHistory()');
-			return httpPost('hisotrias/setHistory/' , history);
-		};
-
-		//Funcion encargada de eliminar una historia
-		service.delHistory = function(idHistory){
-			console.log('[Debug] llamada funcion delHistory()');
-			return httpDelete('hisotrias/deleteHistory/' , history);
-		};
 
 		return service;
 	}]);

@@ -19,11 +19,11 @@ $lastTreatmentid = 0;
                    <?php print$history['id_historia'];?>
                </h5>               
             </div>
-            <div class="col s4 right-align">
-         <a href="#/crear/tratamiento/<?php print$history['id_paciente'];?>" class="btn teal">
-         Nuevo Tratamiento
-         </a>
-         </div>
+          <div class="col s4">
+               <h5 class="left-align">
+                <b class="blue-text text-darken-3">28 Años</b>
+               </h5>               
+            </div>
          </div>
    
       <table class="bordered card-panel">
@@ -38,21 +38,10 @@ $lastTreatmentid = 0;
          <tr>
             <td><b>Email:</b></td>
             <td><?php print $history['mail']?></td>
-            <td><b>Direccion:</b></td>
-            <td><?php print $history['direccion']?></td>
-            <td><b>Registrado:</b></td>
-            <td><?php print $history['creado']?></td>
-         </tr>
-         <tr>
-            <td colspan="2"><b class="teal-text text-lighten-3">Datos Referente</b></td>
-         </tr>
-         <tr>
-            <td><b>Nombre:</b></td>
+            <td><b>Nombre Ref:</b></td>
             <td><?php print $history['nombre_referente']?></td>
-            <td><b>Telf:</b></td>
+            <td><b>Telf Ref:</b></td>
             <td><?php print $history['telefono_referente']?></td>
-            <td><b>Cliente Mail:</b></td>
-            <td><?php print $history['mail_referente']?></td>
          </tr>
          <tr>
             <td colspan="2"><b class="teal-text text-lighten-3">Datos Familiar</b></td>
@@ -62,8 +51,6 @@ $lastTreatmentid = 0;
             <td><?php print $history['nombre_familiar']?></td>
             <td><b>Telf:</b></td>
             <td><?php print $history['telefono_familiar']?></td>
-            <td><b>Dirección:</b></td>
-            <td><?php print $history['direccion_familiar']?></td>
          </tr>
         <tr>
             <td colspan="2"><b class="red-text text-red">Antecedentes Médicos:</b></td>
@@ -114,9 +101,7 @@ $lastTreatmentid = 0;
             <td colspan="2"><b class="green-text text-green">Ultimas Sesiones:</b></td>
          </tr>
           <?php
-          $i = 0;
-         foreach ($sessions as $row){
-            if($i < 3){ 
+         foreach ($sessions as $row){ 
                 print('<tr>');
                 print('<td class="teal-text"><b>ID:</b></td>');
                 print('<td class="teal-text">' . $row['id_sesion'] . '</td>');
@@ -126,45 +111,16 @@ $lastTreatmentid = 0;
                 print('<td>' . $row['nombres'] . '</td>');
                 print('</tr>');
                 }
-               $i++;
-               }
          ?>
       </table>
    </div>
          
          <div class="modal-footer">
     <div class="row">
-<div class="col s3">
-          <a href="#/asignar-antecedente/<?php print$history['id_paciente'];?>" class="left-align btn teal">
-          N. Antecendete
-          </a>
-      </div>
-      <div class="col s2">
-          <?php 
-          if($lastStatus == 0 ){
-              print('<span class="btn teal disabled">N Sesion </span>');
-            }else{
-              print('<a href="#/asignar-sesion/' . $lastTreatmentid . '"');
-              print $lastTreatmentid . '" class="left-align btn teal">
-              N Sesion</a>';
-            }
-          ?>
-          </a>
-      </div>
-      <div class="col s2">
-          <a href="#/editar-historia/<?php print$history['id_historia'];?>" class="btn teal" onclick="cerrarModal()">
-   Editar
-   </a>
-      </div>
-      <div class="col s2">
-         <a href="getReporteHistoria/<?php print$history['id_paciente'];?>" target="_bank" onclick="cerrarModal()" class="btn teal">
-   Imprimir
-   </a>
-      </div>
-      <div class="col s2">
-         <a href="getReporteHistoria/<?php print$history['id_paciente'];?>" target="_bank" onclick="cerrarModal()" class="btn red darken-3">
-   Borrar
-   </a>
+<div class="col s1 offset-s11">
+          <span class="left-align btn red" onclick="cerrarModal()">
+          Cerrar
+          </span>
       </div>
 
     </div>

@@ -86,6 +86,7 @@ mediperbaricaApp.controller('listHistories', function($scope, $location,
 
 	$scope.counter = 0;
 	$scope.listHistories = function(){
+		console.log('[Debug] llamada a funcion listHistories()');
 		var promiseHistories = serviceHistories.getHistories();
 		promiseHistories.then(
 			function(response){
@@ -104,17 +105,7 @@ mediperbaricaApp.controller('listHistories', function($scope, $location,
 	//Metodo encargado de mostrar una historia
 	$scope.presentHistory = function (idPerson){
 		console.log('[Debug] Llamada funcion presentHistory ' + idPerson);
-		delete($scope.tplPresentHistory);
-		var promiseTemplate = serviceLoadTemplates.getTplPresentHistory(idPerson);
-		promiseTemplate.then(
-			function(response){
-				console.dir(response)
-				$scope.tplPresentHistory = $sce.trustAsHtml(response.data);
-			},
-			function(error){
-				console.dir(error);
-			}
-			);
+
 			
 	};
 	//El controlador inicia obteniendo un listado completo de las historias
@@ -166,36 +157,6 @@ Controllador
 **/
 mediperbaricaApp.controller('assigAntecedent', function($scope, $location,
 												$rootScope, $timeout){
-
-});
-
-/**
-Controlador  encargado de listar los tratamientos
-**/
-mediperbaricaApp.controller('listTreatment', function($scope, $location,
-												$rootScope, $timeout){
-		console.log('[Debug] llamad a Controller listTreatment');
-
-	$scope.counter = 0;
-	$scope.listTreatments = function(){
-		console.log('[Debug] Se llama al metodo listTreatments');
-		var promiseHistories = serviceTratments.getHistories();
-		promiseHistories.then(
-			function(response){
-				$scope.historias = response.data;
-				console.log($scope.historias.length);
-				$scope.counter = $scope.historias.length;
-				console.dir(response);
-			},
-			function(error){
-				console.log('[Debug] Hubo un problema para recuperar las hisotiras');
-				console.dir(error);
-			}
-			);
-	};
-
-	//iniciamos la funcion para que liste los tratamientos al entrar en el CTRLL
-	$scope.listTreatments();
 
 });
 
@@ -261,4 +222,3 @@ mediperbaricaApp.controller('errorController', function($scope, $location,
 												$rootScope, $timeout){
 
 });
-
