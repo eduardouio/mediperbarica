@@ -113,7 +113,7 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 	})
 
 	.when('/asignar-sesion/:idTreatment',{
-		templateUrl : host + 'tplhtml/templates/vacio.html',
+		templateUrl : host + 'tplhtml/templates/modal-sesion-tpl.html',
 		controller : 'deleteHystory'
 	})
 
