@@ -147,6 +147,26 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : ''
 	})
 
+	.when('/nuevo-usuario',{
+		templateUrl : host + 'tplhtml/forms/frm-user-tpl.html',
+		controller : 'deleteHystory'
+	})
+
+	.when('/ver-usuario',{
+		templateUrl : host + 'tplhtml/templates/modal-user-tpl.html',
+		controller : 'deleteHystory'
+	})
+
+	.when('/nuevo-equipo',{
+		templateUrl : host + 'tplhtml/forms/frm-equipo-tpl.html',
+		controller : 'deleteHystory'
+	})
+
+	.when('/ver-equipo',{
+		templateUrl : host + 'tplhtml/templates/modal-equipo-tpl.html',
+		controller : 'deleteHystory'
+	})
+
 	.when('/sin-url',{
 		templateUrl : host + 'tplhtml/templates/vacio.html',
 		controller : 'deleteHystory'

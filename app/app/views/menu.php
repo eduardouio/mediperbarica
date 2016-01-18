@@ -53,8 +53,8 @@
             <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Usuarios</a>
               <div class="collapsible-body">
                 <ul>
-                  <li><a href="#/sin-url">Crear Nuevo Usuario</a></li>
-                  <li><a href="#/sin-url">Cambiar Contraseña</a></li>
+                  <li><a href="#/nuevo-usuario">Crear Nuevo Usuario</a></li>
+                  <li><a href="#/ver-usuario">Cambiar Contraseña</a></li>
                   <li><a href="#/sin-url">Cerrar Sesion</a></li>
                 </ul>
               </div>
@@ -68,6 +68,16 @@
                 </ul>
               </div>
             </li>
+            <li class="bold"><a class="collapsible-header  waves-effect waves-teal">Equipos</a>
+              <div class="collapsible-body">
+                <ul>
+                  <li><a href="#/listar-equipos">Listar Equipos</a></li>
+                  <li><a href="#/nuevo-equipo">Ingresar Equipo</a></li>
+                  <li><a href="#/sin-url">Reportes Equipos</a></li>
+                </ul>
+              </div>
+            </li>
+
           </ul>
         </li>
       </ul>

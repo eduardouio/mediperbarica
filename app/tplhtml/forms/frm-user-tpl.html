@@ -1,80 +1,54 @@
-<form class="form-horizontal">
-<fieldset>
+<!-- Inicio de contenedor de la app de Personal-->
+ <div class="row card">
+    <form class="col s12">
+      <br>
+      <span class="blue-text">Datos Nuevo Usuario:</span>
+       
+      <div class="row">
+        <div class="input-field col s4">
+          <i class="material-icons prefix">picture_in_picture</i>
+          <input id="username" type="text" class="validate" name="username" maxlength="30" ng-model="user.username">
+          <label for="username">Usuario</label>
+        </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="apellidos" name="apellidos" maxlength="30" type="text" class="validate" ng-model="user.apellidos">
+          <label for="apellidos">Apellidos</label>
+        </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="nombres" name="nombres" maxlength="30" type="text" class="validate" ng-model="user.nombres">
+          <label for="nombres">Nombres</label>
+        </div>
+       </div>
+      <div class="row">
+        <div class="input-field col s4">
+          <i class="material-icons prefix">email</i>
+          <input id="mail" name="mail" maxlength="45" type="email" class="validate" ng-model="user.mail">
+          <label for="mail">Mail</label>
+        </div>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">lock_outline</i>
+          <input id="password" name="password" maxlength="45" type="password" class="validate" ng-model="user.password">
+          <label for="password">Contraseña</label>
+        </div>
+       </div>
 
-<!-- Form Name -->
-<legend>USER</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="id_INT">INT:</label>  
-  <div class="col-md-2">
-  <input id="id_INT" name="id_INT" placeholder="INT:" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="password">Password:</label>  
-  <div class="col-md-6">
-  <input id="password" name="password" placeholder="Password:" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="last_login">Login:</label>  
-  <div class="col-md-4">
-  <input id="last_login" name="last_login" placeholder="Login:" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="username">Username:</label>  
-  <div class="col-md-5">
-  <input id="username" name="username" placeholder="Username:" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="firts_name">Firts:</label>  
-  <div class="col-md-5">
-  <input id="firts_name" name="firts_name" placeholder="Firts:" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="last_name">Last:</label>  
-  <div class="col-md-5">
-  <input id="last_name" name="last_name" placeholder="Last:" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="email">email:</label>  
-  <div class="col-md-6">
-  <input id="email" name="email" placeholder="email:" class="form-control input-md" type="text">
-    
-  </div>
-</div>
-
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="button1id"></label>
-  <div class="col-md-8">
-    <button id="button1id" name="button1id" class="btn btn-default">Guardar</button>
-    <button id="button2id" name="button2id" class="btn btn-primary">Limpiar</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
+       <br>
+       <div class="row">
+       <div class="col s4 offset-s8">
+       <input type="submit" value="Guardar" class="btn">
+       <a href="" class="btn red">Cancelar</a>
+      </div>
+      </div>
+      </form>
+    </div>
+  <script type="text/javascript">
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 180, // Creates a dropdown of 15 years to control year
+    format: 'dd/mm/yyyy'
+  });
+       
+  </script>
