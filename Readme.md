@@ -39,3 +39,104 @@ Anotaciones:
 
 3.- configura el pie de pagina para que carge solo los archivos js necesarios para el funcionamiento de la pagina que se esta mostrando, para que sto sea posible escribir cada controlador en un fichrero diferente 
 
+Rutas a programar
+
+ 
+ forms
+ crear-antecedente/:idPerson
+ /editar-antecedente/:idAntecedent
+ tplhtml/forms/frm-antecedente-tpl.html
+ /crear-cliente
+ tplhtml/forms/frm-cliente-tpl.html
+ /editar-cliente/:idCustomer
+ tplhtml/forms/frm-cliente-tpl.html
+ /crear-equipo
+ tplhtml/forms/frm-equipo-tpl.html
+ /editar-equipo/:idEquipment
+ tplhtml/forms/frm-equipo-tpl.html
+ /crear-factura
+ tplhtml/forms/frm-factura-tpl.html
+ /crear-historia
+ tplhtml/forms/frm-historia-tpl.html
+ /editar-historia/idPatient
+ tplhtml/forms/frm-historia-tpl.html
+ /crear-personal
+ tplhtml/forms/frm-personal-tpl.html
+ /editar-personal/idEmployed
+ tplhtml/forms/frm-personal-tpl.html
+ /crear-sesion/:idTreatment
+ tplhtml/forms/frm-sesion-tpl.html
+ /editar-sesion/:idSession
+ tplhtml/forms/frm-sesion-tpl.html
+ /crear-usuario/
+ tplhtml/forms/frm-user-tpl.html
+ /editar-usuario/:idUser
+ tplhtml/forms/frm-user-tpl.html
+
+
+
+
+ templates
+ /
+ tplhtml/templates/inicio-tpl.html
+ /acerca-mediperbarica
+ tplhtml/templates/acerca-app-tpl.html
+ /error-server
+ tplhtml/templates/error-server-tpl.html
+ /listar-historias
+ tplhtml/templates/lista-historias-tpl.html
+ /listar-tratamientos
+ tplhtml/templates/listar-tratamientos-tpl.html
+ #ver-antecedente/:idaAntecedent
+ tplhtml/templates/modal-antecedente-tpl.html
+ #ver-cliente/:idCustomer
+ tplhtml/templates/modal-cliente-tpl.html
+ #ver-equipo/:idEquipment
+ tplhtml/templates/modal-equipo-tpl.html
+ #ver-sesion/:idSession
+ tplhtml/templates/modal-sesion-tpl.html
+ /ver-historia/idHistory
+ tplhtml/templates/presentar-historia-tpl.html
+ /ver-personal/idEmployed
+ tplhtml/templates/presentar-personal-tpl.html
+ ver-tratamiento/idTreatment
+ tplhtml/templates/presentar-tratamiento-tpl.html
+ /sin-url
+ tplhtml/templates/vacio.html
+
+
+resumen URL
+
+ forms
+ crear-antecedente/:idPerson
+ /editar-antecedente/:idAntecedent
+ /crear-cliente
+ /editar-cliente/:idCustomer
+ /crear-equipo
+ /editar-equipo/:idEquipment
+ /crear-factura
+ /crear-historia
+ /editar-historia/idPatient
+ /crear-personal
+ /editar-personal/idEmployed
+ /crear-sesion/:idTreatment
+ /editar-sesion/:idSession
+ /crear-usuario/
+ /editar-usuario/:idUser
+
+
+
+ templates
+ /
+ /acerca-mediperbarica
+ /error-server
+ /listar-historias
+ /listar-tratamientos
+ #ver-antecedente/:idaAntecedent
+ #ver-cliente/:idCustomer
+ #ver-equipo/:idEquipment
+ #ver-sesion/:idSession
+ /ver-historia/idHistory
+ /ver-personal/idEmployed
+ ver-tratamiento/idTreatment
+ /sin-url
