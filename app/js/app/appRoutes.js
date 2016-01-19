@@ -162,7 +162,7 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'deleteHystory'
 	})
 
-	.when('/ver-equipo',{
+	.when('/ver-equipo/:idEquipment',{
 		templateUrl : host + 'tplhtml/templates/modal-equipo-tpl.html',
 		controller : 'deleteHystory'
 	})
