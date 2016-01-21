@@ -202,7 +202,7 @@ CREATE TABLE `gelvscom_mediperbarica`.`cobro` (
 CREATE TABLE `log_user` (
   `id_log` int(10) unsigned NOT NULL,
   `accion` varchar(45) NOT NULL,
-  `dato_original` varchar(1000) DEFAULT NULL,
-  `dato_nuevo` varchar(1000) DEFAULT NULL,
+  `old_data` varchar(1000) DEFAULT NULL,
+  `new_data` varchar(1000) DEFAULT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
