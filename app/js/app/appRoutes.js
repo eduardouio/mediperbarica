@@ -19,158 +19,161 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'startController'
 	})
 
-	.when('/crear-personal',{
-		templateUrl : host + 'tplhtml/templates/presentar-personal-tpl.html',
-		controller : ''
-	})
-
-	.when('/presentar-personal/:idPersonal',{
-		templateUrl : host + 'tplhtml/templates/presentar-personal-tpl.html',
-		controller : ''
-	})
-
 	.when('/listar-historias',{
-		templateUrl : host + 'tplhtml/templates/lista-historias-tpl.html',
-		controller : 'listHistories'
+		templateUrl : host + 'tplhtml/templates/listar-historias-tpl.html',
+		controller : 'historiesController'
 	})
 
 	.when('/crear-historia',{
 		templateUrl : host + 'tplhtml/forms/frm-historia-tpl.html',
-		controller: 'createHistoryController'
+		controller : 'historiesController'
 	})
 
-	.when('/editar-historia/:historyID',{
+	.when('/editar-historia/:idHistory',{
 		templateUrl : host + 'tplhtml/forms/frm-historia-tpl.html',
-		controller : 'editHystory'
-	})
+		controller : 'historiesController'
+	})	
 
-	.when('/eliminar-historia/:historyID',{
-		templateUrl : host + 'tplhtml/templates/vacio.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/presentar-historia/:historyID',{
+	.when('/presentar-historia/:idHistory',{
 		templateUrl : host + 'tplhtml/templates/presentar-historia-tpl.html',
-		controller : 'presentHystory'
-	})
+		controller : 'historiesController'
+	})		
 
-	.when('/asignar-antencedente/:idPerson',{
-		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
-		controller : 'assigAntecedent'
-	})
-
-	.when('/mostrar-antecedente/:idPerson',{
-		templateUrl : host + 'tplhtml/templates/modal-antecedente-tpl.html',
-		controller : ''
-	})
-
-	.when('/eliminar-antencedente/:idAntecedent',{
-		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
-		controller : 'assigAntecedent'
-	})
-	.when('/listar-antencedentes/:idPerson',{
-		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
-		controller : 'assigAntecedent'
-	})
-	.when('/editar-antencedente/:idAntecedent',{
-		templateUrl : host + 'tplhtml/forms/frm-antecedente-tpl.html',
-		controller : 'assigAntecedent'
+	.when('/eliminar-historia/:idHistory',{
+		templateUrl : host + 'tplhtml/templateUrl/presentar-historia-tpl.html',
+		controller : 'historiesController'
 	})
 
 	.when('/listar-tratamientos',{
 		templateUrl : host + 'tplhtml/templates/listar-tratamientos-tpl.html',
-		controller : 'listTreatment'
+		controller : 'treatmentsController'
 	})
 
-	.when('/presentar-tratamiento/:idTreatment',{
-		templateUrl : host + 'tplhtml/templates/presentar-tratamiento-tpl.html',
-		controller : 'presentTreatment'
-	})
-
-	.when('/crear-tratamiento/:idPerson',{
+	.when('/crear-tratamiento/:idHistory',{
 		templateUrl : host + 'tplhtml/forms/frm-tratamiento-tpl.html',
-		controller : 'createTreatment'
+		controller : 'treatmentsController'
 	})
 
-	.when('/editar-tratamiento/:idTreatment' , {
+	.when('/editar-tratamiento/:idTreatment',{
 		templateUrl : host + 'tplhtml/forms/frm-tratamiento-tpl.html',
-		controller : 'editTreatment'
+		controller : 'treatmentsController'
 	})
 
 	.when('/eliminar-tratamiento/:idTreatment',{
-		templateUrl : host + 'tplhtml/templates/vacio.html',
-		controller : 'deleteTreatment'
+		templateUrl : host + 'tplhtml/templates/presentar-tratamiento-tpl.html',
+		controller : 'treatmentsController'
+	})
+
+	.when('/crear-personal',{
+		templateUrl : host + 'tplhtml/forms/frm-presonal-tpl.html',
+		controller : 'personalController'
+	})
+
+	.when('/editar-personal/:idPersonal',{
+		templateUrl : host + 'tplhtml/froms/frm-presonal-tpl.html',
+		controller : 'personalController'
+	})
+
+	.when('/listar-personal',{
+		templateUrl : host + 'tplhtml/templates/listar-personal-tpl.html',
+		controller : 'personalController'
+	})
+
+	.when('/presentar-personal/:idPersonal',{
+		templateUrl : host + 'tplhtml/templates/presentar-personal-tpl.html',
+		controller : 'personalController'
+	})
+
+	.when('/eliminar-personal/:idPersonal',{
+		templateUrl : host + 'tplhtml/templates/presentar-personal-tpl.html',
+		controller : 'personalController'
+	})
+
+	.when('/emitir-factura',{
+		templateUrl : host + 'tplhtml/forms/frm-factura-tpl.html',
+		controller : 'invoiceController'
+	})
+
+	.when('/aunlar-factura/:idInvoice',{
+		templateUrl : host + 'tplhtml/templates/presentar-factura-tpl-html',
+		controller : 'invoiceController'
+	})
+
+	.when('/presentar-factura/:idInvoice',{
+		templateUrl : host + 'tplhtml/templates/presentar-factura-tpl-html',
+		controller : 'invoiceController'
+	})
+
+	.when('/crear-cliente',{
+		templateUrl : host + 'tplhtml/forms/frm-cliente-tpl.html',
+		controller : 'customerController'
+	})
+
+	.when('/editar-cliente/:idCustomer',{
+		templateUrl : host + 'tplhtml/forms/frm-cliente-tpl.html',
+		controller : 'customerController'
+	})
+
+	.when('/eliminar-cliente/:idCustomer',{
+		templateUrl : host + 'tplhtml/templates/presentar-cliente-tpl.html',
+		controller : 'customerController'
+	})
+
+	.when('/presentar-cliente/:idCustomer',{
+		templateUrl : host + 'tplhtml/templates/presentar-cliente-tpl.html',
+		controller : ''
+	})
+
+	.when('/crear-equipo',{
+		templateUrl : host + 'tplhtml/froms/frm-equipo-tpl.html',
+		controller : 'machineController'
+	})
+
+	.when('/editar-equipo/:idMachine',{
+		templateUrl : host + 'tplhtml/froms/frm-equipo-tpl.html',
+		controller : 'machineController'
+	})
+
+	.when('/eliminar-equipo/:idMachine',{
+		templateUrl : host + 'tplhtml/templates/presentar-equipo-tpl.html',
+		controller : 'machineController'
+	})
+
+	.when('/presentar-equipo/:idMachine',{
+		templateUrl : host + 'tplhtml/templates/presentar-equipo-tpl.html',
+		controller : 'machineController'
+	})
+
+	.when('/crear-usuario',{
+		templateUrl : host + 'tplhtml/forms/frm-user-tpl.html',
+		controller : 'userController'
+	})
+
+	.when('/eliminar-usuario/:idUser',{
+		templateUrl : host + 'tplhtml/forms/frm-user-tpl.html',
+		controller : 'userController'
+	})
+
+	.when('/suspender-usuario/:idUser',{
+		templateUrl : host + 'tplhtml/forms/frm-user-tpl.html',
+		controller : 'userController'
+	})
+
+	.when('/editar-usuario/:idUser',{
+		templateUrl : host + 'tplhtml/forms/frm-user-tpl.html',
+		controller : 'userController'
 	})
 
 	.when('/acerca',{
 		templateUrl : host + 'tplhtml/templates/acerca-app-tpl.html',
-		controller : 'aboutApp'
+		controller : 'aboutController'
 	})
 
-	.when('/error',{
+	.when('/error-comunicacion',{
 		templateUrl : host + 'tplhtml/templates/error-server-tpl.html',
 		controller : 'errorController'
 	})
 
-	.when('/asignar-sesion/:idTreatment',{
-		templateUrl : host + 'tplhtml/templates/modal-sesion-tpl.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/eliminiar-sesion/:idSesion',{
-		templateUrl : host + 'tplhtml/templates/vacio.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/editar-sesion/:idSesion',{
-		templateUrl : host + 'tplhtml/templates/vacio.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/listar-sesiones/:idTreatment',{
-		templateUrl : host + 'tplhtml/templates/vacio.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/nueva-factura',{
-		templateUrl : host + 'tplhtml/forms/frm-factura-tpl.html',
-		controller : ''
-	})
-
-	.when('/listar-facturas',{
-		templateUrl : host + 'tplhtml/forms/frm-factura-tpl.html',
-		controller : ''
-	})
-
-	.when('/ver-cliente/:idCoustumer',{
-		templateUrl : host + 'tplhtml/templates/modal-cliente-tpl.html',
-		controller : ''
-	})
-
-	.when('/nuevo-usuario',{
-		templateUrl : host + 'tplhtml/forms/frm-user-tpl.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/ver-usuario',{
-		templateUrl : host + 'tplhtml/templates/modal-user-tpl.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/nuevo-equipo',{
-		templateUrl : host + 'tplhtml/forms/frm-equipo-tpl.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/ver-equipo/:idEquipment',{
-		templateUrl : host + 'tplhtml/templates/modal-equipo-tpl.html',
-		controller : 'deleteHystory'
-	})
-
-	.when('/sin-url',{
-		templateUrl : host + 'tplhtml/templates/vacio.html',
-		controller : 'deleteHystory'
-	})
 	.otherwise({redirectTo : '/'});
 
 });
