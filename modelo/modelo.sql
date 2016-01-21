@@ -195,3 +195,13 @@ CREATE TABLE `gelvscom_mediperbarica`.`cobro` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
      ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- -----------------------------------------------------------------------------
+-- Tabla log de actividades de ususario
+-- -----------------------------------------------------------------------------
+CREATE TABLE log_user(
+id_log INT unsigned not null,
+dato_original VARCHAR(1000),
+dato_nuevo VARCHAR(1000),
+fecha TIMESTAMP default CURRENT_TIMESTAMP
+);
