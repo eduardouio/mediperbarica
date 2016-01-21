@@ -199,9 +199,10 @@ CREATE TABLE `gelvscom_mediperbarica`.`cobro` (
 -- -----------------------------------------------------------------------------
 -- Tabla log de actividades de ususario
 -- -----------------------------------------------------------------------------
-CREATE TABLE log_user(
-id_log INT unsigned not null,
-dato_original VARCHAR(1000),
-dato_nuevo VARCHAR(1000),
-fecha TIMESTAMP default CURRENT_TIMESTAMP
-);
+CREATE TABLE `log_user` (
+  `id_log` int(10) unsigned NOT NULL,
+  `accion` varchar(45) NOT NULL,
+  `dato_original` varchar(1000) DEFAULT NULL,
+  `dato_nuevo` varchar(1000) DEFAULT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
