@@ -114,7 +114,7 @@ CREATE TABLE `tratamiento` (
   `motivo_tratamiento` varchar(360) NOT NULL,
   `nro_sesiones` smallint(6) NOT NULL,
   `descuento` decimal(4,2) NOT NULL DEFAULT '0.00',
-  `costo` decimal(4,2) NOT NULL DEFAULT '0.00',
+  `costo` decimal(6,2) NOT NULL DEFAULT '0.00',
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `notas` varchar(360) DEFAULT NULL,
   PRIMARY KEY (`id_tratamiento`),
@@ -200,9 +200,10 @@ CREATE TABLE `gelvscom_mediperbarica`.`cobro` (
 -- Tabla log de actividades de ususario
 -- -----------------------------------------------------------------------------
 CREATE TABLE `log_user` (
-  `id_log` int(10) unsigned NOT NULL,
+  `id_log` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `accion` varchar(45) NOT NULL,
-  `old_data` varchar(1000) DEFAULT NULL,
-  `new_data` varchar(1000) DEFAULT NULL,
+  `tabla` varchar(45) NOT NULL,
+  `old_data` varchar(500) DEFAULT NULL,
+  `new_data` varchar(500) DEFAULT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
