@@ -37,13 +37,25 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 405:
+      case 100:
       objError = {
-        code : '405',
+        code : '100',
         type : 'Error',
         title : 'Error en Aplicacion',
         message : 'No se puede enviar los datos al servidor, compruebe' + 
                   'su conexión a Internet e intente nuevamente.',
+        data : data
+      };
+      break;
+
+      case 500:
+      objError = {
+        code : '500',
+        type : 'Error',
+        title : 'Error De Servidor',
+        message : 'Error interno de servidor la peticion no se procesó' + 
+                  'por que la misma causó un error, favor contacte con el' + 
+                  'administrador del servidor <eduardouio7@gmail.com>',
         data : data
       };
       break;
@@ -59,9 +71,9 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1001:
+      case 2000:
       objError = {
-        code : '1001',
+        code : '2001',
         type : 'Error',
         title : 'Faltan Datos',
         message : 'Falta uno o mas datos en el formulario de registro o es' + 
@@ -70,9 +82,9 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1002:
+      case 3000:
       objError = {
-        code : '1002',
+        code : '3000',
         type : 'Mensaje',
         title : 'Registro Guardado Correctamente',
         message : 'El registro se creo satifactoriamente',
@@ -80,9 +92,9 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1003:
+      case 3001:
       objError = {
-        code : '1003',
+        code : '3001',
         type : 'Mensaje',
         title : 'Registro Guardado Correctamente',
         message : 'Las modificaciones en el registro fueron guardadas',
@@ -90,9 +102,9 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1004:
+      case 2001:
       objError = {
-        code : '1004',
+        code : '2001',
         type : 'Error',
         title : 'Registro Inexistente',
         message : 'El registro que intenta ver no existe',
@@ -100,9 +112,9 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1005:
+      case 3002:
       objError = {
-        code : '1005',
+        code : '3002',
         type : 'Mensaje',
         title : 'Registros Listados',
         message : 'Los registros se listaron correctamente',
@@ -110,9 +122,9 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1006:
+      case 3003:
       objError = {
-        code : '1006',
+        code : '3003',
         type : 'Mensaje',
         title : 'Registro Eliminado',
         message : 'El registro fue eliminado correctamente',
@@ -120,7 +132,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1007:
+      case 2002:
       objError = {
         code : '1007',
         type : 'Error',
@@ -130,9 +142,9 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 3000:
+      case 3004:
       objError = {
-        code : '3000',
+        code : '3004',
         type : 'Mensaje',
         title : 'Sesión Iniciada',
         message : 'La sesión se inicio correctamente',
@@ -140,9 +152,9 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 3001:
+      case 1001:
       objError = {
-        code : '3001',
+        code : '1001',
         type : 'Advertencia',
         title : 'Sesión Terminada',
         message : 'La sesión ha caducado, inicie una nueva sesión',
@@ -150,19 +162,20 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 3002:
+      case 2002:
       objError = {
-        code : '3002',
+        code : '2002',
         type : 'Error',
         title : 'Falta Datos',
-        message : 'Los campos de usuario y contraseña son requeridos',
+        message : 'Uno de los campos no tiene informació, ' + 
+        'llénelo e intenete nuevamente',
         data : data
       };
       break;
 
-      case 3002:
+      case 2003:
       objError = {
-        code : '5001',
+        code : '2003',
         type : 'Error',
         title : 'Partametro Incompleto',
         message : 'El parametro pasado a la función BackEnd esta Incompleto',
