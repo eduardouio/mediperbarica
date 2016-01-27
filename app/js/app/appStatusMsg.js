@@ -151,7 +151,7 @@ function showStatus(codeNumber, data){
         code : '2006',
         type : 'Error',
         title : 'Numero de Identificacion Duplicado',
-        message : 'El número de Cédula ya esta asignado a otra historia, ' + 
+        message : 'El número de Identificación ya esta asignado a otro registro, ' + 
                   'Rectifique e intente nuevamente',
         data : data
       };
