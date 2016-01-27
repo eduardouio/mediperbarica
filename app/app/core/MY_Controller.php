@@ -25,7 +25,7 @@ class MY_Controller extends CI_Controller{
      * @param (array) arreglo de session
      * @return (bool) existe la sesion 
      */
-	public function _checkSesion(){
+	public function _checkSession(){
         if($this->session->userdata('logueado')){
             //si existe retorna 1
             return 1;  
@@ -35,6 +35,39 @@ class MY_Controller extends CI_Controller{
             $this->_redirectLoginPage();
         }
 	}
+
+    /**
+     * Valida los datos de los formularios contra una matriz
+     * @param  (array) $params requisitos minimos
+     * @param (array) $userData valores ingresados por user
+     * @param (int) $items cantidad de items obligatorios
+     * @return (int) codigo de estado
+     */
+    public function _validUserData($params,$userData,$items){
+        #status 1 todo esta bien y contador para datos obligatorios
+        $status = 1;
+        $i = 0;
+
+        #comprobamos que los datos del user tenga datos
+        if(count($userData) > 0){
+            foreach ($userData as $key => $value) {
+                $i++;
+                #comprobamos las longitudes
+                if(!(($params[$key]) < (strlen($value)))){
+                    return 2005;
+                }
+            }
+            #comprobamos que se tenga la cantidad de items minima
+            if($i == $items){
+                return 1
+            }else{
+                return 2000;
+            }
+        }else{
+            #arreglo vacio
+            return 4000;
+        }
+    }
 
     /**
      * Redirecciona Login
