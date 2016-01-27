@@ -19,7 +19,6 @@ class Tratamientos extends MY_Controller {
 	protected $Controller_ = 'tratamientos';
 	protected $Result_;
 	protected $CatalogoVistas_;
-	protected $Pagina_;
 	protected $Query_;
 	protected $ModuloAngular_ = 'tratamientos.js';
 
@@ -32,20 +31,6 @@ class Tratamientos extends MY_Controller {
 		parent::__construct();
 		$this->load->library('rest');
 		$this->_checkSesion($this->session->all_userdata());
-	}
-
-	/*************************************************************************
-	* Muestra la pagina de inicio y sus librerias
-	* @method index
-	* @return void	  
-	 ************************************************************************/
-	public function index()
-	{	
-		$this->CatalogoVistas_['cabecera'] = array();
-		$this->CatalogoVistas_['sidebar'] = array('title' => 'Tratamientos');
-		$this->CatalogoVistas_['menu'] = array('tratamientos' => 'active');
-		$this->CatalogoVistas_['contenidos'] = array();		
-		$this->_mostrarHTML($this->CatalogoVistas_, $this->ModuloAngular_);
 	}
 
 	/**

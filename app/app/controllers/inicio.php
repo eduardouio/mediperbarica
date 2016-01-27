@@ -18,7 +18,7 @@ class Inicio extends MY_Controller {
 	 ************************************************************************/
 	public function __construct(){
 		parent::__construct();
-		$this->_checkSesion($this->session->all_userdata());
+		$this->_checkSession($this->session->all_userdata());
 		$this->load->library('form_validation');
 	}
 
