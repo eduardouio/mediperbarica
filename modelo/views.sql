@@ -73,13 +73,18 @@ LEFT JOIN historia as hst USING(id_paciente);
 -- -----------------------------------------------------------------------------
 -- Consulta de listado de personal
 -- -----------------------------------------------------------------------------
-SELECT per.nombres,
+SELECT 
+	per.id_personal,
+	per.nombres,
 	per.cargo,
     per.celular,
     per.mail,
+    per.creado,
+    per.direccion,
+    per.notas,
     (SELECT count(id_sesion) FROM sesion WHERE id_personal = per.id_personal) as tratamientos,
     (SELECT count(id_tratamiento) FROM tratamiento WHERE id_personal = per.id_personal) as sesiones
-FROM personal as per
+FROM personal as per;
 
 
 -- -----------------------------------------------------------------------------
