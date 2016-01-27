@@ -8,7 +8,8 @@
 */
 class MY_Controller extends CI_Controller{
 
-	
+	public $Pagina_;
+
 	public function __construct() {
        parent::__construct();
        #$this->_checkSesion();

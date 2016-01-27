@@ -20,7 +20,7 @@ class Login extends MY_Controller {
 	protected $MySession_ = array();
 	protected $CatalogoVistas_;
 	protected $Result_;
-	protected $Pagina_;
+	public $Pagina_;
 	protected $Query_;
 	protected $ModuloAngular_ = 'login.js';
 

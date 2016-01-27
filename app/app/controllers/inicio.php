@@ -6,7 +6,7 @@ class Inicio extends MY_Controller {
 	protected $Controller_ = 'welcome';
 	protected $Result_;
 	protected $CatalogoVistas_;
-	protected $Pagina_;
+	public $Pagina_;
 	protected $Query_;
 	private $CodeHTTP = 200;
 	private $ContentType = 'application/json';
@@ -28,7 +28,7 @@ class Inicio extends MY_Controller {
 		$this->CatalogoVistas_['cabecera'] = array();
 		$this->CatalogoVistas_['menu'] = array();
 		$this->CatalogoVistas_['contenidos'] = array();
-		$this->_mostrarhtml($this->CatalogoVistas_,'historias.js');
+		$this->_mostrarhtml($this->CatalogoVistas_);
 	}
 
 	
