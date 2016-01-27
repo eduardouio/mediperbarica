@@ -45,7 +45,7 @@
 </colgroup>
   <tr>
     <th colspan="9">
-    <img src="<?php echo base_url();?>img/logo_blanco.png" width = "100" style="float:left; margin:0px;" >
+    <img src="<?php echo base_url();?>images/img/logo_blanco.png" width = "100" style="float:left; margin:0px;" >
     <h2>HISTORIA M&Eacute;DICA</h2>
     Reporte de historia de Medicina Hiperbarica S.A.</th>
   </tr>
@@ -99,10 +99,6 @@
     <td class="tg-031e" colspan="2"><?php print $historia['telefono_familiar'];?></td>
   </tr>
   <tr>
-    <td class="tg-34fq">Dirección:<br></td>
-    <td class="tg-031e" colspan="8"><?php print $historia['direccion_familiar'];?></td>
-  </tr>
-  <tr>
     <td class="tg-2sfh" colspan="9">ANTECEDENTES MÉDICOS:<br><br></td>
   </tr>
   <?php
@@ -116,19 +112,33 @@
   <tr>
     <td class="tg-2sfh" colspan="9">HISTORIA DE TRATAMIENTOS:<br><br></td>
   </tr>
-  <tr>
-    <td class="tg-34fq">Fecha:</td>
-    <td class="tg-031e"></td>
-    <td class="tg-34fq" colspan="2">Sesiones:</td>
-    <td class="tg-031e"></td>
-    <td class="tg-34fq">Doctor:</td>
-    <td class="tg-031e" colspan="3"></td>
-  </tr>
-  <tr>
-    <td class="tg-34fq">Motivo Tratamiento:<br></td>
-    <td class="tg-031e" colspan="8"></td>
-  </tr>
-  <tr>
+  <?php
+  foreach ($tratamientos as $row) {
+    #status tratamiento
+    $status = '<b style="color:green;">Activo';
+    $saldo_sesiones = ((int)$row['nro_sesiones'] - (int)$row['sesiones_realizadas']);
+    if($saldo_sesiones < 1){
+      $status = '<b style="color:red;">Terminado';
+    }
+
+    print('<tr><td class="tg-34fq">Fecha:</td><td class="tg-031e">' .
+      $row['creado'] . '</td>');
+    print('<td class="tg-34fq" colspan="2">Sesiones:</td><td class="tg-031e">' .
+        $row['nro_sesiones'] . '</td>');
+    print('<td class="tg-34fq">Doctor:</td><td class="tg-031e" colspan="3">' .
+      $row['personal'] . '</td></tr>' );
+    print('<tr><td class="tg-34fq">Motivo Tratamiento:<br></td>' .
+     '<td class="tg-031e" colspan="4">' . $row['motivo_tratamiento'] . '</td>'
+      );
+     print('<td class="tg-34fq">Estado:<br></td>' .
+     '<td class="tg-031e" colspan="1">' . $status . '</b></td>'
+      );
+     print('<td class="tg-34fq">ID:<br></td>' .
+     '<td class="tg-031e" colspan="1">' . $row['id_tratamiento'] . '</td>'
+      );
+  }
+  ?>
+  </tr><tr>
     <td class="tg-2sfh" colspan="9">FIRMAS:<br><br></td>
   </tr>
   <tr>
