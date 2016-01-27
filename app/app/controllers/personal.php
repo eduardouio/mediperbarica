@@ -87,6 +87,18 @@ class Personal extends My_Controller {
 	}
 
 	/**
+	 * Guarda un empleado
+	 * @param (array) employed
+	 * @return (array) status
+	 */
+	public function saveEmployee(){
+		#comprobamos que solo llegen por POST
+		if($this->rest->_getRequestMethod() != 'POST'){
+			$this->_notAuthorized();
+		}
+	}
+
+	/**
 	 * Valida los datos del empleado
 	 * @param (array) employee
 	 * @return (int) codigo de estado 

@@ -84,8 +84,7 @@ class Historias extends MY_Controller {
 	 ************************************************************************/
 	public function saveHistory(){
 		if( $this->rest->_getRequestMethod() != "POST"){
-			$this->rest->_responseHttp('Entrada no autorizada, favor vuelva a '.
-													 base_url() ,406);
+			$this->_notAuthorized();
 		}
 		#variable de respuesta
 		$response = array(

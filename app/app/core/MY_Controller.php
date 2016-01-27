@@ -59,7 +59,7 @@ class MY_Controller extends CI_Controller{
             }
             #comprobamos que se tenga la cantidad de items minima
             if($i == $items){
-                return 1
+                return 1;
             }else{
                 return 2000;
             }
@@ -75,6 +75,11 @@ class MY_Controller extends CI_Controller{
     protected function _redirectLoginPage(){
         header('Status: 301 Moved Permanently', false, 301);
         header('Location: ' . base_url());
+    }
+
+    public function _notAuthorized(){
+        $this->rest->_responseHttp('Entrada No autorizada favor vuelva a ' .
+                    base_url(),406);
     }
 
 	  /*************************************************************************
