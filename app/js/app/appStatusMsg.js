@@ -37,16 +37,6 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 100:
-      objError = {
-        code : '100',
-        type : 'Error',
-        title : 'Error en Aplicacion',
-        message : 'No se puede enviar los datos al servidor, compruebe' + 
-                  'su conexión a Internet e intente nuevamente.',
-        data : data
-      };
-      break;
 
       case 500:
       objError = {
@@ -56,6 +46,17 @@ function showStatus(codeNumber, data){
         message : 'Error interno de servidor la peticion no se procesó' + 
                   'por que la misma causó un error, favor contacte con el' + 
                   'administrador del servidor <eduardouio7@gmail.com>',
+        data : data
+      };
+      break;
+    
+      case 100:
+      objError = {
+        code : '100',
+        type : 'Error',
+        title : 'Error en Aplicacion',
+        message : 'No se puede enviar los datos al servidor, compruebe' + 
+                  'su conexión a Internet e intente nuevamente.',
         data : data
       };
       break;
@@ -71,13 +72,87 @@ function showStatus(codeNumber, data){
       };
       break;
 
+      case 1001:
+      objError = {
+        code : '1001',
+        type : 'Advertencia',
+        title : 'Sesión Terminada',
+        message : 'La sesión ha caducado, inicie una nueva sesión',
+        data : data
+      };
+      break;
+
       case 2000:
+      objError = {
+        code : '2000',
+        type : 'Error',
+        title : 'Faltan Datos',
+        message : 'Falta uno o mas datos en el formulario de registro, ' + 
+                  ' compruebe e intente nuevamente',
+        data : data
+      };
+      break;
+
+      case 2001:
       objError = {
         code : '2001',
         type : 'Error',
-        title : 'Faltan Datos',
-        message : 'Falta uno o mas datos en el formulario de registro o es' + 
-                'es demaciado corto ejem. (Dirección), (Teléfono), (Nombre) etc.',
+        title : 'Registro Inexistente',
+        message : 'El registro que intenta ver no existe',
+        data : data
+      };
+      break;
+      case 2002:
+      objError = {
+        code : '2002',
+        type : 'Error',
+        title : 'El Servidor Retornó Un Valor Vacio',
+        message : 'No existen datos para esta consulta',
+        data : data
+      };
+      break;
+      
+      case 2003:
+      objError = {
+        code : '2003',
+        type : 'Error',
+        title : 'User y Password incorrecto',
+        message : 'El nombre de usuario o la contraseña, ' + 
+        'está incorrecto, intente nuevamente',
+        data : data
+      };
+      break;
+
+      case 2004:
+      objError = {
+        code : '2004',
+        type : 'Error',
+        title : 'No se puede eliminar el registro',
+        message : 'El registro que intenta eliminar tiene otros registros, ' + 
+        'dependientes lo cual impide su borrado para poder cuidar ' +
+          ' la integridad de la base de datos',
+        data : data
+      };
+      break;
+
+    case 2005:
+      objError = {
+        code : '2005',
+        type : 'Error',
+        title : 'Dato insuficiente corto',
+        message : 'Uno de los datos es demasiado corto para lo permitido, ' + 
+                  'Rectifique e intente nuevamente',
+        data : data
+      };
+      break;
+
+    case 2006:
+      objError = {
+        code : '2006',
+        type : 'Error',
+        title : 'Numero de Identificacion Duplicado',
+        message : 'El número de Cédula ya esta asignado a otra historia, ' + 
+                  'Rectifique e intente nuevamente',
         data : data
       };
       break;
@@ -96,18 +171,8 @@ function showStatus(codeNumber, data){
       objError = {
         code : '3001',
         type : 'Mensaje',
-        title : 'Registro Guardado Correctamente',
+        title : 'Registro Editado Correctamente',
         message : 'Las modificaciones en el registro fueron guardadas',
-        data : data
-      };
-      break;
-
-      case 2001:
-      objError = {
-        code : '2001',
-        type : 'Error',
-        title : 'Registro Inexistente',
-        message : 'El registro que intenta ver no existe',
         data : data
       };
       break;
@@ -132,16 +197,6 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 2002:
-      objError = {
-        code : '1007',
-        type : 'Error',
-        title : 'El Servidor Retornó Un Valor Vacio',
-        message : 'No existen datos para esta consulta',
-        data : data
-      };
-      break;
-
       case 3004:
       objError = {
         code : '3004',
@@ -152,36 +207,15 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1001:
+      case 4000:
       objError = {
-        code : '1001',
-        type : 'Advertencia',
-        title : 'Sesión Terminada',
-        message : 'La sesión ha caducado, inicie una nueva sesión',
-        data : data
-      };
-      break;
-
-      case 2002:
-      objError = {
-        code : '2002',
-        type : 'Error',
-        title : 'Falta Datos',
-        message : 'Uno de los campos no tiene informació, ' + 
-        'llénelo e intenete nuevamente',
-        data : data
-      };
-      break;
-
-      case 2003:
-      objError = {
-        code : '2003',
+        code : '4000',
         type : 'Error',
         title : 'Partametro Incompleto',
         message : 'El parametro pasado a la función BackEnd esta Incompleto',
         data : data
       };
       break;
-    }
+  }
     console.dir(objError);
   };
