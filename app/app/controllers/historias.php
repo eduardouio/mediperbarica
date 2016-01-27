@@ -3,36 +3,25 @@
 
 class Historias extends MY_Controller {
 	/**
-	 * Controlador encargado de gestionar la SPA de historias
+	 * Controlador encargado de proveer JSON API para hgistorias
 	 * @author eduardouio7@gmail.com
  	 * @version 1.0
  	 * @copy Mediperbarica 2015
 	 *
-	 *	listar()
-	 *	nuevo(ObjJSON)
-	 *  buscar(param)
-	 *	editar(ObjJSON) => menu de la lista de historias
-	 *	asignarTratamiento(id_historia) => menu de la lista de historias
-	 *  eliminar(id_historia) => menu de la lista de historias
 	 *
 	 * Propiedades Globales de la Clase
 	 * (str)$Table_ => registra el nombre de la tabla en la base de datos
-	 * (str)$Copntroller => nombre del controlador usado para las rutas
 	 * (array)$Result_ => Guarda las respuestas de la base de datos
 	 * (array)$CatalogoVistas_ relaciona las vista scon los contenidos
-	 * (array) $Pagina_ => El vontenido HTML de la pagina completa
-	 *
-	 * SE CODIFICAN LO ERRORES VER ARCHIVO LISTADO DE ERRORES EN LA RAIZ DEL 
-	 * PROYECTO
-	 *
+	 * (array) $Query_ => Texto de las consultas SQL a la BD
+	 * 
+	 * ERRORES CODIFICADOS VER DOCUMENTACION
 	 */
 
 
 	protected $Table_ = 'historia';
-	protected $Controller_ = 'historias';
 	protected $Result_;
 	protected $CatalogoVistas_;
-	protected $Pagina_;
 	protected $Query_;
 
 	/*************************************************************************
@@ -43,54 +32,45 @@ class Historias extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->_checkSesion();
-		$this->load->library('form_validation');
-	}
-
-	/*************************************************************************
-	* Muestra la pagina de inicio y sus librerias
-	* @method index
-	* @return void	  
-	 ************************************************************************/
-	public function index()
-	{	
-		$this->CatalogoVistas_['cabecera'] = array();
-		$this->CatalogoVistas_['sidebar'] = array('title' => 'Historias');
-		$this->CatalogoVistas_['menu'] = array('historias' => 'active');
-		$this->CatalogoVistas_['contenidos'] = array();		
-		$this->_mostrarHTML($this->CatalogoVistas_);
 	}
 
 	 /************************************************************************
 	 * Obtiene un listado de historias o una historia
-	 * @param (int) opcional identificador de la historia
+	 * @param (int) opcional identificador de la historia se pasa auto desde url
 	 * @return (JSON) Listado de hisotrias
 	 ************************************************************************/
-	public function getHistoryData($historiaID = 0){
+	public function getHistories($idHistory = 0){
 		//variable de respuesta
 		$response = array(
 				'status' => 'Success' );
-		$this->Query_ = " SELECT hst.id_historia, 
+
+		//confirmamos el Id de la historia sino listamos todo
+		if($this->uri->segment(3)){
+			$this->Query_ = "SELECT * from historia WHERE id_historia = " . 
+															$idHistory . "
+											Order by nombres DESC;";
+		}else{
+			$this->Query_ = " SELECT hst.id_historia, 
 					hst.id_paciente , hst.nombres,
 					(SELECT count(id_tratamiento) FROM tratamiento AS trt 
 					WHERE trt.id_paciente = hst.id_paciente) AS `tratamientos`,
 					hst.telefono, hst.mail , hst.nombre_referente ,
 					timestampdiff(year,hst.fecha_nacimiento,curdate()) AS `edad`,
 					concat(month(hst.creado), '-' , year(hst.creado)) as creado
-					FROM historia AS hst Order by hst.nombres ASC;";
-		//una historia por id
-		if ($historiaID != 0){
-			$this->Query_ = "SELECT * from historia WHERE id_historia = " . 
-															$historiaID . "
-											Order by nombres DESC;";			
+					FROM historia AS hst  Order by hst.nombres ASC;";
 		}
+		
 		//ejecuta la consulta
 		$this->Result_ = $this->db->query($this->Query_);
-		//comprobamos que la consulta retorna datos
+
+		//comprobamos los posibles errores en las consultas
 		if($this->Result_->num_rows() > 0){
-			$response['msg'] = '1005';
+			$response['msg'] = '3002';
 			$response['data'] = $this->Result_->result_array();
+		}elseif($idHistory){
+			$response['msg'] = '2001';
 		}else{
-			$response['msg'] = '1007';
+			$response['msg'] = '2002';
 		}
 		//enviamos respuesta
 		$this->rest->_responseHttp($response,200);
@@ -102,137 +82,122 @@ class Historias extends MY_Controller {
 	 * @param (array) arreglo con los datos de la historia a crear 
 	 * @return (JSON) Estado de la peticion http 200 y 201
 	 ************************************************************************/
-	public function setHistory(){
+	public function saveHistory(){
 		if( $this->rest->_getRequestMethod() != "POST"){
-			$this->rest->_resposeHttp('','406');
+			$this->rest->_responseHttp('Entrada no autorizada, favor vuelva a '.
+													 base_url() ,406);
 		}
+		#variable de respuesta
+		$response = array(
+			'status' => 'Success');
+	
+		$history = json_decode(file_get_contents("php://input"),true);
 
-		$historia = json_decode(file_get_contents("php://input"),true);
-		# comprobamos que esten todos los campos
-		if ($this->_checkData($historia)){
-			#comprobamos que el id del Registro no exista
-			$this->db->where('id_paciente', $historia['id_paciente']);
-			$query = $this->db->get($this->Table_);
-			$result = ($query->num_rows() > 0 ) ? true : false;
-			if(!$result){
-				$this->db->insert($this->Table_,$historia);
-				$response = array('status'=>'Success',
-								'id_historia' => $this->db->insert_id(),
-								'msg'=> '1002',
-								'data' => $historia);
-				$this->rest->_resposeHttp(json_encode($response), 201);	
+		# true crear False Actualizar
+		if(!$history['id_historia']){
+			$status = $this->_validData($history);
+
+			#validamos sino se retorna el error
+			if($status == 1){
+				$this->db->insert($this->Table_,$history);
+				$response['msg'] = '3000';
+				$response['data'] = $this->db->insert_id();
+
 			}else{
-				$historia_old = $query->result_array();
-				$response = array('status'=>'Ok',
-							'id_historia' => $historia_old[0]['id_historia'],
-						  	'msg'=>'1000',
-							'data' => $query->result_array());
-				$this->rest->_resposeHttp(json_encode($response), 200);	
+				$response['msg'] = $status;
+			}
+		}else{
+			#quitamos los datos inecesarios para la validacion
+			$validateHistory = $history;
+			unset($validateHistory['id_historia']);
+			unset($validateHistory['creado']);
+			
+			#validamos
+			$status = $this->_validData(validateHistory);
+
+			#comprobamos que el DNI no este en otra historia unico
+			$IdPerson = true;
+			$this->Query_ = 'SELECT id_paciente FROM historia WHERE id_paciente' . 
+							' = ' . $history['id_historia'] ;
+			$Result_ = $this->db->query($this->Query_);
+			if($Result_->num_rows() > 0){
+				$IdPerson = false;
 			}
 
-		} else{
-			$response = array('status'=>'Ok',
-							  'msg'=>'1001'
-								);
-			$this->rest->_resposeHttp(json_encode($response), 200);
-		}
-
-	}
-
-	/*************************************************************************
-	 * Actualiza una historia
-	 * @method updateHistoria
-	 * @param (array) arreglo con los datos de la historia modificada
-	 * @return (JSON) Estado de la peticion http 200 y 201
-	 ************************************************************************/
-	public function updateHistory(){
-		if( $this->rest->_getRequestMethod() != "POST"){
-			$this->rest->_resposeHttp('','406');
-		}
-
-		$historia = json_decode(file_get_contents("php://input"),true);
-		# comprobamos que esten todos los campos
-		$validate = $historia;
-		unset($validate['id_historia']);
-		unset($validate['creado']);
-		if ($this->_checkData($validate)){
-			#comprobamos que el id del historia exista
-			$this->db->where('id_historia', $historia['id_historia']);
-			$query = $this->db->get($this->Table_);
-			$result = ($query->num_rows() > 0 ) ? true : false;
-
-			if($result){
-				#comprobar que el numero de cedula no este asignado
-				#a otra historia que no sea esta
-				$this->db->where('id_paciente', $historia['id_paciente']);
-				$query = $this->db->get($this->Table_);
-				$historia_old = $query->result_array();
-				if($historia_old[0]['id_historia'] == $historia['id_historia'])
-				{
-					#se actualiza la historia
-					$this->db->where('id_historia',$historia['id_historia']);
-					$this->db->update($this->Table_,$validate);
-					$response = array('status'=>'Success',
-									'id_historia' => $historia['id_historia'],
-									'msg'=> '1003',
-									'data' => $historia);
-					$this->rest->_resposeHttp(json_encode($response), 201);	
+			if($status == 1){
+				if($IdPerson){
+					$this->db->where('id_historia',$history['id_historia']);
+					$this->db->update($this->Table_, $validateHistory);
+					$response ['msg'] = '3001';
+					$response ['data'] = $history['idHistory'];				
 				}else{
-					$response = array('status'=>'Ok',
-							'id_historia' => $historia_old[0]['id_historia'],
-						  	'msg'=>'1000'
-							  	);
-					$this->rest->_resposeHttp(json_encode($response), 200);	
-				}				
+					$response['msg'] = '2006';
+					$response['data'] = $this->Result_->result_array();
+				}
 
 			}else{
-				$response = array('status'=>'Ok',
-							'id_historia' => $historia_old[0]['id_historia'],
-						  	'msg'=>'1004'
-							  	);
-				$this->rest->_resposeHttp(json_encode($response), 200);	
-			}	
-		} else{
-			$response = array('status'=>'Ok',
-							  'msg'=>'1001');
-			$this->rest->_resposeHttp(json_encode($response), 200);
+				$response['msg'] = $status;
+			}
+
 		}
 
+		//enviamos respuesta
+		$this->rest->_responseHttp($response,200);
 	}
 
-
-
+	
 	/*************************************************************************
 	 * Obtiene un reporte PDF de la hisotoria solicitada
 	 * @method getHistoryReport
 	 * @param (int) identificador de la historia
 	 * @return (JSON) Objeto JS con los detalles de una historia
 	 ************************************************************************/
-	public function getHistoryReport($id_historia){
-		if($id_historia > 0){
+	public function getPDFHistory($id_historia){
+		#arreglo de vistas de envio datos y recoleccion
+		$data = array(
+			'historia' => array(),
+			'antecedentes' => array(),
+			'tratamientos' => array()
+			);
+		#comprobamos el parametro
+		if(isset($id_historia)){
+			#obtenemos la historia
 			$this->db->where('id_historia',$id_historia);
 			$this->Query_ = $this->db->get($this->Table_);
-			$historia = $this->Query_->result_array();
-			$this->db->where('id_paciente',$historia[0]['id_paciente']);
-			$this->Query_ = $this->db->get('antecedente');
-			$antecedentes = $this->Query_->result_array();
-			$data = array(
-				'historia' => $historia[0],
-				'antecedentes' => $antecedentes
-				);
-		$this->CatalogoVistas_['reporte-historia'] = $data;
-		
+			$history = $this->Query_->result_array();
+			if($this->Query_->num_rows() > 0){
+				$data['historia'] = $history[0];
+				#obtenemos los antecedentes
+				$this->db->where('id_paciente',$history[0]['id_paciente']);
+				$this->Query_ = $this->db->get('antecedente');
+				$data['antecedentes'] = $this->Query_->result_array();	
+				#ontenemos los tratamientos
+				$this->Query_ = 'SELECT
+					trt.id_tratamiento,
+					per.nombres as personal,
+				    trt.nro_sesiones,
+				    trt.creado,
+				    (SELECT count(id_sesion) 
+				FROM sesion 
+				WHERE id_tratamiento = trt.id_tratamiento) as sesiones_realizadas,
+				    trt.motivo_tratamiento
+				FROM tratamiento as trt
+				LEFT JOIN personal as per USING(id_personal)
+				LEFT JOIN historia as hst USING(id_paciente)
+				WHERE id_paciente = ' . $history[0]['id_paciente'] . ';';
+				$this->Result_= $this->db->query($this->Query_);
+				$data['tratamientos'] = $this->Result_->result_array();
+				$this->CatalogoVistas_['reporte-historia'] = $data;
+				$this->_mostrarHTML($this->CatalogoVistas_);
+			}else{
+				print('<h1>La historia que Busca no Existe</h1>');	
+			}
 
 		}else{
-		$this->CatalogoVistas_['cabecera'] = array();
-		$this->CatalogoVistas_['sidebar'] = array('title' => 'Historias');
-		$this->CatalogoVistas_['menu'] = array('historias' => 'active');
-		$this->CatalogoVistas_['alertas'] = array('alerta' => 
-						'El identificador de la historia no es el Correcto!');
-
-		$this->CatalogoVistas_['contenidos'] = array();		
+			print('<h1>No se ha especificado un identificado de Historia</h1>');
 		}
-		$this->_mostrarHTML($this->CatalogoVistas_,'historias.js');
+
+		
 	}
 
 
@@ -240,44 +205,49 @@ class Historias extends MY_Controller {
 	 * Validar los datos de hisotoria
 	 * @method _checkData
 	 * @param (array) arreglo con los datos de historia
-	 * @return boolean
+	 * @return (array) status
 	 ************************************************************************/
-	private function _checkData($historia){
-		#print('objeto recibido en validacion');
-		#print(var_dump($historia));
-		$condicion = false;
+	private function _validData($history){
+		#status 1 significa que todo esta bien
+		$status = 1;
+		#valida los 5 primeros datos
 		$i = 0;
-		$longitudes_minimas = array(
+		$minimalLen = array(
 						'id_paciente'=>'9',
 						'nombres'=>'4',
 						'telefono'=>'6',
 						'fecha_nacimiento'=>'9',
 						'mail' => '4',
-						'direccion' => '4',
+						'direccion' => '5',
 						'nombre_referente' => '-1',
 						'telefono_referente' => '-1',
 						'mail_referente' => '-1',
 						'nombre_familiar' => '-1',
 						'telefono_familiar' => '-1',
 						'direccion_familiar' => '-1');
-		if((count($historia)) > 0) {
-			foreach ($historia as $key => $value) {
+		#comprobamos que el arreglo tenga datos
+		if((count($history)) > 0) {
+			foreach ($history as $key => $value) {
 				$i++;
-				if(($longitudes_minimas[$key]) < (strlen($value))){
-					$condicion = true;
+				#comprobamos las longitudes
+				if(($minimalLen[$key]) < (strlen($value))){
+					 $status = 1 ;
 				}else{
-					$condicion = false;
+					 $status  = 2005;					
 					break;
 				}
 			}
 			#comprobamos que al menos nos deb los 6 primeros campos
-			#print('| comprobamos el valor del controlador ' . $i);
-			#print('| Valor de condicion => ' . $condicion);
 			if ($i > 5){
-				return $condicion;			
+				return $status;
 			}else{
-				return false;
+				$status = 2000;
+				return $status;
 			}
+		}else{
+			#si el arreglo esta vacio se retorna error
+			$status = 4000;
+			return $status;
 		}
 
 	}
