@@ -87,7 +87,8 @@ class Personal extends My_Controller {
 	}
 
 	/**
-	 * Guarda un empleado
+	 * Guarda un empleado para actualizar el arreglo de empleado tiene un campo
+	 * adicional para saber update = true
 	 * @param (array) employed
 	 * @return (array) status
 	 */
@@ -95,6 +96,24 @@ class Personal extends My_Controller {
 		#comprobamos que solo llegen por POST
 		if($this->rest->_getRequestMethod() != 'POST'){
 			$this->_notAuthorized();
+		}
+
+		#variable de respuesta
+		$response = array('status' => 'Success' );
+		#recuperamos los datos del enpleado
+		$employee = json_decode(file_get_contents("php://input"),true);
+
+		#true crear fase actualizar
+		if(!$employee['update']){
+			#comprobamos que no exista
+			$this->db->where('id_personal',$employee['id_personal']);
+			$this->Result_ = $this->db->get($this->Table_);
+			
+			
+
+
+		}else{
+
 		}
 	}
 
