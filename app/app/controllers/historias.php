@@ -31,7 +31,7 @@ class Historias extends MY_Controller {
 	 ************************************************************************/
 	public function __construct(){
 		parent::__construct();
-		$this->_checkSesion();
+		$this->_checkSession();
 	}
 
 	 /************************************************************************
@@ -99,10 +99,23 @@ class Historias extends MY_Controller {
 
 			#validamos sino se retorna el error
 			if($status == 1){
-				$this->db->insert($this->Table_,$history);
-				$response['msg'] = '3000';
-				$response['data'] = $this->db->insert_id();
-
+				#comprobamos que no exista el DNI
+				$IdPerson = true;
+				$this->Query_ = 'SELECT id_paciente FROM historia WHERE id_paciente' . 
+							' = ' . $history['id_historia'] ;
+				$Result_ = $this->db->query($this->Query_);
+				if($Result_->num_rows() > 0){
+					$IdPerson = false;
+				}
+				#insertamos
+				if($IdPerson){
+					$this->db->insert($this->Table_,$history);
+					$response['msg'] = '3000';
+					$response['data'] = $this->db->insert_id();	
+				}else{
+					$response['msg'] = '1000';
+				}
+				
 			}else{
 				$response['msg'] = $status;
 			}
@@ -196,10 +209,55 @@ class Historias extends MY_Controller {
 		}else{
 			print('<h1>No se ha especificado un identificado de Historia</h1>');
 		}
-
-		
 	}
 
+
+	/**
+	 * Elimina una historia sino tiene registros hijos
+	 */
+	public function deleteHistory($idHistory){	
+		#variable de respuesta
+		$response = array(
+			'status' => 'Success');
+
+		if(!isset($idHistory)){
+			$response['msg'] = '4000';
+		}else{
+			$condition = false;
+			$this->db->where('id_historia',$idHistory);
+			$this->Result_ = $this->db->get($this->Table_);
+			#no se puede borrar si la historia no existe
+			if($this->Result_->num_rows() > 0){
+				$history = $this->Result_->result_array();
+				#buscamos los tratamientos
+				$this->db->where('id_paciente',$history[0]['id_paciente']);
+				$this->Result_ = $this->db->get('tratamiento');
+				$treatments = $this->Result_->num_rows();
+				#buscamos los antecedentes
+				$this->db->where('id_paciente',$history[0]['id_paciente']);
+				$this->Result_ = $this->db->get('antecedente');
+				$antecedents = $this->Result_->num_rows();
+				#se procece a eliminar si no hay registros dependientes
+				print($antecedents);
+				print($treatments);
+				if(($treatments > 0) || ($antecedents > 0)){
+					$response['msg'] = '2004';
+				}else{
+					$this->db->where('id_historia',$idHistory);
+					$this->db->delete($this->Table_);
+					$response['msg'] = '3003';
+				}
+
+			}else{
+				$response['msg'] = '2001';
+			}
+
+		}
+
+		#enviamos la respuesta
+		$this->rest->_responseHttp($response,200);
+
+	}
 
 	/*************************************************************************
 	 * Validar los datos de hisotoria
