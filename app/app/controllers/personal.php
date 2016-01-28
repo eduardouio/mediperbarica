@@ -102,19 +102,85 @@ class Personal extends My_Controller {
 		$response = array('status' => 'Success' );
 		#recuperamos los datos del enpleado
 		$employee = json_decode(file_get_contents("php://input"),true);
-
-		#true crear fase actualizar
+		
+		#true crear false actualizar
 		if(!$employee['update']){
 			#comprobamos que no exista
 			$this->db->where('id_personal',$employee['id_personal']);
 			$this->Result_ = $this->db->get($this->Table_);
-			
-			
-
-
+			if($this->Result_->num_rows() > 0){
+				$response['msg'] = '1000';
+				$response['data'] = $this->Result_->result_array();
+			}elseif($this->_validData($employee) == 1){
+				#insertamos el registro
+				$this->db->insert($this->Table_,$employee);
+				$response['msg'] = '3000';
+				$response['data'] = $this->db->insert_id();
+			}else{
+				$response['msg'] = $this->_validData($employee);
+			}	
 		}else{
+			#comprobamos las longitudes
+			$status = $this->_validData($employee);
+			#actualizar primero validamos
+			if($status == 1){
+				$this->db->where('id_personal',$employee['id_personal']);
+				$this->db->update($this->Table_, $employee);
+				$response['msg'] = '3001';
+				$response['data'] = $employee; 
+			}else{
+				$response['msg'] = $status;
+			}
 
 		}
+		#presentamos los resultados
+		$this->_responseHttp($response,200);
+	}
+
+	/**
+	 * Elimina un empleado sin registros dependientes
+	 * @param (str) id_empleado
+	 * @return (JSON) resultados
+	 */
+	public function deleteEmployee($idEmployee){
+		#variable para resultados
+		$response = array('status' => 'Success');
+		$data = array();
+		#validamos los parametros
+		if(!isset($idEmployee)){
+			$response['msg'] = '4000';
+		}else{
+			#comprobamos que exista el registro
+			$this->db->where('id_personal',$idEmployee);
+			$this->Result_ = $this->db->get($this->Table_);
+			if($this->Result_->num_rows() > 0){
+				#verifica que no tenga sesiones
+				$this->db->where('id_personal',$idEmployee);
+				$this->Result_ = $this->db->get('sesion');
+				$session = $this->Result_->num_rows();
+				$data['sessions'] = $this->Result_->result_array();
+				
+				#verifica que no tenga tratamientos
+				$this->db->where('id_personal',$idEmployee);
+				$this->Result_ = $this->db->get('tratamiento');
+				$treatments = $this->Result_->num_rows();
+				$data['treatments'] = $this->Result_->result_array();
+
+				if($session > 0 || $treatments > 0){
+					$response['msg'] = '2004';
+					$response['data'] = $data;
+				}else{
+					$this->db->where('id_personal',$idEmployee);
+					$this->db->delete($this->Table_);
+					$response['msg'] = '3003';
+				}
+			}else{
+				$response['msg'] = '2001';
+			}		
+		}
+
+		#mostramos los resultados
+		$this->_responseHttp($response,200);
 	}
 
 	/**
