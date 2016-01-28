@@ -95,28 +95,20 @@ class Historias extends MY_Controller {
 		# true crear False Actualizar
 		if(!$history['id_historia']){
 			$status = $this->_validData($history);
-
-			#validamos sino se retorna el error
-			if($status == 1){
-				#comprobamos que no exista el DNI
-				$IdPerson = true;
-				$this->Query_ = 'SELECT id_paciente FROM historia WHERE id_paciente' . 
+			#comprobamos que no existe el DNI
+			$IdPerson = true;
+			$this->Query_ = 'SELECT id_paciente FROM historia WHERE id_paciente' . 
 							' = ' . $history['id_historia'] ;
-				$Result_ = $this->db->query($this->Query_);
-				if($Result_->num_rows() > 0){
-					$IdPerson = false;
-				}
-				#insertamos
-				if($IdPerson){
-					$this->db->insert($this->Table_,$history);
-					$response['msg'] = '3000';
-					$response['data'] = $this->db->insert_id();	
-				}else{
-					$response['msg'] = '1000';
-				}
-				
+			$Result_ = $this->db->query($this->Query_);
+			if($Result_->num_rows() > 0){
+				$response['msg'] = '1000';
+				$response['data'] = $Result_->result_array();
+			}elseif($this->_validData($history) == 1){
+				$this->db->insert($this->Table_,$history);
+				$response['msg'] = '3000';
+				$response['data'] = $this->db->insert_id();	
 			}else{
-				$response['msg'] = $status;
+				$response['msg'] = $this->_validData($history);
 			}
 		}else{
 			#quitamos los datos inecesarios para la validacion
@@ -125,7 +117,7 @@ class Historias extends MY_Controller {
 			unset($validateHistory['creado']);
 			
 			#validamos
-			$status = $this->_validData(validateHistory);
+			$status = $this->_validData($validateHistory);
 
 			#comprobamos que el DNI no este en otra historia unico
 			$IdPerson = true;
@@ -265,47 +257,21 @@ class Historias extends MY_Controller {
 	 * @return (array) status
 	 ************************************************************************/
 	private function _validData($history){
-		#status 1 significa que todo esta bien
-		$status = 1;
-		#valida los 5 primeros datos
-		$i = 0;
-		$minimalLen = array(
-						'id_paciente'=>'9',
-						'nombres'=>'4',
-						'telefono'=>'6',
-						'fecha_nacimiento'=>'9',
-						'mail' => '4',
-						'direccion' => '5',
-						'nombre_referente' => '-1',
-						'telefono_referente' => '-1',
-						'mail_referente' => '-1',
-						'nombre_familiar' => '-1',
-						'telefono_familiar' => '-1',
-						'direccion_familiar' => '-1');
-		#comprobamos que el arreglo tenga datos
-		if((count($history)) > 0) {
-			foreach ($history as $key => $value) {
-				$i++;
-				#comprobamos las longitudes
-				if(($minimalLen[$key]) < (strlen($value))){
-					 $status = 1 ;
-				}else{
-					 $status  = 2005;					
-					break;
-				}
-			}
-			#comprobamos que al menos nos deb los 6 primeros campos
-			if ($i > 5){
-				return $status;
-			}else{
-				$status = 2000;
-				return $status;
-			}
-		}else{
-			#si el arreglo esta vacio se retorna error
-			$status = 4000;
-			return $status;
-		}
-
+		$params = array(
+				'id_paciente'=>'9',
+				'nombres'=>'4',
+				'telefono'=>'6',
+				'fecha_nacimiento'=>'9',
+				'mail' => '4',
+				'direccion' => '5',
+				'nombre_referente' => '-1',
+				'telefono_referente' => '-1',
+				'mail_referente' => '-1',
+				'nombre_familiar' => '-1',
+				'telefono_familiar' => '-1',
+				'direccion_familiar' => '-1');
+		#se arma la validacion
+		return($this->_validUserData($params,$history,5));
 	}
+		
 }
