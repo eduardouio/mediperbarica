@@ -3,11 +3,8 @@
 class Inicio extends MY_Controller {
 
 	protected $Table_ = 'historia';
-	protected $Controller_ = 'welcome';
-	protected $Result_;
 	protected $CatalogoVistas_;
 	public $Pagina_;
-	protected $Query_;
 	private $CodeHTTP = 200;
 	private $ContentType = 'application/json';
 

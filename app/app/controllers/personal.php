@@ -180,7 +180,7 @@ class Personal extends My_Controller {
 		}
 
 		#mostramos los resultados
-		$this->_responseHttp($response,200);
+		$this->rest->_responseHttp($response,200);
 	}
 
 	/**
