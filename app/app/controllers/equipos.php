@@ -99,16 +99,20 @@ class Equipos extends MY_Controller {
 			$this->db->where('id_equipo',$machine['id_equipo']);
 			$this->Result_ = $this->db->get($this->Table_);
 			if($this->Result_->num_rows() > 0){
-7777777777777
-				unset()
+				unset($machine['id_equipo']);
 				$status = $this->_validData($machine);
-				$this->db->where('id_equipo',$machine['id_equipo']);
+				if($status == 1){
+					$this->db->where('id_equipo',$machine['id_equipo']);					
+					$this->db->update($this->Table_,$machine);
+					$response['msg'] = '3001';
+					$response['data'] = $machine;
+				}else{
+					$response['msg'] = $status;
+				}
 			}else{
 				$response['msg'] = '2001';
 			}
-
 		}
-
 		#enviamos respuestas
 		$this->rest->_responseHttp($response, $this->CodeHttp_);
 
