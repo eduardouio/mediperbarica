@@ -173,6 +173,17 @@ class Tratamientos extends MY_Controller {
 		$this->rest->_responseHttp($response,$this->CodeHttp_);
 	}
 
+
+	/**
+	 * Imprime el protocolo de tratamientos
+	 * @param idTreatment identificador del tratamiento
+	 * @return (str) imprime el protocolo desde cero
+	 */
+	public function printTreatmentProtocol($idTraetment){
+		print('Funcion pendiete hay que crear el formato');
+	}
+
+
 	/**
 	 * Funcion de validacion de datos de tratamiento
 	 * @param (array) tratamiento
