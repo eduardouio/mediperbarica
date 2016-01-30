@@ -157,6 +157,17 @@ function showStatus(codeNumber, data){
       };
       break;
 
+    case 2007:
+      objError = {
+        code : '2007',
+        type : 'Error',
+        title : 'Tiempo Exedido',
+        message : 'El tiempo disponible para borrar se ha terminado, ' + 
+                  'si necesita eliminar el registro comuníquese con el administrador',
+        data : data
+      };
+      break;
+
       case 3000:
       objError = {
         code : '3000',
