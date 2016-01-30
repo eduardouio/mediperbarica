@@ -1,52 +1,53 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends CI_Controller {
+/*****************************************************************************
+ * Objeto que los usuarios del sistema
+ * @author eduardouio7@gmail.com
+ * @version 1.0
+ * @copy Mediperbarica 2015
+ * 
+ * Listado de Metodos creados
+ * __construct()
+ * getAntecedents([id_antecedente])
+ * saveAntecedent(antecendete)
+ * deleteAntecedent(id_antecedente)
+ * _validData(antecedente)
+ *
+ * SE CODIFICAN LO ERRORES VER ARCHIVO LISTADO DE ERRORES EN LA RAIZ DEL 
+ * PROYECTO
+ ****************************************************************************/
+class User extends MY_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		$this->load->view('cabecera');
-		$this->load->view('alertas');
-		$this->load->view('totales');
-        $this->load->view('frm_personal');
-		$this->load->view('widget_tratamientos');
-		$this->load->view('widget_pacientes');
-		$this->load->view('pie');
+	protected $Table_ = 'antecedente';
+	protected $CodeHttp_ = 200;
+	protected $Result_;
+	protected $Query_;
+
+	
+	/*************************************************************************
+	 *  Funcion Contructora inicializa librerias
+	 * @method __construct()
+	 * @return (void)
+	 ************************************************************************/
+	public function __construct(){
+		parent::__construct();
+		$this->_checkSession();
 	}
 
 	
-
 	/**
-	* Se encrarga de recibir la informacion y genera la pantalla de salia
-	* Todos los valores se guardan en una variable de clase $Pagina_
-	* Es este metodo el que decide que vistas mostrar a partir de los paramtros recibidos
-	*
-	* @param array $catalogo array con las plantillas necesarias y su informacion
-	**/
-	private function mostrarhtml($catalogo){
-		$vistas;
-		$this->Pagina_;
-		foreach ($catalogo as $arreglos => $nombres) {
-			$vistas[] = $arreglos;
-			}
-		foreach ($vistas as $nombre) {
-			$this->Pagina_ = $this->Pagina_ . $this->load->view($nombre,$catalogo[$nombre],true);
-			}
-		$this->Pagina_ = $this->Pagina_ . $this->load->view('pie','',true);
-		print $this->Pagina_;
-		}
+	 * Funcion de validacion de datos de antecedente
+	 * @param (array) antecedente
+	 * @return (int) code status
+	 */
+	public function _validData($antecedente){
+		$params = array(
+			'id_paciente'=>'9',
+			'tipo'=>'4',
+			'detalle'=>'4'
+			);
+
+		return($this->_validUserData($params,$antecedente,3));
+
+	}
 }
