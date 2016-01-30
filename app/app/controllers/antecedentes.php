@@ -18,7 +18,7 @@
  ****************************************************************************/
 class Antecedentes extends MY_Controller {
 
-	protected $Table_ = 'historia';
+	protected $Table_ = 'antecedente';
 	protected $CodeHttp_ = 200;
 	protected $Result_;
 	protected $Query_;
@@ -78,20 +78,79 @@ class Antecedentes extends MY_Controller {
 
 		$antecedent = json_decode(file_get_contents("php://input"),true);
 		#falso editamos verdadero creamos
-		hay que eliminar el id_antecedente antes de mandar a validar
 		if(!$antecedent['id_antecedente']){
-			$status = $this->_validData($antecedente)
-
+			#validamos he insertamos el antecedente en la base de datos
+			$status = $this->_validData($antecedente);
+			if($status == 1){
+				$this->db->insert($this->Table_, $antecedente);
+				$response['msg'] = '3000';
+				$response['data'] = $this->db->insert_id();
+			}else{
+				$response['msg'] = $status;
+			}
+			#modificacion de antecedente
 		}else{
-
+			$oldAntecedent = $antecedent;
+			unset($oldAntecedent['id_antecedente']);
+			unset($oldAntecedent['creado']);
+			$status = $this->_validData($oldAntecedent);
+			if($status == 1){
+				#actualiza,os antecedente
+				$this->db->where('id_paciente',$oldAntecedent['id_paciente']);
+				$this->db->update($this->Table_,$oldAntecedent);
+				$response['msg'] = '3001';
+				$response['data'] = $oldAntecedent;
+			}else{
+				$response['msg'] = $status;
+			}
 		}
-
-
-
 		#enviamos la respuesta
 		$this->rest->_responseHttp($response,$this->CodeHttp_);
 	}
 
+	/**
+	 * Funcion encargada de eliminar un antecedente, solo se pueden 
+	 * eliminar los antecedentes hasta 120 segundos despues de insertarlos
+	 * @param (int) id_antecedente para eliminar
+	 * @return (JSON) respuesta
+	 */
+	public function deleteAntecedent($idAntecedent){
+		#variables de respuesta
+		date_default_timezone_set('America/Guayaquil');
+		$response = array('status'=>'Success');
+		$time = date("Y-m-d h:i:s");		
+		if(isset($idAntecedent)){
+			$this->db->where('id_antecedente',$idAntecedent);
+			$this->Result_ = $this->db->get($this->Table_);
+			#recuperamos el antecdente si existe se borra sino error
+			if($this->Result_->num_rows() > 0){
+				$antecedent = $this->Result_->result_array();
+				#validamos el tiempo para eliminar antecedentes
+				$timeA = strtotime($time);
+				$timeB = strtotime($antecedent[0]['creado']);
+				#Valor en segundos
+				$interval = ($timeA - $timeB);
+				if($interval < 43200 ){
+					$this->db->where('id_antecedente',$idAntecedent);
+					$this->db->delete($this->Table_);
+					$response['msg'] = '3003';					
+				}else{
+					#tiempo exedido se mustran los segundos
+					$response['msg'] = '2007';
+					$response['data'] = $interval;
+				}
+			}else{
+				$response['msg'] = '2001';
+			}			
+		}else{
+			#falta parametro id antecedent
+			$response['msg'] = '4000';
+		}
+
+		#enviar los datos
+		$this->rest->_responseHttp($response,200);
+
+	}
 
 	/**
 	 * Funcion de validacion de datos de antecedente
@@ -107,5 +166,5 @@ class Antecedentes extends MY_Controller {
 
 		return($this->_validUserData($params,$antecedente,3));
 
-	};
+	}
 }
