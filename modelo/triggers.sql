@@ -265,9 +265,9 @@ CREATE TRIGGER SESION_AFTER_UPDATE
     'update',
     'sesion',
 			CONCAT(OLD.id_personal, ';' , OLD.id_tratamiento, ';' ,
-			OLD.fecha, ';' ,OLD.hora, ';' ,OLD.notas),
+			OLD.fecha, ';' ,OLD.fecha, ';' ,OLD.notas),
             CONCAT(NEW.id_personal, ';' , NEW.id_tratamiento, ';' ,
-			NEW.fecha, ';' ,NEW.hora, ';' ,NEW.notas)
+			NEW.fecha, ';' ,NEW.fecha, ';' ,NEW.notas)
     );
 	END;//
 DELIMITER ;
@@ -286,7 +286,7 @@ CREATE TRIGGER SESION_AFTER_INSERT
     'insert',
     'sesion',
             CONCAT(NEW.id_personal, ';' , NEW.id_tratamiento, ';' ,
-			NEW.fecha, ';' ,NEW.hora, ';' ,NEW.notas)
+			NEW.fecha, ';' ,NEW.fecha, ';' ,NEW.notas)
     );
 	END;//
 DELIMITER ;
@@ -305,7 +305,7 @@ CREATE TRIGGER SESION_AFTER_DELETE
     'delete',
     'sesion',
 			CONCAT(OLD.id_personal, ';' , OLD.id_tratamiento, ';' ,
-			OLD.fecha, ';' ,OLD.hora, ';' ,OLD.notas)
+			OLD.fecha, ';' ,OLD.fecha, ';' ,OLD.notas)
     );
 	END;//
 DELIMITER ;
