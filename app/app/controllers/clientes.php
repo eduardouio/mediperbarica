@@ -52,7 +52,11 @@ class Clientes extends MY_Controller {
 			$response['msg'] = '3001';
 			$response['data'] = $this->Result_->resul_array();
 		}else{
-			$response['msg'] = '2002';
+			if($idCustomer != 0){
+				$response['msg'] = '2001';
+			}else{
+				$response['msg'] = '2002';
+			}
 		}
 		#emviamos la respuesta
 		$this->rest->_responseHttp($response, $this->CodeHttp_);
