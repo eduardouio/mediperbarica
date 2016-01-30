@@ -116,7 +116,6 @@ class Antecedentes extends MY_Controller {
 	 */
 	public function deleteAntecedent($idAntecedent){
 		#variables de respuesta
-		date_default_timezone_set('America/Guayaquil');
 		$response = array('status'=>'Success');
 		$time = date("Y-m-d h:i:s");		
 		if(isset($idAntecedent)){
