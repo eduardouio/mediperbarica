@@ -8,7 +8,6 @@ class Historias extends MY_Controller {
  	 * @version 1.0
  	 * @copy Mediperbarica 2015
 	 *
-	 *
 	 * Propiedades Globales de la Clase
 	 * (str)$Table_ => registra el nombre de la tabla en la base de datos
 	 * (array)$Result_ => Guarda las respuestas de la base de datos
@@ -44,7 +43,6 @@ class Historias extends MY_Controller {
 		$response = array(
 				'status' => 'Success' );
 
-		//confirmamos el Id de la historia sino listamos todo
 		if($this->uri->segment(3)){
 			$this->Query_ = "SELECT * from historia WHERE id_historia = " . 
 															$idHistory . "
