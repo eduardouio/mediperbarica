@@ -113,3 +113,21 @@ SELECT
     FROM factura as fac
     LEFT JOIN cliente as cli USING (id_cliente)
     LEFT JOIN tratamiento as trt USING(id_tratamiento);
+
+-- -----------------------------------------------------------------------------
+-- Consulta de cobros
+-- -----------------------------------------------------------------------------
+SELECT 
+	cob.id_cobro,
+	cob.fecha,
+	cob.id_factura,
+	fac.id_factura,
+	trt.id_tratamiento,
+	cli.nombres,
+	cob.tipo,
+	cob.nro_deposito,
+	cob.valor
+	FROM cobro AS cob
+	LEFT JOIN factura as fac USING(id_factura)
+	LEFT JOIN tratamiento as trt USING(id_tratamiento)
+	LEFT JOIN cliente as cli using(id_cliente;
