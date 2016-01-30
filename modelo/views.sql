@@ -94,7 +94,8 @@ SELECT eqp.id_equipo,
 	eqp.nombre,
 	eqp.marca,
 	eqp.modelo,
-	(SELECT count(id_sesion) FROM sesion WHERE id_equipo = eqp.id_equipo) as sesiones
+	(SELECT count(id_sesion) FROM sesion WHERE id_equipo = eqp.id_equipo) as sesiones,
+    eqp.notas
 FROM equipo as eqp;
 
 -- -----------------------------------------------------------------------------
