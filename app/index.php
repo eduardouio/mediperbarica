@@ -1,5 +1,13 @@
 <?php
 /*
+ * --------------------------------------------------------------------
+ * DEFINIMOS ZONA HORARIA
+ * --------------------------------------------------------------------
+ */
+
+date_default_timezone_set('America/Guayaquil');
+
+/*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
@@ -199,6 +207,7 @@ if (defined('ENVIRONMENT'))
  *
  */
 require_once BASEPATH.'core/CodeIgniter.php';
+
 
 /* End of file index.php */
 /* Location: ./index.php */
