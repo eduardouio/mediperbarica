@@ -180,7 +180,7 @@ CREATE TABLE `gelvscom_mediperbarica`.`cobro` (
   `id_cobro` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_factura` SMALLINT(5) UNSIGNED NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
-  `fecha` VARCHAR(45) NOT NULL,
+  `fecha` datetime NOT NULL,
   `banco` VARCHAR(45) NULL,
   `nro_cheque` VARCHAR(45) NULL,
   `nro_deposito` VARCHAR(45) NULL,
