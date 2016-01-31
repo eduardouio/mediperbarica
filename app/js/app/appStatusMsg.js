@@ -168,6 +168,17 @@ function showStatus(codeNumber, data){
       };
       break;
 
+    case 2008:
+      objError = {
+        code : '2008',
+        type : 'Error',
+        title : 'Factura cobrada',
+        message : 'La factura que intenta eliminar registra un cobro, ' + 
+                  'si necesita eliminar el registro comuníquese con el administrador',
+        data : data
+      };
+      break;
+
       case 3000:
       objError = {
         code : '3000',
