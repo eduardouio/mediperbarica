@@ -22,6 +22,7 @@ class Rest{
             201 => 'Created' , 
             204 => 'No Content' , 
             404 => 'Not Found' , 
+            405 => 'Not Allowed' , 
             406 => 'Not Acceptable' , 
             );
         return ($status[$this->CodeHTTP] ? $status[$this->CodeHTTP] : $status[500]);
