@@ -79,7 +79,7 @@ class MY_Controller extends CI_Controller{
 
     public function _notAuthorized(){
         $this->rest->_responseHttp('Entrada No autorizada favor vuelva a ' .
-                    base_url(),406);
+                    base_url(),405);
     }
 
 	  /*************************************************************************
