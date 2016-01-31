@@ -22,6 +22,7 @@ class Facturas extends MY_Controller {
 	protected $CodeHttp_ = 200;
 	protected $Result_;
 	protected $Query_;
+	protected $catalogoVistas = array();
 
 	
 	/*************************************************************************
