@@ -80,7 +80,7 @@ mediperbaricaApp.controller('startController', function($scope, $location,
 /**
 Controllador 
 **/
-mediperbaricaApp.controller('listHistories', function($scope, $location,
+mediperbaricaApp.controller('historiesController', function($scope, $location,
 			$rootScope, $timeout, serviceHistories,serviceLoadTemplates, $sce){
 	console.log('[Debug] llamad a Controller listHistories');
 
