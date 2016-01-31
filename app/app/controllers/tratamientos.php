@@ -14,7 +14,6 @@
  * 
  ****************************************************************************/
 class Tratamientos extends MY_Controller {
-
 	protected $Table_ = 'tratamiento';
 	protected $CodeHttp_ = 200;
 	protected $Result_;
