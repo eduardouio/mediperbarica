@@ -39,7 +39,7 @@ class Antecedentes extends MY_Controller {
 	 * @param [(int)] id_antecedente opcional
 	 * @return (JSON) respuesta
 	 */
-	public function getMedicalAntecedents($idHistory){
+	public function getAntecedents($idHistory){
 		#variable de respuesta
 		$response = array('status' => 'Success' );
 		if(isset($idHistory)){
