@@ -94,7 +94,7 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'invoiceController'
 	})
 
-	.when('/aunlar-factura/:idInvoice',{
+	.when('/anular-factura/:idInvoice',{
 		templateUrl : host + 'tplhtml/templates/presentar-factura-tpl-html',
 		controller : 'invoiceController'
 	})
@@ -121,7 +121,7 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 
 	.when('/presentar-cliente/:idCustomer',{
 		templateUrl : host + 'tplhtml/templates/presentar-cliente-tpl.html',
-		controller : ''
+		controller : 'customerController'
 	})
 
 	.when('/crear-equipo',{
