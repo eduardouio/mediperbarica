@@ -63,7 +63,14 @@ class Facturas extends MY_Controller {
 				$response['msg'] = '2001';
 			}
 		}else{
-			$response['msg'] = '4000';
+			#si no tenemos el parametro listamos todas las facturas
+			$this->Result_ = $this->db->get($this->Table_);
+			if($this->Result_->num_rows() > 0){
+				$response['msg'] = '3002';
+				$response['data'] = $this->Result_->result_array();
+			}else{
+				$response['msg'] = '2002';
+			}
 		}
 		#envio de respuesta	
 		$this->rest->_responseHttp($response, $this->CodeHttp_);
@@ -124,7 +131,7 @@ class Facturas extends MY_Controller {
 					$data = array('estado' => 'anulada');
 					$this->db->where('id_factura', $idInvoice);
 					$this->db->update($this->Table_, $data);
-					$response['msg'] = '3001'
+					$response['msg'] = '3001';
 					$response['data'] = $idInvoice;
 				}else{	
 					$response['msg'] = '2008';
