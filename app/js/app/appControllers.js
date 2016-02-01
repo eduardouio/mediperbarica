@@ -3,7 +3,13 @@
   @autor: Eduardo Villota
   @date: 11-05-2016 23:44
   @version 0.2
- 
+  
+ Factories:
+  ['serviceHistories'],['serviceTreatments'],['serviceEmployees'],
+  ['serviceAntecedets'],['serviceCustomers'],['serviceSessions'],
+  ['serviceMachines'],['serviceCollections'],['serviceInvoices'],
+  ['serviceLoadTemplates']
+  
  Introduccion: Modulo encargado de manejar la funcionalidad de la aplicacion, 
  se encargda de realizar consultas y mostrar informacion CRUD
 /******************************************************************************/
@@ -12,7 +18,7 @@
 Controllador encargado del inicio y cierre de sesion
 **/
 mediperbaricaApp.controller('loginController', function($scope, $location,
-									$rootScope, $timeout, serviceLogin){
+									$timeout, serviceLogin){
 	//Envia el formulario al server
 	$scope.login = function(userData){
 		//validamos los datos del usuarios
@@ -69,156 +75,179 @@ mediperbaricaApp.controller('loginController', function($scope, $location,
 });
 
 
-/**
-Controlador de la pagina principal, muestra informacion relevante del sistema
-**/
+/*******************************************************************************
+Controlador inicial es el que se carga en el home de la pagina
+
+factories: ['serviceHistories'],['serviceTreatments'],['serviceEmployees'],
+            ['serviceAntecedets'],['serviceCustomers'],['serviceSessions'],
+            ['serviceMachines'],['serviceCollections'],['serviceInvoices'],
+            ['serviceLoadTemplates']
+
+Rutas
+'/'
+*******************************************************************************/
 mediperbaricaApp.controller('startController', function($scope, $location,
-												$rootScope, $timeout){
-
+   serviceHistories, serviceTreatments, serviceEmployees, serviceSessions,
+   serviceMachines, serviceCollections, serviceInvoices){
+    console.log('[Debug] Llamada a CTRL startController');
+    
+    
 });
 
-/**
-Controllador 
-**/
+/*******************************************************************************
+Controlador para historias y antecedentes
+
+factories: [serviceHistories],[serviceTreatments],[serviceAntecedets], 
+           [serviceSessions]
+
+Rutas
+'/listar-historias'
+'/crear-historia'
+'/editar-historia/:idHistory'
+'/presentar-historia/:idHistory'
+'/eliminar-historia/:idHistory'
+*******************************************************************************/
 mediperbaricaApp.controller('historiesController', function($scope, $location,
-			$rootScope, $timeout, serviceHistories,serviceLoadTemplates, $sce){
-	console.log('[Debug] llamad a Controller listHistories');
-
-	$scope.counter = 0;
-	$scope.listHistories = function(){
-		console.log('[Debug] llamada a funcion listHistories()');
-		var promiseHistories = serviceHistories.getHistories();
-		promiseHistories.then(
-			function(response){
-				$scope.historias = response.data;
-				console.log($scope.historias.length);
-				$scope.counter = $scope.historias.length;
-				console.dir(response);
-			},
-			function(error){
-				console.log('[Debug] Hubo un problema para recuperar las hisotiras');
-				console.dir(error);
-			}
-			);
-	};
-
-	//Metodo encargado de mostrar una historia
-	$scope.presentHistory = function (idPerson){
-		console.log('[Debug] Llamada funcion presentHistory ' + idPerson);
-
-			
-	};
-	//El controlador inicia obteniendo un listado completo de las historias
-	$scope.listHistories();
-
-
+    serviceHistories, serviceTreatments, serviceAntecedets, serviceSessions ){
+    console.log('[Debug] Llamada a CTRL historiesController');
+    
+    
 });
 
+/*******************************************************************************
+Controlador para tratamientos y sesiones
 
+Factories:
+  ['serviceHistories'],['serviceTreatments'],['serviceEmployees'],
+  ['serviceAntecedets'],['serviceSessions'], ['serviceMachines'],
+  ['serviceCollections'],['serviceInvoices'],
 
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('createHistoryController', function($scope, $location,
-												$rootScope, $timeout){
+Rutas
+'/listar-tratamientos'
+'/crear-tratamiento/:idHistory'
+'/editar-tratamiento/:idTreatment'
+'/eliminar-tratamiento/:idTreatment'
+*******************************************************************************/
+mediperbaricaApp.controller('treatmentsController', function($scope, $location,
+    serviceHistories, serviceTreatments, serviceEmployees,  serviceAntecedets, 
+    serviceSessions, serviceMachines, serviceCollections, serviceInvoices){
+    console.log('[Debug] Llamada a CTRL treatmentsController');
+    
+    
+});
+                            
+/*******************************************************************************	
+Controlador para personal
 
+Factories:
+  ['serviceTreatments'],['serviceEmployees'],['serviceSessions']
+  
+Rutas
+'/crear-personal'
+'/editar-personal/:idPersonal'
+'/listar-personal'
+'/presentar-personal/:idPersonal'
+'/eliminar-personal/:idPersonal'
+*******************************************************************************/	
+mediperbaricaApp.controller('personalController', function($scope, $location, 
+    serviceTreatments, serviceEmployees, serviceSessions){
+    console.log('[Debug] Llamada a CTRL personalController');
+    
+    
 });
 
-
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('editHystory', function($scope, $location,
-												$rootScope, $timeout){
-
+/*******************************************************************************
+Controlador para facturas
+ Factories:
+  ['serviceHistories'],['serviceTreatments'],['serviceCustomers'],
+  ['serviceCollections'],['serviceInvoices']
+ 
+Rutas
+'/emitir-factura'
+'/anular-factura/:idInvoice'
+'/presentar-factura/:idInvoice
+*******************************************************************************/
+mediperbaricaApp.controller('invoiceController', function($scope, $location,
+    serviceHistories, serviceTreatments, serviceCustomers, serviceCollections, 
+                                                           serviceInvoices){
+    console.log('[Debug] Llamada a CTRL invoiceController');
+    
+    
 });
 
+/*******************************************************************************
+Controlador para clientes
 
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('deleteHystory', function($scope, $location,
-												$rootScope, $timeout){
-
+ Factories:
+  ['serviceCustomers'],['serviceInvoices']
+  
+Rutas
+'/crear-cliente'
+'/editar-cliente/:idCustomer
+'/eliminar-cliente/:idCustomer'
+'/presentar-cliente/:idCustomer'
+*******************************************************************************/
+mediperbaricaApp.controller('customerController', function($scope, $location,
+                                serviceCustomers, serviceInvoices){
+    console.log('[Debug] Llamada a CTRL customerController');
+    
+    
 });
 
+/*******************************************************************************
+Controlador para Equipos
 
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('presentHystory', function($scope, $location,
-												$rootScope, $timeout){
-
+Factories:
+  ['serviceTreatments'],['serviceSessions'], ['serviceMachines']
+  
+Rutas
+'/crear-equipo'
+'/editar-equipo/:idMachine'
+'/eliminar-equipo/:idMachine'
+'/presentar-equipo/:idMachine'
+*******************************************************************************/
+mediperbaricaApp.controller('machineController', function($scope, $location,
+                    serviceTreatments, serviceSessions, serviceMachines){
+    console.log('[Debug] Llamada a CTRL machineController');
+    
+    
 });
 
+/*******************************************************************************                            
+Controlador para usuarios
 
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('assigAntecedent', function($scope, $location,
-												$rootScope, $timeout){
-
+Rutas
+'/crear-usuario'
+'/eliminar-usuario/:idUser'
+'/suspender-usuario/:idUser'
+'/editar-usuario/:idUser'
+*******************************************************************************/                            
+mediperbaricaApp.controller('userController', function($scope, $location){
+    console.log('[Debug] Llamada a CTRL userController');
+    
+    
 });
 
+/*******************************************************************************
+Controlador para dar informacion acerca de la aplicacion
 
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('presentTreatment', function($scope, $location,
-												$rootScope, $timeout){
-
+Rutas
+'/acerca'
+*******************************************************************************/
+mediperbaricaApp.controller('aboutController', function($scope, $location){
+    console.log('[Debug] Llamada a CTRL aboutController');
+    
+    
 });
 
+/*******************************************************************************
+Controlador que muestra error de comunicacion con el server
 
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('presentTreatment', function($scope, $location,
-												$rootScope, $timeout){
-
-});
-
-
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('createTreatment', function($scope, $location,
-												$rootScope, $timeout){
-
-});
-
-
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('editTreatment', function($scope, $location,
-												$rootScope, $timeout){
-
-});
-
-
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('deleteTreatment', function($scope, $location,
-												$rootScope, $timeout){
-
-});
-
-
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('aboutApp', function($scope, $location,
-												$rootScope, $timeout){
-
-});
-
-
-/**
-Controllador 
-**/
-mediperbaricaApp.controller('errorController', function($scope, $location,
-												$rootScope, $timeout){
-
+Rutas
+'/error-comunicacion
+*******************************************************************************/
+mediperbaricaApp.controller('errorController', function($scope, $location){
+    console.log('[Debug] Llamada a CTRL errorController');
+    
+    
 });
