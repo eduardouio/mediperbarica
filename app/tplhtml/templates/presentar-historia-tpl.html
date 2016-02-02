@@ -1,96 +1,59 @@
-  <div class="row card">
-  <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Eduardo Villota: <b>1722919725</b></span>
-  </div>
-  <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia: <b>1000</b></span>
-  </div>
-  <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Tratamientos Realizados 3</span>
-  </div>
-    <div class="col s12">
-    <br>
-      <span class="grey-text" style="font-size:18px;">Datos Paciente:</span>
-      <br>
-      <br>
-      <div class="row">
-        <div class="col s3">
-        <b class="teal-text text-lighten-2">Tel: </b> 
-        <span class="grey-text text-darken-2">022226906</span>
-        </div> 
-         <div class="col s3">
-        <b class="teal-text text-lighten-2">Mail: </b> 
-        <span class="grey-text text-darken-2">eduardouio7@gmail.com</span>
-        </div>   
-        <div class="col s3">
-        <b class="teal-text text-lighten-2">Fecha Nac: </b> 
-        <span class="grey-text text-darken-2">01-07-1987</span>
-        </div>  
-        <div class="col s3">
-        <b class="teal-text text-lighten-2">Fecha Reg: </b> 
-        <span class="grey-text text-darken-2">01-01-2015</span>
-       </div>
-      </div>
-      <div class="row">
-         <div class="col s5">
-        <b class="teal-text text-lighten-2">Dirección: </b> 
-       <span class="grey-text text-darken-2">Av. Humberto Albornoz y 12 de Agosto La Comuna</span>
-        </div>
-         <div class="col s4">
-        <b class="teal-text text-lighten-2">Examen Físico: </b> 
-        <span class="grey-text text-darken-2">Agun Valor Para el Examen</span>
-        </div>
-         <div class="col s3">
-        <b class="teal-text text-lighten-2">Manejo: </b> 
-        <span class="grey-text text-darken-2">Algo Para el</span>
-        </div>
-      </div>
-<span class="grey-text" style="font-size:18px;">Datos Médico Referente:</span>
-<br>
-<br>
-      <div class="row">
-        <div class="col s4">
-        <b class="teal-text text-lighten-2">Nombre: </b> 
-        <span class="grey-text text-darken-2">Dr. Luiz Peres</span>
-        </div> 
-         <div class="col s3">
-        <b class="teal-text text-lighten-2">Tel: </b> 
-        <span class="grey-text text-darken-2">2226906</span>
-        </div>   
-        <div class="col s3">
-        <b class="teal-text text-lighten-2">Mail </b> 
-        <span class="grey-text text-darken-2">luisperez@aol.com</span>
-        </div>
-      </div>
+<div class="row card">
+<table class="bordered">
+    <tr class="titulo">
+        <td class="grey lighten-2"><span>Nombres: {{historyData.nombres}}</span></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Tratamientos: #</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Historia: {{historyData.id_historia}}</td>
+    </tr>
+    <tr>
+        <td><b>CI:</b> {{historyData.id_paciente}}</td>
+        <td><b>Teléfono:</b> {{historyData.telefono}}</td>
+        <td colspan="5"><b>Fecha Nacimiento:</b> {{historyData.fecha_nacimiento}}</td>
+        <td colspan="5" ><b>Dirección:</b> {{historyData.direccion}} </td>
+    </tr>
+    <tr>
+        <td colspan="3"><b>Examen Físico:</b> {{historyData.examen_fisico}}</td>
+        <td colspan="4"><b>Manejo:</b> {{historyData.manejo}}</td>
+        <td colspan="3"><b>Correo:</b> {{historyData.mail}} </td>
+        <td colspan="2"><b>Registro:</b> {{historyData.creado}}</td>
+    </tr>
+    <tr>
+        <td colspan="12" class="grey lighten-3">
+            Referencias Familiares:
+        </td>
+    </tr>
+    <tr>
+        <td colspan=6><b>Nombre: {{historyData.nombre_familiar}}</b></td>
+        <td colspan=6><b>Teléfono: {{historyData.telefono_familiar}}</b> </td>
+    </tr>
+        <tr>
+        <td colspan="12" class="grey lighten-3">
+            Médico Referente:
+        </td>
+    </tr>
+    <tr>
+            <td colspan="4"><b>Nombres:</b> {{historiData.nombrereferente}}</td>
+            <td colspan="4"><b>Mail:</b> {{historyData.mail_referente}}</td>
+            <td colspan="4"><b>Telefono:</b> {{historyData.telefono_referente}}</td>
+    </tr>
+    <tr>
+        <td colspan="12" class="orange lighten-3">Antecedentes Médicos:</td>
+    </tr> 
+    <tr>
+        
+    </tr>
+</table>
 
-      <span class="grey-text" style="font-size:18px;">Referencia Familiar:</span>
-<br>
-      <div class="row">
-        <div class="col s4">
-        <b class="teal-text text-lighten-2">Nombre: </b> 
-        <span class="grey-text text-darken-2">Juan Lopez</span>
-        </div> 
-         <div class="col s3">
-        <b class="teal-text text-lighten-2">Tel: </b> 
-        <span class="grey-text text-darken-2">099546201</span>
-        </div>   
-      </div>
-      <span class="orange-text" style="font-size:18px;">Antecedentes Médicos:</span>
-<br>
-<br>
-      <div class="row">
-        <div class="col s3">
-        <b class="teal-text text-lighten-2">Tipo: </b> 
-        <span class="grey-text text-darken-2">Quirurjico</span>
-        </div> 
-         <div class="col s4">
-        <b class="teal-text text-lighten-2">Detalle: </b> 
-        <span class="grey-text text-darken-2">Hepatitias G</span>
-        </div>  
-         <div class="col s3 offset-s2">
           <span class="btn">Añadir Antecedente</span>
-        </div> 
-      </div>
       <div class="row">
          <div class="col s5">
              <span class="btn">Editar</span>
@@ -98,7 +61,5 @@
              <span class="btn red">Borrar</span>
          </div>
       </div>
-      
-    </div>
-  </div>
 
+</div>

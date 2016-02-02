@@ -7,11 +7,13 @@
           <label for="buscar">Buscar</label>
       </div>
     </div>
-     <div class="progress" ng-show ="counter < 1">
-      <div class="indeterminate"></div>
+     <div align="center" ng-show ="counter < 1">
+      <img src="../../app/images/ajax-loader.gif">
+         <br>
+         Cargando...
   </div>
         
-		<table class="highlight responsive-table bordered">
+		<table class="highlight responsive-table bordered" ng-show="counter > 0">
 		<thead>
 			<th>#</th>
 			<th>Nombres</th>

@@ -107,7 +107,7 @@ Rutas
 '/presentar-historia/:idHistory'
 '/eliminar-historia/:idHistory'
 *******************************************************************************/
-mediperbaricaApp.controller('historiesController', function($scope, $location,
+mediperbaricaApp.controller('historiesController', function($scope, $location, $routeParams,
     serviceHistories, serviceTreatments, serviceAntecedets, serviceSessions ){
     console.log('[Debug] Llamada a CTRL historiesController');
     //Variables de almacenamiento Datos
@@ -120,14 +120,17 @@ mediperbaricaApp.controller('historiesController', function($scope, $location,
     
     //Metodo que define la funcion a llamar dependiendo de la plantilla que se muestre
     $scope.init = function(){
+        //identificacion ur para llamar a funcion
         var mypath = $location.path();
-        console.dir($location);
-        console.log(mypath);
-        switch (mypath){
-            case '/listar-historias' :
+        var reph = /\/presentar-historia\/\d/;
+        var relh = /\/listar-historias/;
+        //Seleccionamos las rutas y direccionamos a la primera que de true
+        switch (true){
+            case relh.test(mypath):
                 $scope.listHistories();
                 break;
-            case ('/presentar-historia/8'):
+                
+            case reph.test(mypath):
                 $scope.presentHistory();
                 break
         }
@@ -141,19 +144,48 @@ mediperbaricaApp.controller('historiesController', function($scope, $location,
             //validamos la respuesta del server
             function(response){
                 $scope.lstHistoriesData = response.data;
+                $scope.counter = $scope.lstHistoriesData.length;
                 //Llamamos a la funcion de manejo de status
-                 $scope.validHistoriesErrors(response.msg, response.data);
+                $scope.validHistoriesErrors(response.msg, response.data);
             },
             function(error){
                 $scope.validHistoriesErrors(error.msg, error.data);
             }
-        )
+        );
         
     };
     
     //Metodo para presentar una historia
     $scope.presentHistory = function(){
-        console.log('[Debug] llamda a metodo presentHistory')
+        console.dir($routeParams);
+        console.log('[Debug] llamda a metodo presentHistory');
+        //llenamos los datos de la historia
+        var responseHttp = serviceHistories.getHistory($routeParams.idHistory);
+        responseHttp.then(
+            function(response){
+                $scope.historyData = response.data[0];
+                $scope.getAntecedents($scope.historyData.id_paciente);
+                console.dir($scope.historyData);
+                $scope.validHistoriesErrors(response.msg, response.data);
+            },
+            function(error){
+                $scope.validHistoriesErrors(error.msg, error.data); 
+            }
+        );
+        
+        //obtiene los antecedentes de una historia
+        $scope.getAntecedents = function(idHistory){
+            var responseHttp = serviceAntecedets.getAntecedents(idHistory);
+            responseHttp.then(
+                function(response){
+                    $scope.antecedentsData = response.data;
+                    console.dir($scope.antecedentsData);
+                    $scope.validHistoriesErrors(response.msg, response.data);
+                },function(error){
+                    $scope.validHistoriesErrors(response.msg, response.data);
+                }
+            );
+        };
     };
     
     
@@ -164,7 +196,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location,
     $scope.validHistoriesErrors = function(error, data){
         console.log('[Debug] llamada a metodo validHistoriesErrors' + error);
         var statusDetail = showStatus(error, data);    
-        Materialize.toast( statusDetail['message'],  3000);
+        Materialize.toast( statusDetail['message'],  700);
     };
     
     
