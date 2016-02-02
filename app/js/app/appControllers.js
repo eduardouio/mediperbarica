@@ -110,6 +110,62 @@ Rutas
 mediperbaricaApp.controller('historiesController', function($scope, $location,
     serviceHistories, serviceTreatments, serviceAntecedets, serviceSessions ){
     console.log('[Debug] Llamada a CTRL historiesController');
+    //Variables de almacenamiento Datos
+    $scope.lstHistoriesData = {};
+    $scope.counter = 0;
+    $scope.historyData = {};
+    $scope.antecedentsData = {};
+    $scope.antecedentData = {};
+    $scope.statusMsg = '';
+    
+    //Metodo que define la funcion a llamar dependiendo de la plantilla que se muestre
+    $scope.init = function(){
+        var mypath = $location.path();
+        console.dir($location);
+        console.log(mypath);
+        switch (mypath){
+            case '/listar-historias' :
+                $scope.listHistories();
+                break;
+            case ('/presentar-historia/8'):
+                $scope.presentHistory();
+                break
+        }
+    };
+    
+    //Metodo para listar Historias '/listar-historias/'
+    $scope.listHistories = function(){
+        console.log('[Debug] llamda a listHistories');
+        var responseHttp = serviceHistories.getHistories();
+        responseHttp.then(
+            //validamos la respuesta del server
+            function(response){
+                $scope.lstHistoriesData = response.data;
+                //Llamamos a la funcion de manejo de status
+                 $scope.validHistoriesErrors(response.msg, response.data);
+            },
+            function(error){
+                $scope.validHistoriesErrors(error.msg, error.data);
+            }
+        )
+        
+    };
+    
+    //Metodo para presentar una historia
+    $scope.presentHistory = function(){
+        console.log('[Debug] llamda a metodo presentHistory')
+    };
+    
+    
+    //Funcion que inicia el init del controller
+    $scope.init();
+    
+    //Funcion encargada de presentar los errores en pantalla
+    $scope.validHistoriesErrors = function(error, data){
+        console.log('[Debug] llamada a metodo validHistoriesErrors' + error);
+        var statusDetail = showStatus(error, data);    
+        Materialize.toast( statusDetail['message'],  3000);
+    };
     
     
 });

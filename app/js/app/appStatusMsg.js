@@ -25,7 +25,7 @@ function showStatus(codeNumber, data){
   var objError = {};
     switch (codeNumber) {
       
-      case 404:
+      case '404':
       objError = {
         code : '404',
         type : 'Error',
@@ -38,7 +38,7 @@ function showStatus(codeNumber, data){
       break;
 
 
-      case 500:
+      case '500':
       objError = {
         code : '500',
         type : 'Error',
@@ -50,7 +50,7 @@ function showStatus(codeNumber, data){
       };
       break;
     
-      case 100:
+      case '100':
       objError = {
         code : '100',
         type : 'Error',
@@ -61,7 +61,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1000:
+      case '1000':
       objError = {
         code : '1000',
         type : 'Advertencia',
@@ -72,7 +72,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 1001:
+      case '1001':
       objError = {
         code : '1001',
         type : 'Advertencia',
@@ -82,7 +82,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 2000:
+      case '2000':
       objError = {
         code : '2000',
         type : 'Error',
@@ -93,7 +93,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 2001:
+      case '2001':
       objError = {
         code : '2001',
         type : 'Error',
@@ -102,7 +102,7 @@ function showStatus(codeNumber, data){
         data : data
       };
       break;
-      case 2002:
+      case '2002':
       objError = {
         code : '2002',
         type : 'Error',
@@ -112,7 +112,7 @@ function showStatus(codeNumber, data){
       };
       break;
       
-      case 2003:
+      case '2003':
       objError = {
         code : '2003',
         type : 'Error',
@@ -123,7 +123,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 2004:
+      case '2004':
       objError = {
         code : '2004',
         type : 'Error',
@@ -135,7 +135,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-    case 2005:
+    case '2005':
       objError = {
         code : '2005',
         type : 'Error',
@@ -146,7 +146,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-    case 2006:
+    case '2006':
       objError = {
         code : '2006',
         type : 'Error',
@@ -157,7 +157,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-    case 2007:
+    case '2007':
       objError = {
         code : '2007',
         type : 'Error',
@@ -168,7 +168,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-    case 2008:
+    case '2008':
       objError = {
         code : '2008',
         type : 'Error',
@@ -179,7 +179,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 3000:
+      case '3000':
       objError = {
         code : '3000',
         type : 'Mensaje',
@@ -189,7 +189,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 3001:
+      case '3001':
       objError = {
         code : '3001',
         type : 'Mensaje',
@@ -199,7 +199,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 3002:
+      case '3002':
       objError = {
         code : '3002',
         type : 'Mensaje',
@@ -209,7 +209,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 3003:
+      case '3003':
       objError = {
         code : '3003',
         type : 'Mensaje',
@@ -219,7 +219,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 3004:
+      case '3004':
       objError = {
         code : '3004',
         type : 'Mensaje',
@@ -229,7 +229,7 @@ function showStatus(codeNumber, data){
       };
       break;
 
-      case 4000:
+      case '4000':
       objError = {
         code : '4000',
         type : 'Error',
@@ -238,6 +238,17 @@ function showStatus(codeNumber, data){
         data : data
       };
       break;
+        
+        default:
+            objError = {
+                code : '7777',
+                type : 'Error',
+                title : 'Codigo de error no corresponde',
+                message : 'No se encontro el error que conicida con una advertencia',
+                data : data
+            }
   }
+    console.log('---- Mensaje de estado procesado')
     console.dir(objError);
+    return objError;
   };
