@@ -1,10 +1,6 @@
-<div ng-bind-html="tplPresentHistory">
-	
-</div>
-
   <div class="row">
       <div class="col s6 card-panel teal lighten-2">
-        <H5> <b>{{historias.length}} </b> Historias Encontradas</h5>
+        <H5> <b>{{lstHistoriesData.length}} </b> Historias Encontradas</h5>
       </div>
       <div class="col s6">
       	<input placeholder="Buscar" id="buscar" ng-model="buscar" type="text" class="validate">
@@ -15,10 +11,11 @@
       <div class="indeterminate"></div>
   </div>
         
-		<table class="highlight responsive-table bordered" ng-show ="counter > 1">
+		<table class="highlight responsive-table bordered">
 		<thead>
-			<th>ID</th>
+			<th>#</th>
 			<th>Nombres</th>
+			<th>CI</th>
 			<th>Edad</th>
 			<th>Tratamientos</th>
 			<th>Telefono</th>
@@ -29,11 +26,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="row in historias | filter:buscar">
-				<td>{{row.id_historia}}</td>
+			<tr ng-repeat="row in lstHistoriesData | filter:buscar track by $index">
+                <td>{{$index}}</td>
 				<td>
 				<a href="#/presentar-historia/{{row.id_historia}}">
 				{{row.nombres}}</a></td>
+				<td>{{row.id_paciente}}</td>
 				<td>{{row.edad}}</td>
 				<td>{{row.tratamientos}}</td>
 				<td>{{row.telefono}}</td>
