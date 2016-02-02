@@ -74,10 +74,10 @@ function toTitleCase(str)
   <script src="<?php echo base_url();?>js/angular-material.min.js"></script>
   <script src="<?php echo base_url();?>js/angular-sanitize.js"></script>
 
+<script src="<?php echo base_url();?>js/app/appStatusMsg.js"></script>
 <script src="<?php echo base_url();?>js/app/app.js"></script>
 <script src="<?php echo base_url();?>js/app/appRoutes.js"></script>
 <script src="<?php echo base_url();?>js/app/appFactories.js"></script>
 <script src="<?php echo base_url();?>js/app/appControllers.js"></script>
-<script src="<?php echo base_url();?>js/app/appStatusMsg.js"></script>
   </body>
 </html>
