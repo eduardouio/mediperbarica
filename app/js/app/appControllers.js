@@ -153,8 +153,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
             function(error){
                 $scope.validHistoriesErrors(error.msg, error.data);
             }
-        );
-        
+        );  
     };
     
     //Metodo para presentar una historia
@@ -193,7 +192,15 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     //Inicia el formulario con los datos de las historias
     $scope.saveHistory = function(historyData){
         console.log('[Debug] Llamda a metodo saveHistory');
-        
+        var httpResponse = serviceHistories.saveHistory(historyData);
+        httpResponse.then(function(response){
+            console.dir(response);
+            $scope.validHistoriesErrors(response.msg, response.data);
+        },
+            function(error){
+            console.dir(error);
+            $scope.validHistoriesErrors(response.msg, {});
+        })
     };
     
     //Valida los datos del formulario
@@ -217,14 +224,17 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                 'telefono' : '7',    
                 'fecha_nacimiento' :'10' };
         $i = 0;
+        //comprobamos la cantidad de datos y su condiciones
         angular.forEach(minimalValues, function(value, key){
-            $i ++;
-            if(historyData[key].length < value){
+            if(historyData[key]){
+                $i ++;
+                if(historyData[key].length < value){
                condition = false;   
+            }    
             }
+            
         });
         //mostramos el error
-        console.log($i);
         if($i == 5){
             condition ? $scope.saveHistory(historyData) : $scope.validHistoriesErrors('2005',{});
         }else{

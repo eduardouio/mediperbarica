@@ -89,24 +89,23 @@ class Historias extends MY_Controller {
 			'status' => 'Success');
 	
 		$history = json_decode(file_get_contents("php://input"),true);
-
 		# true crear False Actualizar
-		if(!$history['id_historia']){
+		if(! array_key_exists('id_historia', $history)){
 			$status = $this->_validData($history);
 			#comprobamos que no existe el DNI
 			$IdPerson = true;
 			$this->Query_ = 'SELECT id_paciente FROM historia WHERE id_paciente' . 
-							' = ' . $history['id_historia'] ;
+							' = ' . $history['id_paciente'] ;
 			$Result_ = $this->db->query($this->Query_);
 			if($Result_->num_rows() > 0){
 				$response['msg'] = '1000';
 				$response['data'] = $Result_->result_array();
-			}elseif($this->_validData($history) == 1){
+			}elseif($status == 1){
 				$this->db->insert($this->Table_,$history);
 				$response['msg'] = '3000';
 				$response['data'] = $this->db->insert_id();	
 			}else{
-				$response['msg'] = $this->_validData($history);
+				$response['msg'] = $status;
 			}
 		}else{
 			#quitamos los datos inecesarios para la validacion
@@ -256,18 +255,18 @@ class Historias extends MY_Controller {
 	 ************************************************************************/
 	private function _validData($history){
 		$params = array(
-				'id_paciente'=>'9',
-				'nombres'=>'4',
-				'telefono'=>'6',
-				'fecha_nacimiento'=>'9',
-				'mail' => '4',
-				'direccion' => '5',
-				'nombre_referente' => '-1',
-				'telefono_referente' => '-1',
-				'mail_referente' => '-1',
-				'nombre_familiar' => '-1',
-				'telefono_familiar' => '-1',
-				'direccion_familiar' => '-1');
+				'id_paciente'=> 10,
+				'nombres'=> 5,
+				'telefono'=> 7,
+				'fecha_nacimiento'=> 10,
+				'direccion' => 5,
+				'mail' => 0,
+				'nombre_referente' => 0,
+				'telefono_referente' => 0,
+				'mail_referente' => 0,
+				'nombre_familiar' => 0,
+				'telefono_familiar' => 0,
+				'direccion_familiar' => 0);
 		#se arma la validacion
 		return($this->_validUserData($params,$history,5));
 	}

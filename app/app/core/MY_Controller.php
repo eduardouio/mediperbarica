@@ -47,6 +47,9 @@ class MY_Controller extends CI_Controller{
         #status 1 todo esta bien y contador para datos obligatorios
         $status = 1;
         $i = 0;
+        print(var_dump($params));
+        print(var_dump($userData));
+        print(var_dump($items));
 
         #comprobamos que los datos del user tenga datos
         if(count($userData) > 0){
