@@ -48,14 +48,16 @@
     <tr>
         <td colspan="12" class="orange lighten-3">Antecedentes Médicos:</td>
     </tr> 
-    <tr>
-        
+    <tr ng-repeat= "row in antecedentsData">
+        <td colspan="4">Tipo: {{row.tipo}}</td>
+        <td colspan="8">Detalle: {{row.detalle}}</td>
     </tr>
 </table>
+    <p>&nbsp;</p>
 
-          <span class="btn">Añadir Antecedente</span>
       <div class="row">
-         <div class="col s5">
+         <div class="col s8">
+            <span class="btn">Añadir Antecedente</span>
              <span class="btn">Editar</span>
              <span class="btn">Volver</span>
              <span class="btn red">Borrar</span>
