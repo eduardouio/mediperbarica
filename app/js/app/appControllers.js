@@ -124,7 +124,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         var mypath = $location.path();
         var reph = /\/presentar-historia\/\d/;
         var relh = /\/listar-historias/;
-        var rech = /\/crear-historia/;
+        var rech = /\/editar-historia/;
         //Seleccionamos las rutas y direccionamos a la primera que de true
         switch (true){
             case relh.test(mypath):
@@ -190,18 +190,46 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         };
     };
     
-    //Crea una histria
-    $scope.saveHistory = function(){
+    //Inicia el formulario con los datos de las historias
+    $scope.saveHistory = function(historyData){
         console.log('[Debug] Llamda a metodo saveHistory');
-        alert('hola');
         
     };
     
-        //Crea una histria
-    $scope.saveHistory3 = function(){
-        console.log('[Debug] Llamda a metodo saveHistory');
-        alert('hola');
+    //Valida los datos del formulario
+    $scope.validDataForm = function(historyData){
+        //normalizamos el arreglo eliminar vacios y nulls 0
+        angular.forEach(historyData, function(value,key){
+            var mivalue = historyData[key];
+            if(!/mail/.test(mivalue)){
+               historyData[key] = mivalue.toLowerCase();
+               historyData[key] = toTitleCase(mivalue);
+            }}); 
         
+        //variable de condicion antes de evaluar el objeto
+        var condition = true;
+        
+        //Variables obligatorioas con valores minimos
+        var minimalValues = {
+                'id_paciente' : '10',    
+                'nombres' : '10',    
+                'direccion' : '5',    
+                'telefono' : '7',    
+                'fecha_nacimiento' :'10' };
+        $i = 0;
+        angular.forEach(minimalValues, function(value, key){
+            $i ++;
+            if(historyData[key].length < value){
+               condition = false;   
+            }
+        });
+        //mostramos el error
+        console.log($i);
+        if($i == 5){
+            condition ? $scope.saveHistory(historyData) : $scope.validHistoriesErrors('2005',{});
+        }else{
+            $scope.validHistoriesErrors('2000',{});
+        }
     };
     
     //Funcion que inicia el init del controller
@@ -209,12 +237,9 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     
     //Funcion encargada de presentar los errores en pantalla
     $scope.validHistoriesErrors = function(error, data){
-        console.log('[Debug] llamada a metodo validHistoriesErrors' + error);
         var statusDetail = showStatus(error, data);    
-        Materialize.toast( statusDetail['message'],  700);
-    };
-    
-    
+        Materialize.toast( statusDetail['message'],  2500);
+    }
 });
 
 /*******************************************************************************
