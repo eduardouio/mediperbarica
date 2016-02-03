@@ -124,15 +124,17 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         var mypath = $location.path();
         var reph = /\/presentar-historia\/\d/;
         var relh = /\/listar-historias/;
+        var rech = /\/crear-historia/;
         //Seleccionamos las rutas y direccionamos a la primera que de true
         switch (true){
             case relh.test(mypath):
                 $scope.listHistories();
                 break;
-                
             case reph.test(mypath):
                 $scope.presentHistory();
-                break
+                break;
+            case rech.test(mypath):
+                $scope.saveHistory();
         }
     };
     
@@ -188,6 +190,19 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         };
     };
     
+    //Crea una histria
+    $scope.saveHistory = function(){
+        console.log('[Debug] Llamda a metodo saveHistory');
+        alert('hola');
+        
+    };
+    
+        //Crea una histria
+    $scope.saveHistory3 = function(){
+        console.log('[Debug] Llamda a metodo saveHistory');
+        alert('hola');
+        
+    };
     
     //Funcion que inicia el init del controller
     $scope.init();
