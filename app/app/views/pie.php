@@ -16,7 +16,7 @@
         </div>
       </div>
     </footer>
-  
+
 <script type="text/javascript">
   
   var host = '<?php print(base_url()); ?>';
@@ -47,14 +47,8 @@
   }
   return msg;
 }
-//alert('cadena de la cosina mia =>' + toTitleCase('cadena de la cosina mia') );
-// REtorna la primera letra de cada palabra en ayuscula
-function toTitleCase(str)
-{
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
-
 </script>
+
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>if (!window.jQuery) { document.write('<script src="http://materializecss.com/bin/jquery-2.1.1.min.js"><\/script>'); }
@@ -79,5 +73,15 @@ function toTitleCase(str)
 <script src="<?php echo base_url();?>js/app/appRoutes.js"></script>
 <script src="<?php echo base_url();?>js/app/appFactories.js"></script>
 <script src="<?php echo base_url();?>js/app/appControllers.js"></script>
+<script type="text/javascript">
+    //alert('cadena de la cosina mia =>' + toTitleCase('cadena de la cosina mia') );
+// REtorna la primera letra de cada palabra en ayuscula
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+</script>
+
+
   </body>
 </html>
