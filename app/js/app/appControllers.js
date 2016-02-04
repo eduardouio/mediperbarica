@@ -208,7 +208,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         //normalizamos el arreglo eliminar vacios y nulls 0
         angular.forEach(historyData, function(value,key){
             var mivalue = historyData[key];
-            if(!/mail/.test(mivalue)){
+            if(!/mail/.test(mivalue) || !/fecha_nacimiento/.test(mivalue)){
                historyData[key] = mivalue.toLowerCase();
                historyData[key] = toTitleCase(mivalue);
             }}); 

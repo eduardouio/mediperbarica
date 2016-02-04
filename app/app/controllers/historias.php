@@ -89,6 +89,12 @@ class Historias extends MY_Controller {
 			'status' => 'Success');
 	
 		$history = json_decode(file_get_contents("php://input"),true);
+		#cambiamos el formato de fecha
+		if(array_key_exists('fecha_nacimiento', $history)){
+			$date = date_create($history['fecha_nacimiento']);
+			$history['fecha_nacimiento'] = date_format($date,'Y-m-d H:i:s');
+		}
+
 		# true crear False Actualizar
 		if(! array_key_exists('id_historia', $history)){
 			$status = $this->_validData($history);
@@ -96,7 +102,9 @@ class Historias extends MY_Controller {
 			$IdPerson = true;
 			$this->Query_ = 'SELECT id_paciente FROM historia WHERE id_paciente' . 
 							' = ' . $history['id_paciente'] ;
+
 			$Result_ = $this->db->query($this->Query_);
+
 			if($Result_->num_rows() > 0){
 				$response['msg'] = '1000';
 				$response['data'] = $Result_->result_array();

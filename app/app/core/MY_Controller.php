@@ -45,31 +45,31 @@ class MY_Controller extends CI_Controller{
      */
     public function _validUserData($params,$userData,$items){
         #status 1 todo esta bien y contador para datos obligatorios
-        $status = 1;
         $i = 0;
-        print(var_dump($params));
-        print(var_dump($userData));
-        print(var_dump($items));
+        $status = 1;
 
-        #comprobamos que los datos del user tenga datos
-        if(count($userData) > 0){
-            foreach ($userData as $key => $value) {
-                $i++;
-                #comprobamos las longitudes
-                if(!(($params[$key]) < (strlen($value)))){
-                    return 2005;
-                }
+        //contamos el minimo de parametros
+        foreach ($params as $key => $value) {
+            if(($value != 0) && (array_key_exists($key, $userData))){
+                        $i++;
             }
-            #comprobamos que se tenga la cantidad de items minima
-            if($i == $items){
-                return 1;
-            }else{
-                return 2000;
-            }
-        }else{
-            #arreglo vacio
-            return 4000;
         }
+
+        //verificamos la logitud de cada parametro
+        if($i == $items){
+            foreach ($params as $key => $limit) {
+                if(array_key_exists($key, $userData)){
+                    if($limit > strlen($userData[$key])){
+                        $status = '2005';
+                        break;
+                    }                
+                }                
+            }                
+        }else{
+            $status = '2000';
+        }
+        
+        return $status;
     }
 
     /**
