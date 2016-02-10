@@ -48,9 +48,8 @@
     <tr>
         <td colspan="12" class="orange lighten-3">Antecedentes Médicos:</td>
     </tr> 
-    <tr ng-repeat= "row in antecedentsData">
-        <td colspan="4">Tipo: {{row.tipo}}</td>
-        <td colspan="8">Detalle: {{row.detalle}}</td>
+    <tr ng-repeat= "row in antecedentsData track by $index">
+        <td colspan="8"><b>Antecedente {{$index + 1}}: </b> {{row.antecedente}}</td>
     </tr>
 </table>
     <br>
