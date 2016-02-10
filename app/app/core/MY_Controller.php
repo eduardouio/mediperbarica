@@ -55,6 +55,15 @@ class MY_Controller extends CI_Controller{
             }
         }
 
+        /**
+        * sirve para depurar buscas un patron e imprimes,
+        * si no filtras se detiene el script en la primera conincdencia
+        *if(array_key_exists('antecedente', $userData)){
+         *   print($i);
+          *  print(var_dump($params));
+           * print(var_dump($userData));
+        *}
+        */
         //verificamos la logitud de cada parametro
         if($i == $items){
             foreach ($params as $key => $limit) {
