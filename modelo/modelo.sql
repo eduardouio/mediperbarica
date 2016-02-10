@@ -94,8 +94,6 @@ CREATE TABLE `user` (
 CREATE TABLE `antecedente` (
   `id_antecedente` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `id_paciente` varchar(10) NOT NULL,
-  `tipo` varchar(45) NOT NULL COMMENT 'solo poner como opciones 
-  					(antedentes patologicos personales, quirurjicos,familiares)',
   `detalle` varchar(180) NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_antecedente`,`tipo`),
