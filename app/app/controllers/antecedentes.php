@@ -77,12 +77,13 @@ class Antecedentes extends MY_Controller {
 		$response = array('status' => 'Success');
 
 		$antecedent = json_decode(file_get_contents("php://input"),true);
+
 		#falso editamos verdadero creamos
-		if(!$antecedent['id_antecedente']){
+		if(!array_key_exists('id_antecedente', $antecedent)){
 			#validamos he insertamos el antecedente en la base de datos
-			$status = $this->_validData($antecedente);
+			$status = $this->_validData($antecedent);
 			if($status == 1){
-				$this->db->insert($this->Table_, $antecedente);
+				$this->db->insert($this->Table_, $antecedent);
 				$response['msg'] = '3000';
 				$response['data'] = $this->db->insert_id();
 			}else{
@@ -90,6 +91,7 @@ class Antecedentes extends MY_Controller {
 			}
 			#modificacion de antecedente
 		}else{
+			print('editamos');
 			$oldAntecedent = $antecedent;
 			unset($oldAntecedent['id_antecedente']);
 			unset($oldAntecedent['creado']);
@@ -156,14 +158,12 @@ class Antecedentes extends MY_Controller {
 	 * @param (array) antecedente
 	 * @return (int) code status
 	 */
-	public function _validData($antecedente){
-		$params = array(
-			'id_paciente'=>'9',
-			'tipo'=>'4',
-			'detalle'=>'4'
+	public function _validData($antecedent){
+		$params = array('id_paciente'=>'10',
+						'antecedente'=>'4'
 			);
 
-		return($this->_validUserData($params,$antecedente,3));
+		return($this->_validUserData($params,$antecedent,2));
 
 	}
 }
