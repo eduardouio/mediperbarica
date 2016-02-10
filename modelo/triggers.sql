@@ -146,7 +146,7 @@ CREATE TRIGGER ANTECEDENTE_AFTER_INSERT
     'insert',
     'antecedente',
             CONCAT(NEW.id_antecedente, ';' , NEW.id_paciente, ';' ,
-			,NEW.detalle)
+			NEW.antecedente)
     );
 	END;//
 DELIMITER ;
@@ -165,9 +165,9 @@ CREATE TRIGGER ANTECEDENTE_AFTER_UPDATE
     'update',
     'antecedente',
             CONCAT(OLD.id_antecedente, ';' , OLD.id_paciente,
-            ';' ,OLD.detalle),
+            ';' ,OLD.antecedente),
             CONCAT(NEW.id_antecedente, ';' , NEW.id_paciente, ';' ,
-			NEW.detalle)
+			NEW.antecedente)
     );
 	END;//
 DELIMITER ;
@@ -186,7 +186,7 @@ CREATE TRIGGER ANTECEDENTE_AFTER_DELETE
     'delete',
     'antecedente',
             CONCAT(OLD.id_antecedente, ';' , OLD.id_paciente, ';' ,
-			OLD.detalle)
+			OLD.antecedente)
     );
 	END;//
 DELIMITER ;
