@@ -111,13 +111,21 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     serviceHistories, serviceTreatments, serviceAntecedets, serviceSessions ){
     console.log('[Debug] Llamada a CTRL historiesController');
     //Variables de almacenamiento Datos
-    $scope.lstHistoriesData = {};
+    $scope.lstHistoriesData = [];
     $scope.counter = 0;
     $scope.historyData = {};
-    $scope.antecedentsData = {};
-    $scope.antecedentData = {};
+    $scope.antecedentsData = [];
     $scope.statusMsg = '';
+
+    //iniciamos el datos de historia
     
+    $scope.historyData.id_paciente = '1722950001';
+    $scope.historyData.nombres = 'Juan pablo II';
+    $scope.historyData.telefono = '0999545845';
+    $scope.historyData.direccion = 'Las casas y 12 de agisto con la que cruza';
+    $scope.historyData.mail = 'alguen@algo.com';
+    $scope.historyData.fecha_nacimiento = '10/10/2000';
+
     //Metodo que define la funcion a llamar dependiendo de la plantilla que se muestre
     $scope.init = function(){
         //identificacion ur para llamar a funcion
@@ -194,13 +202,73 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         console.log('[Debug] Llamda a metodo saveHistory');
         var httpResponse = serviceHistories.saveHistory(historyData);
         httpResponse.then(function(response){
-            console.dir(response);
+            if(response.msg == '3000'){
+                $scope.saveAntecedents(historyData.id_paciente);                
+            }
             $scope.validHistoriesErrors(response.msg, response.data);
         },
             function(error){
-            console.dir(error);
-            $scope.validHistoriesErrors(response.msg, {});
+            $scope.validHistoriesErrors('7777', error);
         })
+    };
+    
+    //anade un antecedente al listado
+    $scope.addAntecedent = function(antecedent){
+        console.log('[Debug] Llamda a metodo saveHistory');
+        //Verificacmo si se esta creando e editando la historia sino se añaden
+        if($location.path() == '/crear-historia'){
+            $scope.antecedentsData.push(
+                    {antecedente: toTitleCase(antecedent.antecedente)});
+            $scope.antecedent = {};
+        }else{
+            //guarda el antecedente en la base de datos
+            antecedent['id_paciente'] = $scope.historyData;
+            alert('funcion agregar antecedentes incmpleta');
+        }
+    };
+    
+    //elimina un antecedente del listado
+    $scope.deleteAntecedent = function(antecedente){
+        //Vertificamios si se esta creando o editando
+        console.log(antecedente);
+        if($location.path() == '/crear-historia'){
+            angular.forEach($scope.antecedentsData, function(value, key){
+               if(value.antecedente == antecedente){
+                   $scope.antecedentsData.splice(key,1);
+               }
+            });
+        }else{
+            alert('funcion eliminar antecedente pendiente');
+        }
+    };
+    
+    //prepara un formulario para la edicion
+    $scope.prepreFormHistory = function(history){
+        $scope.historyData = history;
+        var httpresponse = serviceAntecedets.getAntecedents(history.id_historia);
+        httpresponse.then(function(response){
+            $scope.antecedentsData = response.data;
+        }, function(error){
+            console.error(error);
+        });
+    };
+    
+    //Guarda el listado de antecedentes
+    $scope.saveAntecedents = function(idPacient){
+        if($scope.antecedentsData.length > 0){
+            angular.forEach($scope.antecedentsData, function(value,key){            
+            value.id_paciente = idPacient;
+            var httpresponse = serviceAntecedets.saveAntecedent(value);
+            httpresponse.then(function(response){
+                $scope.validHistoriesErrors(response.msg, response);
+            },function(error){
+                $scope.validHistoriesErrors('7777', error);
+            });
+        }); 
+        }else{
+            alert('no se regoistras');
+        }
+  
     };
     
     //Valida los datos del formulario
