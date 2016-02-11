@@ -142,7 +142,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                 $scope.presentHistory();
                 break;
             case rech.test(mypath):
-                $scope.saveHistory();
+                $scope.prepareFormHistory();
         }
     };
     
@@ -243,10 +243,22 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     };
     
     //prepara un formulario para la edicion
-    $scope.prepreFormHistory = function(history){
-        $scope.historyData = history;
+    $scope.prepreFormHistory = function(){
+        var httpresponse = serviceHistories.getHistory($routeParams.idHistory);
+        httpresponse.then(function(response){
+            if(response.msg == '3002'){
+                $scope.historyData = response.data;
+            }else{
+                $scope.validHistoriesErrors(response.msg, response)
+            }
+            
+        },function(error){
+            $scope.validHistoriesErrors('7777', error);
+        });
+        console.dir($scope.historyData);
         var httpresponse = serviceAntecedets.getAntecedents(history.id_historia);
         httpresponse.then(function(response){
+            console.dir($scope.antecedentsData);
             $scope.antecedentsData = response.data;
         }, function(error){
             console.error(error);
@@ -274,6 +286,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     //Valida los datos del formulario
     $scope.validDataForm = function(historyData){
         //normalizamos el arreglo eliminar vacios y nulls 0
+        alert($location.path());
         angular.forEach(historyData, function(value,key){
             var mivalue = historyData[key];
             if(!/mail/.test(mivalue) || !/fecha_nacimiento/.test(mivalue)){
