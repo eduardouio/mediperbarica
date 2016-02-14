@@ -166,7 +166,6 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     
     //Metodo para presentar una historia
     $scope.presentHistory = function(){
-        console.dir($routeParams);
         console.log('[Debug] llamda a metodo presentHistory');
         //llenamos los datos de la historia
         var responseHttp = serviceHistories.getHistory($routeParams.idHistory);
@@ -181,20 +180,19 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                 $scope.validHistoriesErrors(error.msg, error.data); 
             }
         );
+    };
         
-        //obtiene los antecedentes de una historia
-        $scope.getAntecedents = function(idHistory){
-            var responseHttp = serviceAntecedets.getAntecedents(idHistory);
-            responseHttp.then(
-                function(response){
-                    $scope.antecedentsData = response.data;
-                    console.dir($scope.antecedentsData);
-                    $scope.validHistoriesErrors(response.msg, response.data);
-                },function(error){
-                    $scope.validHistoriesErrors(response.msg, response.data);
-                }
-            );
-        };
+    //obtiene los antecedentes de un paciente
+    $scope.getAntecedents = function(idPerson){
+        var responseHttp = serviceAntecedets.getAntecedents(idPerson);
+        responseHttp.then(
+            function(response){
+                $scope.antecedentsData = response.data;
+                $scope.validHistoriesErrors(response.msg, response.data);
+            },function(error){
+                $scope.validHistoriesErrors(response.msg, response.data);
+            }
+        );
     };
     
     //Inicia el formulario con los datos de las historias
@@ -222,15 +220,28 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
             $scope.antecedent = {};
         }else{
             //guarda el antecedente en la base de datos
-            antecedent['id_paciente'] = $scope.historyData;
-            alert('funcion agregar antecedentes incmpleta');
+            antecedent['id_paciente'] = $scope.historyData.id_paciente;
+            console.dir(antecedent);
+            var httpresponse = serviceAntecedets.saveAntecedent(antecedent);
+            httpresponse.then(
+                function(response){
+                    if(response.msg == '3000'){
+                        $scope.antecedentsData.push(
+                            {antecedente: toTitleCase(antecedent.antecedente)});
+                        $scope.antecedent = {};
+                    } else{
+                        $scope.validHistoriesErrors(response.msg,response);
+                    }   
+                },
+                function(error){
+                alert('hubo un eror en lapeticion');
+            });
         }
     };
     
     //elimina un antecedente del listado
     $scope.deleteAntecedent = function(antecedente){
         //Vertificamios si se esta creando o editando
-        console.log(antecedente);
         if($location.path() == '/crear-historia'){
             angular.forEach($scope.antecedentsData, function(value, key){
                if(value.antecedente == antecedente){
@@ -238,30 +249,58 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                }
             });
         }else{
-            alert('funcion eliminar antecedente pendiente');
+            //elimina un antecedente de la lista
+            var idAntecedent = 0;
+            angular.forEach($scope.antecedentsData, function(value, key){
+               if(value.antecedente == antecedente){
+                   idAntecedent = value['id_antecedente']; 
+               }     
+            });
+            //eliminamos el antecedente
+            if(idAntecedent > 0){
+                var httpresponse = serviceAntecedets.deleteAntecedent(idAntecedent);
+                httpresponse.then(
+                    function(response){
+                        if(response.msg == '3000'){
+                            angular.forEach($scope.antecedentsData, function
+                                           (value, key){
+                                if(value.antecedente == antecedente){
+                                    $scope.antecedentsData.splice(key,1);
+                                }
+                            });
+                        }else{
+                            $scope.validHistoriesErrors(response.msg, response)
+                        }
+                    },
+                    function(error){
+                        alert('Error de envio solicitud HTTP');
+                    });
+            }
+        }
+    };
+    
+    //Verifica campos nulos si lo son no coloca active en el label
+    $scope.isInputNull = function (data){
+        if(typeof(data) == 'string'){
+            return 'active';
         }
     };
     
     //prepara un formulario para la edicion
-    $scope.prepreFormHistory = function(){
+    $scope.prepareFormHistory = function(){
         var httpresponse = serviceHistories.getHistory($routeParams.idHistory);
         httpresponse.then(function(response){
             if(response.msg == '3002'){
-                $scope.historyData = response.data;
+                $scope.historyData = response.data[0];
+                //obtenemos los antecedentes de la historia
+                $scope.getAntecedents(response.data[0].id_paciente);
+                console.dir($scope.historyData);
             }else{
                 $scope.validHistoriesErrors(response.msg, response)
             }
             
         },function(error){
             $scope.validHistoriesErrors('7777', error);
-        });
-        console.dir($scope.historyData);
-        var httpresponse = serviceAntecedets.getAntecedents(history.id_historia);
-        httpresponse.then(function(response){
-            console.dir($scope.antecedentsData);
-            $scope.antecedentsData = response.data;
-        }, function(error){
-            console.error(error);
         });
     };
     
