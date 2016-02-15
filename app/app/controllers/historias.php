@@ -138,7 +138,7 @@ class Historias extends MY_Controller {
 					$this->db->where('id_historia',$history['id_historia']);
 					$this->db->update($this->Table_, $validateHistory);
 					$response ['msg'] = '3001';
-					$response ['data'] = $history['idHistory'];				
+					$response ['data'] = $history['id_historia'];				
 				}else{
 					$response['msg'] = '2006';
 					$response['data'] = $this->Result_->result_array();

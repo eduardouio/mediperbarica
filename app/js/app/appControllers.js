@@ -117,14 +117,13 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     $scope.antecedentsData = [];
     $scope.statusMsg = '';
 
-    //iniciamos el datos de historia
-    
-    $scope.historyData.id_paciente = '1722950001';
+    //iniciamos el datos de historia para priubeas    
+    /*$scope.historyData.id_paciente = '1722950001';
     $scope.historyData.nombres = 'Juan pablo II';
     $scope.historyData.telefono = '0999545845';
     $scope.historyData.direccion = 'Las casas y 12 de agisto con la que cruza';
     $scope.historyData.mail = 'alguen@algo.com';
-    $scope.historyData.fecha_nacimiento = '10/10/2000';
+    $scope.historyData.fecha_nacimiento = '10/10/2000';*/
 
     //Metodo que define la funcion a llamar dependiendo de la plantilla que se muestre
     $scope.init = function(){
@@ -201,7 +200,10 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         var httpResponse = serviceHistories.saveHistory(historyData);
         httpResponse.then(function(response){
             if(response.msg == '3000'){
-                $scope.saveAntecedents(historyData.id_paciente);                
+                $scope.saveAntecedents(historyData.id_paciente);
+                $location.path('/presentar-historia/' + response.data);
+            }else if(response.msg == '3001'){
+                $location.path('/presentar-historia/' + response.data);
             }
             $scope.validHistoriesErrors(response.msg, response.data);
         },
@@ -221,7 +223,6 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         }else{
             //guarda el antecedente en la base de datos
             antecedent['id_paciente'] = $scope.historyData.id_paciente;
-            console.dir(antecedent);
             var httpresponse = serviceAntecedets.saveAntecedent(antecedent);
             httpresponse.then(
                 function(response){
@@ -324,8 +325,16 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     
     //Valida los datos del formulario
     $scope.validDataForm = function(historyData){
+        //cuando edita el form genra campos null
+        if( /editar-historia\/\d/.test($location.path())){
+            angular.forEach(historyData, function(value, key){
+                if(value == null){
+                    delete historyData[key];
+                }
+            });
+        }
+        
         //normalizamos el arreglo eliminar vacios y nulls 0
-        alert($location.path());
         angular.forEach(historyData, function(value,key){
             var mivalue = historyData[key];
             if(!/mail/.test(mivalue) || !/fecha_nacimiento/.test(mivalue)){
