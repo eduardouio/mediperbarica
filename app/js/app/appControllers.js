@@ -117,14 +117,6 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     $scope.antecedentsData = [];
     $scope.statusMsg = '';
 
-    //iniciamos el datos de historia para priubeas    
-    /*$scope.historyData.id_paciente = '1722950001';
-    $scope.historyData.nombres = 'Juan pablo II';
-    $scope.historyData.telefono = '0999545845';
-    $scope.historyData.direccion = 'Las casas y 12 de agisto con la que cruza';
-    $scope.historyData.mail = 'alguen@algo.com';
-    $scope.historyData.fecha_nacimiento = '10/10/2000';*/
-
     //Metodo que define la funcion a llamar dependiendo de la plantilla que se muestre
     $scope.init = function(){
         //identificacion ur para llamar a funcion
@@ -170,10 +162,16 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         var responseHttp = serviceHistories.getHistory($routeParams.idHistory);
         responseHttp.then(
             function(response){
-                $scope.historyData = response.data[0];
-                $scope.getAntecedents($scope.historyData.id_paciente);
-                console.dir($scope.historyData);
-                $scope.validHistoriesErrors(response.msg, response.data);
+                if (response.msg == '2001'){
+                    $scope.validHistoriesErrors(response.msg, response);
+                    $location.path('/listar-historias');
+                }else if(response.msg == '2002'){
+                    $scope.validHistoriesErrors(response.msg, response);
+                }else{
+                    $scope.historyData = response.data[0];
+                    $scope.getAntecedents($scope.historyData.id_paciente);
+                    console.dir($scope.historyData);
+                }
             },
             function(error){
                 $scope.validHistoriesErrors(error.msg, error.data); 
@@ -187,7 +185,6 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         responseHttp.then(
             function(response){
                 $scope.antecedentsData = response.data;
-                $scope.validHistoriesErrors(response.msg, response.data);
             },function(error){
                 $scope.validHistoriesErrors(response.msg, response.data);
             }
@@ -250,6 +247,8 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                }
             });
         }else{
+            console.dir(antecedente);
+            console.dir($scope.antecedentsData);
             //elimina un antecedente de la lista
             var idAntecedent = 0;
             angular.forEach($scope.antecedentsData, function(value, key){
@@ -262,7 +261,9 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                 var httpresponse = serviceAntecedets.deleteAntecedent(idAntecedent);
                 httpresponse.then(
                     function(response){
-                        if(response.msg == '3000'){
+                        console.dir(response);
+                        //si la consulta se ejecutra lo borramos de la lista
+                        if(response.msg == '3003'){
                             angular.forEach($scope.antecedentsData, function
                                            (value, key){
                                 if(value.antecedente == antecedente){
@@ -295,7 +296,6 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                 $scope.historyData = response.data[0];
                 //obtenemos los antecedentes de la historia
                 $scope.getAntecedents(response.data[0].id_paciente);
-                console.dir($scope.historyData);
             }else{
                 $scope.validHistoriesErrors(response.msg, response)
             }
@@ -318,7 +318,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
             });
         }); 
         }else{
-            alert('no se regoistras');
+            $scope.validHistoriesErrors('2005', $scope.antecedentsData);
         }
   
     };
