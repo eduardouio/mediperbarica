@@ -211,7 +211,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     
     //anade un antecedente al listado
     $scope.addAntecedent = function(antecedent){
-        console.log('[Debug] Llamda a metodo saveHistory');
+        console.log('[Debug] Llamda a metodo addAntecedent');
         //Verificacmo si se esta creando e editando la historia sino se añaden
         if($location.path() == '/crear-historia'){
             $scope.antecedentsData.push(
@@ -225,7 +225,8 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                 function(response){
                     if(response.msg == '3000'){
                         $scope.antecedentsData.push(
-                            {antecedente: toTitleCase(antecedent.antecedente)});
+                            {antecedente: toTitleCase(antecedent.antecedente),
+                            id_antecedente : response.data});
                         $scope.antecedent = {};
                     } else{
                         $scope.validHistoriesErrors(response.msg,response);
@@ -247,8 +248,6 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                }
             });
         }else{
-            console.dir(antecedente);
-            console.dir($scope.antecedentsData);
             //elimina un antecedente de la lista
             var idAntecedent = 0;
             angular.forEach($scope.antecedentsData, function(value, key){
@@ -256,13 +255,12 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                    idAntecedent = value['id_antecedente']; 
                }     
             });
-            //eliminamos el antecedente
+            //eliminamos el antecedente siempre y cuando exista en la base de datos
             if(idAntecedent > 0){
                 var httpresponse = serviceAntecedets.deleteAntecedent(idAntecedent);
                 httpresponse.then(
                     function(response){
-                        console.dir(response);
-                        //si la consulta se ejecutra lo borramos de la lista
+                        //si la consulta se ejecutra lo borramos de la lista                        
                         if(response.msg == '3003'){
                             angular.forEach($scope.antecedentsData, function
                                            (value, key){
@@ -277,6 +275,9 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                     function(error){
                         alert('Error de envio solicitud HTTP');
                     });
+            //Elimina antecedentes agregados en la edicion
+            }else{
+                var httpResponse = 'juanirto';
             }
         }
     };
