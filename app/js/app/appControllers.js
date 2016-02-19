@@ -186,7 +186,7 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
             function(response){
                 $scope.antecedentsData = response.data;
             },function(error){
-                $scope.validHistoriesErrors(response.msg, response.data);
+                $scope.validHistoriesErrors(error.msg, error.data);
             }
         );
     };
@@ -207,6 +207,36 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
             function(error){
             $scope.validHistoriesErrors('7777', error);
         })
+    };
+    
+    //Elimina una historia solo si esta no tiene tratamientos
+    $scope.deleteHistory = function(idPerson){
+        console.log('[Debug] Llamada a method deleteHistory');
+        if(idPerson > 0){
+            //eliminamos los antecedentes
+            var httpResponse = serviceAntecedets.deleteAntecedentsHistory(idPerson);
+            httpResponse.then(function(response){
+                if(response.msg == '3003'){
+                    //eliminamos la historia
+                    var httpResponse = serviceHistories.deleteHistory(idPerson);
+                    httpResponse.then(function(response){
+                        if(response.msg == '3003'){
+                            $scope.validHistoriesErrors(response.msg, response)
+                            $location.path('/listar-historias');
+                        }else{
+                            $scope.validHistoriesErrors(response.msg, response)
+                        }
+                    },function(error){
+                        $scope.validHistoriesErrors('7777', error);
+                    });
+                }else{
+                    $scope.validHistoriesErrors(response.msg, response);
+                }
+            },function(error){
+                $scope.validHistoriesErrors('7777', error);
+            });
+            
+        }
     };
     
     //anade un antecedente al listado

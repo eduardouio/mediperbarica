@@ -211,16 +211,16 @@ class Historias extends MY_Controller {
 	/**
 	 * Elimina una historia sino tiene registros hijos
 	 */
-	public function deleteHistory($idHistory){	
+	public function deleteHistory($IdPerson){	
 		#variable de respuesta
 		$response = array(
 			'status' => 'Success');
 
-		if(!isset($idHistory)){
+		if(!isset($IdPerson)){
 			$response['msg'] = '4000';
 		}else{
 			$condition = false;
-			$this->db->where('id_historia',$idHistory);
+			$this->db->where('id_paciente',$IdPerson);
 			$this->Result_ = $this->db->get($this->Table_);
 			#no se puede borrar si la historia no existe
 			if($this->Result_->num_rows() > 0){
@@ -234,14 +234,15 @@ class Historias extends MY_Controller {
 				$this->Result_ = $this->db->get('antecedente');
 				$antecedents = $this->Result_->num_rows();
 				#se procece a eliminar si no hay registros dependientes
-				print($antecedents);
-				print($treatments);
 				if(($treatments > 0) || ($antecedents > 0)){
 					$response['msg'] = '2004';
 				}else{
-					$this->db->where('id_historia',$idHistory);
-					$this->db->delete($this->Table_);
-					$response['msg'] = '3003';
+					$this->db->where('id_paciente',$IdPerson);
+					if($this->db->delete($this->Table_)){
+						$response['msg'] = '3003';
+					}else{
+						$response['msg'] = '600';
+					}
 				}
 
 			}else{

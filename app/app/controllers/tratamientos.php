@@ -40,8 +40,14 @@ class Tratamientos extends MY_Controller {
         $response = array('status' => 'Success');
         #verificamos el parametro antes de armar la consulta
         if($this->uri->segment(3)){
-        	$this->Query_ = 'SELECT * from tratamiento 
-        					WHERE id_tratamiento = ' . $idTraetment;
+            #verificamos la longitud del id para saver si es cedula
+            if(strlen($idTraetment) == 10){
+               $this->Query_ = 'SELECT * from tratamiento 
+        					WHERE id_paciente = ' . $idTraetment;
+            }else{
+        	   $this->Query_ = 'SELECT * from tratamiento 
+        					WHERE id_tratamiento = ' . $idTraetment;              
+            }
         }else{
 			$this->Query_ = 'SELECT
 					trt.id_tratamiento,

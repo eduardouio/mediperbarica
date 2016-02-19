@@ -58,11 +58,12 @@
       <div class="row">
          <div class="col s12">
              &nbsp;&nbsp;&nbsp;
+             <a class="btn" href="../index.php/historias/getPDFHistory/{{historyData.id_historia}}" target="_blank" >Imprimir</a>
              <a class="btn" href="#/editar-historia/{{historyData.id_historia}}">Editar</a>
              <a class="btn" href="#/crear-tratamiento/{{historyData.id_paciente}}">Iniciar Tratamiento</a>
-             <a class="btn" href="#/listar-historias">Volver</a>
+             <a class="btn" href="#/listar-historias">Salir</a>
              &nbsp;&nbsp;&nbsp;
-             <a class="btn red" >Borrar</a>
+             <a class="btn red" ng-click="deleteHistory(historyData.id_paciente)">  Borrar</a>
          </div>
       </div>
     <br>

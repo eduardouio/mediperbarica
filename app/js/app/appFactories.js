@@ -135,7 +135,7 @@ mediperbaricaApp.factory('serviceHistories', ['$http','$rootScope',	'$q',
 		//Funcion encargada de eliminar una historia
 		service.deleteHistory = function(idHistory){
 			console.log('[Debug] llamada funcion delHistory()');
-			return httpGet('hisotrias/deleteHistory/' , idHistory);
+			return httpGet('historias/deleteHistory/' + idHistory);
 		};
 		return service;
 	}]);
@@ -188,13 +188,19 @@ mediperbaricaApp.factory('serviceTreatments',['$http', '$q','$rootScope',
             return httpGet('tratamientos/getTreatments/' + idTreatment);
         };
         
+        //lista los tratamientos de una persona
+        service.getPersonTratments = function(idPerson){
+          console.log('[Debug] Llamada a metodo getPersonTratments');
+          return httpGet('tratamientos/getTreatments/' + idPerson);  
+        };
+        
         //guarda un tratamiento nuevo y con cambios
         service.saveTreatment = function(treatment){
             console.log('[Debug] Llamada a metodo saveTreatment');
             return httpPost('tratamientos/saveTreatment', treatment);
         };
         
-        //elimina una historia
+        //elimina un tratamiento
         service.deleteTreatment = function(idTreatment){
             console.log('[Debug] Llamada a metodo deleteTreatment');
             return httpGet('tratamientos/deleteTreatment/' + idTreatment);
@@ -313,6 +319,11 @@ mediperbaricaApp.factory('serviceAntecedets', ['$http','$q','$rootScope',
             return httpGet('antecedentes/deleteAntecedent/' + idAntecedent);
         };
         
+        //Elimina antecedentes de una historia
+        service.deleteAntecedentsHistory = function(idPerson){
+            console.log('[Debug] llamada a metodo deleteHistoryAntecedents');
+            return httpGet('antecedentes/deleteAntecedentsHistory/' + idPerson);
+        };
         
         return service;
 }]);

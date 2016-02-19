@@ -39,11 +39,6 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'historiesController'
 	})		
 
-	.when('/eliminar-historia/:idHistory',{
-		templateUrl : host + 'tplhtml/templateUrl/presentar-historia-tpl.html',
-		controller : 'historiesController'
-	})
-
 	.when('/listar-tratamientos',{
 		templateUrl : host + 'tplhtml/templates/listar-tratamientos-tpl.html',
 		controller : 'treatmentsController'

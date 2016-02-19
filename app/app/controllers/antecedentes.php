@@ -154,6 +154,40 @@ class Antecedentes extends MY_Controller {
 	}
 
 	/**
+	 * Funcion encargada de eliminar los antecedentes de una historia
+	 * primero se verifica que no existan tratamientos para el paciente
+	 * Con esto se evita problemas con la funcion anterior
+	 * @param idPerson (str) id paciente
+	 * @return (array) respuesta server
+	 */
+
+	public function deleteAntecedentsHistory($idPerson){
+		$response = array('status' => 'Success');
+		$this->Query_ = 'SELECT COUNT(id_paciente) as tratamientos FROM tratamiento
+						WHERE id_paciente =  ' . $idPerson;
+		
+		$this->Result_ = $this->db->query($this->Query_);
+		$treatments = $this->Result_->result_array();
+		#si tiene tratamientos no se borra
+		if($treatments[0]['tratamientos'] == 0){
+			#eliminamos la los antecedentes
+			$this->db->where('id_paciente',$idPerson);
+			if($this->db->delete('antecedente')){
+				$response['msg'] = '3003';
+			}else{
+				$response['msg'] = '600';	
+			}
+		}else{
+			$response['msg'] = '2004';
+		}
+
+		#enviar datos
+		$this->rest->_responseHttp($response,200);
+
+	}
+
+
+	/**
 	 * Funcion de validacion de datos de antecedente
 	 * @param (array) antecedente
 	 * @return (int) code status

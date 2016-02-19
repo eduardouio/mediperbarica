@@ -104,9 +104,8 @@
   <?php
   foreach ($antecedentes as $key) {
     print ('<tr><td class="tg-34fq" style="color:#044078">Tipo Antecedente:<br></td>');
-    print('<td class="tg-031e" colspan="8" style="color:#044078">' . $key['tipo'] . '</td></tr>');
     print('<tr><td class="tg-34fq">Descripción:<br></td>');
-    print('<td class="tg-031e" colspan="8">' . $key['detalle'] . '<br/><br/></td></tr>');
+    print('<td class="tg-031e" colspan="8">' . $key['antecedente'] . '<br/><br/></td></tr>');
   }
   ?>
   <tr>
