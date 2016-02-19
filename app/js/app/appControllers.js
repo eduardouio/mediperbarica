@@ -155,6 +155,15 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         );  
     };
     
+    //Habilitra o deshabilirta el boton de borrado
+    $scope.enableDisableButton = function(){
+        if($scope.nroTreatments == '0' || $scope.nroTreatments == 0 ){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     //Metodo para presentar una historia
     $scope.presentHistory = function(){
         console.log('[Debug] llamda a metodo presentHistory');
@@ -170,7 +179,18 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                 }else{
                     $scope.historyData = response.data[0];
                     $scope.getAntecedents($scope.historyData.id_paciente);
-                    console.dir($scope.historyData);
+                    $scope.nroTreatments = 0;
+                    //obtenemos el numero de tratamientos de la historia
+                    var httpResponse = serviceTreatments.getPersonTratments(
+                                                $scope.historyData.id_paciente);
+                    httpResponse.then(
+                        function(response){
+                            if(response.msg == '3002'){
+                                $scope.nroTreatments = response.data.length;
+                            }
+                        },function(error){
+                            $scope.validHistoriesErrors('7777', error);
+                        });
                 }
             },
             function(error){

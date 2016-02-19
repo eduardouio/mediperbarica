@@ -6,7 +6,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td>Tratamientos: #</td>
+        <td>Tratamientos: {{nroTreatments}}</td>
         <td></td>
         <td></td>
         <td></td>
@@ -63,7 +63,8 @@
              <a class="btn" href="#/crear-tratamiento/{{historyData.id_paciente}}">Iniciar Tratamiento</a>
              <a class="btn" href="#/listar-historias">Salir</a>
              &nbsp;&nbsp;&nbsp;
-             <a class="btn red" ng-click="deleteHistory(historyData.id_paciente)">  Borrar</a>
+             <button class="btn red" ng-click="deleteHistory(historyData.id_paciente)" 
+             > Borrar</button>
          </div>
       </div>
     <br>
