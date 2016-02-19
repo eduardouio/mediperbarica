@@ -454,6 +454,39 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     serviceSessions, serviceMachines, serviceCollections, serviceInvoices){
     console.log('[Debug] Llamada a CTRL treatmentsController');
     
+    //Variables de almacenamiento Datos
+    $scope.lstreatmentsData = [];
+    $scope.counter = 0;
+    $scope.treatmentData = {};
+    $scope.sessionsData = [];
+    $scope.statusMsg = '';
+
+    //Metodo que define la funcion a llamar dependiendo de la plantilla que se muestre
+    $scope.init = function(){
+        //identificacion ur para llamar a funcion
+        var mypath = $location.path();
+        var rept = /\/presentar-tratamiento\/\d/;
+        var relt = /\/listar-tratamientos/;
+        var rect = /\/editar-tratamiento/;
+        //Seleccionamos las rutas y direccionamos a la primera que de true
+        switch (true){
+            case relt.test(mypath):
+                break;
+            case rept.test(mypath):
+                break;                                
+            case rect.test(mypath):
+                break;                
+        }
+    };
+
+    //Funcion que inicia el init del controller
+    $scope.init();
+    
+    //Funcion encargada de presentar los errores en pantalla
+    $scope.validTreatmentsErrors = function(error, data){
+        var statusDetail = showStatus(error, data);    
+        Materialize.toast( statusDetail['message'],  2500);
+    }
     
 });
                             
