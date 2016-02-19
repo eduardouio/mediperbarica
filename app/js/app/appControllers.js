@@ -221,9 +221,14 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
             //guarda el antecedente en la base de datos
             antecedent['id_paciente'] = $scope.historyData.id_paciente;
             var httpresponse = serviceAntecedets.saveAntecedent(antecedent);
+            console.dir($scope.antecedentsData);
             httpresponse.then(
                 function(response){
                     if(response.msg == '3000'){
+                        //cuando editamos el no existe el array por eso lo creamos
+                        if(typeof($scope.antecedentsData) == 'undefined'){
+                            $scope.antecedentsData = [];
+                        }   
                         $scope.antecedentsData.push(
                             {antecedente: toTitleCase(antecedent.antecedente),
                             id_antecedente : response.data});
@@ -276,8 +281,6 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
                         alert('Error de envio solicitud HTTP');
                     });
             //Elimina antecedentes agregados en la edicion
-            }else{
-                var httpResponse = 'juanirto';
             }
         }
     };
