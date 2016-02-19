@@ -91,8 +91,8 @@ class Historias extends MY_Controller {
 		$history = json_decode(file_get_contents("php://input"),true);
 		#cambiamos el formato de fecha
 		if(array_key_exists('fecha_nacimiento', $history)){
-			$date = date_create($history['fecha_nacimiento']);
-			$history['fecha_nacimiento'] = date_format($date,'Y-m-d H:i:s');
+			$date = date_create(str_replace('/', '-',$history['fecha_nacimiento']));
+			$history['fecha_nacimiento'] = date_format($date,'Y-m-d');
 		}
 
 		# true crear False Actualizar
