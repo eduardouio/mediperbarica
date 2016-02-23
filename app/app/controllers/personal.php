@@ -47,6 +47,7 @@ class Personal extends My_Controller {
 				per.nombres,
 				per.cargo,
 			    per.celular,
+			    per.telefono_fijo,
 			    per.mail,
 			    per.creado,
 			    per.direccion,
