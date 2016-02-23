@@ -1,56 +1,49 @@
  <div class="row">
       <div class="col s6 card-panel teal lighten-2">
-        <H5> <b>{{tratamientos.length}} </b> Tratamientos Encontrados</h5>
+        <H5> <b>{{lsTreatmentsData.length}} </b> Tratamientos Encontrados</h5>
       </div>
       <div class="col s6">
       	<input placeholder="Buscar" id="buscar" ng-model="buscar" type="text" class="validate">
           <label for="buscar">Buscar</label>
       </div>
     </div>
-     <div class="progress" ng-show ="counter < 1">
-      <div class="indeterminate"></div>
+     <div align="center" ng-show ="lsTreatmentsData.length < 1">
+      <img src="../../app/images/ajax-loader.gif">
+         <br>
+         Cargando...
   </div>
         
-		<table class="highlight responsive-table bordered" ng-show ="counter > 1">
-		<thead>
+		<table class="highlight responsive-table bordered" ng-show ="lsTreatmentsData.length > 0">
+		<thead>           
 			<th>ID</th>
-			<th>Nombres</th>
-			<th>Telefono</th>
-			<th>Medico</th>
-			<th>Motivo Tratamiento</th>
-			<th>Ses Cont</th>
-			<th>Ses Real</th>
-			<th>Ses Pend</th>
-			<th>Fecha</th>
+			<th>Paciente</th>
+			<th>Teléfono</th>
+			<th>Sess Rel</th>
+			<th>Sess Pen</th>
+			<th>Doctor</th>
+			<th>Ult Sess</th>
 			<th>Acciones</th>			
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="row in tratamientos | filter:buscar">
-				<td><a href="#/presentar/{{row.id_tratamieto}}">{{row.id_tratamiento}}</a></td>
-				<td><a href="#/presentar/{{row.nombres}}">{{row.nombres}}</a></td>
+			<tr ng-repeat="row in lsTreatmentsData | filter:buscar">
+                <td><a href="#/presentar-tratamiento/{{row.id_tratamieto}}">{{row.id_tratamiento}}</a></td>
+				<td><a href="#/presentar-historia/{{row.id_historia}}">{{row.paciente}}</a></td>
 				<td>{{row.telefono}}</td>
-				<td>{{row.medico}}</td>
-				<td>{{row.motivo_tratamiento}}</td>
-				<td>{{row.nro_sesiones}}</td>
-				<td>{{row.sesiones}}</td>
-				<td>{{row.pendientes}}</td>
-				<td>{{row.creado}}</td>
+				<td>{{row.seiones_realizadas}}</td>
+				<td>{{row.nro_sesiones - row.seiones_realizadas}}</td>
+                <td> <a href="#/presentar-personal/{{row.id_personal}}">{{row.personal}}</a></td>
+				<td>{{row.ultima_sesion}}</td>
 				<td>
-					<!-- Single button -->
-					<div class="btn-group">
-					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-					    Acci&oacute;n <span class="caret"></span>
-					 </button>
-					 <ul class="dropdown-menu" role="menu">
-					    <li><a href="#/presentar/{{row.id_tratamiento}}">Ver</a></li>
-					    <li><a href="#/editar/{{row.id_tratamiento}}">Editar</a></li>
-					    <li><a href="#/asignar-sesion/{{row.id_tratamiento}}">Nueva Sesi&oacute;n</a></li>
-					    <li><a href="getReporteTratamiento/{{row.id_tratamiento}}" target="_blank">Imprimir Protocolo</a></li>
-					    <li class="divider"></li>
-					    <li><a href="#/eliminar/{{row.id_tratamiento}}" class="text-danger">Eliminar</a></li>
-					</ul>
-					</div>
+
+					    <a href="#/editar-tratamiento/{{row.id_tratamiento}}">
+					    		<i class="material-icons right">edit</i>
+					    	</a>					
+					    	<a href="tratamiento/imprimir/{{row.id_tratamiento}}" target="_blank">
+					    		<i class="material-icons right">print</i>
+					    	</a>
+					
+					
 				</td>
 			</tr>
 		</tbody>

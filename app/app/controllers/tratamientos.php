@@ -51,6 +51,9 @@ class Tratamientos extends MY_Controller {
         }else{
 			$this->Query_ = 'SELECT
 					trt.id_tratamiento,
+					hst.id_paciente,
+					hst.id_historia,
+					per.id_personal,
 					per.nombres as personal,
 					hst.nombres as paciente,
 					hst.telefono,

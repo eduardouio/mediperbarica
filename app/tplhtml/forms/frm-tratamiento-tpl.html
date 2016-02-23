@@ -1,30 +1,33 @@
   <div class="row card">
   <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Eduardo Villota</span>
+    <span style="font-size:18px;" class="teal-text teal-darken-4">{{historyData.nombres}}</span>
   </div>
   <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia: <b>1000</b></span>
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia: <b>{{historyData.id_historia}}</b></span>
   </div>
   <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Tratamientos Anteriores 3</span>
+    <span style="font-size:18px;" class="teal-text teal-darken-4">CI: <b>{{historyData.id_paciente}}</b></span>
   </div>
     <form class="col s12">
     <br>
       <span class="blue-text">Datos Paciente:</span>
       <div class="row">
-        <div class="input-field col s3">
-          
- <select>
-      <option value="" disabled selected>Ingrese un Nombre</option>
-      <option value="1">MArco Polo</option>
-      <option value="2">Anita Lopez</option>
-      <option value="3">Oscar Poma</option>
-    </select>
+        <div class="input-field col s6">
+ 
+     <md-autocomplete 
+        md-items="item in auQuerySearch(auSearchText)" 
+        md-item-text="item.display" 
+        md-min-length="0" 
+        placeholder="Ingrese un nombre">
+        <md-item-template>
+          <span md-highlight-text="auSearchText" md-highlight-flags="^i">{{item.display}}</span>
+        </md-item-template>
+        <md-not-found>
+          No hay concidencias para "{{auSearchText}}"
+          <a ng-click="ctrl.newState(ctrl.searchText)">Desea crear la historia?</a>
+        </md-not-found>
+      </md-autocomplete>
 </div>
-        <div class="col s3">
-        <b class="teal-text text-lighten-2">Cédula: </b> 
-        <span class="grey-text text-darken-2">1722919725</span>
-        </div>    
         <div class="col s3">
         <b class="teal-text text-lighten-2">Telef: </b> 
         <span class="grey-text text-darken-2">0992936569</span>
@@ -115,10 +118,11 @@
       </div>
     </form>
   </div>
-
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('select').material_select();
+    setTimeout(function(){
+          $(document).ready(function() {
+        $('select').material_select();
   });
-  
+    }, 3500);
+ 
 </script>

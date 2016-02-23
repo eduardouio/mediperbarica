@@ -107,7 +107,8 @@ Rutas
 '/presentar-historia/:idHistory'
 '/eliminar-historia/:idHistory'
 *******************************************************************************/
-mediperbaricaApp.controller('historiesController', function($scope, $location, $routeParams,
+mediperbaricaApp.controller('historiesController', function($scope, $location, 
+    $routeParams, $rootScope,
     serviceHistories, serviceTreatments, serviceAntecedets, serviceSessions ){
     console.log('[Debug] Llamada a CTRL historiesController');
     //Variables de almacenamiento Datos
@@ -359,6 +360,8 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
         });
     };
     
+    //Listado de funciones externas
+    this.listarHistorias = $scope.lstHistoriesData();
     //Guarda el listado de antecedentes
     $scope.saveAntecedents = function(idPacient){
         if($scope.antecedentsData.length > 0){
@@ -428,6 +431,9 @@ mediperbaricaApp.controller('historiesController', function($scope, $location, $
     //Funcion que inicia el init del controller
     $scope.init();
     
+    $scope.$on('listHistories', function(){return $scope.listHistories(); alert('Hola');});
+
+    
     //Funcion encargada de presentar los errores en pantalla
     $scope.validHistoriesErrors = function(error, data){
         var statusDetail = showStatus(error, data);    
@@ -449,14 +455,20 @@ Rutas
 '/editar-tratamiento/:idTreatment'
 '/eliminar-tratamiento/:idTreatment'
 *******************************************************************************/
-mediperbaricaApp.controller('treatmentsController', function($scope, $location,
+mediperbaricaApp.controller('treatmentsController', function($scope, $location, 
+    $routeParams,
     serviceHistories, serviceTreatments, serviceEmployees,  serviceAntecedets, 
     serviceSessions, serviceMachines, serviceCollections, serviceInvoices){
     console.log('[Debug] Llamada a CTRL treatmentsController');
     
     //Variables de almacenamiento Datos
-    $scope.lstreatmentsData = [];
     $scope.counter = 0;
+    $scope.lsTreatmentsData = [];
+    $scope.lstHistoriesData = [];
+    $scope.lsEmployeesData = [];
+    $scope.counter = 0;
+    $scope.historyData = {};
+    $scope.employeedData = {};
     $scope.treatmentData = {};
     $scope.sessionsData = [];
     $scope.statusMsg = '';
@@ -465,28 +477,163 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     $scope.init = function(){
         //identificacion ur para llamar a funcion
         var mypath = $location.path();
-        var rept = /\/presentar-tratamiento\/\d/;
         var relt = /\/listar-tratamientos/;
-        var rect = /\/editar-tratamiento/;
+        var rept = /\/presentar-tratamiento\/\d/;
+        var rect = /\/crear-tratamiento\/\d/;
+        var reet = /\/editar-tratamiento\/\d/;
         //Seleccionamos las rutas y direccionamos a la primera que de true
         switch (true){
             case relt.test(mypath):
+                $scope.listTreartments();
                 break;
             case rept.test(mypath):
+                $scope.presentTreatment();
                 break;                                
+            case reet.test(mypath):
+                $scope.prepareFormTreatment($routeParams.idTreatment, null);
+                break;
             case rect.test(mypath):
-                break;                
+                $scope.prepareFormTreatment(null, $routeParams.idHistory);
         }
+    };
+
+    //Metodo encargado de listar los tratamientos
+    $scope.listTreartments = function(){
+        console.log('[Debug] Lamada a metodo listTreartments');
+        var httpResponse = serviceTreatments.getTratments();
+        httpResponse.then(
+            function(response){
+                $scope.validTreatmentsErrors(response.msg, response.data);
+                $scope.lsTreatmentsData = response.data;
+            },function(error){
+                $scope.validTreatmentsErrors('7777', error);
+            });
+    };
+
+    //Metodo encargado de presentar un tratamiento
+    //@parmam idTreatment recibido por URL
+    $scope.presentTreatment = function(){
+        console.log('[Debug] Lamada a metodo presentTreatment');
+        var idTreatment =0;
+    };
+
+    //obtiene el detalle de las sesiones del tratamiento
+    $scope.getSesionsTreatment = function(idTreatment){
+        console.log('[Debug] Lamada a metodo getSesionsTreatment');
+
+    };
+
+    //Guarda un tratamiento
+    $scope.saveTreatment = function(treatmentData){
+        console.log('[Debug] Lamada a metodo saveTreatment');
+
+    };
+
+    //Valida el fomulario de tratamientos
+    $scope.validTreatmentForm = function(treatmentData){
+        console.log('[Debug] Lamada a metodo validTreatmentForm');
+
+    };
+
+    //Elimina un tratamiento sin sesiones hasta 1 hora despues
+    $scope.deleteTreatment = function(idTreatment){
+        console.log('[Debug] Lamada a metodo deleteTreatment');
+
+    };
+
+    //verirfica si un capo es nulo para poner active en la class
+    $scope.isInputNull = function(){
+        console.log('[Debug] Lamada a metodo isInputNull');
+
+    };
+
+    //añade una sesion al tratamiento
+    $scope.addSession = function(idTreatment){
+        console.log('[Debug] Lamada a metodo addSession');
+
+    };
+
+    //Elimina una sesion del tratamiento
+    $scope.deleteSession = function(session){
+        console.log('[Debug] Lamada a metodo deleteSession');
+
+    };
+
+    // Prepara el formulario para editar un tratamiento y crearlo
+    // los parametros que reibe son en caso de edicion id_tratamiento
+    // para crear recibe el numero de ci delpcaiente o 0 sino se eligio 
+    // un paciente
+    $scope.prepareFormTreatment = function(idTreatment, idHistory){
+        console.log('[Debug] llamada a metodo prepareFormTreatment');
+       //verificamos la variable tratamiento
+       if(idTreatment){
+           alert('Edicion de tratamiento pendiente');
+       }else if(idHistory){
+           //Se prepara el formulario con los datos de todos los pacientes
+           if(idHistory == 0){
+            //traemos el listado de historias
+            var httpResponse = serviceHistories.getHistories();
+               httpResponse.then(
+                   function(response){
+                       if(response.msg == '3002'){
+                            $scope.lstHistoriesData = response.data;                           
+                       }else{
+                           $scope.validTreatmentsErrors(response.msg, response.data);
+                       }
+                   },function(error){
+                       $scope.validTreatmentsErrors('7777', error);
+                   });
+               delete httpResponse;
+               
+               //Traer listado de personal
+               var httpResponse = serviceEmployees.getEmployees();
+               httpResponse.then(
+                   function(response){
+                       if(response.msg == '3002'){
+                           $scope.lsEmployeesData = response.data;
+                       }else{
+                           $scope.validTreatmentsErrors(response.msg, response);
+                       }
+                   },function(error){
+                       $scope.validTreatmentsErrors('7777', error);
+                   });
+               
+            //Se prepara el formulario con los datos del paciente pasado 
+           }else{
+                
+           }
+       }
+    
+    
+    
     };
 
     //Funcion que inicia el init del controller
     $scope.init();
     
+    
+    //Metodos para el autocmplete de historias
+    console.dir($scope.lstHistoriesData);
+        $scope.auQuerySearch = function(query){
+            var results = [];
+            angular.forEach($scope.lstHistoriesData,function(value,item){
+                results.push({value: value.id_paciente, display: value.nombres});
+            })
+            console.dir(results);
+            return results;
+        }
+       // md-selected-item="au.selectedItem"
+       // md-search-text-change="au.searchTextChange(ctrl.searchText)" 
+       // md-selected-item-change="au.selectedItemChange(item)" 
+       // md-item-text="item.display" 
+       // 
+
     //Funcion encargada de presentar los errores en pantalla
     $scope.validTreatmentsErrors = function(error, data){
         var statusDetail = showStatus(error, data);    
         Materialize.toast( statusDetail['message'],  2500);
     }
+
     
 });
                             
