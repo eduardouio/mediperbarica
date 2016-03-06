@@ -18,7 +18,7 @@
     <link href="<?php print base_url();?>css/prism.css" rel="stylesheet">
     <link href="<?php print base_url();?>css/style.css" rel="stylesheet">
     <link href="<?php print base_url();?>css/ghpages-materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="<?php print base_url();?>css/icon?family=Material+Icons" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>

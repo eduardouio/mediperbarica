@@ -50,7 +50,7 @@
 </script>
 
     <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="<?php print base_url();?>js/jquery-2.1.4.min.js"></script>
     <script>if (!window.jQuery) { document.write('<script src="http://materializecss.com/bin/jquery-2.1.1.min.js"><\/script>'); }
     </script>
     <script src="<?php print base_url();?>js/jquery.timeago.min.js"></script>
