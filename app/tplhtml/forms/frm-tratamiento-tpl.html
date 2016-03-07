@@ -1,22 +1,28 @@
   <div class="row card">
   <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">{{historyData.nombres}}</span>
+    <span style="font-size:20px;" class="teal-text teal-darken-5"><b>{{historyData.nombres}}</b></span>
   </div>
   <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia: <b>{{historyData.id_historia}}</b></span>
+    <span style="font-size:16px;" class="teal-text teal-darken-4">Historia: <b>
+    <a href="#/presentar-historia/{{historyData.id_historia}}">{{historyData.id_historia}}</a></b></span>
   </div>
   <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">CI: <b>{{historyData.id_paciente}}</b></span>
+    <span style="font-size:16px;" class="teal-text teal-darken-4">CI: <b>{{historyData.id_paciente}}</b></span>
   </div>
-    <form class="col s12">
+  <div style="background-color:#f1f1f1;">
+  .
+  </div>
+    <form class="col s12" ng-submit="validDataTreatmentForm(historyData, employeedData, tratamiento )">
     <br>
       <span class="blue-text">Datos Paciente:</span>
       <div class="row">
         <div class="input-field col s6">
       <md-autocomplete 
       md-selected-item="selectedItem" 
+      md-autofocus
       md-search-text="searchText" 
       md-items="item in keyValueCustomer(searchText)" 
+      md-selected-item-change  = "chageCustomerItem(item);"
       md-item-text="item.display">
         <md-item-template>
           <span md-highlight-text="searchText">{{ item.display}}</span>
@@ -58,6 +64,7 @@
  <md-autocomplete 
   md-search-text="searchText2" 
   md-items="item2 in keyValueEmployee(searchText2)" 
+  md-selected-item-change  = "chageEmployeeItem(item2)"
   md-item-text="item2.display">
    <md-item-template>
      <span md-highlight-text="searchText2">{{ item2.display }}</span>
@@ -81,51 +88,52 @@
         </div>
         
       </div>
+      <br>
+      <hr>
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">comment</i>
-          <input id="motivo" type="text" class="validate" name="motivo" ng-model="tratamiento.motivo" maxlength="360">
+          <input id="motivo" type="text" class="validate" name="motivo" ng-model="tratamiento.motivo_tratamiento" maxlength="360">
           <label for="motivo">Motivo</label>
         </div>
       </div>
+     <br>
       <div class="row">
         <div class="input-field col s2">
           <i class="material-icons prefix">#</i>
-          <input type="number" name="sesiones" id="sesiones" ng-model="tratamiento.nro_sesiones" maxlength="2">
+          <input style="font-size:20px;" type="number" name="sesiones" id="sesiones" ng-model="tratamiento.nro_sesiones" maxlength="2">
           <label for="id_paciente">Sesiones</label>
         </div>
-        <div class="input-field col s2">
-          <i class="material-icons prefix">trending_down</i>
-          <input type="number" name="descuento" id="descuento" ng-model="tratamiento.descuento" maxlength="2">
-          <label for="descuento">% Descueto</label>
-        </div>
-        <div class="input-field col s2">
+                <div class="input-field col s2">
           <i class="material-icons prefix">$</i>
-          <input type="number" name="costo" id="costo" ng-model="tratamiento.costo" maxlength="5">
+          <input  style="font-size:20px;"type="text" name="costo" id="costo" ng-model="tratamiento.costo" maxlength="6">
           <label for="costo">Costo $</label>
         </div>
         <div class="input-field col s2">
-           <input type="checkbox" id="iva" name="iva" />
+          <i class="material-icons prefix">trending_down</i>
+          <input style="font-size:20px;"type="text" name="descuento" id="descuento" ng-model="tratamiento.descuento" maxlength="6">
+          <label for="descuento">% Descueto</label>
+        </div>
+        <div class="input-field col s2">
+           <input type="checkbox" id="iva" name="iva" ng-model="tratamiento.iva"/>
            <label for="iva">IVA</label>
         </div>
-                <div class="input-field col s4">
-           <h5 class="right-align">IVA: 0.00 </h5>
-           <h5 class="right-align"><span class="teal-text">Total: $100.00</span></h5>
+            <div class="input-field col s4">
+           <h5 class="right-align">Costo/Sesión: {{(tratamiento.costo-tratamiento.descuento)/tratamiento.nro_sesiones | currency:" $  "}}</h5>
+           <h5 class="right-align">Subtotal: {{tratamiento.costo-tratamiento.descuento  | currency:" $  "}}</h5>
+           <h5 class="right-align" 
+           ng-show="tratamiento.iva">
+           IVA: {{(tratamiento.costo - tratamiento.descuento)* 0.12  | currency:" $  "}} </h5>
+           <h5 class="right-align" ng-show="!tratamiento.iva"><span class="teal-text">Total: {{(tratamiento.costo-tratamiento.descuento) | currency:" $  "}}</span></h5>
+           <h5 class="right-align" ng-show="tratamiento.iva"><span class="teal-text">Total: {{(tratamiento.costo-tratamiento.descuento) * 1.12| currency:" $  "}}</span></h5>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s4 offset-s8">
           <input id="enviar" type="submit" class="btn" value="Guardar">
-          <a href="" class="btn red">Cancelar</a>
+          <a href="#/listar-tratamientos" class="btn red">Volver</a>
         </div>
       </div>
+      <p>&nbsp;</p>
     </form>
   </div>
-<script type="text/javascript">
-    setTimeout(function(){
-          $(document).ready(function() {
-        $('select').material_select();
-  });
-    }, 3500);
- 
-</script>

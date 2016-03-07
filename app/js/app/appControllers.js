@@ -35,7 +35,6 @@ mediperbaricaApp.controller('loginController', function($scope, $location,
 	//Valida los datos del user
 	$scope.validForm = function(userData){
 		var condition = false;
-		console.dir(userData);
 		if(userData.username && userData.password){
 			if(userData.username !== '' && userData.password !== ''){
 				condition = true;
@@ -530,8 +529,22 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     };
 
     //Valida el fomulario de tratamientos
-    $scope.validTreatmentForm = function(treatmentData){
+    $scope.validDataTreatmentForm = function(historyData, employeedData, treatmentData){
         console.log('[Debug] Lamada a metodo validTreatmentForm');
+        //creamos el objeto a enviar
+        var myTreatment = treatmentData;
+        myTreatment['id_paciente'] = historyData.id_paciente;
+        myTreatment['id_personal'] = employeedData.id_personal;
+
+        $i = 0;
+        // normalizamos el arreglo y contamos los campos
+        angular.forEach(myTreatment, function(value,key){
+            if(value){
+                
+            }
+        });
+
+        
 
     };
 
@@ -567,6 +580,9 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     $scope.prepareFormTreatment = function(idTreatment, idHistory){
         console.log('[Debug] llamada a metodo prepareFormTreatment');
 
+        //validaciones de edicion para que no modifiquen los autocopmpletes
+
+
         //genera un diccionario clave valor de los clientes
         //@param JSON datos clientes
         //@return JSON datos calve valor value:1722919725,display:'Eduardo Villota'
@@ -581,11 +597,24 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
                 }else if (cliente.indexOf(nombres) ===   0){
                     obj.push({value : value.id_paciente, 
                             display: value.nombres});
-                    console.dir(obj);
                 }
             }); 
             return obj;
         }
+
+        //Asigna los datos al oibjeto para que paraezcan la informacion
+        $scope.chageCustomerItem = function(item){
+            angular.forEach($scope.lstHistoriesData, function(value, key){
+                if(item && item.value === value.id_paciente){
+                    $scope.historyData = value;                    
+                }
+
+                if(!item){
+                 $scope.historyData = {};   
+                }
+            });
+        };
+
         //genera un diccionario clave valor de los empleados
         //@param JSON datos empleado
         //@return JSON datos clav val value:1722919725,display:'Eduardo Villota'
@@ -608,11 +637,24 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
             return myObj;
         }
 
+        //Asigna los datos al oibjeto para que paraezcan la informacion
+        $scope.chageEmployeeItem = function(item){
+            angular.forEach($scope.lsEmployeesData, function(value, key){
+                if(item && item.value === value.id_personal){
+                    $scope.employeedData = value;                    
+                }
+                if(!item){
+                 $scope.employeedData = {};   
+                }
+            });
+        };
 
-  
+
+    //comprobamos que reciba un tratamiento y lo edita
      if(idTreatment){
+
            alert('Edicion de tratamiento pendiente');
-       }else if(idHistory){
+       }else{
            //Se prepara el formulario con los datos de todos los pacientes
            if(idHistory == 0){
             //traemos el listado de historias
@@ -654,16 +696,7 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     //Funcion que inicia el init del controller
     $scope.init();
     
-    
-    //Metodos para el autocmplete de historias
-        $scope.auQuerySearch = function(query){
-            var results = [];
-            angular.forEach($scope.lstHistoriesData,function(value,item){
-                results.push({value: value.id_paciente, display: value.nombres});
-            })
-            console.dir(results);
-            return results;
-        }
+
        // md-selected-item="au.selectedItem"
        // md-search-text-change="au.searchTextChange(ctrl.searchText)" 
        // md-selected-item-change="au.selectedItemChange(item)" 
