@@ -360,8 +360,6 @@ mediperbaricaApp.controller('historiesController', function($scope, $location,
         });
     };
     
-    //Listado de funciones externas
-    this.listarHistorias = $scope.lstHistoriesData();
     //Guarda el listado de antecedentes
     $scope.saveAntecedents = function(idPacient){
         if($scope.antecedentsData.length > 0){
@@ -472,6 +470,8 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     $scope.treatmentData = {};
     $scope.sessionsData = [];
     $scope.statusMsg = '';
+    $scope.idCustomerName = [];
+    $scope.idEmployeeName = [];
 
     //Metodo que define la funcion a llamar dependiendo de la plantilla que se muestre
     $scope.init = function(){
@@ -481,7 +481,7 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
         var rept = /\/presentar-tratamiento\/\d/;
         var rect = /\/crear-tratamiento\/\d/;
         var reet = /\/editar-tratamiento\/\d/;
-        //Seleccionamos las rutas y direccionamos a la primera que de true
+        //Seleccionamos las rutas 'r3;365lytmkhlouop67iy direccionamos a la primera que de true
         switch (true){
             case relt.test(mypath):
                 $scope.listTreartments();
@@ -559,14 +559,58 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
 
     };
 
-    // Prepara el formulario para editar un tratamiento y crearlo
-    // los parametros que reibe son en caso de edicion id_tratamiento
-    // para crear recibe el numero de ci delpcaiente o 0 sino se eligio 
-    // un paciente
+    //prepara el formulario para la edicion o un registro nuevo de los trata
+    //mientos por defecto una de las variables es null cuando la otra tiene valo
+    //@param idTreatment (int) si es un numero lo que se hace es editar el trar
+    //@param idHistori (int) si es cero se listan las historias en el formulario
+    // sino puede ser el numero de cedula del paciente por defecto el idTratment es Cero
     $scope.prepareFormTreatment = function(idTreatment, idHistory){
         console.log('[Debug] llamada a metodo prepareFormTreatment');
-       //verificamos la variable tratamiento
-       if(idTreatment){
+
+        //genera un diccionario clave valor de los clientes
+        //@param JSON datos clientes
+        //@return JSON datos calve valor value:1722919725,display:'Eduardo Villota'
+        $scope.keyValueCustomer = function(searchText){
+            var obj = [];
+            angular.forEach($scope.lstHistoriesData, function(value, key){
+                var nombres = angular.lowercase(searchText);
+                var cliente = angular.lowercase(value.nombres);
+                if(cliente.indexOf(nombres) > 0){
+                    obj.push({value : value.id_paciente, 
+                            display: value.nombres});
+                }else if (cliente.indexOf(nombres) ===   0){
+                    obj.push({value : value.id_paciente, 
+                            display: value.nombres});
+                    console.dir(obj);
+                }
+            }); 
+            return obj;
+        }
+        //genera un diccionario clave valor de los empleados
+        //@param JSON datos empleado
+        //@return JSON datos clav val value:1722919725,display:'Eduardo Villota'
+               //genera un diccionario clave valor de los empleados
+        //@param JSON datos empleado
+        //@return JSON datos clav val value:1722919725,display:'Eduardo Villota'
+        $scope.keyValueEmployee = function(searchText){
+            var myObj = [];
+            angular.forEach($scope.lsEmployeesData, function(value, key){
+                var nombres = angular.lowercase(searchText);
+                var employeed = angular.lowercase(value.nombres);
+                if(employeed.indexOf(nombres) > 0){
+                    myObj.push({value : value.id_personal, 
+                            display: value.nombres});
+                }else if (employeed.indexOf(nombres) ===   0){
+                    myObj.push({value : value.id_personal, 
+                            display: value.nombres});
+                }
+            }); 
+            return myObj;
+        }
+
+
+  
+     if(idTreatment){
            alert('Edicion de tratamiento pendiente');
        }else if(idHistory){
            //Se prepara el formulario con los datos de todos los pacientes
@@ -576,7 +620,7 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
                httpResponse.then(
                    function(response){
                        if(response.msg == '3002'){
-                            $scope.lstHistoriesData = response.data;                           
+                            $scope.lstHistoriesData = response.data;
                        }else{
                            $scope.validTreatmentsErrors(response.msg, response.data);
                        }
@@ -597,7 +641,6 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
                    },function(error){
                        $scope.validTreatmentsErrors('7777', error);
                    });
-               
             //Se prepara el formulario con los datos del paciente pasado 
            }else{
                 
@@ -613,7 +656,6 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     
     
     //Metodos para el autocmplete de historias
-    console.dir($scope.lstHistoriesData);
         $scope.auQuerySearch = function(query){
             var results = [];
             angular.forEach($scope.lstHistoriesData,function(value,item){

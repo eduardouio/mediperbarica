@@ -13,43 +13,41 @@
       <span class="blue-text">Datos Paciente:</span>
       <div class="row">
         <div class="input-field col s6">
- 
-     <md-autocomplete 
-        md-items="item in auQuerySearch(auSearchText)" 
-        md-item-text="item.display" 
-        md-min-length="0" 
-        placeholder="Ingrese un nombre">
+      <md-autocomplete 
+      md-selected-item="selectedItem" 
+      md-search-text="searchText" 
+      md-items="item in keyValueCustomer(searchText)" 
+      md-item-text="item.display">
         <md-item-template>
-          <span md-highlight-text="auSearchText" md-highlight-flags="^i">{{item.display}}</span>
+          <span md-highlight-text="searchText">{{ item.display}}</span>
         </md-item-template>
         <md-not-found>
-          No hay concidencias para "{{auSearchText}}"
-          <a ng-click="ctrl.newState(ctrl.searchText)">Desea crear la historia?</a>
+          El paciente <b>{{searchText}}</b> no existe, <a href="#/crear-historia" class="btn">crear historia</a>
         </md-not-found>
       </md-autocomplete>
 </div>
         <div class="col s3">
         <b class="teal-text text-lighten-2">Telef: </b> 
-        <span class="grey-text text-darken-2">0992936569</span>
+        <span class="grey-text text-darken-2">{{historyData.telefono}}</span>
         </div>  
         <div class="col s3">
         <b class="teal-text text-lighten-2">Referente: </b> 
-        <span class="grey-text text-darken-2">Dr. German Lopez</span>
+        <span class="grey-text text-darken-2">{{historyData.nombre_referente}}</span>
         </div>
         
       </div>
       <div class="row">
          <div class="col s5">
         <b class="teal-text text-lighten-2">Manejo: </b> 
-       <span class="grey-text text-darken-2"> Indicaciones de manejo en presion de la camar</span>
+       <span class="grey-text text-darken-2">{{historyData.manejo}}</span>
         </div>
          <div class="col s4">
         <b class="teal-text text-lighten-2">Examen Físico: </b> 
-        <span class="grey-text text-darken-2">Agun Valor Para el Examen</span>
+        <span class="grey-text text-darken-2">{{historyData.examen_fisico}}</span>
         </div>
          <div class="col s3">
         <b class="teal-text text-lighten-2">Registrado: </b> 
-        <span class="grey-text text-darken-2">2011-05-01</span>
+        <span class="grey-text text-darken-2">{{historyData.creado}}</span>
         </div>
       </div>
       <br>
@@ -57,24 +55,29 @@
             <div class="row">
         <div class="input-field col s3">
           
- <select>
-      <option value="" disabled selected>Ingrese un Nombre</option>
-      <option value="1">MArco Polo</option>
-      <option value="2">Anita Lopez</option>
-      <option value="3">Oscar Poma</option>
-    </select>
+ <md-autocomplete 
+  md-search-text="searchText2" 
+  md-items="item2 in keyValueEmployee(searchText2)" 
+  md-item-text="item2.display">
+   <md-item-template>
+     <span md-highlight-text="searchText2">{{ item2.display }}</span>
+   </md-item-template>
+   <md-not-found>
+     Dr. <b>{{searchText2}}</b> no existe, <a href="#/crear-historia" class="btn">ingresar personal</a>
+   </md-not-found>
+ </md-autocomplete>
 </div>
         <div class="col s3">
         <b class="teal-text text-lighten-2">Celular: </b> 
-       <span class="grey-text text-darken-2">0992936569</span>
+       <span class="grey-text text-darken-2">{{employeedData.celular}}</span>
         </div>    
         <div class="col s3">
         <b class="teal-text text-lighten-2">Telef: </b> 
-        <span class="grey-text text-darken-2">023203521</span>
+        <span class="grey-text text-darken-2">{{employeedData.telefono_fijo}}</span>
         </div>  
         <div class="col s3">
         <b class="teal-text text-lighten-2">Mail: </b> 
-        <span class="grey-text text-darken-2">eduardouio7@gmail.com</span>
+        <span class="grey-text text-darken-2">{{employeedData.mail}}</span>
         </div>
         
       </div>

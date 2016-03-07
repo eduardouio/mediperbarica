@@ -66,6 +66,7 @@
   <script type="text/javascript" src="<?php echo base_url();?>js/angular-route.js"></script>
   <script type="text/javascript" src="<?php echo base_url();?>js/angular-resource.js"></script>
   <script src="<?php echo base_url();?>js/angular-material.min.js"></script>
+  <script src="<?php echo base_url();?>js/angular-autocomplete.js"></script>
   <script src="<?php echo base_url();?>js/angular-sanitize.js"></script>
 
 <script src="<?php echo base_url();?>js/app/appStatusMsg.js"></script>

@@ -10,4 +10,4 @@
 
 //Variable que contiene la aplicacion
 var mediperbaricaApp = angular.module('mediperbaricaApp',['ngRoute',
-								'ngMaterial','ngSanitize']);
+								'ngMaterial','ngSanitize',]);
