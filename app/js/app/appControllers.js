@@ -419,7 +419,8 @@ mediperbaricaApp.controller('historiesController', function($scope, $location,
         });
         //mostramos el error
         if($i == 5){
-            condition ? $scope.saveHistory(historyData) : $scope.validHistoriesErrors('2005',{});
+            condition ? $scope.saveHistory(historyData) : 
+                                        $scope.validHistoriesErrors('2005',{});
         }else{
             $scope.validHistoriesErrors('2000',{});
         }
@@ -529,7 +530,8 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     };
 
     //Valida el fomulario de tratamientos
-    $scope.validDataTreatmentForm = function(historyData, employeedData, treatmentData){
+    $scope.validDataTreatmentForm = function(historyData, employeedData, 
+                                                        treatmentData){
         console.log('[Debug] Lamada a metodo validTreatmentForm');
         //creamos el objeto a enviar
         var myTreatment = treatmentData;
@@ -538,11 +540,10 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
 
         $i = 0;
         // normalizamos el arreglo y contamos los campos
-        angular.forEach(myTreatment, function(value,key){
-            if(value){
-                
-            }
-        });
+        var old = myTreatment.motivo_tratamiento.toLowerCase();
+        console.dir(old);
+        myTreatment.motivo_tratamiento = toTitleCase(old);
+        console.dir(myTreatment);
 
         
 
