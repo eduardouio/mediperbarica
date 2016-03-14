@@ -72,7 +72,8 @@ class Tratamientos extends MY_Controller {
 				                    where id_tratamiento = trt.id_tratamiento )) as pagos
 				FROM tratamiento as trt
 				LEFT JOIN personal as per USING(id_personal)
-				LEFT JOIN historia as hst USING(id_paciente);';
+				LEFT JOIN historia as hst USING(id_paciente)
+				ORDER BY trt.id_tratamiento;';
         }
         #ejecutamos la consulta
         $this->Result_ = $this->db->query($this->Query_);
@@ -106,7 +107,7 @@ class Tratamientos extends MY_Controller {
 
 		$treatment = json_decode(file_get_contents('php://input'),true);
 		#true crear false guardar
-		if(!$treatment['id_tratamiento']){
+		if(!array_key_exists('id_tratamiento', $treatment)){
 			$status = $this->_validData($treatment);
 			if($status == 1){
 				$this->db->insert($this->Table_, $treatment);
@@ -200,20 +201,16 @@ class Tratamientos extends MY_Controller {
 	 */
 	protected function _validData($tratamiento,$edit = false){
 		$params = array(
-			'id_paciente'=>'9',
-			'id_personal'=>'9',
-			'motivo_tratamiento'=>'10',
+			'id_paciente'=>'10',
+			'id_personal'=>'10',
+			'motivo_tratamiento'=>'5',
 			'nro_sesiones'=>'1',
-			'costo'=>'2',
-			'descuento'=>'-1',
+			'costo'=>'1',
+			'descuento'=>'1',
 			'notas'=>'-1'
 			);
-		if($edit){
-			unset($params['id_paciente']);
-			return($this->_validUserData($params,$tratamiento,4));
-		}
 
-		return($this->_validUserData($params,$tratamiento,5));
+		return($this->_validUserData($params,$tratamiento,6));
 
 	}
 }
