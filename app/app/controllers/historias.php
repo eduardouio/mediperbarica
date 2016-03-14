@@ -74,6 +74,39 @@ class Historias extends MY_Controller {
 		$this->rest->_responseHttp($response,200);
 	}
 
+
+	 /************************************************************************
+	 * Obtiene un listado de historias o una historia
+	 * @param (int) opcional identificador de la historia se pasa auto desde url
+	 * @return (JSON) Listado de hisotrias
+	 ************************************************************************/
+	public function getHistoriesFromID($idPerson = 0){
+		//variable de respuesta
+		$response = array(
+				'status' => 'Success' );
+
+		if($this->uri->segment(3)){
+			$this->Query_ = "SELECT * from historia WHERE id_paciente = " . 
+															$idPerson . "
+											Order by nombres DESC;";
+		}
+		
+		//ejecuta la consulta
+		$this->Result_ = $this->db->query($this->Query_);
+
+		//comprobamos los posibles errores en las consultas
+		if($this->Result_->num_rows() > 0){
+			$response['msg'] = '3002';
+			$response['data'] = $this->Result_->result_array();
+		}elseif($idHistory){
+			$response['msg'] = '2001';
+		}else{
+			$response['msg'] = '2002';
+		}
+		//enviamos respuesta
+		$this->rest->_responseHttp($response,200);
+	}
+
 	/*************************************************************************
 	 * Registra una historia en el sistema
 	 * @method setHistoria()

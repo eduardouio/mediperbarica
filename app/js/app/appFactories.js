@@ -114,16 +114,22 @@ mediperbaricaApp.factory('serviceHistories', ['$http','$rootScope',	'$q',
         }
 
 		
-        //Losta todas las historias de la base de datos
+        //Lista todas las historias de la base de datos
 		service.getHistories = function(){
 			console.log('[Debug] llamada funcion getHistories() ');
 			return httpGet('historias/getHistories');	
 			};
 
-		//Funcion encargada de devolver una historia
-		service.getHistory = function(idHistory){
-			console.log('[Debug] llamada funcion getHistory()');
-			return httpGet('historias/getHistories/' + idHistory);
+        //Funcion encargada de devolver una historia
+        service.getHistory = function(idHistory){
+            console.log('[Debug] llamada funcion getHistory()');
+            return httpGet('historias/getHistories/' + idHistory);
+        };
+
+		//Funcion encargada de devolver una historia desde la Cedula
+		service.getHistoryFromId = function(idPerson){
+			console.log('[Debug] llamada funcion getHistoryfromID()');
+			return httpGet('historias/getHistoriesFromID/' + idPerson);
 		};
 
 		//Funcion encargada de guardar una historia
