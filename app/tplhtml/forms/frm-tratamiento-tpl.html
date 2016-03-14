@@ -10,16 +10,16 @@
     <span style="font-size:16px;" class="teal-text teal-darken-4">CI: <b>{{historyData.id_paciente}}</b></span>
   </div>
   <div style="background-color:#f1f1f1;">
-  .
   </div>
-    <form class="col s12" ng-submit="validDataTreatmentForm(historyData, employeedData, tratamiento )">
+    <form class="col s12" ng-submit="validDataTreatmentForm(historyData.id_paciente, employeedData.id_personal, tratamiento )">
     <br>
       <span class="blue-text">Datos Paciente:</span>
       <div class="row">
         <div class="input-field col s6">
       <md-autocomplete 
-      md-selected-item="selectedItem" 
       md-autofocus
+      md-selected-item = "selectePersondItem"
+      ng-disabled = "auTreatmentDisable()"
       md-search-text="searchText" 
       md-items="item in keyValueCustomer(searchText)" 
       md-selected-item-change  = "chageCustomerItem(item);"
@@ -65,6 +65,8 @@
   md-search-text="searchText2" 
   md-items="item2 in keyValueEmployee(searchText2)" 
   md-selected-item-change  = "chageEmployeeItem(item2)"
+  ng-disabled = "auTreatmentDisable()"
+  md-selected-item = "selecteEmployeeItem"
   md-item-text="item2.display">
    <md-item-template>
      <span md-highlight-text="searchText2">{{ item2.display }}</span>
@@ -93,29 +95,33 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">comment</i>
-          <input id="motivo" type="text" class="validate" name="motivo" ng-model="tratamiento.motivo_tratamiento" maxlength="360">
-          <label for="motivo">Motivo</label>
+          <input id="motivo" type="text" class="validate" name="motivo" ng-model="tratamiento.motivo_tratamiento" maxlength="360" >
+          <label for="motivo" ng-class="isInputTreatmentNull(tratamiento.motivo_tratamiento)">Motivo</label>
         </div>
       </div>
      <br>
       <div class="row">
         <div class="input-field col s2">
           <i class="material-icons prefix">#</i>
-          <input style="font-size:20px;" type="number" name="sesiones" id="sesiones" ng-model="tratamiento.nro_sesiones" maxlength="2">
-          <label for="id_paciente">Sesiones</label>
+          <input style="font-size:20px;" type="text" name="sesiones" id="sesiones" ng-model="tratamiento.nro_sesiones" maxlength="2"
+         >
+          <label for="id_paciente"  ng-class="isInputTreatmentNull(tratamiento.nro_sesiones)">Sesiones</label>
         </div>
                 <div class="input-field col s2">
           <i class="material-icons prefix">$</i>
-          <input  style="font-size:20px;"type="text" name="costo" id="costo" ng-model="tratamiento.costo" maxlength="6">
-          <label for="costo">Costo $</label>
+          <input  style="font-size:20px;"type="text" name="costo" id="costo" ng-model="tratamiento.costo" maxlength="6"
+          >
+          <label for="costo" ng-class="isInputTreatmentNull(tratamiento.costo)">Costo $</label>
         </div>
         <div class="input-field col s2">
           <i class="material-icons prefix">trending_down</i>
-          <input style="font-size:20px;"type="text" name="descuento" id="descuento" ng-model="tratamiento.descuento" maxlength="6">
-          <label for="descuento">% Descueto</label>
+          <input style="font-size:20px;"type="text" name="descuento" id="descuento" ng-model="tratamiento.descuento" maxlength="6"
+          >
+          <label for="descuento" ng-class="isInputTreatmentNull(tratamiento.descuento)">% Descueto</label>
         </div>
         <div class="input-field col s2">
-           <input type="checkbox" id="iva" name="iva" ng-model="tratamiento.iva"/>
+           <input type="checkbox" id="iva" name="iva" ng-model="tratamiento.iva"
+           />
            <label for="iva">IVA</label>
         </div>
             <div class="input-field col s4">

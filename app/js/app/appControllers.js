@@ -409,10 +409,10 @@ mediperbaricaApp.controller('historiesController', function($scope, $location,
         $i = 0;
         //comprobamos la cantidad de datos y su condiciones
         angular.forEach(minimalValues, function(value, key){
-            if(historyData[key]){
+            if(historyData[key] && condition){
                 $i ++;
                 if(historyData[key].length < value){
-               condition = false;   
+               condition = false; 
             }    
             }
             
@@ -490,10 +490,10 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
                 $scope.presentTreatment();
                 break;                                
             case reet.test(mypath):
-                $scope.prepareFormTreatment($routeParams.idTreatment, null);
+                $scope.prepareFormTreatment($routeParams.idTreatment);
                 break;
             case rect.test(mypath):
-                $scope.prepareFormTreatment(null, $routeParams.idHistory);
+                $scope.prepareFormTreatment(null);
         }
     };
 
@@ -526,27 +526,78 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     //Guarda un tratamiento
     $scope.saveTreatment = function(treatmentData){
         console.log('[Debug] Lamada a metodo saveTreatment');
+        var httpPromise = serviceTreatments.saveTreatment(treatmentData);
+        httpPromise.then(
+        function(response){
+            if(response.msg == '3000'){
+                $location.path('/presentar-tratamiento/' + response.data);
+            }else if(response.msg == '3001'){
+                $location.path('/presentar-tratamiento/' + 
+                                            response.data.id_tratamiento);
+            }else{
+                $scope.validTreatmentsErrors(response.msg, response.data);                
+            }
+        },function(error){
+            $scope.validTreatmentsErrors(7777, error);
+        });
 
     };
 
     //Valida el fomulario de tratamientos
-    $scope.validDataTreatmentForm = function(historyData, employeedData, 
+    $scope.validDataTreatmentForm = function(idPerson, idEmployee, 
                                                         treatmentData){
         console.log('[Debug] Lamada a metodo validTreatmentForm');
         //creamos el objeto a enviar
-        var myTreatment = treatmentData;
-        myTreatment['id_paciente'] = historyData.id_paciente;
-        myTreatment['id_personal'] = employeedData.id_personal;
+        if(!idPerson){
+            alert('Ingrese un nombre y seleccionelo de la lista');
+        }
 
-        $i = 0;
+        var myTreatment = treatmentData;
+        myTreatment['id_paciente'] = idPerson
+        myTreatment['id_personal'] = idEmployee;
         // normalizamos el arreglo y contamos los campos
         var old = myTreatment.motivo_tratamiento.toLowerCase();
-        console.dir(old);
         myTreatment.motivo_tratamiento = toTitleCase(old);
-        console.dir(myTreatment);
 
-        
+        //variable de condicion antes de evaluar objeto
+        var condition = true;
 
+        //Valores minimos de los campos
+        var minimalValues = {
+            'id_paciente': '10',
+            'id_personal': '10',
+            'motivo_tratamiento': '5',
+            'nro_sesiones': '1',
+            'costo': '1',
+            'descuento': '1'
+        };
+
+        $i = 0;
+        if(myTreatment.costo > 0 
+                    && myTreatment.nro_sesiones > 0 
+                    && myTreatment.descuento > -1){
+            //comprobamos la cantidad de datos
+            angular.forEach(minimalValues, function(value, key){
+                if(myTreatment[key] && condition){
+                    $i++;
+                    if(myTreatment[key].length < value){
+                        condition = false;
+                    }
+                }
+            });
+    
+        }else{
+            alert('Los Valores de sesiones costos y ' +
+                                    ' Descuentos no pueden ser Cero.');
+            condition = false;
+        }
+        //evaluamos los errores
+        if($i == 6){
+            condition ? $scope.saveTreatment(myTreatment) :
+                                $scope.validTreatmentsErrors('2005',{});
+        }else{
+            $scope.validTreatmentsErrors('2000',{});
+        }
     };
 
     //Elimina un tratamiento sin sesiones hasta 1 hora despues
@@ -555,11 +606,6 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
 
     };
 
-    //verirfica si un capo es nulo para poner active en la class
-    $scope.isInputNull = function(){
-        console.log('[Debug] Lamada a metodo isInputNull');
-
-    };
 
     //añade una sesion al tratamiento
     $scope.addSession = function(idTreatment){
@@ -578,7 +624,7 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     //@param idTreatment (int) si es un numero lo que se hace es editar el trar
     //@param idHistori (int) si es cero se listan las historias en el formulario
     // sino puede ser el numero de cedula del paciente por defecto el idTratment es Cero
-    $scope.prepareFormTreatment = function(idTreatment, idHistory){
+    $scope.prepareFormTreatment = function(idTreatment){
         console.log('[Debug] llamada a metodo prepareFormTreatment');
 
         //validaciones de edicion para que no modifiquen los autocopmpletes
@@ -650,22 +696,16 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
             });
         };
 
-
-    //comprobamos que reciba un tratamiento y lo edita
-     if(idTreatment){
-
-           alert('Edicion de tratamiento pendiente');
-       }else{
-           //Se prepara el formulario con los datos de todos los pacientes
-           if(idHistory == 0){
-            //traemos el listado de historias
+        $scope.loadData = function(){
+             //traemos el listado de historias
             var httpResponse = serviceHistories.getHistories();
                httpResponse.then(
                    function(response){
                        if(response.msg == '3002'){
                             $scope.lstHistoriesData = response.data;
                        }else{
-                           $scope.validTreatmentsErrors(response.msg, response.data);
+                           $scope.validTreatmentsErrors(response.msg, 
+                                                              response.data);
                        }
                    },function(error){
                        $scope.validTreatmentsErrors('7777', error);
@@ -684,12 +724,90 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
                    },function(error){
                        $scope.validTreatmentsErrors('7777', error);
                    });
-            //Se prepara el formulario con los datos del paciente pasado 
-           }else{
-                
-           }
+        }
+
+     if(idTreatment){
+        //Verifica campos nulos si lo son no coloca active en el label
+        $scope.isInputTreatmentNull = function (data){
+            if(typeof(data) === 'string'){
+                return 'active';
+            }
+        };
+
+        //comprobamos que reciba un tratamiento y lo edita como solo se
+        //recibe il id del tratamiento buscamos los datos
+        $scope.auTreatmentDisable = function(){
+            return true;
+        };
+        
+        //Recupera los datos y selecciona el item del empleado
+        function selectPerson(idPerson){
+            var httpResponse = serviceHistories.getHistoryFromId(idPerson);
+            httpResponse.then(
+                function(response){
+                    if(response.msg == '3002'){
+                        $scope.historyData = response.data[0];
+                        //seleccionamos el item de la lista del autocomplete
+                        $scope.selectePersondItem = {
+                            'value': $scope.historyData.id_paciente,
+                            'display': $scope.historyData.nombres
+                        };
+                    }else{
+                        $scope.validTreatmentsErrors(response.msg ,response.data);
+                    }
+                }, function(error){
+                    $scope.validTreatmentsErrors('7777', error);
+                });
+        }
+
+        //Recupera los datos y selecciona el item del paciente
+        function selectEmployee(idEmployee){
+            var httpResponse = serviceEmployees.getEmployee(idEmployee);
+            httpResponse.then(
+                function(response){
+                    if(response.msg == '3002'){
+                        $scope.employeedData = response.data[0];
+                        //seleccionamos el item de la lista del autocomplete
+                        $scope.selecteEmployeeItem = {
+                            'value': $scope.employeedData.id_personal,
+                            'display': $scope.employeedData.nombres
+                        };
+                    }else{
+                        $scope.validTreatmentsErrors(response.msg ,
+                                                        response.data);
+                    }
+                }, function(error){
+                    $scope.validTreatmentsErrors('7777', error);
+                });
+        }
+
+
+
+        //recupera los datos del tartamietnio
+        var httpResponse = serviceTreatments.getTreatment(idTreatment);
+        httpResponse.then(
+            function(response){
+                if(response.msg == '3002'){
+                   $scope.tratamiento = response.data[0];
+                    //recuperamos los datos del paciente y empleado
+                    selectPerson($scope.tratamiento.id_paciente);
+                    selectEmployee($scope.tratamiento.id_personal);
+                   if($scope.tratamiento.iva == "1"){
+                        $scope.tratamiento.iva = true;
+                   }else{
+                    $scope.tratamiento.iva = false;
+                   }
+                }else{
+                    $scope.validTreatmentsErrors(response.msg,response.data);
+                    $location.path('/listar-tratamientos');
+                }
+            }, function(error){
+                $scope.validTreatmentsErrors('7777', error);
+            }
+            );
+       }else{
+        $scope.loadData();
        }
-    
     
     
     };

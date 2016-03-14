@@ -54,6 +54,11 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'treatmentsController'
 	})
 
+	.when('/presentar-tratamiento/:idTreatment',{
+		templateUrl : host + 'tplhtml/templates/presentar-tratamiento-tpl.html',
+		controller : 'treatmentsController'
+	})
+
 	.when('/eliminar-tratamiento/:idTreatment',{
 		templateUrl : host + 'tplhtml/templates/presentar-tratamiento-tpl.html',
 		controller : 'treatmentsController'
