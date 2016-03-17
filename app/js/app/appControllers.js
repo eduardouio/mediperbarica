@@ -464,14 +464,14 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     $scope.lsTreatmentsData = [];
     $scope.lstHistoriesData = [];
     $scope.lsEmployeesData = [];
+    $scope.sessionsData = [];
+    $scope.idCustomerName = [];
+    $scope.idEmployeeName = [];
     $scope.counter = 0;
     $scope.historyData = {};
     $scope.employeedData = {};
     $scope.treatmentData = {};
-    $scope.sessionsData = [];
     $scope.statusMsg = '';
-    $scope.idCustomerName = [];
-    $scope.idEmployeeName = [];
 
     //Metodo que define la funcion a llamar dependiendo de la plantilla que se muestre
     $scope.init = function(){
@@ -514,8 +514,73 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     //@parmam idTreatment recibido por URL
     $scope.presentTreatment = function(){
         console.log('[Debug] Lamada a metodo presentTreatment');
-        var idTreatment =0;
+
+        //identificamos el tratamiento y lo traemos 
+        var httpResponse = serviceTreatments.getTreatment(
+                                                $routeParams.idTreatment);
+        httpResponse.then(
+            function(response){
+                if(response.msg == '3002'){
+                    $scope.treatmentData = response.data[0];
+                    //obtenemos los datos de la hiostoria
+                    getHistory($scope.treatmentData.id_paciente);
+                    getProfessional($scope.treatmentData.id_personal);
+                    getSessions($scope.treatmentData.id_tratamiento);
+                }else{
+                    $scope.validTreatmentsErrors(response.msg, response);    
+                }
+            },
+            function(error){
+                $scope.validTreatmentsErrors('7777', error);
+            });
+        
     };
+
+    //retorna los datos de una historia
+    function getHistory(idPerson){
+        var httpResponse = serviceHistories.getHistoryFromId(idPerson);
+        httpResponse.then(
+            function(response){
+                if(response.msg == '3002'){
+                    $scope.historyData =   response.data[0];                    
+                }else{
+                    $scope.validTreatmentsErrors(response.msg, response);    
+                }
+            },function(error){
+                    $scope.validHistoriesErrors('7777',error);                
+            });
+    }
+
+    //retorna datos de un profesional
+    function getProfessional(idEmployee){
+        var httpResponse = serviceEmployees.getEmployee(idEmployee);
+        httpResponse.then(
+            function(response){
+                if(response.msg == '3002'){
+                    $scope.employeedData = response.data[0];
+                }else{
+                    $scope.validTreatmentsErrors(response.msg, response);    
+                }
+            },function(error){
+                $scope.validHistoriesErrors('7777',error);                
+        });
+    }
+
+    function getSessions(idTreatment){
+        var httpResponse = serviceSessions.getSessions(idTreatment);
+        httpResponse.then(
+            function(response){
+                if(response.msg == '3002'){
+                    $scope.sessionsData = response.data;
+                    console.dir($scope.sessionsData);
+                }else{
+                    $scope.validTreatmentsErrors(response.msg, response);    
+                }
+            },function(error){
+                $scope.validHistoriesErrors('7777',error);                
+        });   
+    }
+
 
     //obtiene el detalle de las sesiones del tratamiento
     $scope.getSesionsTreatment = function(idTreatment){

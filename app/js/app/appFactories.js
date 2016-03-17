@@ -431,7 +431,7 @@ mediperbaricaApp.factory('serviceSessions', ['$http', '$q', '$rootScope',
         // lista las sesiones de un tratamiento
         service.getSessions = function(idTreatment){
             console.log('[Debug] llamda a metodo getSessions');
-            return httpGet('tratamientos/getSessions/' + idTreatment);
+            return httpGet('sesiones/getSessions/' + idTreatment);
         };
         
         // guarda o edita una sesion

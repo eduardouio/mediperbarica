@@ -1,121 +1,115 @@
   <div class="row card">
-  <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Eduardo Villota</span>
+  <div class="col s4 grey lighten-2">
+    <span style="font-size:18px;" class="teal-text teal-darken-4 ">
+    {{historyData.nombres}}</span>
   </div>
   <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia: <b>1000</b></span>
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Historia:  
+    <b>{{historyData.id_historia}}</b></span>
   </div>
   <div class="col s4">
-    <span style="font-size:18px;" class="teal-text teal-darken-4">Estado 3 / Nueva sesion</span>
+    <span style="font-size:18px;" class="teal-text teal-darken-4">Estado: <b>Activo</b></span>
   </div>
     <div class="col s12">
     <br>
-      <span class="grey-text" style="font-size:18px;">Datos Paciente:</span>
+      <span class="grey-text text-darken-4" style="font-size:18px;">Datos Paciente:</span>
     <br>
       <div class="row">
         <div class=" col s3">
         <b class="teal-text text-lighten-2">Nombres: </b> 
-        <span class="grey-text text-darken-2">Eduardo Villota</span>
+        <span class="grey-text text-darken-2">{{historyData.nombres}}</span>
         </div>
         <div class="col s3">
         <b class="teal-text text-lighten-2">Cédula: </b> 
-        <span class="grey-text text-darken-2">1722919725</span>
+        <span class="grey-text text-darken-2">{{historyData.id_paciente}}</span>
         </div>    
         <div class="col s3">
         <b class="teal-text text-lighten-2">Telef: </b> 
-        <span class="grey-text text-darken-2">0992936569</span>
+        <span class="grey-text text-darken-2">{{historyData.telefono}}</span>
         </div>  
         <div class="col s3">
         <b class="teal-text text-lighten-2">Referente: </b> 
-        <span class="grey-text text-darken-2">Dr. German Lopez</span>
+        <span class="grey-text text-darken-2">{{historyData.nombre_referente}}</span>
         </div>
         
       </div>
       <div class="row">
          <div class="col s5">
         <b class="teal-text text-lighten-2">Manejo: </b> 
-       <span class="grey-text text-darken-2"> Indicaciones de manejo en presion de la camar</span>
+       <span class="grey-text text-darken-2"> {{historyData.manejo}}</span>
         </div>
          <div class="col s4">
         <b class="teal-text text-lighten-2">Examen Físico: </b> 
-        <span class="grey-text text-darken-2">Agun Valor Para el Examen</span>
+        <span class="grey-text text-darken-2">{{historyData.examen_fisico}}</span>
         </div>
          <div class="col s3">
         <b class="teal-text text-lighten-2">Registrado: </b> 
-        <span class="grey-text text-darken-2">2011-05-01</span>
+        <span class="grey-text text-darken-2">{{historyData.creado}}</span>
         </div>
-      </div>
-<span class="grey-text" style="font-size:18px;">Datos Médico Tratante:</span>
+      </div><br>
+<span class="grey-text text-darken-4" style="font-size:18px;">Datos Médico Tratante:</span>
             <div class="row">
         <div class="col s3">
           <b class="teal-text text-lighten-2">Médico: </b> 
-        <span class="grey-text text-darken-2">Dr. Laura Moncayo</span>
+        <span class="grey-text text-darken-2">{{employeedData.nombres}}</span>
 </div>
         <div class="col s3">
         <b class="teal-text text-lighten-2">Celular: </b> 
-       <span class="grey-text text-darken-2">0992936569</span>
+       <span class="grey-text text-darken-2">{{employeedData.celular}}</span>
         </div>    
         <div class="col s3">
         <b class="teal-text text-lighten-2">Telef: </b> 
-        <span class="grey-text text-darken-2">023203521</span>
+        <span class="grey-text text-darken-2">{{employeedData.telefono_fijo}}</span>
         </div>  
         <div class="col s3">
         <b class="teal-text text-lighten-2">Mail: </b> 
-        <span class="grey-text text-darken-2">eduardouio7@gmail.com</span>
+        <span class="grey-text text-darken-2">{{employeedData.mail}}</span>
+        </div>
+      </div><br>
+      <span class="grey-text text-darken-4" style="font-size:18px;">Datos Tratamiento:</span>
+      <div class="row">
+         <div class="col s5">
+        <b class="teal-text text-lighten-2">Motivo: </b> 
+       <span class="grey-text text-darken-2"> {{treatmentData.motivo_tratamiento}}</span>
+        </div>
+         <div class="col s3">
+        <b class="teal-text text-lighten-2">Sesiones Contratadas: </b> 
+        <span class="grey-text text-darken-2">{{treatmentData.nro_sesiones}}</span>
+        </div>
+                 <div class="col s4">
+        <b class="teal-text text-lighten-2">Registro: </b> 
+        <span class="grey-text text-darken-2">{{treatmentData.creado}}</span>
         </div>
       </div>
-
-      <span class="grey-text" style="font-size:18px;">Sesiones:</span>
+      <br>
+      <span class="grey-text text-darken-4" style="font-size:18px;">
+      Histórico de Sesiones:</span> &nbsp;&nbsp;&nbsp;&nbsp;
+       <span class="btn">Nueva Sesion</span>
             <div class="row">
-        <div class="col s8">
+        <div class="col s12">
          <table class="bordered">
            <tr>
              <th>ID</th>
              <th>Fecha</th>
-             <th>Hora</th>
              <th>Personal</th>
              <th>Equipo</th>
+             <th>notas</th>
            </tr>
-           <tr>
-             <td>1</td>
-             <td>2012-01-02</td>
-             <td>16:21</td>
-             <td>Juan Casas</td>
-             <td>Maquina 1000</td>
-           </tr>
-                      <tr>
-             <td>1</td>
-             <td>2012-01-02</td>
-             <td>16:21</td>
-             <td>Juan Casas</td>
-             <td>Maquina 1000</td>
-           </tr>
-                      <tr>
-             <td>1</td>
-             <td>2012-01-02</td>
-             <td>16:21</td>
-             <td>Juan Casas</td>
-             <td>Maquina 1000</td>
-           </tr>
-                      <tr>
-             <td>1</td>
-             <td>2012-01-02</td>
-             <td>16:21</td>
-             <td>Juan Casas</td>
-             <td>Maquina 1000</td>
-           </tr>
+           <tr ng-repeat="row in sessionsData">
+             <td>{{row.id_sesion}}</td>
+             <td>{{row.fecha}}</td>
+             <td>{{row.nombres}}</td>
+             <td>{{row.nombre}}</td>
+             <td>{{row.notas}}</td>
+           </tr>        
          </table>
-      </div>
-
-        <div class="col s3 offset-s1">
-       <span class="btn">Nueva Sesion</span>
-        </div>    
+      </div>   
       </div>
       <br>
        <span class="blue-text" style="font-size:18px;">Costos:</span>
       <div class="row">
         <div class="col s2">
-        <span class="grey-text text-darken-2">Sesiones</span>
+        <span class="grey-text text-darken-2">Ses Pend</span>
         </div>
         <div class="col s2">
           <span class="grey-text text-darken-2">Descuento</span>
@@ -124,10 +118,10 @@
         <span class="grey-text text-darken-2">Costo</span>
         </div>
         <div class="col s2">
-        <span class="grey-text text-darken-2">IVA</span>
+        <span class="grey-text text-darken-2">Total</span>
         </div>
          <div class="col s2">
-        <span class="grey-text text-darken-2">Total</span>
+        <span class="grey-text text-darken-2">Abonos</span>
         </div>
          <div class="col s2">
         <span class="grey-text text-darken-2">Saldo</span>
@@ -138,21 +132,31 @@
         <span class="grey-text text-darken-4" style="font-size:18px;">4</span>
         </div>
         <div class="col s2">
-          <span class="grey-text text-darken-4" style="font-size:18px;">10%</span>
+          <span class="grey-text text-darken-4" style="font-size:18px;">
+            {{treatmentData.descuento | currency }}
+          </span>
         </div>
         <div class="col s2">
-        <span class="grey-text text-darken-4" style="font-size:18px;">$ 291.10</span>
+        <span class="grey-text text-darken-4" style="font-size:18px;">
+        {{treatmentData.costo | currency }}</span>
         </div>
         <div class="col s2">
-        <span class="grey-text text-darken-4" style="font-size:18px;">0.00</span>
+        <span class="grey-text text-darken-4" style="font-size:18px;">
+        {{treatmentData.costo - treatmentData.descuento | currency}}
+        </span>
         </div>
         <div class="col s2">
-        <span class="grey-text text-darken-4" style="font-size:18px;">$291.10</span>
+        <span class="grey-text text-darken-4" style="font-size:18px;">
+        0.00
+        </span>
         </div>
          <div class="col s2">
-        <span class="red-text text-darken-4" style="font-size:20px;">$61.10</span>
+        <span class="red-text text-darken-4" style="font-size:20px;">
+         {{treatmentData.costo - treatmentData.descuento | currency}}
+        </span>
         </div>
       </div>
+      <br>
 <span class="blue-text" style="font-size:18px;">Registro de Pagos:</span>
                   <div class="row">
         <div class="col s8">
@@ -182,14 +186,16 @@
       </div>
 
         <div class="col s3 offset-s1">
-       <span class="btn">Emitir Factura</span>
+       <span class="btn">Nueva Factura</span>
         </div>    
       </div>
       <div class="row">
-        <div class="col s2 offset-s10">
-          <button class="btn">Volver</button>
+        <div class="col s3 offset-s0">
+        <br>
+      <button class="btn red">Volver al Listado</button>
         </div>
       </div>
+      <br>
     </div>
 
   </div>

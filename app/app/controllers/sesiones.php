@@ -41,10 +41,16 @@ class Sesiones extends MY_Controller {
 	 */
 	public function getSessions($idTreatment){
 		# variable de respuesta
-		$response = array('status' => 'Succes');	
+		$response = array('status' => 'Succes');		
 		if(isset($idTreatment)){
-			$this->db->where('id_tratamiento',$idTreatment);
-			$this->Result_ = $this->db->get($this->Table_);
+			$this->Query_ = 'SELECT ses.*, per.nombres, equi.nombre
+							FROM sesion as ses
+							LEFT JOIN personal AS per USING(id_personal) 
+							LEFT JOIN equipo AS equi USING(id_equipo) 
+							WHERE id_tratamiento = ' . $idTreatment;
+			
+			$this->Result_ = $this->db->query($this->Query_);
+
 			if($this->Result_->num_rows() > 0){
 				$response['msg'] = '3002';
 				$response['data'] = $this->Result_->result_array();
