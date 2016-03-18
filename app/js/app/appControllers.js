@@ -464,6 +464,7 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
     $scope.lsTreatmentsData = [];
     $scope.lstHistoriesData = [];
     $scope.lsEmployeesData = [];
+    $scope.lsInvoicesTreatments = [];
     $scope.sessionsData = [];
     $scope.idCustomerName = [];
     $scope.idEmployeeName = [];
@@ -526,6 +527,7 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
                     getHistory($scope.treatmentData.id_paciente);
                     getProfessional($scope.treatmentData.id_personal);
                     getSessions($scope.treatmentData.id_tratamiento);
+                    getInvoices($scope.treatmentData.id_tratamiento);
                 }else{
                     $scope.validTreatmentsErrors(response.msg, response);    
                 }
@@ -566,13 +568,37 @@ mediperbaricaApp.controller('treatmentsController', function($scope, $location,
         });
     }
 
+    //retotna los apgos de un tratamiento
+    function getInvoices(idTreatment){
+        var httpResponse = serviceInvoices.getTreatmentInvoices(idTreatment);
+        httpResponse.then(
+            function(response){
+                if(response.msg == '3002'){
+                    $scope.lsInvoicesTreatments = response.data;
+                    //sumamos los cobros
+                    $scope.charges = 0;
+                    angular.forEach($scope.lsInvoicesTreatments, 
+                        function(value,key){
+                        $scope.charges = $scope.charges + 
+                                    parseFloat(value.subtotal0) + 
+                                    parseFloat(value.subtotal12);
+                    });
+                    console.dir($scope.charges);
+                }else{
+                    $scope.validTreatmentsErrors(response.msg, response);    
+                }
+            },
+            function(error){
+               $scope.validHistoriesErrors('7777',error);                 
+            });
+    }
+
     function getSessions(idTreatment){
         var httpResponse = serviceSessions.getSessions(idTreatment);
         httpResponse.then(
             function(response){
                 if(response.msg == '3002'){
                     $scope.sessionsData = response.data;
-                    console.dir($scope.sessionsData);
                 }else{
                     $scope.validTreatmentsErrors(response.msg, response);    
                 }

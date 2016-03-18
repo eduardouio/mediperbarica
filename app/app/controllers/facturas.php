@@ -53,7 +53,8 @@ class Facturas extends MY_Controller {
 			//tomamos los parametros de la consulta
 			$param = $this->uri->segment(3);
 			$id = $this->uri->segment(4);
-			$this->Query_ = 'SELECT * FROM factura WHERE ' . $param . ' = ' . $id;
+			$this->Query_ = 'SELECT *, (subtotal0 + subtotal12) as total FROM 
+							factura WHERE ' . $param . ' = ' . $id;
 			$this->Result_ = $this->db->query($this->Query_);
 			#comprobamos la cantidad de registros
 			if($this->Result_->num_rows() > 0){

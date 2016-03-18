@@ -65,11 +65,7 @@ class Tratamientos extends MY_Controller {
 							FROM sesion 
 				            WHERE id_tratamiento = trt.id_tratamiento 
 				            ORDER BY fecha DESC limit 1) as ultima_sesion,
-				        trt.costo,
-						(SELECT SUM(valor) from cobro where id_factura = 
-								(SELECT id_factura 
-									from factura 
-				                    where id_tratamiento = trt.id_tratamiento )) as pagos
+				        trt.costo
 				FROM tratamiento as trt
 				LEFT JOIN personal as per USING(id_personal)
 				LEFT JOIN historia as hst USING(id_paciente)

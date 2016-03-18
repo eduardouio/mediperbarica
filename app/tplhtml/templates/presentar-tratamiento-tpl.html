@@ -1,3 +1,66 @@
+  <!-- Modal de sesion -->
+  <div id="modalSession" class="modal">
+  <form>
+    <div class="modal-content">
+      <h5>Nueva Sesión Para {{historyData.nombres}} &nbsp;/&nbsp; Historia: {{historyData.id_historia}} &nbsp;/&nbsp; Tratamiento: {{treatmentData.id_tratamiento}} </h4>
+      <div class="row">
+         <div class="col s5">
+        <b class="teal-text text-lighten-2">Manejo: </b> 
+       <span class="grey-text text-darken-2"> {{historyData.manejo}}</span>
+        </div>
+         <div class="col s4">
+        <b class="teal-text text-lighten-2">Examen Físico: </b> 
+        <span class="grey-text text-darken-2">{{historyData.examen_fisico}}</span>
+        </div>
+         <div class="col s3">
+        <b class="teal-text text-lighten-2">Registrado: </b> 
+        <span class="grey-text text-darken-2">{{historyData.creado}}</span>
+        </div>
+      </div>
+      <br>
+<span class="blue-text">Datos Médico Tratante y Equipo</span>
+            <div class="row">
+        <div class="input-field col s4">
+          
+ <select>
+      <option value="" disabled selected>Elija Médico...</option>
+      <option value="1">MArco Polo</option>
+      <option value="2">Anita Lopez</option>
+      <option value="3">Oscar Poma</option>
+    </select>
+</div>
+        <div class="input-field col s4">
+          
+ <select>
+      <option value="" disabled selected>Elija Equipo...</option>
+      <option value="1">Camara Perry Baromedical</option>
+      <option value="2">Camara Sechrist</option>
+    </select>
+</div>
+
+        <div class="col s4">
+        <b class="teal-text text-lighten-2">Medico Encargado: </b> 
+        <span class="grey-text text-darken-2">{{employeedData.nombres}}</span>
+        </div>
+     
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">comment</i>
+          <input id="notas" type="text" class="validate" name="notas" ng-model="sesion.notas" maxlength="360">
+          <label for="notas">Notas</label>
+        </div>
+      </div>
+
+    <div class="modal-footer">
+      <input type="submit" class=" modal-action modal-close waves-effect waves-green btn">
+      <a class=" modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+    </div>
+    </div>
+    </form>
+  </div>
+  <!-- Modal de sesion-->
+
   <div class="row card">
   <div class="col s4 grey lighten-2">
     <span style="font-size:18px;" class="teal-text teal-darken-4 ">
@@ -83,8 +146,8 @@
       </div>
       <br>
       <span class="grey-text text-darken-4" style="font-size:18px;">
-      Histórico de Sesiones:</span> &nbsp;&nbsp;&nbsp;&nbsp;
-       <span class="btn">Nueva Sesion</span>
+      Histórico de Sesiones realizadas ({{sessionsData.length}}):</span> &nbsp;&nbsp;&nbsp;&nbsp;
+       <a class="waves-effect waves-light btn modal-trigger" href="#modalSession">Nueva Sesion</a>
             <div class="row">
         <div class="col s12">
          <table class="bordered">
@@ -129,7 +192,9 @@
       </div>
       <div class="row">
         <div class="col s2">
-        <span class="grey-text text-darken-4" style="font-size:18px;">4</span>
+        <span class="grey-text text-darken-4" style="font-size:18px;">
+          {{treatmentData.nro_sesiones - sessionsData.length}}
+        </span>
         </div>
         <div class="col s2">
           <span class="grey-text text-darken-4" style="font-size:18px;">
@@ -147,12 +212,12 @@
         </div>
         <div class="col s2">
         <span class="grey-text text-darken-4" style="font-size:18px;">
-        0.00
+        {{charges | currency}}
         </span>
         </div>
          <div class="col s2">
         <span class="red-text text-darken-4" style="font-size:20px;">
-         {{treatmentData.costo - treatmentData.descuento | currency}}
+         {{treatmentData.costo - treatmentData.descuento  - charges | currency}}
         </span>
         </div>
       </div>
@@ -164,38 +229,49 @@
            <tr>
              <th>Factura</th>
              <th>Fecha</th>
+             <th>Estado</th>
              <th>SubT 0</th>
              <th>Sub T12</th>
              <th>Total</th>
            </tr>
-           <tr>
-             <td>1000</td>
-             <td>2013-01-10</td>
-             <td>0.00</td>
-             <td>100.00</td>
-             <td>100.00</td>
+           <tr ng-repeat="row in lsInvoicesTreatments">
+             <td>{{row.id_factura}}</td>
+             <td>{{row.fecha}}</td>
+             <td>{{row.estado}}</td>
+             <td>{{row.subtotal0 | currency}}</td>
+             <td>{{row.subtotal12 | currency}}</td>
+             <td>{{(row.total) | currency}}</td>
            </tr>
-           <tr>
-             <td>1010</td>
-             <td>2013-01-10</td>
-             <td>0.00</td>
-             <td>30.00</td>
-             <td>30.00</td>
-           </tr>
+             <tr class="light-green lighten-4">
+                 <td colspan="5" class="rigth">Sumas Abonos Tratamiento:</td>
+                 <td> <b>{{charges | currency}}</b></td>
+             </tr>
          </table>
       </div>
 
         <div class="col s3 offset-s1">
-       <span class="btn">Nueva Factura</span>
+       <a class="btn" href="#/emitir-factura/{{treatmentData.costo - treatmentData.descuento  - charges | number:2}}">Nueva Factura</a>
         </div>    
       </div>
       <div class="row">
         <div class="col s3 offset-s0">
         <br>
-      <button class="btn red">Volver al Listado</button>
+      <a class="btn red" href="#listar-tratamientos">Volver al Listado</a>
         </div>
       </div>
       <br>
     </div>
 
   </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+  
+</script>

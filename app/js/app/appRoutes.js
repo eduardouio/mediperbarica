@@ -89,7 +89,7 @@ mediperbaricaApp.config(function($locationProvider, $routeProvider){
 		controller : 'personalController'
 	})
 
-	.when('/emitir-factura',{
+	.when('/emitir-factura/:valorMax',{
 		templateUrl : host + 'tplhtml/forms/frm-factura-tpl.html',
 		controller : 'invoiceController'
 	})
